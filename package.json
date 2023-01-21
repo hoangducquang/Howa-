@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/HDQJin/CourseSys/issues"
   },
-  "homepage": "https://github.com/HDQJin/CourseSys#readme"
+  "homepage": "https://github.com/HDQJin/CourseSys#readme",
+  "dependencies": {
+    "web3": "^1.8.1"
+  }
 }
