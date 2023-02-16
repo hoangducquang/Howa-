@@ -7,23 +7,23 @@ module.exports = (app) => {
     });
 
     app.post("/register", (req, res) => {
-        if(!req.body.name || !req.body.email || !req.body.phoneNumber){
+        if(!req.body.name || !req.body.numberDay || !req.body.endTimeRegister || !req.body.endTimeCourse || !req.body.price){
             res.json({result:0, err: "Not enough information"});
         }else{
-            var newMember = new member({
+            var newCourse = new member({
                 name: req.body.name,
-                email: req.body.email,
-                phoneNumber: req.body.phoneNumber, 
-                wallet: "", 
-                dayTime: Date.now(),
-                pay: false 
+                numberDay: req.body.numberDay,
+                endTimeRegister: req.body.endTimeRegister,
+                endTimeCourse: req.body.endTimeCourse,
+                price: req.body.price,
+                dayTime: Date.now()
             })
         }
-        newMember.save((err) => {
+        newCourse.save((err) => {
             if(err){
                 res.json({result: 0, err: "MongooseDB save error! " + err}); 
             }else{
-                res.json({result: 1, err: newMember});
+                res.json({result: 1, err: newCourse});
             }
         })
     })

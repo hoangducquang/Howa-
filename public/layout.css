@@ -1,0 +1,29 @@
+#dataPrice, #timeEndRegister, #timeEndCourse{
+    background-color: blanchedalmond;
+    padding: 20px;
+    border: 2px double;
+}
+
+#data{
+    margin: 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+    height: 200px;
+    border: 5px solid;
+    border-color: blue;
+    padding: 20px;
+}
+
+#btn{
+    display: flex;
+    justify-content: space-around;
+    margin: 100px;
+    
+}
+
+#form{
+    margin: 50px;
+}
+
