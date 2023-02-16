@@ -8,7 +8,7 @@ html {
 }
 .hero-section{
     margin-top: 46px !important;
-    background-image: url("/images/blockchain.jpg");
+    background-image: url("/CourseRegister/images/blockchain.jpg");
     background-repeat: no-repeat;
     box-sizing: border-box;
 }
@@ -175,7 +175,7 @@ html {
 
 @media screen and (max-width: 1024px) {
     .hero-section{
-        background-image: url("/images/blockchain.jpg");
+        background-image: url("/CourseRegister/images/blockchain.jpg");
         background-repeat: no-repeat;
     }
     .products{
@@ -212,7 +212,7 @@ html {
         height: 600px;
     }
    .hero-section{
-    background-image: url("/images/blockchain.jpg");
+    background-image: url("/CourseRegister/images/blockchain.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     margin: auto;
