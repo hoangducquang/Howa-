@@ -3,7 +3,7 @@ var member = require("../models/member");
 module.exports = (app) => {
 
     app.get("/", (req, res) => {
-        res.render("layout");
+        res.render("index");
     });
 
     app.post("/register", (req, res) => {
