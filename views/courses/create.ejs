@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/course-create.css">
+    <title>Create a Course | HOWA - Course Register</title>
+</head>
+<header class="header" id="top">
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card header">
+            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+                href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i
+                    class="fa fa-bars"></i></a>
+            <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
+            <span class="w3-right">
+
+                <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
+                <a href="/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                    style="background-color: white; color: black;">Courses</a>
+                <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
+                <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
+                <a href="/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
+            </span>
+        </div>
+    </div>
+
+    <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+        <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Home</a>
+        <a href="/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large"
+            style="background-color: white; color: black;" onclick="myFunction()">Couses</a>
+        <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
+        <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
+        <a href="/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
+    </div>
+</header>
+
+<body>
+    <div class="course-center">
+        <h1>Create a Course</h1>
+        <form method="post">
+            <div class="text-field">
+                <input type="text" name="course-name" required="">
+                <span></span>
+                <label>Course name</label>
+            </div>
+            <div class="text-field">
+                <input type="text" name="category" required="">
+                <span></span>
+                <label>Category</label>
+            </div>
+            <div class="text-field">
+                <input type="text" name="lecture" required="">
+                <span></span>
+                <label>Lecturer</label>
+            </div>
+            <div class="text-field">
+                <input type="text" name="description" required="">
+                <span></span>
+                <label>Description</label>
+            </div>
+            <div class="text-field">
+                <input type="number" required="" name="fee">
+                <span></span>
+                <label>Tuition fee</label>
+            </div>
+            <div class="text-field">
+                <input type="number" required="" name="quantity" min="1">
+                <span></span>
+                <label>Max students</label>
+            </div>
+            <div class="text-field date">
+                <label>Date</label>
+                <input type="date" required="" name="cdate" style="padding-left: 100px;">
+                <span></span>
+            </div>
+            <div class="text-field time">
+                <label>Time</label>
+                <input type="time" required="" name="ctime" style="padding-left: 100px;">
+                <span></span>
+            </div>
+            <div class="text-field select">
+                <label>Select course's picture:</label>
+                <input type="file" required="" name="img" style="padding-left: 175px; padding-top: 10px;"
+                    accept="image/*">
+                <span></span>
+            </div>
+            <div class="text-field" style="border-bottom: none;">
+                <button type="button">Create</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

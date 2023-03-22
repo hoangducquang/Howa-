@@ -11,24 +11,24 @@ body {
   margin: 0;
   padding: 0px;
   background: linear-gradient(120deg, #8ab2cd, #c676e9);
-  height: 100vh;
-  overflow: hidden;
+  height: 143vh;
 }
 
-.login-center {
+.course-center {
   position: absolute;
-  top: 53.5%;
+  top: 52%;
   left: 50%;
+  margin-top: 150px;
   transform: translate(-50%, -50%);
-  width: 400px;
+  width: auto !important;
   background: white;
   border-radius: 20px;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
 }
 
-.login-center h1 {
+.course-center h1 {
   text-align: center;
-  padding: 20px 0;
+  padding: 10px 0;
   margin-top: 2px;
   border-bottom: 5px solid transparent;
   border-image: linear-gradient(120deg, #8ab2cd, #c676e9);
@@ -36,8 +36,8 @@ body {
   width: 100%;
 }
 
-.login-center form {
-  padding: 0 40px;
+.course-center form {
+  padding: 0px 40px 0px 40px;
   box-sizing: border-box;
 }
 
@@ -47,11 +47,19 @@ form .text-field {
   margin: 30px 0;
 }
 
+form .text-field .date {
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+  padding: 10%;
+  padding-right: 10%;
+}
+
 .text-field input {
   width: 100%;
   padding: 0 5px;
   height: 40px;
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   background: none;
   outline: none;
@@ -63,7 +71,7 @@ form .text-field {
   left: 5px;
   color: #0e0276;
   transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 14px;
   pointer-events: none;
   transition: .5s;
 }
@@ -85,19 +93,14 @@ form .text-field {
   color: #2691d9;
 }
 
+text-field[date] input:focus~label,
+text-field[date] input:valid~label {
+  color: #2691d9;
+}
+
 .text-field input:focus~span::before,
 .text-field input:valid~span::before {
   width: 100%;
-}
-
-.forgot-pass {
-  margin: -5px 0 20px 5px;
-  color: #a6a6a6;
-  cursor: pointer;
-}
-
-.forgot-pass:hover {
-  text-decoration: underline;
 }
 
 .text-field button {
@@ -116,20 +119,4 @@ form .text-field {
 .text-field button:hover {
   background: #c676e9;
   transition: .5s;
-}
-
-.sign-up-url {
-  margin: 30px 0;
-  text-align: center;
-  font-size: 16px;
-  color: #666666;
-}
-
-.sign-up-url a {
-  color: #2691d9;
-  text-decoration: none;
-}
-
-.sign-up-url a:hover {
-  text-decoration: underline;
 }

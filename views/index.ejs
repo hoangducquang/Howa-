@@ -1,72 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>HOWA - Course Register</title>
-</head>
-<body>
-    <header class="header" id="top">
-        <div class="w3-top">
-            <div class="w3-bar w3-black w3-card header">
-              <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-              <a href="#top" class="w3-bar-item w3-button w3-padding-large " >HOWA</a>
-              <span class="w3-right">
 
-              <a href="#home" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
-              <a href="#courses" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Courses</a>
-              <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
-              <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
-              <a href="#login" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
-            </span>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/public/css/style.css">
+  <title>HOWA - Course Register</title>
+  <script src="/scripts/home.js"></script>
+</head>
+
+<body>
+  <header class="header" id="top">
+    <div class="w3-top">
+      <div class="w3-bar w3-black w3-card header">
+        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+          href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
+        <span class="w3-right">
+          <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+            style="background-color: white; color: black;">Home</a>
+          <a href="/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Courses</a>
+          <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
+          <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
+          <a href="/auth/login.ejs" id="btnLogin" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
+          <div class="w3-dropdown-hover w3-right w3-hide-small" id="btnAccount">
+            <button class="w3-button w3-black w3-padding-large">Account</button>
+            <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+              <a href="/account/profile.ejs" class="w3-bar-item w3-button">Profile</a>
+              <a href="/account/wallet.ejs" class="w3-bar-item w3-button">My wallet</a>
+              <a href="#" class="w3-bar-item w3-button">My courses</a>
+              <a href="#" class="w3-bar-item w3-button">Edit password</a>
+              <a href="#" class="w3-bar-item w3-button">Log out</a>
             </div>
           </div>
-  
-          <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-            <a href="#home" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Home</a>
-            <a href="#courses" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Couses</a>
-            <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
-            <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
-            <a href="#login" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
-          </div>
-    </header>
-<main>
-    <div  class="hero-section w3-animate-left " id="home">
-        <div class="hero-section-main">
-           <div class="hero-section-into-text w3-margin-top">
-               <h1 class="w3-text-white">HOWA</h1>
-              <p class="w3-right w3-text-white w3-small w3-hide-small hero-qoute ">
-                Công nghệ Blockchain là một cơ chế cơ sở dữ liệu tiên tiến cho phép chia sẻ thông tin minh bạch trong một mạng lưới kinh doanh. 
-                <br>Cơ sở dữ liệu chuỗi khối lưu trữ dữ liệu trong các khối được liên kết với nhau trong một chuỗi. 
-                <br>Dữ liệu có sự nhất quán theo trình tự thời gian vì bạn không thể xóa hoặc sửa đổi chuỗi mà không có sự đồng thuận từ mạng lưới.
-              </p>
-               <div class="w3-text-white l " style="margin-top:60px">
-                 <p >Follow us on Social media</p>
-                 <div class="w3-margin-top">
+        </span>
+      </div>
+    </div>
 
-  
-              <a href="#"> <i class="fa fa-facebook-official w3-hover-opacity icons" ></i></a> 
-              <a href="#"><i class="fa fa-instagram w3-hover-opacity icons" ></i></a> 
-              <a href="#"><i class="fa fa-snapchat w3-hover-opacity icons"></i></a>  
-              <a href="#"><i class="fa fa-pinterest-p w3-hover-opacity icons" ></i></a>  
-              <a href="#"><i class="fa fa-twitter w3-hover-opacity icons"></i></a>  
-              <a href="#"><i class="fa fa-linkedin w3-hover-opacity icons"></i></a>  
-              </div>
-               </div>
-               <a href="#new-arrivals" class="" >
-                <button class="w3-text-white w3-small w3-round w3-red w3-btn w3-margin-top"  >New Products   
-                </button>
-               </a>
-               
-           </div>
-        </div>    
+    <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+      <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large"
+        style="background-color: white; color: black;" onclick="myFunction()">Home</a>
+      <a href="/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Couses</a>
+      <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
+      <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
+      <a href="/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
+      <div class="w3-dropdown-hover w3-right">
+        <button class="w3-button w3-black w3-padding-large">My Account</button>
+        <div class="w3-dropdown-content w3-bar-block w3-border">
+          <a href="/account/profile.ejs" class="w3-bar-item w3-button">Profile</a>
+          <a href="/account/wallet.ejs" class="w3-bar-item w3-button">My wallet</a>
+          <a href="#" class="w3-bar-item w3-button">My courses</a>
+          <a href="#" class="w3-bar-item w3-button">Edit password</a>
+          <a href="#" class="w3-bar-item w3-button">Log out</a>
         </div>
-    
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="hero-section w3-animate-left " id="home">
+      <div class="hero-section-main">
+        <div class="hero-section-into-text w3-margin-top">
+          <h1 class="w3-text-white">HOWA</h1>
+          <p class="w3-right w3-text-white w3-small w3-hide-small hero-qoute ">
+            Công nghệ Blockchain là một cơ chế cơ sở dữ liệu tiên tiến cho phép chia sẻ thông tin minh bạch trong một
+            mạng lưới kinh doanh.
+            <br>Cơ sở dữ liệu chuỗi khối lưu trữ dữ liệu trong các khối được liên kết với nhau trong một chuỗi.
+            <br>Dữ liệu có sự nhất quán theo trình tự thời gian vì bạn không thể xóa hoặc sửa đổi chuỗi mà không có sự
+            đồng thuận từ mạng lưới.
+          </p>
+          <div class="w3-text-white l " style="margin-top:60px">
+            <p>Follow us on Social media</p>
+            <div class="w3-margin-top">
+              <a href="#"> <i class="fa fa-facebook-official w3-hover-opacity icons"></i></a>
+              <a href="#"><i class="fa fa-instagram w3-hover-opacity icons"></i></a>
+              <a href="#"><i class="fa fa-snapchat w3-hover-opacity icons"></i></a>
+              <a href="#"><i class="fa fa-pinterest-p w3-hover-opacity icons"></i></a>
+              <a href="#"><i class="fa fa-twitter w3-hover-opacity icons"></i></a>
+              <a href="#"><i class="fa fa-linkedin w3-hover-opacity icons"></i></a>
+            </div>
+          </div>
+          <a href="#new-arrivals" class="">
+            <button class="w3-text-white w3-small w3-round w3-red w3-btn w3-margin-top">New Products
+            </button>
+          </a>
+
+        </div>
+      </div>
+    </div>
     </div>
   </main>
   <section>
@@ -74,215 +98,218 @@
       <div>
         <div class="w3-container">
           <h2 class="section-text-header">Featured Courses</h2>
-        </div> 
+        </div>
       </div>
-      </div>
+    </div>
   </section>
-    <div class="new-arrived-products">
-      <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-        <div class="new-product ">
-          <div class="new-arrived-image">
-             <img src="images/python-prog.jpg" alt="Python Programming Language Course"/>
-          </div>
-          <div class="w3-margin-top">
-           <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-           <p class="w3-small">Hieu Thu Hai</p>
-           <p class="price" >$12.00</p>
+  <div class="new-arrived-products">
+    <a href="/courses/basic-python.ejs" style="text-decoration: none;">
+      <div class="new-product ">
+        <div class="new-arrived-image">
+          <img src="/public/images/python-prog.jpg" alt="Basic Python" />
+        </div>
+        <div class="w3-margin-top">
+          <h4 style="text-overflow:ellipsis; overflow: hidden;">Basic Python</h4>
+          <p class="w3-small">Nguyen Duy Tan</p>
+          <p class="price">1.000.000 VND</p>
         </div>
       </div>
-      </a>
-      <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-        <div class="new-product ">
-          <div class="new-arrived-image">
-             <img src="images/python-prog.jpg" alt="Python Programming Language Course"/>
-          </div>
-          <div class="w3-margin-top">
-           <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-           <p class="w3-small">Hieu Thu Hai</p>
-           <p class="price" >$12.00</p>
+    </a>
+    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
+      <div class="new-product ">
+        <div class="new-arrived-image">
+          <img src="/public/images/python-prog.jpg" alt="Python Programming Language Course" />
+        </div>
+        <div class="w3-margin-top">
+          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
+          <p class="w3-small">Hieu Thu Hai</p>
+          <p class="price">$12.00</p>
         </div>
       </div>
-      </a>
-      <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-        <div class="new-product ">
-          <div class="new-arrived-image">
-             <img src="images/python-prog.jpg" alt="Python Programming Language Course"/>
-          </div>
-          <div class="w3-margin-top">
-           <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-           <p class="w3-small">Hieu Thu Hai</p>
-           <p class="price" >$12.00</p>
+    </a>
+    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
+      <div class="new-product ">
+        <div class="new-arrived-image">
+          <img src="/public/images/python-prog.jpg" alt="Python Programming Language Course" />
+        </div>
+        <div class="w3-margin-top">
+          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
+          <p class="w3-small">Hieu Thu Hai</p>
+          <p class="price">$12.00</p>
         </div>
       </div>
-      </a>
-      <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-        <div class="new-product ">
-          <div class="new-arrived-image">
-             <img src="images/python-prog.jpg" alt="Python Programming Language Course"/>
-          </div>
-          <div class="w3-margin-top">
-           <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-           <p class="w3-small">Hieu Thu Hai</p>
-           <p class="price" >$12.00</p>
+    </a>
+    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
+      <div class="new-product ">
+        <div class="new-arrived-image">
+          <img src="/public/images/python-prog.jpg" alt="Python Programming Language Course" />
+        </div>
+        <div class="w3-margin-top">
+          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
+          <p class="w3-small">Hieu Thu Hai</p>
+          <p class="price">$12.00</p>
         </div>
       </div>
-      </a>
-      <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-        <div class="new-product ">
-          <div class="new-arrived-image">
-             <img src="images/python-prog.jpg" alt="Python Programming Language Course"/>
-          </div>
-          <div class="w3-margin-top">
-           <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-           <p class="w3-small">Hieu Thu Hai</p>
-           <p class="price" >$12.00</p>
+    </a>
+    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
+      <div class="new-product ">
+        <div class="new-arrived-image">
+          <img src="/public/images/python-prog.jpg" alt="Python Programming Language Course" />
+        </div>
+        <div class="w3-margin-top">
+          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
+          <p class="w3-small">Hieu Thu Hai</p>
+          <p class="price">$12.00</p>
         </div>
       </div>
-      </a>
-      <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-        <div class="new-product ">
-          <div class="new-arrived-image">
-             <img src="images/python-prog.jpg" alt="Python Programming Language Course"/>
-          </div>
-          <div class="w3-margin-top">
-           <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-           <p class="w3-small">Hieu Thu Hai</p>
-           <p class="price" >$12.00</p>
+    </a>
+    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
+      <div class="new-product ">
+        <div class="new-arrived-image">
+          <img src="/public/images/python-prog.jpg" alt="Python Programming Language Course" />
+        </div>
+        <div class="w3-margin-top">
+          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
+          <p class="w3-small">Hieu Thu Hai</p>
+          <p class="price">$12.00</p>
         </div>
       </div>
-      </a>
-      <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-        <div class="new-product ">
-          <div class="new-arrived-image">
-             <img src="images/python-prog.jpg" alt="Python Programming Language Course"/>
-          </div>
-          <div class="w3-margin-top">
-           <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-           <p class="w3-small">Hieu Thu Hai</p>
-           <p class="price" >$12.00</p>
+    </a>
+    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
+      <div class="new-product ">
+        <div class="new-arrived-image">
+          <img src="/public/images/python-prog.jpg" alt="Python Programming Language Course" />
+        </div>
+        <div class="w3-margin-top">
+          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
+          <p class="w3-small">Hieu Thu Hai</p>
+          <p class="price">$12.00</p>
         </div>
       </div>
-      </a>
-      <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-        <div class="new-product ">
-          <div class="new-arrived-image">
-             <img src="images/python-prog.jpg" alt="Python Programming Language Course"/>
-          </div>
-          <div class="w3-margin-top">
-           <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-           <p class="w3-small">Hieu Thu Hai</p>
-           <p class="price" >$12.00</p>
+    </a>
+    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
+      <div class="new-product ">
+        <div class="new-arrived-image">
+          <img src="/public/images/python-prog.jpg" alt="Python Programming Language Course" />
+        </div>
+        <div class="w3-margin-top">
+          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
+          <p class="w3-small">Hieu Thu Hai</p>
+          <p class="price">$12.00</p>
         </div>
       </div>
-      </a>
-      <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-        <div class="new-product ">
-          <div class="new-arrived-image">
-             <img src="images/python-prog.jpg" alt="Python Programming Language Course"/>
-          </div>
-          <div class="w3-margin-top">
-           <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-           <p class="w3-small">Hieu Thu Hai</p>
-           <p class="price" >$12.00</p>
+    </a>
+    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
+      <div class="new-product ">
+        <div class="new-arrived-image">
+          <img src="/public/images/python-prog.jpg" alt="Python Programming Language Course" />
+        </div>
+        <div class="w3-margin-top">
+          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
+          <p class="w3-small">Hieu Thu Hai</p>
+          <p class="price">$12.00</p>
         </div>
       </div>
-      </a>
+    </a>
 
-   </div>
-<!-- Customer Feedback-->
-<div class="w3-light-gray" style="margin-top: 40px; padding: 50px 0px;" id="testimony">
-
-
-<div class="feedback">
-  <div class="w3-container ">
-    <h2 class="section-text-header" style="margin-top: 0px !important;">Customer FeedBack</h2>
-  </div> 
-  <div class="Customer-feedback" style="display: flex;justify-content: space-evenly;flex-wrap: wrap;">
-   <div class="card">
-    <div class="customer-feedback-header">
-       <div class="customer-profile">
-         <img src="https://photo-cms-tpo.epicdn.me/w890/Uploaded/2023/aohuooh/2014_07_08/annabelle_VGIK.jpg" alt="Búp bê ma Annabelle"/>
-       </div>
-       <div>
-         <p class="name">Annabelle</p>
-       </div>
-    </div>
-   <div>
-     <p class="w3-small">"10 điểmmmmmmmmmmmmmmmmmmmmmmmm! Tối Beo ghé tặng một nụ hôn!"</p>
-   </div>
   </div>
-  <div class="card">
-    <div class="customer-feedback-header">
-       <div class="customer-profile">
-         <img src="https://afamilycdn.com/150157425591193600/2020/3/26/9102519526563951479518365377079929655525376o-1585181253139343012422-15851925696381880198733.jpg" alt="Trần Thanh Tâm"/>
-       </div>
-       <div>
-         <p class="name">Á hậu 8 Miss Fabulous<br>Trần Thanh Tâm</p>
-         
-       </div>
+  <!-- Customer Feedback-->
+  <div class="w3-light-gray" style="margin-top: 40px; padding: 50px 0px;" id="testimony">
+    <div class="feedback">
+      <div class="w3-container ">
+        <h2 class="section-text-header" style="margin-top: 0px !important;">Customer FeedBack</h2>
+      </div>
+      <div class="Customer-feedback" style="display: flex;justify-content: space-evenly;flex-wrap: wrap;">
+        <div class="card">
+          <div class="customer-feedback-header">
+            <div class="customer-profile">
+              <img src="https://photo-cms-tpo.epicdn.me/w890/Uploaded/2023/aohuooh/2014_07_08/annabelle_VGIK.jpg"
+                alt="Búp bê ma Annabelle" />
+            </div>
+            <div>
+              <p class="name">Annabelle</p>
+            </div>
+          </div>
+          <div>
+            <p class="w3-small">"10 điểmmmmmmmmmmmmmmmmmmmmmmmm!<br>Tối Beo ghé tặng một nụ hôn!"</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="customer-feedback-header">
+            <div class="customer-profile">
+              <img
+                src="https://afamilycdn.com/150157425591193600/2020/3/26/9102519526563951479518365377079929655525376o-1585181253139343012422-15851925696381880198733.jpg"
+                alt="Trần Thanh Tâm" />
+            </div>
+            <div>
+              <p class="name">Á hậu 8 Miss Fabulous<br>Trần Thanh Tâm</p>
+
+            </div>
+          </div>
+          <div>
+            <p class="w3-small">"Sau khi đăng ký học một khoá nấu ăn trên Howa, Tâm đã biết các chiên trứng bằng dầu
+              hoả!"</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="customer-feedback-header">
+            <div class="customer-profile">
+              <img src="https://img.docbao.vn/public/images/uploads/2023/02/07/doi-song/co-dong-2.jpg"
+                alt="Cô đồng Trương Hương" />
+            </div>
+            <div>
+              <p class="name">Cô đồng Trương Hương</p>
+
+            </div>
+          </div>
+          <div>
+            <p class="w3-small">"Bổ qua cau này ra nói trang Howa này có nhiều khoá học hay, bổ ích. Đúng nhận sai cãi
+              cho cô cái!"</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="customer-feedback-header">
+            <div class="customer-profile">
+              <img
+                src="https://i.vietgiaitri.com/2022/1/17/tran-my-livestream-nhan-loi-phan-tran-ve-viec-luon-leo-khi-noi-khong-quen-khanh-e0f-6274215.jpg"
+                alt="Tran My" />
+            </div>
+            <div>
+              <p class="name">Trần My</p>
+
+            </div>
+          </div>
+          <div>
+            <p class="w3-small">"My đã nhận ra 550:2 không phải là 225 sau khi học một khoá làm toán ở Howa!"</p>
+          </div>
+        </div>
+      </div>
     </div>
-   <div>
-     <p class="w3-small">"Sau khi đăng ký học một khoá nấu ăn trên Howa, Tâm đã biết các chiên trứng bằng dầu hoả!"</p>
-   </div>
-  </div>
-  <div class="card">
-    <div class="customer-feedback-header">
-       <div class="customer-profile">
-         <img src="https://img.docbao.vn/images/uploads/2023/02/07/doi-song/co-dong-2.jpg" alt="Cô đồng Trương Hương"/>
-       </div>
-       <div>
-         <p class="name">Cô đồng Trương Hương</p>
-         
-       </div>
-    </div>
-   <div>
-     <p class="w3-small">"Bổ qua cau này ra nói trang Howa này có nhiều khoá học hay, bổ ích. Đúng nhận sai cãi cho cô cái!"</p>
-   </div>
-  </div>
-  <div class="card">
-    <div class="customer-feedback-header">
-       <div class="customer-profile">
-         <img src="https://i.vietgiaitri.com/2022/1/17/tran-my-livestream-nhan-loi-phan-tran-ve-viec-luon-leo-khi-noi-khong-quen-khanh-e0f-6274215.jpg" alt="Tran My"/>
-       </div>
-       <div>
-         <p class="name">Trần My</p>
-         
-       </div>
-    </div>
-   <div>
-     <p class="w3-small" >"My đã nhận ra 550:2 không phải là 225 sau khi học một khoá làm toán ở Howa!"</p>
-   </div>
   </div>
 
-
-  </div> 
-</div>
-
-</div>
-
-<br>
-  <div class="w3-center contact" id="contact" >
+  <br>
+  <div class="w3-center contact" id="contact">
     <div class=" w3-left-align w3-margin-top contact-info ">
-       <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3> 
-       <h4 style="font-weight: 600;">Your styles at low cost 
-       </h4>
-       <p>We care about our customers<br>you can contact us for any feedback</p>
-       <h4 style="font-weight: 600;">Follow Us </h4>
-       
-     <i class="fa fa-facebook-official w3-hover-opacity icons"  ></i>
-     <i class="fa fa-instagram w3-hover-opacity icons" ></i>
-     <i class="fa fa-snapchat w3-hover-opacity icons"></i>
-     <i class="fa fa-pinterest-p w3-hover-opacity icons" ></i>
-     <i class="fa fa-twitter w3-hover-opacity icons"></i>
-     <i class="fa fa-linkedin w3-hover-opacity icons"></i>
+      <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
+      <h4 style="font-weight: 600;">Your styles at low cost
+      </h4>
+      <p>We care about our customers<br>you can contact us for any feedback</p>
+      <h4 style="font-weight: 600;">Follow Us </h4>
+
+      <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
+      <i class="fa fa-instagram w3-hover-opacity icons"></i>
+      <i class="fa fa-snapchat w3-hover-opacity icons"></i>
+      <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
+      <i class="fa fa-twitter w3-hover-opacity icons"></i>
+      <i class="fa fa-linkedin w3-hover-opacity icons"></i>
     </div>
-    <div class="w3-left-align w3-margin-top contact-info" >
-          <h3 style="font-weight: 600;">OPENING HOURS</h3>
-             <p>Mon - Sat 7am - 9pm:</p>
-             <p>Opening on Morning | Off at afternoon</p>
-             <p>Delivery only on opening hours</p>
+    <div class="w3-left-align w3-margin-top contact-info">
+      <h3 style="font-weight: 600;">OPENING HOURS</h3>
+      <p>Mon - Sat 7am - 9pm:</p>
+      <p>Opening on Morning | Off at afternoon</p>
+      <p>Delivery only on opening hours</p>
     </div>
-    
   </div>
 </body>
+
 </html>

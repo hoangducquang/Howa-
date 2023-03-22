@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/wallet.css">
+    <title>My wallet | HOWA</title>
+</head>
+<header class="header" id="top">
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card header">
+            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+                href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i
+                    class="fa fa-bars"></i></a>
+            <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
+            <span class="w3-right">
+                <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
+                <a href="/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Courses</a>
+                <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
+                <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
+                <a href="/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
+                <div class="w3-dropdown-hover w3-right w3-hide-small">
+                    <button class="w3-button w3-black w3-padding-large"
+                        style="background-color: white; color: black;">Account</button>
+                    <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0;">
+                        <a href="/account/profile.ejs" class="w3-bar-item w3-button">Profile</a>
+                        <a href="/account/wallet.ejs" class="w3-bar-item w3-button">My wallet</a>
+                        <a href="#" class="w3-bar-item w3-button">My courses</a>
+                        <a href="#" class="w3-bar-item w3-button">Edit password</a>
+                        <a href="#" class="w3-bar-item w3-button">Log out</a>
+                    </div>
+                </div>
+            </span>
+        </div>
+    </div>
+
+    <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+        <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large"
+            style="background-color: white; color: black;" onclick="myFunction()">Home</a>
+        <a href="/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Couses</a>
+        <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
+        <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
+        <a href="/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
+        <div class="w3-dropdown-hover w3-right">
+            <button class="w3-button w3-black w3-padding-large"
+                style="background-color: white; color: black;">Account</button>
+            <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0;">
+                <a href="/account/profile.ejs" class="w3-bar-item w3-button">Profile</a>
+                <a href="/account/wallet.ejs" class="w3-bar-item w3-button">My wallet</a>
+                <a href="#" class="w3-bar-item w3-button">My courses</a>
+                <a href="#" class="w3-bar-item w3-button">Edit password</a>
+                <a href="#" class="w3-bar-item w3-button">Log out</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<body>
+    <section style="margin-top: 70px;">
+        <div class="breadcrumb" style="padding-left: 20%;">
+            <a href="/index.ejs" style="color:black;">Home</a>
+            >
+            <a href="/account/profile.ejs" style="color: black;">Account</a>
+            >
+            <a style="text-decoration: none;">My wallet</a>
+        </div>
+        <div class="card" style="height: auto; display: block; margin: auto; margin-top: 30px; width: 1200px;">
+            <div id="main" style="margin: auto;">
+                <div id="pitch">
+                    <h1 style="margin-bottom: 20px;">My wallet</h1>
+                    <div id="detail-wallet" class="not-delayed">
+                        <div class="list-card" style="border-top: 1px solid #d1cccc;">
+                            <div class="creditcard-card">
+                                <div class="creditcard-card__logo"><img
+                                        src="https://cdn.visa.com/v2/assets/images/logos/visa/blue/logo.png">
+                                </div>
+                                <div>
+                                    <div class="creditcard-card__type">VISA</div>
+                                </div>
+                                <div class="bacc-default-badge">Default</div>
+                                <div class="creditcard-card__spacer"></div>
+                                <div class="GBIZS7 "> **** **** **** 9150</div>
+                                <div class="creditcard-card__actions"><button
+                                        class="bacc-secondary-action-btn">Delete</button><button type="button"
+                                        class="btn btn-light btn--s btn--inline btn-light--disabled"
+                                        aria-disabled="true">Set as default</button></div>
+                            </div>
+                        </div>
+                        <div class="group-button" style="margin-bottom: 30px;">
+                            <button class="btn2-connect-wallet" type="button">Connect your wallet</button>
+                            <button class="btn2-remove-wallet" type="button" style="margin-left: 20px;">Remove your
+                                wallet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <div class="w3-center contact" id="contact" style="color: white;">
+        <div class=" w3-left-align w3-margin-top contact-info ">
+            <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
+            <h4 style="font-weight: 600;">Your styles at low cost
+            </h4>
+            <p>We care about our customers<br>you can contact us for any feedback</p>
+            <h4 style="font-weight: 600;">Follow Us </h4>
+
+            <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
+            <i class="fa fa-instagram w3-hover-opacity icons"></i>
+            <i class="fa fa-snapchat w3-hover-opacity icons"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
+            <i class="fa fa-twitter w3-hover-opacity icons"></i>
+            <i class="fa fa-linkedin w3-hover-opacity icons"></i>
+        </div>
+        <div class="w3-left-align w3-margin-top contact-info">
+            <h3 style="font-weight: 600;">OPENING HOURS</h3>
+            <p>Mon - Sat 7am - 9pm:</p>
+            <p>Opening on Morning | Off at afternoon</p>
+            <p>Delivery only on opening hours</p>
+        </div>
+
+    </div>
+</body>
+
+</html>

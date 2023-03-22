@@ -6,6 +6,15 @@ module.exports = (app) => {
         res.render("index");
     });
 
+    app.get("/login", (req, res) => {
+        res.render("auth/login")
+    });
+    
+    app.get("/signup", (req, res) => {
+        res.render("auth/signup")
+    });
+
+
     app.post("/register", (req, res) => {
         if(!req.body.name || !req.body.numberDay || !req.body.endTimeRegister || !req.body.endTimeCourse || !req.body.price){
             res.json({result:0, err: "Not enough information"});

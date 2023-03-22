@@ -1,18 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
-*{
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-body{
+
+body {
   margin: 0;
   padding: 0px;
-  background: linear-gradient(120deg,#8ab2cd, #c676e9);
+  background: linear-gradient(120deg, #8ab2cd, #c676e9);
   height: 100vh;
   overflow: hidden;
 }
-.forgot-center{
+
+.forgot-center {
   position: absolute;
   top: 53.5%;
   left: 50%;
@@ -20,28 +23,32 @@ body{
   width: 400px;
   background: white;
   border-radius: 20px;
-  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
 }
-.forgot-center h1{
+
+.forgot-center h1 {
   text-align: center;
   padding: 20px 0;
   margin-top: 2px;
   margin-bottom: 20px;
   border-bottom: 5px solid transparent;
-  border-image: linear-gradient(120deg,#8ab2cd, #c676e9);
+  border-image: linear-gradient(120deg, #8ab2cd, #c676e9);
   border-image-slice: 1;
-  width:100%;
+  width: 100%;
 }
-.forgot-center form{
+
+.forgot-center form {
   padding: 0 40px;
   box-sizing: border-box;
 }
-form .email-field{
+
+form .email-field {
   position: relative;
   border-bottom: 2px solid #adadad;
   margin: 30px 0;
 }
-.email-field input{
+
+.email-field input {
   width: 100%;
   padding: 0 5px;
   height: 40px;
@@ -50,7 +57,8 @@ form .email-field{
   background: none;
   outline: none;
 }
-.email-field label{
+
+.email-field label {
   position: absolute;
   top: 50%;
   left: 5px;
@@ -60,7 +68,8 @@ form .email-field{
   pointer-events: none;
   transition: .5s;
 }
-.email-field span::before{
+
+.email-field span::before {
   content: '';
   position: absolute;
   top: 40px;
@@ -70,18 +79,21 @@ form .email-field{
   background: #2691d9;
   transition: .5s;
 }
-.email-field input:focus ~ label,
-.email-field input:invalid ~ label,
-.email-field input:valid ~ label{
+
+.email-field input:focus~label,
+.email-field input:invalid~label,
+.email-field input:valid~label {
   top: -5px;
   color: #2691d9;
 }
-.email-field input:focus ~ span::before,
-.email-field input:invalid ~ span::before,
-.email-field input:valid ~ span::before{
+
+.email-field input:focus~span::before,
+.email-field input:invalid~span::before,
+.email-field input:valid~span::before {
   width: 100%;
 }
-input[type="submit"]{
+
+.text-field button {
   width: 100%;
   height: 50px;
   border: 1px solid;
@@ -93,20 +105,24 @@ input[type="submit"]{
   cursor: pointer;
   outline: none;
 }
-input[type="submit"]:hover{
+
+.text-field button:hover {
   background: #c676e9;
   transition: .5s;
 }
-.login-url{
+
+.login-url {
   margin: 30px 0;
   text-align: center;
   font-size: 16px;
   color: #666666;
 }
-.login-url a{
+
+.login-url a {
   color: #2691d9;
   text-decoration: none;
 }
-.login-url a:hover{
+
+.login-url a:hover {
   text-decoration: underline;
 }
