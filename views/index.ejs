@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/public/css/style.css">
   <title>HOWA - Course Register</title>
-  <script src="/scripts/home.js"></script>
+  <script src="/public/scripts/home.js"></script>
 </head>
 
 <body>
@@ -19,19 +19,19 @@
       <div class="w3-bar w3-black w3-card header">
         <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
           href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-        <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
+        <a href="/views/index.ejs" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
         <span class="w3-right">
-          <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+          <a href="/views/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
             style="background-color: white; color: black;">Home</a>
-          <a href="/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Courses</a>
+          <a href="/views/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Courses</a>
           <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
           <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
-          <a href="/auth/login.ejs" id="btnLogin" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
+          <a href="/views/auth/login.ejs" id="btnLogin" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
           <div class="w3-dropdown-hover w3-right w3-hide-small" id="btnAccount">
             <button class="w3-button w3-black w3-padding-large">Account</button>
             <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-              <a href="/account/profile.ejs" class="w3-bar-item w3-button">Profile</a>
-              <a href="/account/wallet.ejs" class="w3-bar-item w3-button">My wallet</a>
+              <a href="/views/account/profile.ejs" class="w3-bar-item w3-button">Profile</a>
+              <a href="/views/account/wallet.ejs" class="w3-bar-item w3-button">My wallet</a>
               <a href="#" class="w3-bar-item w3-button">My courses</a>
               <a href="#" class="w3-bar-item w3-button">Edit password</a>
               <a href="#" class="w3-bar-item w3-button">Log out</a>
@@ -42,17 +42,17 @@
     </div>
 
     <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-      <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large"
-        style="background-color: white; color: black;" onclick="myFunction()">Home</a>
-      <a href="/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Couses</a>
+      <a href="/views/index.ejs" class="w3-bar-item w3-button w3-padding-large" style="background-color: white; color: black;"
+        onclick="myFunction()">Home</a>
+      <a href="/views/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Couses</a>
       <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
       <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
-      <a href="/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
+      <a href="/views/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
       <div class="w3-dropdown-hover w3-right">
         <button class="w3-button w3-black w3-padding-large">My Account</button>
         <div class="w3-dropdown-content w3-bar-block w3-border">
-          <a href="/account/profile.ejs" class="w3-bar-item w3-button">Profile</a>
-          <a href="/account/wallet.ejs" class="w3-bar-item w3-button">My wallet</a>
+          <a href="/views/account/profile.ejs" class="w3-bar-item w3-button">Profile</a>
+          <a href="/views/account/wallet.ejs" class="w3-bar-item w3-button">My wallet</a>
           <a href="#" class="w3-bar-item w3-button">My courses</a>
           <a href="#" class="w3-bar-item w3-button">Edit password</a>
           <a href="#" class="w3-bar-item w3-button">Log out</a>
@@ -103,7 +103,7 @@
     </div>
   </section>
   <div class="new-arrived-products">
-    <a href="/courses/basic-python.ejs" style="text-decoration: none;">
+    <a href="/public/courses/basic-python.ejs" style="text-decoration: none;">
       <div class="new-product ">
         <div class="new-arrived-image">
           <img src="/public/images/python-prog.jpg" alt="Basic Python" />
