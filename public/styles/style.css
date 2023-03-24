@@ -9,7 +9,7 @@ html {
 
 .hero-section {
     margin-top: 46px !important;
-    background-image: url("/public/images/blockchain.jpg");
+    background-image: url("/images/blockchain.jpg");
     background-repeat: no-repeat;
     box-sizing: border-box;
 }
@@ -249,7 +249,7 @@ html {
     }
 
     .hero-section {
-        background-image: url("/public/images/blockchain.jpg");
+        background-image: url("/images/blockchain.jpg");
         background-repeat: no-repeat;
         background-size: cover;
         margin: auto;
