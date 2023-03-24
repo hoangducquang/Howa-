@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/public/styles/style.css">
-    <link rel="stylesheet" href="/public/styles/login.css">
-    <script src="/public/scripts/login.js"></script>
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/login.css">
+    <script src="/scripts/login.js"></script>
     <title>Login | HOWA - Course Register</title>
 </head>
 <header class="header" id="top">
@@ -19,25 +19,25 @@
             <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
                 href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i
                     class="fa fa-bars"></i></a>
-            <a href="/views/index.ejs" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
+            <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
             <span class="w3-right">
 
-                <a href="/views/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
-                <a href="/views/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Courses</a>
+                <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
+                <a href="/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Courses</a>
                 <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
                 <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
-                <a href="/views/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+                <a href="/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
                     style="background-color: white; color: black;">Login</a>
             </span>
         </div>
     </div>
 
     <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-        <a href="/views/index.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Home</a>
-        <a href="/views/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Couses</a>
+        <a href="/index.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Home</a>
+        <a href="/courses/index.ejs" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Couses</a>
         <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
         <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
-        <a href="/views/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large"
+        <a href="/auth/login.ejs" class="w3-bar-item w3-button w3-padding-large"
             style="background-color: white; color: black;" onclick="myFunction()">Login</a>
     </div>
 </header>
@@ -57,7 +57,7 @@
 
                 <label>Password</label>
             </div>
-            <div class="forgot-pass"><a href="/views/auth/forgot.ejs">Forgot password?</a></div>
+            <div class="forgot-pass"><a href="/auth/forgot.ejs">Forgot password?</a></div>
             <div class="text-field" style="border-bottom: none;">
                 <button onclick="validLogin()">Login</button>
             </div>
