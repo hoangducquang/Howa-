@@ -14,6 +14,11 @@ app.get('/index.html',(req, res) => {
 	)
 })
 
+app.get('',(req, res) => {
+	res.render('index',
+	)
+})
+
 app.get('/account',(req, res) => {
 	res.render('account/profile',
 	)
@@ -87,7 +92,6 @@ mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt6
 		console.log("Mongoose connected successfully");
 	}
 });
-
 
 require("./controllers/game")(app);
 
