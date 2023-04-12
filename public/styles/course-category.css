@@ -14,6 +14,48 @@ body {
   height: auto;
 }
 
+.new-courses {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  grid-row-gap: 60px;
+  width: auto;
+  margin: auto;
+  margin-bottom: 80px;
+}
+
+.category-course-card {
+  width: 300px;
+  color: rgb(8, 27, 105);
+  background-color: #ebebeb;
+  margin-bottom: 10px;
+  padding: 5px 5px;
+}
+
+.price {
+  color: rgb(249, 0, 0);
+  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 15px;
+}
+
+.new-arrived-image {
+  width: 200px !important;
+  height: 200px !important;
+  overflow: hidden;
+  margin: auto;
+}
+
+.new-arrived-image img {
+  width: 100% !important;
+  height: 100% !important;
+  margin-top: 20px;
+  object-fit: cover;
+
+}
+
+
 .card {
   margin: 0;
   background: #ffffff;
