@@ -108,7 +108,7 @@ html {
     flex-wrap: wrap;
 }
 
-.products {
+.courses {
     width: 90%;
     margin: auto;
     overflow-x: hidden;
@@ -120,7 +120,7 @@ html {
     overflow: hidden;
 }
 
-.new-arrived-products {
+.new-courses {
     display: flex !important;
     flex-wrap: wrap;
     justify-content: center;
@@ -131,7 +131,7 @@ html {
     margin-bottom: 80px;
 }
 
-.new-product {
+.course-card {
     height: 300px;
     width: 300px;
     color: rgb(8, 27, 105);
@@ -223,7 +223,7 @@ html {
 }
 
 @media screen and (min-width: 1200px) {
-    .new-arrived-products {
+    .new-courses {
         width: 80% !important;
     }
 
@@ -494,7 +494,7 @@ html {
         font-weight: 600;
     }
 
-    .new-product {
+    .course-card {
         border-bottom: 1px solid gray;
         padding-bottom: 50px;
         height: 420px;
