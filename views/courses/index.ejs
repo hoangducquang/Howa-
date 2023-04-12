@@ -2,205 +2,185 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/course-category.css">
-    <title>Course Categories | HOWA</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="/styles/course-category.css">
+  <title>Course Categories | HOWA</title>
 </head>
 <header class="header" id="top">
-    <div class="w3-top">
-        <div class="w3-bar w3-black w3-card header">
-            <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
-                href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i
-                    class="fa fa-bars"></i></a>
-            <a href="/index.html" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
-            <span class="w3-right">
-                <a href="/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
-                <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
-                    style="background-color: white; color: black;">Courses</a>
-                <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
-                <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
-                <a href="/auth/login.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
-                <div class="w3-dropdown-hover w3-right w3-hide-small">
-                    <button class="w3-button w3-black w3-padding-large">Account</button>
-                    <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-                        <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
-                        <a href="#" class="w3-bar-item w3-button">My courses</a>
-                        <a href="#" class="w3-bar-item w3-button">Edit password</a>
-                        <a href="#" class="w3-bar-item w3-button">Log out</a>
-                    </div>
-                </div>
-            </span>
+  <div class="w3-top">
+    <div class="w3-bar w3-black w3-card header">
+      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
+        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <a href="/index.html" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
+      <span class="w3-right">
+        <a href="/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
+        <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+          style="background-color: white; color: black;">Courses</a>
+        <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
+        <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
+        <a href="/auth/login.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
+        <div class="w3-dropdown-hover w3-right w3-hide-small">
+          <button class="w3-button w3-black w3-padding-large">Account</button>
+          <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+            <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
+            <a href="#" class="w3-bar-item w3-button">My courses</a>
+            <a href="#" class="w3-bar-item w3-button">Edit password</a>
+            <a href="#" class="w3-bar-item w3-button">Log out</a>
+          </div>
         </div>
+      </span>
     </div>
+  </div>
 
-    <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-        <a href="/index.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Home</a>
-        <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large"
-            style="background-color: white; color: black;" onclick="myFunction()">Couses</a>
-        <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
-        <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
-        <a href="/auth/login.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
-        <div class="w3-dropdown-hover w3-right">
-            <button class="w3-button w3-black w3-padding-large">My Account</button>
-            <div class="w3-dropdown-content w3-bar-block w3-border">
-                <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
-                <a href="#" class="w3-bar-item w3-button">My courses</a>
-                <a href="#" class="w3-bar-item w3-button">Edit password</a>
-                <a href="#" class="w3-bar-item w3-button">Log out</a>
-            </div>
-        </div>
+  <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+    <a href="/index.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Home</a>
+    <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large"
+      style="background-color: white; color: black;" onclick="myFunction()">Couses</a>
+    <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
+    <a href="/auth/login.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
+    <div class="w3-dropdown-hover w3-right">
+      <button class="w3-button w3-black w3-padding-large">My Account</button>
+      <div class="w3-dropdown-content w3-bar-block w3-border">
+        <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
+        <a href="#" class="w3-bar-item w3-button">My courses</a>
+        <a href="#" class="w3-bar-item w3-button">Edit password</a>
+        <a href="#" class="w3-bar-item w3-button">Log out</a>
+      </div>
     </div>
+  </div>
 </header>
 
 <body>
-    <div style="margin-top: 70px;">
-        <div class="breadcrumb" style="padding-left: 20%;">
-            <a href="/index.html" style="color:black;">Home</a>
-            >
-            <a style="text-decoration: none;">Courses</a>
-        </div>
+  <div style="margin-top: 70px;">
+    <div class="breadcrumb" style="padding-left: 20%;">
+      <a href="/index.html" style="color:black;">Home</a>
+      >
+      <a style="text-decoration: none;">Courses</a>
     </div>
-    <main class="category" style="min-height: max-content;">
-        <div class="new-courses">
-            <a href="/courses/basic-python.html" style="text-decoration: none;">
-              <div class="category-course-card programming python">
-                <div class="new-arrived-image">
-                  <img src="/images/python-prog.jpg" alt="Basic Python" />
-                </div>
-                <div class="category-course-card w3-margin-top">
-                  <h4 style="text-overflow:ellipsis; overflow: hidden;">Basic Python</h4>
-                  <p class="w3-small">Nguyen Duy Tan</p>
-                  <p class="price">1.000.000 VND</p>
-                </div>
+  </div>
+  <main class="category" style="min-height: max-content;">
+    <div class="new-courses">
+      <div class="category-list column">
+        <ul>
+          <li><a href="#category1">Category 1</a></li>
+          <li><a href="#category2">Category 2</a></li>
+          <li><a href="#category3">Category 3</a></li>
+          <li><a href="#category4">Category 4</a></li>
+        </ul>
+      </div>
+      <div class="show-list-courses column">
+        <div class="category-course-card programming python">
+          <a href="/courses/basic-python.html" style="text-decoration: none;">
+            <div class="course-image">
+              <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
+            </div>
+            <div class="course-short-details">
+              <h4 style="text-overflow:ellipsis; overflow: hidden;">Basic Python</h4>
+              <p class="w3-small">Nguyen Duy Tan</p>
+              <div class="price-course">
+                <span class="new-price">1.000.000 VND</span>
+                <span class="old-price">1.200.000 VND</span>
               </div>
-            </a>
-            <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-              <div class="category-course-card ">
-                <div class="new-arrived-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="category-course-card w3-margin-top">
-                  <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-                  <p class="w3-small">Hieu Thu Hai</p>
-                  <p class="price">$12.00</p>
-                </div>
-              </div>
-            </a>
-            <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-              <div class="category-course-card ">
-                <div class="new-arrived-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="category-course-card w3-margin-top">
-                  <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-                  <p class="w3-small">Hieu Thu Hai</p>
-                  <p class="price">$12.00</p>
-                </div>
-              </div>
-            </a>
-            <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-              <div class="category-course-card ">
-                <div class="new-arrived-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="category-course-card w3-margin-top">
-                  <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-                  <p class="w3-small">Hieu Thu Hai</p>
-                  <p class="price">$12.00</p>
-                </div>
-              </div>
-            </a>
-            <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-              <div class="category-course-card ">
-                <div class="new-arrived-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="category-course-card w3-margin-top">
-                  <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-                  <p class="w3-small">Hieu Thu Hai</p>
-                  <p class="price">$12.00</p>
-                </div>
-              </div>
-            </a>
-            <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-              <div class="category-course-card ">
-                <div class="new-arrived-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="category-course-card w3-margin-top">
-                  <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-                  <p class="w3-small">Hieu Thu Hai</p>
-                  <p class="price">$12.00</p>
-                </div>
-              </div>
-            </a>
-            <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-              <div class="category-course-card ">
-                <div class="new-arrived-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="category-course-card w3-margin-top">
-                  <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-                  <p class="w3-small">Hieu Thu Hai</p>
-                  <p class="price">$12.00</p>
-                </div>
-              </div>
-            </a>
-            <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-              <div class="category-course-card ">
-                <div class="new-arrived-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="category-course-card w3-margin-top">
-                  <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-                  <p class="w3-small">Hieu Thu Hai</p>
-                  <p class="price">$12.00</p>
-                </div>
-              </div>
-            </a>
-            <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-              <div class="category-course-card ">
-                <div class="new-arrived-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="category-course-card w3-margin-top">
-                  <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-                  <p class="w3-small">Hieu Thu Hai</p>
-                  <p class="price">$12.00</p>
-                </div>
-              </div>
-            </a>
-          </div>
-    </main>
-    <footer class="w3-center contact" id="contact" style="color: white;">
-        <div class=" w3-left-align w3-margin-top contact-info ">
-            <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
-            <h4 style="font-weight: 600;">Your styles at low cost
-            </h4>
-            <p>We care about our customers<br>you can contact us for any feedback</p>
-            <h4 style="font-weight: 600;">Follow Us </h4>
-
-            <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
-            <i class="fa fa-instagram w3-hover-opacity icons"></i>
-            <i class="fa fa-snapchat w3-hover-opacity icons"></i>
-            <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
-            <i class="fa fa-twitter w3-hover-opacity icons"></i>
-            <i class="fa fa-linkedin w3-hover-opacity icons"></i>
+              <p class="duration">17/03/2023 - 17/04/2023</p>
+            </div>
+          </a>
         </div>
-        <div class="w3-left-align w3-margin-top contact-info">
-            <h3 style="font-weight: 600;">OPENING HOURS</h3>
-            <p>Mon - Sat 7am - 9pm:</p>
-            <p>Opening on Morning | Off at afternoon</p>
-            <p>Delivery only on opening hours</p>
+        <div class="category-course-card programming python">
+          <a href="/courses/basic-python.html" style="text-decoration: none;">
+            <div class="course-image">
+              <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
+            </div>
+            <div class="course-short-details">
+              <h4 style="text-overflow:ellipsis; overflow: hidden;">Basic Python</h4>
+              <p class="w3-small">Nguyen Duy Tan</p>
+              <div class="price-course">
+                <span class="new-price">1.000.000 VND</span>
+                <span class="old-price">1.200.000 VND</span>
+              </div>
+              <p class="duration">17/03/2023 - 17/04/2023</p>
+            </div>
+          </a>
         </div>
+        <div class="category-course-card programming python">
+          <a href="/courses/basic-python.html" style="text-decoration: none;">
+            <div class="course-image">
+              <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
+            </div>
+            <div class="course-short-details">
+              <h4 style="text-overflow:ellipsis; overflow: hidden;">Basic Python</h4>
+              <p class="w3-small">Nguyen Duy Tan</p>
+              <div class="price-course">
+                <span class="new-price">1.000.000 VND</span>
+                <span class="old-price">1.200.000 VND</span>
+              </div>
+              <p class="duration">17/03/2023 - 17/04/2023</p>
+            </div>
+          </a>
+        </div>
+        <div class="category-course-card programming python">
+          <a href="/courses/basic-python.html" style="text-decoration: none;">
+            <div class="course-image">
+              <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
+            </div>
+            <div class="course-short-details">
+              <h4 style="text-overflow:ellipsis; overflow: hidden;">Basic Python</h4>
+              <p class="w3-small">Nguyen Duy Tan</p>
+              <div class="price-course">
+                <span class="new-price">1.000.000 VND</span>
+                <span class="old-price">1.200.000 VND</span>
+              </div>
+              <p class="duration">17/03/2023 - 17/04/2023</p>
+            </div>
+          </a>
+        </div>
+        <div class="category-course-card programming python">
+          <a href="/courses/basic-python.html" style="text-decoration: none;">
+            <div class="course-image">
+              <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
+            </div>
+            <div class="course-short-details">
+              <h4 style="text-overflow:ellipsis; overflow: hidden;">Basic Python</h4>
+              <p class="w3-small">Nguyen Duy Tan</p>
+              <div class="price-course">
+                <span class="new-price">1.000.000 VND</span>
+                <span class="old-price">1.200.000 VND</span>
+              </div>
+              <p class="duration">17/03/2023 - 17/04/2023</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <div class="w3-center contact" id="contact" style="color: white;">
+    <div class=" w3-left-align w3-margin-top contact-info ">
+      <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
+      <h4 style="font-weight: 600;">Your styles at low cost
+      </h4>
+      <p>We care about our customers<br>you can contact us for any feedback</p>
+      <h4 style="font-weight: 600;">Follow Us </h4>
 
-    </footer>
+      <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
+      <i class="fa fa-instagram w3-hover-opacity icons"></i>
+      <i class="fa fa-snapchat w3-hover-opacity icons"></i>
+      <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
+      <i class="fa fa-twitter w3-hover-opacity icons"></i>
+      <i class="fa fa-linkedin w3-hover-opacity icons"></i>
+    </div>
+    <div class="w3-left-align w3-margin-top contact-info">
+      <h3 style="font-weight: 600;">OPENING HOURS</h3>
+      <p>Mon - Sat 7am - 9pm:</p>
+      <p>Opening on Morning | Off at afternoon</p>
+      <p>Delivery only on opening hours</p>
+    </div>
+  </div>
 </body>
 
 </html>
