@@ -11,16 +11,21 @@ body {
   margin: 0;
   padding: 0px;
   background: linear-gradient(120deg, #8ab2cd, #c676e9);
-  height: 143vh;
+  height: auto;
+  overflow: hidden;
+}
+
+.course-form{
+  padding-bottom: 50px;
 }
 
 .course-center {
-  position: absolute;
-  top: 52%;
+  position:absolute;
+  top: 90%;
   left: 50%;
-  margin-top: 150px;
   transform: translate(-50%, -50%);
   width: auto !important;
+  margin-bottom: 30px;
   background: white;
   border-radius: 20px;
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
