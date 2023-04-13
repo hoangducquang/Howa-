@@ -14,47 +14,87 @@ body {
   height: auto;
 }
 
+.column{
+  display: table-cell;
+}
+
+.course-image{
+  position: relative;
+}
+
+.course-image img{
+  width: 250px;
+  position: relative;
+  border-radius: 15px 15px 0px 0px;
+}
+
 .new-courses {
-  display: flex !important;
+  display: table !important;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  grid-row-gap: 60px;
+  justify-content: left;
+  gap: 50px;
+  grid-row-gap: 30px;
   width: auto;
-  margin: auto;
-  margin-bottom: 80px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 0px;
+  padding-bottom: 50px;
+  min-height: max-content;
+}
+
+.show-list-courses{
+  display: flex !important;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 50px;
+  grid-row-gap: 30px;
+  width: 70%;
+  margin-bottom: 50px;
+  padding-left: 240px;
+  min-height: max-content;
+}
+
+.category-list{
+  width: 30%;
 }
 
 .category-course-card {
-  width: 300px;
+  position: relative;
+  width: 250px;
+  height: auto;
   color: rgb(8, 27, 105);
   background-color: #ebebeb;
   margin-bottom: 10px;
-  padding: 5px 5px;
+  border-radius: 15px;
 }
 
-.price {
+.course-short-details{
+  padding: 5px 15px;
+}
+
+.price-course{
+  margin: 5px 0px;
+}
+
+.price-course .new-price {
   color: rgb(249, 0, 0);
   font-weight: 600;
+  font-size: 15px;
   margin-top: 8px;
-  margin-bottom: 15px;
 }
 
-.new-arrived-image {
-  width: 200px !important;
-  height: 200px !important;
-  overflow: hidden;
-  margin: auto;
+.price-course .old-price{
+  font-size: 12px;
+  color: rgb(128, 128, 137); 
+  text-decoration: line-through;
 }
 
-.new-arrived-image img {
-  width: 100% !important;
-  height: 100% !important;
-  margin-top: 20px;
-  object-fit: cover;
-
+.duration{
+  color: darkgoldenrod;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
-
 
 .card {
   margin: 0;
@@ -62,7 +102,7 @@ body {
   border: 1px solid #ebebeb;
   box-shadow: none;
   -webkit-box-shadow: none;
-  border-radius: 16px;
+  border-radius: 15px 50px;
   max-width: 33.33333333%;
   flex-grow: 0;
   height: auto;
@@ -125,3 +165,29 @@ label {
   width: 20%;
   border-radius: 50%
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+}
+
+li a {
+  display: flex;
+  position: relative;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+  background-color: #8741a7;
+  color: white;
+  border-radius: 15px;
+}
+
+
