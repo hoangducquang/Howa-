@@ -38,29 +38,24 @@ body {
   margin-top: 50px;
   margin-bottom: 50px;
   padding: 0px;
-  padding-bottom: 50px;
   min-height: max-content;
 }
 
 .show-list-courses{
-  display: flex !important;
+  display: inline-flex !important;
   position: relative;
   flex-wrap: wrap;
   justify-content: left;
-  gap: 50px;
+  gap: 73px;
   grid-row-gap: 30px;
-  width: 70%;
-  margin-bottom: 50px;
-  padding-left: 240px;
+  width: 100%;
   min-height: max-content;
-}
-
-.category-list{
-  width: 30%;
+  padding: 0px 150px;
 }
 
 .category-course-card {
-  position: relative;
+  position: relative !important;
+  display:inline-flex;
   width: 250px;
   height: auto;
   color: rgb(8, 27, 105);
@@ -80,7 +75,7 @@ body {
 .price-course .new-price {
   color: rgb(249, 0, 0);
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
   margin-top: 8px;
 }
 
@@ -94,6 +89,19 @@ body {
   color: darkgoldenrod;
   font-size: 12px;
   margin-bottom: 10px;
+}
+
+.cate-name{
+  color: #dbb300;
+  height: 17px;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 17px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  margin-top: 5px;
 }
 
 .card {
@@ -188,6 +196,74 @@ li a:hover {
   background-color: #8741a7;
   color: white;
   border-radius: 15px;
+}
+
+#head-categories {
+  background: none;
+  margin-bottom: 68px;
+}
+#head-categories .cols, #head-categories .woocommerce-variation {
+  justify-content: center;
+  max-width: none;
+}
+
+.cols, .woocommerce-variation {
+  flex-wrap: wrap;
+}
+
+.cols, .woocommerce-variation {
+  display: flex;
+}
+
+.container {
+  max-width: 1162px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+#head-categories .cat {
+  color: #ffffff;
+  display: flex;
+  padding: 20px 0;
+  margin-right: 50px;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+#head-categories .cat:last-child {
+  margin-right: 0;
+}
+#head-categories .cat span {
+  width: 100%;
+  text-align: center;
+}
+#head-categories .cat.current {
+  color: #7913ec;
+  border-bottom: 3px solid #7913ec;
+}
+
+#head-categories .cat:hover{
+  color: #7913ec;
+  border-bottom: 3px solid #7913ec;
+}
+
+.col-2 {
+  width: calc(16.6666666667% - 15px);
+}
+
+.col-2.no-gap {
+  width: 16.6666666667%;
+}
+
+.col-10 {
+  width: calc(83.3333333333% - 3px);
+}
+
+.col-10.no-gap {
+  width: 83.3333333333%;
 }
 
 
