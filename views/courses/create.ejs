@@ -109,19 +109,23 @@
                     <span></span>
                     <label>Days of course</label>
                 </div>
-                <div class="text-field time">
+                <script>datePickerId.min = new Date().toISOString().split("T")[0];</script>
+                <script>
+                    document.getElementById('today').value = moment().format('YYYY-MM-DD');
+                </script>
+                <div class="text-field date">
                     <label>Course start date</label>
-                    <input type="date" required="" name="coursestartdate" style="padding-left: 200px;">
+                    <input type="date" required="" name="coursestartdate" value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
                     <span></span>
                 </div>
-                <div class="text-field time">
+                <div class="text-field date">
                     <label>Course end date</label>
-                    <input type="date" required="" name="courseenddate" style="padding-left: 200px;">
+                    <input type="date" required="" name="courseenddate" value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
                     <span></span>
                 </div>
                 <div class="text-field date">
                     <label>Registration closing date</label>
-                    <input type="date" required="" name="registenddate" style="padding-left: 200px;">
+                    <input type="date" required="" name="registenddate" value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
                     <span></span>
                 </div>
                 <div class="text-field select">
