@@ -200,10 +200,10 @@ li a:hover {
 
 #head-categories {
   background: none;
-  margin-bottom: 68px;
+  padding: 0 10%;
 }
 #head-categories .cols, #head-categories .woocommerce-variation {
-  justify-content: center;
+  justify-content: left;
   max-width: none;
 }
 
@@ -216,7 +216,7 @@ li a:hover {
 }
 
 .container {
-  max-width: 1162px;
+  width:fit-content;
   padding: 0 20px;
   margin: 0 auto;
 }
@@ -226,7 +226,7 @@ li a:hover {
   display: flex;
   padding: 20px 0;
   margin-right: 50px;
-  justify-content: center;
+  justify-content: left;
   flex-wrap: wrap;
   font-weight: bold;
   font-size: 18px;
@@ -238,7 +238,7 @@ li a:hover {
 }
 #head-categories .cat span {
   width: 100%;
-  text-align: center;
+  text-align: left;
 }
 #head-categories .cat.current {
   color: #7913ec;
