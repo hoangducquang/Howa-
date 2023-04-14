@@ -172,4 +172,5 @@ contract ProjectCourse {
         addressCourse[_idSubject] = address(course);
         emit eventAddCourse(_idSubject, addressCourse[_idSubject], msg.sender);
     }
+    // function
 }
