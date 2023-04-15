@@ -89,7 +89,7 @@ mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt6
 		console.log("Mongoose connect error!" + err);
 	}
 	else{
-		console.log("Mongoose connected successfully");
+		console.log("Mongoose connected successfully!");
 	}
 });
 
