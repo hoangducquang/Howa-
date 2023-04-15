@@ -59,39 +59,40 @@
 
 <body>
   <div style="margin-top: 70px;">
+    <style>
+      .button {
+        background-color: #704caf;
+        border: none;
+        color: #fff;
+        padding: 10px 20px;
+        text-align: right;
+        text-decoration: none;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        float: right;
+        margin-right: 50px;
+        border-radius: 15px;
+      }
+
+      .btn-add-course {
+        background-color: #fff;
+        color: #704caf;
+        border: 2px solid #704caf;
+      }
+
+      .btn-add-course:hover {
+        background-color: #704caf;
+        color: #fff;
+      }
+    </style>
+    <div class="add-course">
+      <button class="button btn-add-course" type="button">
+        <a href="/courses/create.html" style="text-decoration: none;">Create a course</a>
+      </button>
+    </div>
     <div id="head-categories">
-      <style>
-        .button {
-          background-color: white;
-          border: none;
-          color: #704caf;
-          padding: 16px 32px;
-          text-align: right;
-          text-decoration: none;
-          font-size: 16px;
-          margin: 4px 2px;
-          transition-duration: 0.4s;
-          cursor: pointer;
-          float: right;
-          margin-right: 50px;
-        }
-
-        .btn-add-course {
-          background-color: #704caf;
-          color: white;
-          border: 2px solid #704caf;
-        }
-
-        .btn-add-course:hover {
-          background-color: white;
-          color: #704caf;
-        }
-      </style>
-      <div class="add-course">
-        <button class="button btn-add-course" type="button">
-          <a href="/courses/create.html" style="text-decoration: none;">Create a course</a>
-        </button>
-      </div>
       <div class="container cols">
         <a href="#" class="cat current"><span>All</span></a>
         <a href="#languages" class="cat "><span>Foreign Language</span></a>
