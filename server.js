@@ -29,6 +29,11 @@ app.get('/account/profile.html',(req, res) => {
 	)
 })
 
+app.get('/account/edit-profile.html',(req, res) => {
+	res.render('account/edit-profile',
+	)
+})
+
 app.get('/account/wallet.html',(req, res) => {
 	res.render('account/wallet',
 	)
