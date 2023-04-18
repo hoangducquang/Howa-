@@ -20,7 +20,7 @@ body {
   top: 53.5%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
+  width: 500px;
   background: white;
   border-radius: 20px;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.05);
@@ -77,6 +77,11 @@ form .text-field {
   height: 2px;
   background: #2691d9;
   transition: .5s;
+}
+
+text-field[date] input:focus~label,
+text-field[date] input:valid~label {
+  color: #2691d9;
 }
 
 .text-field input:focus~label,

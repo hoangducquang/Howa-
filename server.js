@@ -29,6 +29,11 @@ app.get('/account/profile.html',(req, res) => {
 	)
 })
 
+app.get('/account/edit-profile.html',(req, res) => {
+	res.render('account/edit-profile',
+	)
+})
+
 app.get('/account/wallet.html',(req, res) => {
 	res.render('account/wallet',
 	)
@@ -64,6 +69,11 @@ app.get('/courses/create.html',(req, res) => {
 	)
 })
 
+app.get('/courses/index-copy.html',(req, res) => {
+	res.render('courses/index copy',
+	)
+})
+
 app.get('/courses',(req, res) => {
 	res.render('courses/index',
 	)
@@ -89,7 +99,7 @@ mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt6
 		console.log("Mongoose connect error!" + err);
 	}
 	else{
-		console.log("Mongoose connected successfully");
+		console.log("Mongoose connected successfully!");
 	}
 });
 
