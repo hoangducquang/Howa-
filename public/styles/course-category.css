@@ -60,7 +60,7 @@ body {
   height: auto;
   color: rgb(8, 27, 105);
   background-color: #ebebeb;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
   border-radius: 15px;
 }
 
@@ -231,6 +231,7 @@ li a:hover {
   font-weight: bold;
   font-size: 18px;
   text-decoration: none;
+  margin-bottom: 50px;
 }
 
 #head-categories .cat:last-child {
@@ -266,4 +267,30 @@ li a:hover {
   width: 83.3333333333%;
 }
 
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mg-10 {
+  margin: 0 -10px;
+}
+
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
+.col-4:nth-child(4n+1) {
+  clear: both;
+}
+
+.col-4 {
+  width: 25%;
+  float: left;
+}
+
+.pd-10 {
+  padding: 0px 20px;
+}
 
