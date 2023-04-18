@@ -69,6 +69,11 @@ app.get('/courses/create.html',(req, res) => {
 	)
 })
 
+app.get('/courses/index-copy.html',(req, res) => {
+	res.render('courses/index copy',
+	)
+})
+
 app.get('/courses',(req, res) => {
 	res.render('courses/index',
 	)
