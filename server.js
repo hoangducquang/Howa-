@@ -1,13 +1,14 @@
 var express = require("express");
 var app = express();
+const route = express.Router();
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set('views', 'views')
 app.use("/scripts", express.static(__dirname+"/node_modules/web3.js-browser/build/"));
-
 app.use('/css', express.static(__dirname+"public/styles/"));
 app.use('/js', express.static(__dirname+"public/scripts/"));
 app.use('/img', express.static(__dirname+"public/images/"));
+const controller = require('./controllers/userController');
 
 app.get('/index.html',(req, res) => {
 	res.render('index',
@@ -84,6 +85,8 @@ app.get('/courses/index.html',(req, res) => {
 	)
 })
 
+
+
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 server.listen(3000);
@@ -105,6 +108,9 @@ mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt6
 
 require("./controllers/game")(app);
 
+route.get('/account/profile/test',controller.find);
+
+module.exports = route;
 
 
 
