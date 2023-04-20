@@ -1,5 +1,6 @@
-var userDB = require('../models/user');
-
+const userDB = require('../models/user');
+const mongoose = require("mongoose");
+const UserController = {}
 //create and save new user
 exports.create = (req,res)=>{
 
@@ -42,3 +43,14 @@ exports.delete = (req,res)=>{
 
 }
 
+UserController.show = (req,res)=>{
+    userDB.findOne({_id: req.params.id}).exec((err, user) => {
+        if(err){
+            console.log("Error", err);
+        }else{
+            res.render("../views/account/profile", {user:user});
+        }
+    });
+};
+
+module.exports = UserController;

@@ -25,10 +25,10 @@ app.get('/account',(req, res) => {
 	)
 })
 
-app.get('/account/profile.html',(req, res) => {
-	res.render('account/profile',
-	)
-})
+// app.get('/account/profile.html',(req, res) => {
+// 	res.render('account/profile',
+// 	)
+// })
 
 app.get('/account/edit-profile.html',(req, res) => {
 	res.render('account/edit-profile',
@@ -85,8 +85,6 @@ app.get('/courses/index.html',(req, res) => {
 	)
 })
 
-
-
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 server.listen(3000);
@@ -97,7 +95,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 // Mongoose
 // projectblockchain 0f8jx9y02fXfhx5E
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt65b.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) =>{
+const userDB = require("./models/user");
+mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt65b.mongodb.net/projectblockchain?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true}, (err) =>{
 	if(err){
 		console.log("Mongoose connect error!" + err);
 	}
@@ -106,9 +105,25 @@ mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt6
 	}
 });
 
-require("./controllers/game")(app);
+//get user profile
+app.get('/account/profile/:id', async function(req, res){
+    user = await userDB.findOne({
+         _id: req.params.id
+    })
+	console.log(user);
+    res.render("../views/account/profile", {user: user});
+});
 
-route.get('/account/profile/test',controller.find);
+//get user profile - edit
+app.get('/account/edit-profile/:id', async function(req, res){
+    user = await userDB.findOne({
+         _id: req.params.id
+    })
+	console.log(user);
+    res.render("../views/account/edit-profile", {user: user});
+});
+
+require("./controllers/game")(app);
 
 module.exports = route;
 
