@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+const { update } = require('../controllers/userController');
 var ObjectId = mongoose.Schema.ObjectId;
+var Schema = mongoose.Schema;
 
 var userAccount = new mongoose.Schema({
     id:{
@@ -28,6 +30,10 @@ var userAccount = new mongoose.Schema({
     address:{
         type: String,
         required: false
+    },
+    update_at:{
+        type: Date,
+        default: Date.now
     }
 })
 
