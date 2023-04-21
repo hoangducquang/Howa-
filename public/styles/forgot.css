@@ -84,7 +84,7 @@ form .email-field {
 .email-field input:invalid~label,
 .email-field input:valid~label {
   top: -5px;
-  color: #2691d9;
+  color: #0e0276;
 }
 
 .email-field input:focus~span::before,
