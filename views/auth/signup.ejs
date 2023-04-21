@@ -47,7 +47,7 @@
         <h1>Sign up</h1>
         <form method="post" onsubmit="validSignup()">
             <div class="text-field">
-                <input type="text" required="" name="email" id="email">
+                <input type="email" required="" name="email" id="email">
                 <span></span>
                 <label>Email</label>
             </div>
@@ -62,7 +62,12 @@
                 <span></span>
             </div>
             <div class="text-field">
-                <input type="password" required="" name="password" id="password">
+                <input type="password" required="" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                title="
+                • At least 8 characters - the more characters, the better
+                • A mixture of both uppercase and lowercase letters
+                • A mixture of letters and numbers
+                • (Optional) Add at least one special character, e.g., ! @ # ? ]">
                 <span></span>
                 <label>Password</label>
             </div>
