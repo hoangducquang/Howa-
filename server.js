@@ -1,6 +1,8 @@
 var express = require("express");
 var app = express();
 const route = express.Router();
+const authRouter = require('./routes/auth');
+const userRouter = require('./routes/users');
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set('views', 'views')
@@ -9,6 +11,9 @@ app.use('/css', express.static(__dirname+"public/styles/"));
 app.use('/js', express.static(__dirname+"public/scripts/"));
 app.use('/img', express.static(__dirname+"public/images/"));
 const controller = require('./controllers/userController');
+
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
 
 app.get('/index.html',(req, res) => {
 	res.render('index',
@@ -84,6 +89,10 @@ app.get('/courses/index.html',(req, res) => {
 	res.render('courses/index',
 	)
 })
+
+app.post('/auth/forgot.html', function(request, response, next){
+	response.send(request.body);
+});
 
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
