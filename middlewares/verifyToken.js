@@ -3,13 +3,13 @@ const jwt = require('jsonwebtoken');
 module.exports = (request, response, next) => {
     const token = request.header('auth-token');
     
-    if (!token) return response.status(401).send({message: 'Access Denied'});
+    if (!token) return response.status(401).send({message: 'Access Denied nha ban'});
 
     try {
         jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
             if(err){
                 console.log(err);
-                response.status(401).send({message: 'Access Denied'});
+                response.status(401).send({message: 'Access Denied nha ban'});
             } else {
                 request.userID = decoded._id;
                 request.isLoggedIn = true;
