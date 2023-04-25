@@ -548,3 +548,7 @@ html {
     }
 
 }
+
+div.menuAccount {
+    display: none;
+}

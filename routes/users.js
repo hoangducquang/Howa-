@@ -5,7 +5,7 @@ var bodyParser = require('body-parser');
 var user = require('../models/user')
 const verifyToken = require('../middlewares/verifyToken');
 
-mongoose.connect('mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt65b.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt65b.mongodb.net/projectblockchain?retryWrites=true&w=majority')
 
 mongoose.connection.on('open',()=>{
   console.log("Connection OK");
