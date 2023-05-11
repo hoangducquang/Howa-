@@ -110,6 +110,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // projectblockchain 0f8jx9y02fXfhx5E
 const mongoose = require("mongoose");
 const userDB = require("./models/user");
+const courseDB = require("./models/course");
 mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt65b.mongodb.net/projectblockchain?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
 	if (err) {
 		console.log("Mongoose connect error!" + err);
@@ -135,6 +136,15 @@ app.get('/account/edit-profile/:id', async function (req, res) {
 	})
 	console.log(user);
 	res.render("../views/account/edit-profile", { user: user });
+});
+
+//get course detail
+app.get('/courses/:id', async function (req, res) {
+	course = await courseDB.findOne({
+		_id: req.params.id
+	})
+	console.log(course);
+	res.render("../views/courses/basic-python", { course: course });
 });
 
 require("./controllers/game")(app);

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { update } = require('../controllers/userController');
+const { Int32, Timestamp } = require('mongodb');
 var ObjectId = mongoose.Schema.ObjectId;
 var Schema = mongoose.Schema;
 
@@ -35,7 +36,7 @@ var userAccount = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-})
+});
 
 const userDB = mongoose.model('users', userAccount);
 
