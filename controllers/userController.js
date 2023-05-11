@@ -1,4 +1,5 @@
 const userDB = require('../models/user');
+const courseDB = require('../models/course');
 const mongoose = require("mongoose");
 const UserController = {}
 //create and save new user
