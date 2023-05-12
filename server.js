@@ -111,6 +111,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const mongoose = require("mongoose");
 const userDB = require("./models/user");
 const courseDB = require("./models/course");
+const lectureDB = require("./models/lecture");
 mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt65b.mongodb.net/projectblockchain?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
 	if (err) {
 		console.log("Mongoose connect error!" + err);
