@@ -10,7 +10,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="/styles/forgot.css">
-    <script src="/scripts/forgot.js"></script>
+    <script>
+        function validForgot() {
+            var em = document.getElementById('email').value;
+            if (em == "john@gmail.com") {
+                window.alert("Email was sent!");
+                window.location = "./auth/signup.html";
+            }
+            else {
+                window.alert("Send email failed! Please try again!");
+                return false;
+            }
+        }
+    </script>
     <title>Forgot password | HOWA - Course Register</title>
 </head>
 <header class="header" id="top">

@@ -80,18 +80,22 @@ form .text-field {
 }
 
 text-field[date] input:focus~label,
-text-field[date] input:valid~label {
-  color: #2691d9;
+text-field[date] input:focus~label,
+text-field[date] input:valid~label,
+text-field[date] input:invalid~label {
+  color: #0e0276;
 }
 
 .text-field input:focus~label,
-.text-field input:valid~label {
+.text-field input:valid~label,
+.text-field input:invalid~label {
   top: -5px;
-  color: #2691d9;
+  color: #0e0276;
 }
 
 .text-field input:focus~span::before,
-.text-field input:valid~span::before {
+.text-field input:valid~span::before,
+.text-field input:invalid~span::before {
   width: 100%;
 }
 
