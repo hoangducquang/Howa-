@@ -3,6 +3,185 @@ $(document).ready(() =>{
         {
             "inputs": [
                 {
+                    "internalType": "address",
+                    "name": "_ownerWeb",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "idSubject",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "owner",
+                    "type": "address"
+                }
+            ],
+            "name": "eventCreateCourse",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "idSubject",
+                    "type": "string"
+                },
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "idStudent",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "wallet",
+                            "type": "address"
+                        }
+                    ],
+                    "indexed": false,
+                    "internalType": "struct RegisterCourse.student[]",
+                    "name": "listStudent",
+                    "type": "tuple[]"
+                }
+            ],
+            "name": "eventListStudent",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "idSubject",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "owner",
+                    "type": "address"
+                }
+            ],
+            "name": "eventMentorCancelCourse",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "idSubject",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "idStudent",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "wallet",
+                    "type": "address"
+                }
+            ],
+            "name": "eventStudentCancelCourse",
+            "type": "event"
+        },
+        {
+            "anonymous": false,
+            "inputs": [
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "idSubject",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "string",
+                    "name": "idStudent",
+                    "type": "string"
+                },
+                {
+                    "indexed": false,
+                    "internalType": "address",
+                    "name": "wallet",
+                    "type": "address"
+                }
+            ],
+            "name": "eventStudentRegisterCourse",
+            "type": "event"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                }
+            ],
+            "name": "courses",
+            "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "idSubject",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "numberDays",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "endTimeRegister",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "endTimeCourse",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "price",
+                    "type": "uint256"
+                },
+                {
+                    "internalType": "address",
+                    "name": "owner",
+                    "type": "address"
+                },
+                {
+                    "internalType": "bool",
+                    "name": "stateCourse",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
                     "internalType": "string",
                     "name": "_idSubject",
                     "type": "string"
@@ -28,82 +207,214 @@ $(document).ready(() =>{
                     "type": "uint256"
                 }
             ],
-            "name": "addCourse",
-            "outputs": [],
-            "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "stateMutability": "payable",
-            "type": "constructor"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "idSubject",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "address",
-                    "name": "address_SmartContract",
-                    "type": "address"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "address",
-                    "name": "addressOwner",
-                    "type": "address"
-                }
-            ],
-            "name": "eventAddCourse",
-            "type": "event"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "",
-                    "type": "string"
-                }
-            ],
-            "name": "addressCourse",
+            "name": "createCourse",
             "outputs": [
                 {
-                    "internalType": "address",
+                    "internalType": "bool",
                     "name": "",
-                    "type": "address"
+                    "type": "bool"
                 }
             ],
-            "stateMutability": "view",
+            "stateMutability": "payable",
             "type": "function"
         },
         {
             "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_idSubject",
+                    "type": "string"
+                }
+            ],
+            "name": "getListStudent",
+            "outputs": [
+                {
+                    "components": [
+                        {
+                            "internalType": "string",
+                            "name": "idStudent",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "address",
+                            "name": "wallet",
+                            "type": "address"
+                        }
+                    ],
+                    "internalType": "struct RegisterCourse.student[]",
+                    "name": "",
+                    "type": "tuple[]"
+                }
+            ],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "",
+                    "type": "string"
+                },
                 {
                     "internalType": "uint256",
                     "name": "",
                     "type": "uint256"
                 }
             ],
-            "name": "idCourse",
+            "name": "listStudent",
             "outputs": [
+                {
+                    "internalType": "string",
+                    "name": "idStudent",
+                    "type": "string"
+                },
+                {
+                    "internalType": "address",
+                    "name": "wallet",
+                    "type": "address"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_idSubject",
+                    "type": "string"
+                }
+            ],
+            "name": "mentorCancelCourse",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
                 {
                     "internalType": "string",
                     "name": "",
                     "type": "string"
                 }
             ],
+            "name": "numStudents",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_idSubject",
+                    "type": "string"
+                }
+            ],
+            "name": "studentCancelRegisterCourse",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_idStudent",
+                    "type": "string"
+                },
+                {
+                    "internalType": "string",
+                    "name": "_idSubject",
+                    "type": "string"
+                }
+            ],
+            "name": "studentRegisterCourse",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_idSubject",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256[]",
+                    "name": "numdayStudys",
+                    "type": "uint256[]"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "lenS",
+                    "type": "uint256"
+                }
+            ],
+            "name": "withdrawMentor",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_idSubject",
+                    "type": "string"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "numdayStudy",
+                    "type": "uint256"
+                }
+            ],
+            "name": "withdrawStudent",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "payable",
             "type": "function"
         }
     ];
  
-    const addressSC = "0x498B18c1bE96dbb68c595014bb282450c9371d5d";
+    const addressSC = "0x8DCbE94879a37A47F6426C2e91054ddf1784b082";
     
 
     const web3 = new Web3(window.ethereum);
@@ -119,7 +430,7 @@ $(document).ready(() =>{
     var contractInfura = new web3_infura.eth.Contract(ABI, addressSC);
     console.log(contractInfura);
 
-    contractInfura.events.eventAddCourse({
+    contractInfura.events.eventCreateCourse({
         filter:{},
         fromBlock:"latest"
     }, (err, returnEvent) => {
@@ -127,8 +438,41 @@ $(document).ready(() =>{
             console.log(err);
         }else{
             console.log(returnEvent);
+            $("#listTB").append(`
+                <tr id="dong1">
+                    <td>`+ returnEvent.returnValues[1] +`</td>
+                    <td>`+ returnEvent.returnValues[0] +`</td>
+                </tr>
+            `)
         }
         // returnEvent.returnValues.address_SmartContract
+    });
+    contractInfura.events.eventStudentRegisterCourse({
+        filter:{},
+        fromBlock:"latest"
+    }, (err, returnEvent) => {
+        if(err) {
+            console.log(err);
+        }else{
+            console.log(returnEvent);
+            $("#listTB").append(`
+                <tr id="dong1">
+                    <td>`+ returnEvent.returnValues[1] +`</td>
+                    <td>`+ returnEvent.returnValues[0] +`</td>
+                    <td>`+ returnEvent.returnValues[2] +`</td>
+                </tr>
+            `)
+        }
+    });
+    contractInfura.events.eventListStudent({
+        filter:{},
+        // fromBlock:"latest"
+    }, (err, returnEvent) => {
+        if(err) {
+            console.log(err);
+        }else{
+            console.log(returnEvent);
+        }
     });
 
     // contractInfura.events.eventRegisterCourse({filter:{}, fromBlock : "latest"}, function(err, eventReturn){
@@ -194,21 +538,49 @@ $(document).ready(() =>{
                 price:$("#txtPrice").val()
             }, async(data)=>{
                 if(data.result == 1){
-                    contractMM.methods.addCourse(data.err._id, data.err.numberDay, data.err.endTimeRegister, data.err.endTimeCourse, data.err.price).send({
+                    contractMM.methods.createCourse(data.err._id, data.err.numberDay, data.err.endTimeRegister, data.err.endTimeCourse, data.err.price).send({
                         from: currentAccount,
-                        value: data.err.price * 2,
+                        value: data.err.price,
                     })
                     // .on('receipt', function(receipt){
-                    //     console.log(receipt.events.eventAddCourse.returnValues.address_SmartContract);
-                    // })
-                    // .on('error', function(error, receipt) {
-                    //     console.log(error);
-                    // });
+                        //     console.log(receipt.events.eventAddCourse.returnValues.address_SmartContract);
+                        // })
+                        // .on('error', function(error, receipt) {
+                            //     console.log(error);
+                            // });
+                        }
+                    });
                 }
             });
+            
+    $("#btnGetListStudent").click(()=>{
+        if(currentAccount.length == 0){
+            alert("Please login metamask!");
+        }
+        else{
+            let idSubjectCurrent = $("#txtID").val()
+            if(idSubjectCurrent != ''){
+                contractMM.methods.getListStudent(idSubjectCurrent).send({
+                    from: currentAccount,
+                })
+            }
         }
     });
-
+    $('#btnRegisterCourse').click(()=>{
+        
+        if(currentAccount.length == 0){
+            alert("Please login metamask!");
+        }else{
+            let idSubjectCurrent = $("#txtID").val()
+            let idStudentCurrent = $("#txtIDStudent").val()
+            if(idSubjectCurrent != ''){
+                contractMM.methods.studentRegisterCourse(idStudentCurrent, idSubjectCurrent).send({
+                    from: currentAccount,
+                    value: 1000000000,
+                })
+            }
+        }
+    });    
     
 });
 

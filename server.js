@@ -85,6 +85,11 @@ app.get('/courses/index.html',(req, res) => {
 	)
 })
 
+app.get('/layout', (req, res) => {
+	res.render('layout',
+	)
+})
+
 
 
 var server = require("http").Server(app);
