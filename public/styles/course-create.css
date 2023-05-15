@@ -12,18 +12,17 @@ body {
   padding: 0px;
   background: linear-gradient(120deg, #8ab2cd, #c676e9);
   height: auto;
-  overflow: hidden;
 }
 
 .course-form{
-  padding-bottom: 50px;
+  padding: 0% 25%;
 }
 
 .course-center {
-  position:absolute;
+  position: flex !important;
   top: 60%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  padding-bottom: 15px;
   width: auto !important;
   margin-bottom: 30px;
   background: white;
@@ -42,7 +41,7 @@ body {
 }
 
 .course-center form {
-  padding: 0px 40px 0px 40px;
+  padding: 0px 70px;
   box-sizing: border-box;
 }
 
