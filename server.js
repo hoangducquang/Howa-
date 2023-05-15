@@ -30,11 +30,6 @@ app.get('/account', (req, res) => {
 	)
 })
 
-// app.get('/account/profile.html',(req, res) => {
-// 	res.render('account/profile',
-// 	)
-// })
-
 app.get('/account/mycourse.html', (req, res) => {
 	res.render('account/mycourse',
 	)
@@ -70,18 +65,8 @@ app.get('/auth/signup.html', (req, res) => {
 	)
 })
 
-app.get('/courses/basic-python.html', (req, res) => {
-	res.render('courses/basic-python',
-	)
-})
-
 app.get('/courses/create.html', (req, res) => {
 	res.render('courses/create',
-	)
-})
-
-app.get('/courses/index-copy.html', (req, res) => {
-	res.render('courses/index copy',
 	)
 })
 
@@ -145,7 +130,7 @@ app.get('/courses/:id', async function (req, res) {
 		_id: req.params.id
 	})
 	console.log(course);
-	res.render("../views/courses/basic-python", { course: course });
+	res.render("../views/courses/coursedetail", { course: course });
 });
 
 require("./controllers/game")(app);
