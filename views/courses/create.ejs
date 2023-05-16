@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="/styles/course-create.css">
+    <!-- <script src="/scripts/create.js" async=""></script> -->
     <title>Create a Course | HOWA - Course Register</title>
 </head>
 <header class="header" id="top">
@@ -72,9 +73,9 @@
                     </div>
                     <div class="text-field">
                         <span></span>
-                        <label>Category</label>
+                        <label id="dropdown-container">Category</label>
                         <!-- Cho nay can fix lai design -->
-                        <select id="category" name="category"
+                         <select id="category" name="category"
                             style="padding: 10px 200px; background-color: #fff; width:100%; border: none;">
                             <option value="foreignlanguage">Foreign Language</option>
                             <option value="programming">Programming</option>
@@ -84,6 +85,19 @@
                             <option value="photography">Photography</option>
                             <option value="others">Others</option>
                         </select>
+                        <!-- <script>
+                            const categoryList = require("../../models/category");
+                            var dropdownHTML = '<select>';
+                            for (var i = 0; i < categoryList.length; i++) {
+                                var name = categoryList[i].name;
+                                var code = categoryList[i].code;
+                                dropdownHTML += '<option value="' + code + '">' + name + '</option>';
+                            }
+                            dropdownHTML += '</select>';
+                            //Load the dynamically created dropdown in container
+                            var container = document.getElementById("dropdown-container");
+                            container.innerHTML = dropdownHTML;
+                        </script> -->
                     </div>
                     <div class="text-field">
                         <input type="text" name="lecture" required="">
