@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/styles/style.css">
   <link rel="stylesheet" href="/styles/course-detail.css">
-  <title>Basic Python - Courses | HOWA - Course Register</title>
+  <title><%= course.name %> - Courses | HOWA - Course Register</title>
 </head>
 <header class="header" id="top">
   <div class="w3-top">
@@ -62,32 +62,32 @@
       >
       <a href="/courses/index.html" style="color: black;">Courses</a>
       >
-      <a style="text-decoration: none;">Basic Python</a>
+      <a style="text-decoration: none;"><%= course.name %></a>
     </div>
     <div class="card" style="height: auto; display: block; margin: auto; margin-top: 30px; width: 1200px;">
       <div id="main" style="margin: auto;">
         <div id="pitch">
           <div id="logo-course" style="float:left; margin-right: 10px; margin-bottom: 15px;">
             <div>
-              <img src="/images/python-programming-language.png"
+              <img src=<%= course.image %>
                 style="margin-top: 6px;margin-right: 10px;width: 200px;height: 200px;" alt="Basic Python">
               <br>
             </div>
           </div>
           <div id="detail-course" class="not-delayed">
-            <h2 id="title" style="margin-bottom: 20px;"><b>Basic Python</b></h2>
+            <h2 id="title" style="margin-bottom: 20px;"><b><%= course.name %></b></h2>
             <p style="margin-bottom: 5px;">Category:&nbsp;
-              <a href="" style="color: rgb(31, 128, 192)">Python</a>
+              <a href="" style="color: rgb(31, 128, 192)"><%= course.categories_id %></a>
             </p>
             <p style="margin-bottom: 5px;">
               Lecturer:&nbsp;
-              <a href="" style="color: rgb(31, 128, 192)">Nguyen Duy Tan</a>
+              <a href="" style="color: rgb(31, 128, 192)"><%= course.lectures_id %></a>
             <p style="margin-bottom: 5px">
-              Duration:&ensp;17/03/2023 - 17/04/2023 (20:00 ~ 22:00 every Sunday)
+              Duration:&ensp;<%= course.start_date %> - <%= course.end_date %> (20:00 ~ 22:00 every Sunday)
             </p>
             <div style="margin-top: 15px; margin-bottom: 15px;">
-              <span style="color: rgb(255, 0, 0); font-size: 30px;"><b>1.000.000 VND&nbsp;</b></span>
-              <span style="color: rgb(128, 128, 137); text-decoration: line-through;">1.200.000 VND</span>
+              <span style="color: rgb(255, 0, 0); font-size: 30px;"><b><%= course.price %> ETH&nbsp;</b></span>
+              <span style="color: rgb(128, 128, 137); text-decoration: line-through;"><%= course.price %> ETH&nbsp;</span>
               <span style="color: rgb(255, 0, 0);">&nbsp;-17%</span>
             </div>
             <div class="group-button" style="margin-bottom: 30px;">
@@ -96,14 +96,7 @@
           </div>
           <div class="course-description" style="border-top: 1px solid #a8acc0;">
             <p style="font-size: 20px; color: blueviolet; margin-top: 30px; margin-bottom: 15px;"><b>Description</b></p>
-            昨今デジタルを活用した施策にシフトし、マーケティングでリードを獲得し、インサイドセールスでフォローする取り組みを進める企業が増えてきています。コニカミノルタは早い時期から取り組んでおり、その中で多くの失敗を経て、成功体験につながっております。また、その経験からお客様のご支援を行っております。本コラムでは実際に体験したこと、お客様からご相談頂くお困りごとに対してコニカミノルタではどのように対応してきたかをご紹介させて頂きます。
-            <br><br>
-            インサイドセールスは組織を立ち上げればいいわけではなく、社内連携や目的を見失わずに進めていくことが重要です。これから取り組む方も既に取り組んでいる方にも参考にして頂けるよう５つのポイントを解説していきます。
-            インサイドセールスの活動は「未来の顧客」に対して友好的な関係を築くために、電話を通してヒアリングを行い、顧客に有益な情報を提供し続けることになります。そのため、見込み顧客として温め続け、信頼関係が築かれた状態で商談を営業にパスしていきます。
-            <br><br>
-            テレアポはあくまでアポイント取得を目的としており、短い期間でいかにアポイントを量産できるかという形で活動しています。
-            <br>
-            そのため、インサイドセールスは中長期的に顧客とコミュニケーションを取ることを前提としており、アポイントの数ではなく質を重視し活動します。
+            <%= course.description %>
           </div>
         </div>
       </div>
@@ -130,7 +123,6 @@
       <p>Opening on Morning | Off at afternoon</p>
       <p>Delivery only on opening hours</p>
     </div>
-
   </div>
 </body>
 

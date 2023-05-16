@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="/styles/course-create.css">
+    <!-- <script src="/scripts/create.js" async=""></script> -->
     <title>Create a Course | HOWA - Course Register</title>
 </head>
 <header class="header" id="top">
@@ -30,12 +31,12 @@
                 <div class="w3-dropdown-hover w3-right w3-hide-small">
                     <button class="w3-button w3-black w3-padding-large">Account</button>
                     <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-                      <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
-                      <a href="#" class="w3-bar-item w3-button">My courses</a>
-                      <a href="#" class="w3-bar-item w3-button">Edit password</a>
-                      <a href="#" class="w3-bar-item w3-button">Log out</a>
+                        <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
+                        <a href="#" class="w3-bar-item w3-button">My courses</a>
+                        <a href="#" class="w3-bar-item w3-button">Edit password</a>
+                        <a href="#" class="w3-bar-item w3-button">Log out</a>
                     </div>
-                  </div>
+                </div>
             </span>
         </div>
     </div>
@@ -50,95 +51,132 @@
         <div class="w3-dropdown-hover w3-right">
             <button class="w3-button w3-black w3-padding-large">My Account</button>
             <div class="w3-dropdown-content w3-bar-block w3-border">
-              <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
-              <a href="#" class="w3-bar-item w3-button">My courses</a>
-              <a href="#" class="w3-bar-item w3-button">Edit password</a>
-              <a href="#" class="w3-bar-item w3-button">Log out</a>
+                <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
+                <a href="#" class="w3-bar-item w3-button">My courses</a>
+                <a href="#" class="w3-bar-item w3-button">Edit password</a>
+                <a href="#" class="w3-bar-item w3-button">Log out</a>
             </div>
-          </div>
+        </div>
     </div>
 </header>
 
 <body>
-    <div class="course-form" style="margin-top: 70px;">
-        <div class="course-center">
-            <h1>Create a Course</h1>
-            <form method="post">
-                <div class="text-field">
-                    <input type="text" name="course-name" required="">
-                    <span></span>
-                    <label>Course name</label>
-                </div>
-                <div class="text-field">
-                    <span></span>
-                    <label>Category</label>
-                    <!-- Cho nay can fix lai design -->
-                    <select id="category" name="category"
-                        style="padding: 10px 150px; background-color: #fff; border: none;">
-                        <option value="foreignlanguage">Foreign Language</option>
-                        <option value="programming">Programming</option>
-                        <option value="design">Design</option>
-                        <option value="music">Music</option>
-                        <option value="videoediting">Video Editing</option>
-                        <option value="photography">Photography</option>
-                        <option value="others">Others</option>
-                    </select>
-                </div>
-                <div class="text-field">
-                    <input type="text" name="lecture" required="">
-                    <span></span>
-                    <label>Lecturer</label>
-                </div>
-                <div class="text-field">
-                    <input type="text" name="description" required="">
-                    <span></span>
-                    <label>Description</label>
-                </div>
-                <div class="text-field">
-                    <input type="number" required="" name="fee">
-                    <span></span>
-                    <label>Tuition fee</label>
-                </div>
-                <div class="text-field">
-                    <input type="number" required="" name="quantity" min="1">
-                    <span></span>
-                    <label>Max students</label>
-                </div>
-                <div class="text-field">
-                    <input type="number" required="" name="quantity" min="1">
-                    <span></span>
-                    <label>Days of course</label>
-                </div>
-                <script>datePickerId.min = new Date().toISOString().split("T")[0];</script>
-                <script>
-                    document.getElementById('today').value = moment().format('YYYY-MM-DD');
-                </script>
-                <div class="text-field date">
-                    <label>Course start date</label>
-                    <input type="date" required="" name="coursestartdate" value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
-                    <span></span>
-                </div>
-                <div class="text-field date">
-                    <label>Course end date</label>
-                    <input type="date" required="" name="courseenddate" value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
-                    <span></span>
-                </div>
-                <div class="text-field date">
-                    <label>Registration closing date</label>
-                    <input type="date" required="" name="registenddate" value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
-                    <span></span>
-                </div>
-                <div class="text-field select">
-                    <label>Select course's picture:</label>
-                    <input type="file" required="" name="img" style="padding-left: 175px; padding-top: 10px;"
-                        accept="image/*">
-                    <span></span>
-                </div>
-                <div class="text-field" style="border-bottom: none;">
-                    <button type="button">Create</button>
-                </div>
-            </form>
+    <main class="category" style="min-height: max-content;">
+        <div class="course-form" style="margin-top: 70px;">
+            <div class="course-center">
+                <h1>Create a Course</h1>
+                <form method="post">
+                    <div class="text-field">
+                        <input type="text" name="course-name" required="">
+                        <span></span>
+                        <label>Course name</label>
+                    </div>
+                    <div class="text-field">
+                        <span></span>
+                        <label id="dropdown-container">Category</label>
+                        <!-- Cho nay can fix lai design -->
+                         <select id="category" name="category"
+                            style="padding: 10px 200px; background-color: #fff; width:100%; border: none;">
+                            <option value="foreignlanguage">Foreign Language</option>
+                            <option value="programming">Programming</option>
+                            <option value="design">Design</option>
+                            <option value="music">Music</option>
+                            <option value="videoediting">Video Editing</option>
+                            <option value="photography">Photography</option>
+                            <option value="others">Others</option>
+                        </select>
+                        <!-- <script>
+                            const categoryList = require("../../models/category");
+                            var dropdownHTML = '<select>';
+                            for (var i = 0; i < categoryList.length; i++) {
+                                var name = categoryList[i].name;
+                                var code = categoryList[i].code;
+                                dropdownHTML += '<option value="' + code + '">' + name + '</option>';
+                            }
+                            dropdownHTML += '</select>';
+                            //Load the dynamically created dropdown in container
+                            var container = document.getElementById("dropdown-container");
+                            container.innerHTML = dropdownHTML;
+                        </script> -->
+                    </div>
+                    <div class="text-field">
+                        <input type="text" name="lecture" required="">
+                        <span></span>
+                        <label>Lecturer</label>
+                    </div>
+                    <div class="text-field">
+                        <input type="text" name="description" required="">
+                        <span></span>
+                        <label>Description</label>
+                    </div>
+                    <div class="text-field">
+                        <input type="number" required="" name="fee">
+                        <span></span>
+                        <label>Tuition fee (ETH)</label>
+                    </div>
+                    <div class="text-field">
+                        <input type="number" required="" name="quantity" min="1">
+                        <span></span>
+                        <label>Max students</label>
+                    </div>
+                    <div class="text-field">
+                        <input type="number" required="" name="quantity" min="1">
+                        <span></span>
+                        <label>Days of course</label>
+                    </div>
+                    <div class="text-field date">
+                        <label>Course start time</label>
+                        <input type="datetime-local" required="" name="coursestartdate" id="coursestartdate" value="<?= date('Y-m-d') ?>"
+                            min="today" max="2030-12-31" style="padding-left: 200px;">
+                        <span></span>
+                    </div>
+                    <div class="text-field date">
+                        <label>Course end time</label>
+                        <input type="datetime-local" required="" name="courseenddate" value="<?= date('Y-m-d') ?>"
+                            max="2030-12-31" style="padding-left: 200px;">
+                        <span></span>
+                    </div>
+                    <div class="text-field date">
+                        <label>Registration closing time</label>
+                        <input type="datetime-local" required="" name="registenddate" value="<?= date('Y-m-d') ?>"
+                            max="2030-12-31" style="padding-left: 200px;">
+                        <span></span>
+                    </div>
+                    <div class="text-field select">
+                        <label>Select course's picture:</label>
+                        <input type="file" required="none" name="img" style="padding-left: 200px; padding-top: 10px;"
+                            accept="image/*">
+                        <span></span>
+                    </div>
+                    <div class="text-field" style="border-bottom: none;">
+                        <button type="button">Create</button>
+                    </div>
+                </form>
+            </div>
         </div>
+    </main>
+    <div class="w3-center contact" id="contact" style="color: white;">
+        <div class=" w3-left-align w3-margin-top contact-info ">
+            <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
+            <h4 style="font-weight: 600;">Your styles at low cost
+            </h4>
+            <p>We care about our customers<br>you can contact us for any feedback</p>
+            <h4 style="font-weight: 600;">Follow Us </h4>
+
+            <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
+            <i class="fa fa-instagram w3-hover-opacity icons"></i>
+            <i class="fa fa-snapchat w3-hover-opacity icons"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
+            <i class="fa fa-twitter w3-hover-opacity icons"></i>
+            <i class="fa fa-linkedin w3-hover-opacity icons"></i>
+        </div>
+        <div class="w3-left-align w3-margin-top contact-info">
+            <h3 style="font-weight: 600;">OPENING HOURS</h3>
+            <p>Mon - Sat 7am - 9pm:</p>
+            <p>Opening on Morning | Off at afternoon</p>
+            <p>Delivery only on opening hours</p>
+        </div>
+
     </div>
 </body>
 

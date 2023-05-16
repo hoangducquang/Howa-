@@ -30,11 +30,6 @@ app.get('/account', (req, res) => {
 	)
 })
 
-// app.get('/account/profile.html',(req, res) => {
-// 	res.render('account/profile',
-// 	)
-// })
-
 app.get('/account/mycourse.html', (req, res) => {
 	res.render('account/mycourse',
 	)
@@ -70,21 +65,6 @@ app.get('/auth/signup.html', (req, res) => {
 	)
 })
 
-app.get('/courses/basic-python.html', (req, res) => {
-	res.render('courses/basic-python',
-	)
-})
-
-app.get('/courses/create.html', (req, res) => {
-	res.render('courses/create',
-	)
-})
-
-app.get('/courses/index-copy.html', (req, res) => {
-	res.render('courses/index copy',
-	)
-})
-
 app.get('/courses', (req, res) => {
 	res.render('courses/index',
 	)
@@ -92,6 +72,11 @@ app.get('/courses', (req, res) => {
 
 app.get('/courses/index.html', (req, res) => {
 	res.render('courses/index',
+	)
+})
+
+app.get('/layout', (req, res) => {
+	res.render('layout',
 	)
 })
 
@@ -110,6 +95,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // projectblockchain 0f8jx9y02fXfhx5E
 const mongoose = require("mongoose");
 const userDB = require("./models/user");
+const courseDB = require("./models/course");
+const lectureDB = require("./models/lecture");
+//const categoryDB = require("./models/category");
 mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt65b.mongodb.net/projectblockchain?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
 	if (err) {
 		console.log("Mongoose connect error!" + err);
@@ -136,6 +124,21 @@ app.get('/account/edit-profile/:id', async function (req, res) {
 	console.log(user);
 	res.render("../views/account/edit-profile", { user: user });
 });
+
+//get course detail
+app.get('/courses/detail/:id', async function (req, res) {
+	course = await courseDB.findOne({
+		_id: req.params.id
+	})
+	console.log(course);
+	res.render("../views/courses/coursedetail", { course: course });
+});
+
+//
+app.get('/courses/create.html', (req, res) => {
+	res.render('../views/courses/create',
+	)
+})
 
 require("./controllers/game")(app);
 
