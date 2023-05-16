@@ -27,6 +27,7 @@ contract RegisterCourse {
     mapping (string => uint256) public numStudents;
 
     // Event
+    event eventCreateCourse(string idSubject, address owner);
     event eventListStudent(string idSubject, student[] listStudent);
     event eventStudentRegisterCourse(string idSubject, string idStudent, address wallet);
     event eventStudentCancelCourse(string idSubject, string idStudent, address wallet);
@@ -64,6 +65,7 @@ contract RegisterCourse {
             
             numCourses ++;
             numStudents[_idSubject] = 0;
+            emit eventCreateCourse(_idSubject, msg.sender);
             return true;
     }
 
