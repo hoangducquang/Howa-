@@ -4,41 +4,39 @@ const { Int32, Timestamp } = require('mongodb');
 var ObjectId = mongoose.Schema.ObjectId;
 var Schema = mongoose.Schema;
 
-var userAccount = new mongoose.Schema({
+var account = new mongoose.Schema({
     id:{
         type: ObjectId,
         required: true,
         unique: true
     },
-    name:{
+    password:{
         type: String,
         required: true
-    },
-    dob: {
-        type: Date,
-        required: true
-    },
-    email:{
-        type: String,
-        required: true,
-        unique: true
-    },
-    phone:{
-        type: String,
-        required: false,
-        unique: true
-    },
-    address:{
-        type: String,
-        required: false
     },
     update_at:{
         type: Date,
         default: Date.now
+    },
+    create_at:{
+        type: Date,
+        default: Date.now
+    },
+    delete_at:{
+        type: Date,
+        default: Date.now
+    },
+    type:{
+        type: Number,
+        required: true
+    },
+    users_id:{
+        type: ObjectId,
+        required: true,
+        unique: true
     }
 });
 
-const userDB = mongoose.model('users', userAccount);
-console.log(userDB);
+const accountDB = mongoose.model('accounts', account);
 
-module.exports = userDB;
+module.exports = accountDB;
