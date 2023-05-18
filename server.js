@@ -47,6 +47,11 @@ app.get('/account/edit-profile.html', (req, res) => {
 	)
 })
 
+app.get('/account/edit-password.html', (req, res) => {
+	res.render('account/edit-password',
+	)
+})
+
 app.get('/account/wallet.html', (req, res) => {
 	res.render('account/wallet',
 	)
@@ -90,6 +95,15 @@ app.get('/layout', (req, res) => {
 app.post('/auth/forgot.html', function (request, response, next) {
 	response.send(request.body);
 });
+
+app.post('/account/edit-password.html', function (request, response, next) {
+	response.send(request.body);
+});
+
+app.get('/password', (req, res) => {
+	res.render('password',
+	)
+})
 
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
@@ -145,6 +159,12 @@ app.get('/courses/detail/:id', async function (req, res) {
 app.get('/courses/create.html', (req, res) => {
 	//if (err) throw err;
 	res.render('../views/courses/create',
+	)
+})
+
+app.get('/upload-image', (req, res) => {
+	//if (err) throw err;
+	res.render('scripts/upload-image.',
 	)
 })
 
