@@ -430,6 +430,7 @@ $(document).ready(() =>{
     var contractInfura = new web3_infura.eth.Contract(ABI, addressSC);
     console.log(contractInfura);
 
+    // Start listen Infura
     contractInfura.events.eventCreateCourse({
         filter:{},
         fromBlock:"latest"
@@ -483,11 +484,12 @@ $(document).ready(() =>{
     //     }
     // });
 
-
+    // Var account
     var currentAccount = "";
     var price = 0;
     var timeRegister = 0, timeCourse = 0;
 
+    // Check metamask install
     checkMM();
 
     $("#btnConnectMM").click(()=>{
@@ -499,59 +501,47 @@ $(document).ready(() =>{
         })
     })
 
-    // $("#btnGetPrice").click(async ()=>{
-    //     contractMM.methods.getPrice().call().then((data) => {
-    //         price = web3.utils.hexToNumber(data);
-    //         document.getElementById('priceCourse').innerHTML = price;
-    //     });
-    // })
-    
-    // $("#btnGetTimeRegister").click(async ()=>{
-    //     contractMM.methods.endTimeRegister().call().then((data) => {
-    //         timeRegister = web3.utils.hexToNumber(data);
-    //         document.getElementById('endRegister').innerHTML = timeRegister;
-    //     });
-    // })
-    
-    // $("#btnGetTimeCourse").click(async ()=>{
-    //     contractMM.methods.endTimeCourse().call().then((data) => {
-    //         timeCourse = web3.utils.hexToNumber(data);
-    //         document.getElementById('endCourse').innerHTML = timeCourse;
-    //     });
-    // })
-    
-    // $("#btnGetInfoStudent").click(()=>{
-    //     contractMM.methods.getListStudent().call().then(data => console.log(data));
-    // })
 
-
-    $("#btnRegister").click(()=>{
+    $("#btn-create").click(()=>{
         if(currentAccount.length == 0){
             alert("Please login metamask!");
         }
         else{
-            $.post("./register", {
-                name:$("#txtName").val(), 
-                numberDay:$("#txtNumberDay").val(), 
-                endTimeRegister:$("#txtEndTimeRegister").val(),
-                endTimeCourse:$("#txtEndTimeCourse").val(),
-                price:$("#txtPrice").val()
+            $.post("./courses", {
+                categories_id: $("#create-category").val(),
+                description: $("#create-description").val(),
+                lectures_id: $("#create-lecturer").val(),
+                name: $("#create-course-name").val(),
+                price: $("#create-tuition-fee").val(),
+                num_days: $("#create-days-of-course").val(),
+                end_date: $("#create-time-end").val(),
+                start_date: $("#create-time-start").val(),
+                end_regist: $("#create-time-register").val(),
+                create_at: Date.now(),
+                delete_at: Date.now(),
+                update_at: Date.now(),
+                image: "Link",
+                users_id: "6437b0c684ab3117410be702",
             }, async(data)=>{
                 if(data.result == 1){
-                    contractMM.methods.createCourse(data.err._id, data.err.numberDay, data.err.endTimeRegister, data.err.endTimeCourse, data.err.price).send({
+                    let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
+                    let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
+
+                    // Call smart contract create course 
+                    contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
                         from: currentAccount,
                         value: data.err.price,
                     })
-                    // .on('receipt', function(receipt){
-                        //     console.log(receipt.events.eventAddCourse.returnValues.address_SmartContract);
-                        // })
-                        // .on('error', function(error, receipt) {
-                            //     console.log(error);
-                            // });
-                        }
-                    });
-                }
-            });
+                    .on('receipt', function(receipt){
+                        console.log(receipt.events.eventAddCourse.returnValues.address_SmartContract);
+                    })
+                    .on('error', function(error, receipt) {
+                            console.log(error);
+                        });
+                    }
+                });
+            }
+        });
             
     $("#btnGetListStudent").click(()=>{
         if(currentAccount.length == 0){
