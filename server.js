@@ -10,6 +10,13 @@ app.use("/scripts", express.static(__dirname + "/node_modules/web3.js-browser/bu
 app.use('/css', express.static(__dirname + "public/styles/"));
 app.use('/js', express.static(__dirname + "public/scripts/"));
 app.use('/img', express.static(__dirname + "public/images/"));
+app.use(function(req, res,next){
+	res.setHeader('Access-Control-Allow-Origin','*');
+	res.setHeader('Access-Control-Allow-Methods','GET, POST, DELETE, OPTIONS');
+	res.setHeader('Access-Control-Allow-Headers','X-Requested-With,content-type');
+	res.setHeader('Access-Control-Allow-Credentials','true');
+	next();
+});
 const controller = require('./controllers/userController');
 
 app.use('/api/auth', authRouter);
@@ -40,6 +47,11 @@ app.get('/account/edit-profile.html', (req, res) => {
 	)
 })
 
+app.get('/account/edit-password.html', (req, res) => {
+	res.render('account/edit-password',
+	)
+})
+
 app.get('/account/wallet.html', (req, res) => {
 	res.render('account/wallet',
 	)
@@ -65,11 +77,6 @@ app.get('/auth/signup.html', (req, res) => {
 	)
 })
 
-app.get('/courses/create.html', (req, res) => {
-	res.render('courses/create',
-	)
-})
-
 app.get('/courses', (req, res) => {
 	res.render('courses/index',
 	)
@@ -89,6 +96,15 @@ app.post('/auth/forgot.html', function (request, response, next) {
 	response.send(request.body);
 });
 
+app.post('/account/edit-password.html', function (request, response, next) {
+	response.send(request.body);
+});
+
+app.get('/password', (req, res) => {
+	res.render('password',
+	)
+})
+
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
 server.listen(3000);
@@ -102,6 +118,7 @@ const mongoose = require("mongoose");
 const userDB = require("./models/user");
 const courseDB = require("./models/course");
 const lectureDB = require("./models/lecture");
+const categoryDB = require("./models/category");
 mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt65b.mongodb.net/projectblockchain?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
 	if (err) {
 		console.log("Mongoose connect error!" + err);
@@ -130,13 +147,26 @@ app.get('/account/edit-profile/:id', async function (req, res) {
 });
 
 //get course detail
-app.get('/courses/:id', async function (req, res) {
+app.get('/courses/detail/:id', async function (req, res) {
 	course = await courseDB.findOne({
 		_id: req.params.id
 	})
 	console.log(course);
 	res.render("../views/courses/coursedetail", { course: course });
 });
+
+//
+app.get('/courses/create.html', (req, res) => {
+	// if (err) throw err;
+	res.render('../views/courses/create',
+	)
+})
+
+app.get('/upload-image', (req, res) => {
+	//if (err) throw err;
+	res.render('scripts/upload-image.',
+	)
+})
 
 require("./controllers/game")(app);
 

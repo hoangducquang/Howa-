@@ -10,9 +10,10 @@ var categoryList = new mongoose.Schema({
         required: true,
         unique: true
     },
-    description:{
+    code:{
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     name:{
         type: String,
