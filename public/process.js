@@ -507,7 +507,6 @@ $(document).ready(() =>{
             alert("Please login metamask!");
         }
         else{
-            console.log("Login success")
             $.post("./courses", {
                 categories_id: $("#create-category").val(),
                 description: $("#create-description").val(),
@@ -525,21 +524,24 @@ $(document).ready(() =>{
                 users_id: "6437b0c684ab3117410be702",
             }, async(data)=>{
                 if(data.result == 1){
-                    console.log("1")
-                    contractMM.methods.createCourse(data.err._id, data.err.daysOfCourse, data.err.timeRegister, data.err.timeEnd, data.err.tuitionFee).send({
+                    let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
+                    let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
+
+                    // Call smart contract create course 
+                    contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
                         from: currentAccount,
-                        value: data.err.tuitionFee,
+                        value: data.err.price,
                     })
-                    // .on('receipt', function(receipt){
-                        //     console.log(receipt.events.eventAddCourse.returnValues.address_SmartContract);
-                        // })
-                        // .on('error', function(error, receipt) {
-                            //     console.log(error);
-                            // });
-                        }
-                    });
-                }
-            });
+                    .on('receipt', function(receipt){
+                        console.log(receipt.events.eventAddCourse.returnValues.address_SmartContract);
+                    })
+                    .on('error', function(error, receipt) {
+                            console.log(error);
+                        });
+                    }
+                });
+            }
+        });
             
     $("#btnGetListStudent").click(()=>{
         if(currentAccount.length == 0){

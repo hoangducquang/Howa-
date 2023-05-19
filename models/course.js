@@ -8,7 +8,7 @@ var Schema = mongoose.Schema;
 var courseList = new mongoose.Schema({
     id: {
         type: ObjectId,
-        required: true,
+        // required: true,
         unique: true
     },
     categories_id: {
@@ -74,18 +74,18 @@ var courseList = new mongoose.Schema({
 
 const courseDB = mongoose.model('courses', courseList);
 
-courseDB.aggregate([
-    {
-        $lookup: {
-            from: 'lectures',
-            localField: '_id',
-            foreignField: 'lectures_id',
-            as: 'lectureDetail'
-        }
-    }
-    ], function (err, res) {
-        if (err) throw err;
-        console.log(res);
-    });
+// courseDB.aggregate([
+//     {
+//         $lookup: {
+//             from: 'lectures',
+//             localField: '_id',
+//             foreignField: 'lectures_id',
+//             as: 'lectureDetail'
+//         }
+//     }
+//     ], function (err, res) {
+//         if (err) throw err;
+//         console.log(res);
+//     });
 
 module.exports = courseDB;

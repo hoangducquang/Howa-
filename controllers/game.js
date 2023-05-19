@@ -39,7 +39,7 @@ module.exports = (app) => {
     // })
 
     app.post("/courses", (req, res) => {
-        if(!req.body.name || !req.body.lecturer || !req.body.timeRegister || !req.body.timeEnd || !req.body.tuitionFee){
+        if(!req.body.name || !req.body.lectures_id || !req.body.end_regist || !req.body.end_date  || !req.body.price){
             res.json({result:0, err: "Not enough information"});
         }else{
             var newCourse = new courseDB({
