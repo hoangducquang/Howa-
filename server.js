@@ -157,7 +157,7 @@ app.get('/courses/detail/:id', async function (req, res) {
 
 //
 app.get('/courses/create.html', (req, res) => {
-	//if (err) throw err;
+	// if (err) throw err;
 	res.render('../views/courses/create',
 	)
 })

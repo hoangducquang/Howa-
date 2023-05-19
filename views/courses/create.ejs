@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="http://localhost:3000/">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,9 @@
     <link rel="stylesheet" href="/styles/course-create.css">
     <!-- <script src="/scripts/create.js" async=""></script> -->
     <title>Create a Course | HOWA - Course Register</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="/scripts/web3.js"></script>
+    <script src="/process.js"></script>
 </head>
 <header class="header" id="top">
     <div class="w3-top">
@@ -67,9 +71,12 @@
         <div class="course-form" style="margin-top: 70px;">
             <div class="course-center">
                 <h1>Create a Course</h1>
+                <div>
+                    <button id="btnConnectMM">Connect metamask</button>
+                </div>
                 <form method="post">
                     <div class="text-field">
-                        <input type="text" name="course-name" required="">
+                        <input id="create-course-name" type="text" name="course-name" required="">
                         <span></span>
                         <label>Course name</label>
                     </div>
@@ -77,7 +84,7 @@
                         <span></span>
                         <label id="dropdown-container">Category</label>
                         <!-- Cho nay can fix lai design -->
-                         <select id="category" name="category"
+                         <select id="create-category" name="category"
                             style="padding: 10px 200px; background-color: #fff; width:100%; border: none;">
                             <option value="foreignlanguage">Foreign Language</option>
                             <option value="programming">Programming</option>
@@ -102,57 +109,58 @@
                         </script> -->
                     </div>
                     <div class="text-field">
-                        <input type="text" name="lecture" required="">
+                        <input id="create-lecturer" type="text" name="lecture" required="">
                         <span></span>
                         <label>Lecturer</label>
                     </div>
                     <div class="text-field">
-                        <input type="text" name="description" required="">
+                        <input id="create-description" type="text" name="description" required="">
                         <span></span>
                         <label>Description</label>
                     </div>
                     <div class="text-field">
-                        <input type="number" required="" name="fee">
+                        <input id="create-tuition-fee" type="number" required="" name="fee">
                         <span></span>
                         <label>Tuition fee (ETH)</label>
                     </div>
                     <div class="text-field">
-                        <input type="number" required="" name="quantity" min="1">
+                        <input id="create-max-student" type="number" required="" name="quantity" min="1">
                         <span></span>
                         <label>Max students</label>
                     </div>
                     <div class="text-field">
-                        <input type="number" required="" name="quantity" min="1">
+                        <input id="create-days-of-course" type="number" required="" name="quantity" min="1">
                         <span></span>
                         <label>Days of course</label>
                     </div>
                     <div class="text-field date">
                         <label>Course start time</label>
-                        <input type="datetime-local" required="" name="coursestartdate" id="coursestartdate" value="<?= date('Y-m-d') ?>"
+                        <input id="create-time-start" type="datetime-local" required="" name="coursestartdate" id="coursestartdate" value="<?= date('Y-m-d') ?>"
                             min="today" max="2030-12-31" style="padding-left: 200px;">
                         <span></span>
                     </div>
                     <div class="text-field date">
                         <label>Course end time</label>
-                        <input type="datetime-local" required="" name="courseenddate" value="<?= date('Y-m-d') ?>"
+                        <input id="create-time-end" type="datetime-local" required="" name="courseenddate" value="<?= date('Y-m-d') ?>"
                             max="2030-12-31" style="padding-left: 200px;">
                         <span></span>
                     </div>
                     <div class="text-field date">
                         <label>Registration closing time</label>
-                        <input type="datetime-local" required="" name="registenddate" value="<?= date('Y-m-d') ?>"
+                        <input id="create-time-register" type="datetime-local" required="" name="registenddate" value="<?= date('Y-m-d') ?>"
                             max="2030-12-31" style="padding-left: 200px;">
                         <span></span>
                     </div>
                     <div class="text-field select">
                         <label>Select course's picture:</label>
-                        <input type="file" required="none" name="img" style="padding-left: 200px; padding-top: 10px;"
+                        <input id="create-select-picture" type="file" required="none" name="img" style="padding-left: 200px; padding-top: 10px;"
                             accept="image/*">
                         <span></span>
                     </div>
                     <div class="text-field" style="border-bottom: none;">
-                        <button type="button">Create</button>
+                        <button id="btn-create" type="button">Create</button>
                     </div>
+                    
                 </form>
             </div>
         </div>
