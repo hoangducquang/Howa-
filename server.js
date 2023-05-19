@@ -3,6 +3,7 @@ var app = express();
 const route = express.Router();
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/users');
+const jwt = require('jsonwebtoken');
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set('views', 'views')
@@ -17,6 +18,7 @@ app.use(function(req, res,next){
 	res.setHeader('Access-Control-Allow-Credentials','true');
 	next();
 });
+
 const controller = require('./controllers/userController');
 
 app.use('/api/auth', authRouter);
@@ -167,6 +169,40 @@ app.get('/upload-image', (req, res) => {
 	res.render('scripts/upload-image.',
 	)
 })
+
+//post login form
+app.post('/login', async (request, response) => {
+    const user = await userDB.findOne({email: request.body.email});
+
+    if (!user) return response.status(422).send({message: 'Email or Password is not correct'});
+	const CryptoJS = require('crypto-js');
+    const hashPassword = CryptoJS.SHA256(request.body.password);
+
+    const checkPassword = hashPassword.toString().localeCompare(user.password);
+
+    if (!checkPassword) return response.status(422).send({message: 'Email or Password is not correct'});
+
+    const token = await jwt.sign({_id: user._id}, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 * 24 });
+
+    return response.status(200).send({
+        token,
+        user: {
+            _id: user._id,
+            name: user.name,
+            email: user.email
+        },
+        message: 'Login successfully'
+    });
+})
+
+const verifyToken = require('./middlewares/verifyToken');
+
+app.get('/', verifyToken, (request, response) => {
+    User.find({}).exec(function (err, users) {
+        response.send(users);
+    });
+});
+
 
 require("./controllers/game")(app);
 
