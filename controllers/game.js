@@ -55,7 +55,7 @@ module.exports = (app) => {
                 create_at: Date.now(),
                 delete_at: Date.now(),
                 update_at: Date.now(),
-                image: "Link",
+                image: "Link00000000",
                 users_id: "6437b0c684ab3117410be702",
             })
         }

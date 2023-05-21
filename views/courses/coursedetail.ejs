@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="/styles/style.css">
   <link rel="stylesheet" href="/styles/course-detail.css">
   <title><%= course.name %> - Courses | HOWA - Course Register</title>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/scripts/web3.js"></script>
+  <script src="/process.js"></script>
 </head>
 <header class="header" id="top">
   <div class="w3-top">
@@ -93,8 +96,11 @@
               <span style="color: rgb(255, 0, 0);">&nbsp;-17%</span>
             </div>
             <div class="group-button" style="margin-bottom: 30px;">
-              <button class="btn btn-buy-now" type="button">Buy now</button>
+              <button id="btnBuyNow" class="btn btn-buy-now" type="button">Buy now</button>
             </div>
+            <div>
+              <button id="btnConnectMM">Connect metamask</button>
+          </div>
           </div>
           <div class="course-description" style="border-top: 1px solid #a8acc0;">
             <p style="font-size: 20px; color: blueviolet; margin-top: 30px; margin-bottom: 15px;"><b>Description</b></p>
