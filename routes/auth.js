@@ -5,6 +5,7 @@ const verifyToken = require('../middlewares/verifyToken');
 const router = express.Router();
 const User = require('../models/user');
 const { registerValidator } = require('../validations/auth');
+const { update } = require('../controllers/userController');
 
 router.post('/register', async (request, response) => {
     const { error } = registerValidator(request.body);
@@ -15,13 +16,17 @@ router.post('/register', async (request, response) => {
 
     if (checkEmailExist) return response.status(422).send('Email is exist');
 
-    const salt = await bcrypt.genSalt(10);
-    const hashPassword = await bcrypt.hash(request.body.password, salt);
+    const hashPassword = CryptoJS.SHA256(request.body.password);
 
     const user = new User({
-        name: request.body.name,
         email: request.body.email,
+        name: request.body.name,
+        dob: request.body.dob,
         password: hashPassword,
+        address: null,
+        create_at: Date.now,
+        update_at: Date.now,
+        delete_at: null
     });
 
     try {
@@ -37,7 +42,9 @@ router.post('/login', async (request, response) => {
 
     if (!user) return response.status(422).send({message: 'Email or Password is not correct'});
 
-    const checkPassword = await bcrypt.compare(request.body.password, user.password);
+    const hashPassword = CryptoJS.SHA256(request.body.password);
+
+    const checkPassword = hashPassword.localeCompare(user.password);
 
     if (!checkPassword) return response.status(422).send({message: 'Email or Password is not correct'});
 
