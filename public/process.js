@@ -532,41 +532,52 @@ $(document).ready(() =>{
                         from: currentAccount,
                         value: data.err.price,
                     })
-                    .on('receipt', function(receipt){
-                        console.log(receipt.events.eventAddCourse.returnValues.address_SmartContract);
-                    })
-                    .on('error', function(error, receipt) {
-                            console.log(error);
-                        });
-                    }
-                });
-            }
-        });
+                    // .on('receipt', function(receipt){
+                    //     console.log(receipt.events.eventAddCourse.returnValues.address_SmartContract);
+                    // })
+                    // .on('error', function(error, receipt) {
+                    //     console.log(error);
+                    // });
+                    
+                    // var _idSubjectCurrent = data.err.id
+
+                    // data storage
+                    localStorage.setItem("_idSubjectCurrent", data.err._id);
+                    localStorage.setItem("_priceCurrent", data.err.price);
+
+                    // setTimeout(() => {
+                    //     window.location.href = "/courses/detail/" + data.err._id
+                    // },30000)
+                }
+            });
+        }
+    });
             
     $("#btnGetListStudent").click(()=>{
         if(currentAccount.length == 0){
             alert("Please login metamask!");
         }
         else{
-            let idSubjectCurrent = $("#txtID").val()
-            if(idSubjectCurrent != ''){
-                contractMM.methods.getListStudent(idSubjectCurrent).send({
+            if(_idSubjectCurrent != ''){
+                contractMM.methods.getListStudent(_idSubjectCurrent).send({
                     from: currentAccount,
                 })
             }
         }
     });
-    $('#btnRegisterCourse').click(()=>{
+    $('#btnBuyNow').click(()=>{
         
         if(currentAccount.length == 0){
             alert("Please login metamask!");
         }else{
-            let idSubjectCurrent = $("#txtID").val()
-            let idStudentCurrent = $("#txtIDStudent").val()
-            if(idSubjectCurrent != ''){
-                contractMM.methods.studentRegisterCourse(idStudentCurrent, idSubjectCurrent).send({
+            console.log("here")
+            let idStudentCurrent = "6437b0c684ab3117410be702"
+            let _idSubjectCurrent = localStorage.getItem("_idSubjectCurrent")
+            console.log(_idSubjectCurrent)
+            if(_idSubjectCurrent != '' && idStudentCurrent != ''){
+                contractMM.methods.studentRegisterCourse(idStudentCurrent, _idSubjectCurrent).send({
                     from: currentAccount,
-                    value: 1000000000,
+                    value: localStorage.getItem("_priceCurrent"),
                 })
             }
         }
