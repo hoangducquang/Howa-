@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/styles/style.css">
   <link rel="stylesheet" href="/styles/course-detail.css">
-  <title><%= course.name %> - Courses | HOWA - Course Register</title>
+  <title>
+    <%= course.name %> - Courses | HOWA - Course Register
+  </title>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script src="/scripts/web3.js"></script>
   <script src="/process.js"></script>
@@ -18,12 +20,13 @@
 <header class="header" id="top">
   <div class="w3-top">
     <div class="w3-bar w3-black w3-card header">
-      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
-        href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
+        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
       <a href="/index.html" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
       <span class="w3-right">
         <a href="/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
-        <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small" style="background-color: white; color: black;">Courses</a>
+        <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+          style="background-color: white; color: black;">Courses</a>
         <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
         <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
         <a href="/auth/login.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
@@ -43,7 +46,8 @@
 
   <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
     <a href="/index.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Home</a>
-    <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large" style="background-color: white; color: black;" onclick="myFunction()">Couses</a>
+    <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large"
+      style="background-color: white; color: black;" onclick="myFunction()">Couses</a>
     <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
     <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
     <a href="/auth/login.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
@@ -67,32 +71,44 @@
       >
       <a href="/courses/index.html" style="color: black;">Courses</a>
       >
-      <a style="text-decoration: none;"><%= course.name %></a>
+      <a style="text-decoration: none;">
+        <%= course.name %>
+      </a>
     </div>
     <div class="card" style="height: auto; display: block; margin: auto; margin-top: 30px; width: 1200px;">
       <div id="main" style="margin: auto;">
         <div id="pitch">
           <div id="logo-course" style="float:left; margin-right: 10px; margin-bottom: 15px;">
             <div>
-              <img src=<%= course.image %>
-                style="margin-top: 6px;margin-right: 10px;width: 200px;height: 200px;" alt="<%= course.name %>">
-              <br>
+              <img src=<%=course.image %>
+              style="margin-top: 6px;margin-right: 10px;width: 200px;height: 200px;" alt="<%= course.name %>">
+                <br>
             </div>
           </div>
           <div id="detail-course" class="not-delayed" style="padding: 0% 5% 0% 20%;">
-            <h2 id="title" style="margin-bottom: 20px;"><b><%= course.name %></b></h2>
+            <h2 id="title" style="margin-bottom: 20px;"><b>
+                <%= course.name %>
+              </b></h2>
             <p style="margin-bottom: 5px;">Category:&nbsp;
-              <a href="" style="color: rgb(31, 128, 192)"><%= course.categories_id %></a>
+              <a href="" style="color: rgb(31, 128, 192)">
+                <%= course.categories_id %>
+              </a>
             </p>
             <p style="margin-bottom: 5px;">
               Lecturer:&nbsp;
-              <a href="" style="color: rgb(31, 128, 192)"><%= course.lectures_id %></a>
+              <a href="" style="color: rgb(31, 128, 192)">
+                <%= course.lectures_id %>
+              </a>
             <p style="margin-bottom: 5px">
               Duration:&ensp;<%= course.start_date %> - <%= course.end_date %> (20:00 ~ 22:00 every Sunday)
             </p>
             <div style="margin-top: 15px; margin-bottom: 15px;">
-              <span style="color: rgb(255, 0, 0); font-size: 30px;"><b><%= course.price %> ETH&nbsp;</b></span>
-              <span style="color: rgb(128, 128, 137); text-decoration: line-through;"><%= course.price %> ETH&nbsp;</span>
+              <span style="color: rgb(255, 0, 0); font-size: 30px;"><b>
+                  <%= course.price %> ETH&nbsp;
+                </b></span>
+              <span style="color: rgb(128, 128, 137); text-decoration: line-through;">
+                <%= course.price %> ETH&nbsp;
+              </span>
               <span style="color: rgb(255, 0, 0);">&nbsp;-17%</span>
             </div>
             <div class="group-button" style="margin-bottom: 30px;">
@@ -100,7 +116,7 @@
             </div>
             <div>
               <button id="btnConnectMM">Connect metamask</button>
-          </div>
+            </div>
           </div>
           <div class="course-description" style="border-top: 1px solid #a8acc0;">
             <p style="font-size: 20px; color: blueviolet; margin-top: 30px; margin-bottom: 15px;"><b>Description</b></p>

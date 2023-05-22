@@ -1,4 +1,4 @@
-$(document).ready(() =>{
+$(document).ready(() => {
     const ABI = [
         {
             "inputs": [
@@ -413,9 +413,9 @@ $(document).ready(() =>{
             "type": "function"
         }
     ];
- 
+
     const addressSC = "0x8DCbE94879a37A47F6426C2e91054ddf1784b082";
-    
+
 
     const web3 = new Web3(window.ethereum);
     window.ethereum.enable();
@@ -432,46 +432,46 @@ $(document).ready(() =>{
 
     // Start listen Infura
     contractInfura.events.eventCreateCourse({
-        filter:{},
-        fromBlock:"latest"
+        filter: {},
+        fromBlock: "latest"
     }, (err, returnEvent) => {
-        if(err) {
+        if (err) {
             console.log(err);
-        }else{
+        } else {
             console.log(returnEvent);
             $("#listTB").append(`
                 <tr id="dong1">
-                    <td>`+ returnEvent.returnValues[1] +`</td>
-                    <td>`+ returnEvent.returnValues[0] +`</td>
+                    <td>`+ returnEvent.returnValues[1] + `</td>
+                    <td>`+ returnEvent.returnValues[0] + `</td>
                 </tr>
             `)
         }
         // returnEvent.returnValues.address_SmartContract
     });
     contractInfura.events.eventStudentRegisterCourse({
-        filter:{},
-        fromBlock:"latest"
+        filter: {},
+        fromBlock: "latest"
     }, (err, returnEvent) => {
-        if(err) {
+        if (err) {
             console.log(err);
-        }else{
+        } else {
             console.log(returnEvent);
             $("#listTB").append(`
                 <tr id="dong1">
-                    <td>`+ returnEvent.returnValues[1] +`</td>
-                    <td>`+ returnEvent.returnValues[0] +`</td>
-                    <td>`+ returnEvent.returnValues[2] +`</td>
+                    <td>`+ returnEvent.returnValues[1] + `</td>
+                    <td>`+ returnEvent.returnValues[0] + `</td>
+                    <td>`+ returnEvent.returnValues[2] + `</td>
                 </tr>
             `)
         }
     });
     contractInfura.events.eventListStudent({
-        filter:{},
+        filter: {},
         // fromBlock:"latest"
     }, (err, returnEvent) => {
-        if(err) {
+        if (err) {
             console.log(err);
-        }else{
+        } else {
             console.log(returnEvent);
         }
     });
@@ -492,21 +492,21 @@ $(document).ready(() =>{
     // Check metamask install
     checkMM();
 
-    $("#btnConnectMM").click(()=>{
-        connectMM().then((data)=>{
+    $("#btnConnectMM").click(() => {
+        connectMM().then((data) => {
             currentAccount = data[0];
             console.log(currentAccount);
-        }).catch((err)=>{
+        }).catch((err) => {
             console.log(err);
         })
     })
 
 
-    $("#btn-create").click(()=>{
-        if(currentAccount.length == 0){
+    $("#btn-create").click(() => {
+        if (currentAccount.length == 0) {
             alert("Please login metamask!");
         }
-        else{
+        else {
             $.post("./courses", {
                 categories_id: $("#create-category").val(),
                 description: $("#create-description").val(),
@@ -522,8 +522,8 @@ $(document).ready(() =>{
                 update_at: Date.now(),
                 image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
                 users_id: "6437b0c684ab3117410be702",
-            }, async(data)=>{
-                if(data.result == 1){
+            }, async (data) => {
+                if (data.result == 1) {
                     let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
                     let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
 
@@ -538,7 +538,7 @@ $(document).ready(() =>{
                     // .on('error', function(error, receipt) {
                     //     console.log(error);
                     // });
-                    
+
                     // var _idSubjectCurrent = data.err.id
 
                     // data storage
@@ -550,51 +550,51 @@ $(document).ready(() =>{
                     // },30000)
                 }
             });
-            
+
         }
     });
-            
-    $("#btnGetListStudent").click(()=>{
-        if(currentAccount.length == 0){
+
+    $("#btnGetListStudent").click(() => {
+        if (currentAccount.length == 0) {
             alert("Please login metamask!");
         }
-        else{
-            if(_idSubjectCurrent != ''){
+        else {
+            if (_idSubjectCurrent != '') {
                 contractMM.methods.getListStudent(_idSubjectCurrent).send({
                     from: currentAccount,
                 })
             }
         }
     });
-    $('#btnBuyNow').click(()=>{
-        
-        if(currentAccount.length == 0){
+    $('#btnBuyNow').click(() => {
+
+        if (currentAccount.length == 0) {
             alert("Please login metamask!");
-        }else{
+        } else {
             console.log("here")
             let idStudentCurrent = "6437b0c684ab3117410be702"
             let _idSubjectCurrent = localStorage.getItem("_idSubjectCurrent")
             console.log(_idSubjectCurrent)
-            if(_idSubjectCurrent != '' && idStudentCurrent != ''){
+            if (_idSubjectCurrent != '' && idStudentCurrent != '') {
                 contractMM.methods.studentRegisterCourse(idStudentCurrent, _idSubjectCurrent).send({
                     from: currentAccount,
                     value: localStorage.getItem("_priceCurrent"),
                 })
             }
         }
-    });    
-    
+    });
+
 });
 
-async function connectMM(){
+async function connectMM() {
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
     return accounts;
 }
 
-function checkMM(){
+function checkMM() {
     if (typeof window.ethereum !== 'undefined') {
         console.log('MetaMask is installed!');
-    }else{
+    } else {
         console.log("You not install metamask!");
     }
 }

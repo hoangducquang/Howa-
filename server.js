@@ -11,11 +11,11 @@ app.use("/scripts", express.static(__dirname + "/node_modules/web3.js-browser/bu
 app.use('/css', express.static(__dirname + "public/styles/"));
 app.use('/js', express.static(__dirname + "public/scripts/"));
 app.use('/img', express.static(__dirname + "public/images/"));
-app.use(function(req, res,next){
-	res.setHeader('Access-Control-Allow-Origin','*');
-	res.setHeader('Access-Control-Allow-Methods','GET, POST, DELETE, OPTIONS');
-	res.setHeader('Access-Control-Allow-Headers','X-Requested-With,content-type');
-	res.setHeader('Access-Control-Allow-Credentials','true');
+app.use(function (req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, OPTIONS');
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+	res.setHeader('Access-Control-Allow-Credentials', 'true');
 	next();
 });
 
@@ -172,35 +172,35 @@ app.get('/upload-image', (req, res) => {
 
 //post login form
 app.post('/login', async (request, response) => {
-    const user = await userDB.findOne({email: request.body.email});
+	const user = await userDB.findOne({ email: request.body.email });
 
-    if (!user) return response.status(422).send({message: 'Email or Password is not correct'});
+	if (!user) return response.status(422).send({ message: 'Email or Password is not correct' });
 	const CryptoJS = require('crypto-js');
-    const hashPassword = CryptoJS.SHA256(request.body.password);
+	const hashPassword = CryptoJS.SHA256(request.body.password);
 
-    const checkPassword = hashPassword.toString().localeCompare(user.password);
+	const checkPassword = hashPassword.toString().localeCompare(user.password);
 
-    if (!checkPassword) return response.status(422).send({message: 'Email or Password is not correct'});
+	if (!checkPassword) return response.status(422).send({ message: 'Email or Password is not correct' });
 
-    const token = await jwt.sign({_id: user._id}, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 * 24 });
+	const token = await jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, { expiresIn: 60 * 60 * 24 });
 
-    return response.status(200).send({
-        token,
-        user: {
-            _id: user._id,
-            name: user.name,
-            email: user.email
-        },
-        message: 'Login successfully'
-    });
+	return response.status(200).send({
+		token,
+		user: {
+			_id: user._id,
+			name: user.name,
+			email: user.email
+		},
+		message: 'Login successfully'
+	});
 })
 
 const verifyToken = require('./middlewares/verifyToken');
 
 app.get('/', verifyToken, (request, response) => {
-    User.find({}).exec(function (err, users) {
-        response.send(users);
-    });
+	User.find({}).exec(function (err, users) {
+		response.send(users);
+	});
 });
 
 
