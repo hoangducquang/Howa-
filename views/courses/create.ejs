@@ -71,10 +71,12 @@
         <div class="course-form" style="margin-top: 70px;">
             <div class="course-center">
                 <h1>Create a Course</h1>
-                <div>
-                    <button id="btnConnectMM">Connect metamask</button>
-                </div>
+                
                 <form method="post">
+                    <div class="btn-connect-wallet">
+                        <button id="btnConnectMM">Connect Metamask wallet</button>
+                        <p id="successConnectMM" style="margin-top: 10px; color: red;"></p>
+                    </div>
                     <div class="text-field">
                         <input id="create-course-name" type="text" name="course-name" required="">
                         <span></span>
