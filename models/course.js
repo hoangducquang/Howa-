@@ -32,6 +32,11 @@ var courseList = new mongoose.Schema({
         required: true,
         integer: true
     },
+    old_price: {
+        type: Number,
+        required: true,
+        integer: true
+    },
     num_days: {
         type: Number,
         required: true,

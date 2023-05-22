@@ -496,6 +496,8 @@ $(document).ready(() => {
         connectMM().then((data) => {
             currentAccount = data[0];
             console.log(currentAccount);
+            document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4,38), "***") + "!";
+            document.getElementById("btnConnectMM").disabled = true;
         }).catch((err) => {
             console.log(err);
         })
@@ -526,7 +528,7 @@ $(document).ready(() => {
                 if (data.result == 1) {
                     let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
                     let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
-
+                    
                     // Call smart contract create course 
                     contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
                         from: currentAccount,
@@ -544,7 +546,6 @@ $(document).ready(() => {
                     // data storage
                     localStorage.setItem("_idSubjectCurrent", data.err._id);
                     localStorage.setItem("_priceCurrent", data.err.price);
-
                     // setTimeout(() => {
                     //     window.location.href = "/courses/detail/" + data.err._id
                     // },30000)
