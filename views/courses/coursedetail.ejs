@@ -75,11 +75,11 @@
           <div id="logo-course" style="float:left; margin-right: 10px; margin-bottom: 15px;">
             <div>
               <img src=<%= course.image %>
-                style="margin-top: 6px;margin-right: 10px;width: 200px;height: 200px;" alt="Basic Python">
+                style="margin-top: 6px;margin-right: 10px;width: 200px;height: 200px;" alt="<%= course.name %>">
               <br>
             </div>
           </div>
-          <div id="detail-course" class="not-delayed">
+          <div id="detail-course" class="not-delayed" style="padding: 0% 5% 0% 20%;">
             <h2 id="title" style="margin-bottom: 20px;"><b><%= course.name %></b></h2>
             <p style="margin-bottom: 5px;">Category:&nbsp;
               <a href="" style="color: rgb(31, 128, 192)"><%= course.categories_id %></a>

@@ -520,7 +520,7 @@ $(document).ready(() =>{
                 create_at: Date.now(),
                 delete_at: Date.now(),
                 update_at: Date.now(),
-                image: "Link",
+                image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
                 users_id: "6437b0c684ab3117410be702",
             }, async(data)=>{
                 if(data.result == 1){
@@ -550,6 +550,7 @@ $(document).ready(() =>{
                     // },30000)
                 }
             });
+            
         }
     });
             
