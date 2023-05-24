@@ -10,3 +10,7 @@ dropdownHTML += '</select>';
 //Load the dynamically created dropdown in container
 var container = document.getElementById("dropdown-container");
 container.innerHTML = dropdownHTML;
+
+function loaderIcon(){
+    document.getElementsByClassName("loader")[0].style.display = "block";
+}

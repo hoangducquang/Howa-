@@ -16,6 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="/scripts/web3.js"></script>
     <script src="/process.js"></script>
+    <script src="/scripts/create.js"></script>
 </head>
 <header class="header" id="top">
     <div class="w3-top">
@@ -161,9 +162,12 @@
                         <span></span>
                     </div>
                     <div class="text-field" style="border-bottom: none;">
-                        <button id="btn-create" type="button">Create</button>
+                        <button id="btn-create" type="submit" onclick="loaderIcon()">Create</button>
+                        <div class="loader w3-center">
+                            <div class="loading w3-center"></div>
+                            <p style="margin-top: 10px; padding: auto;">Loading...</p>
+                        </div>
                     </div>
-
                 </form>
             </div>
         </div>

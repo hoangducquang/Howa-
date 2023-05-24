@@ -499,6 +499,7 @@ $(document).ready(() => {
             document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4,38), "***") + "!";
             document.getElementById("btnConnectMM").disabled = true;
         }).catch((err) => {
+            document.getElementById("successConnectMM").innerHTML = err;
             console.log(err);
         })
     })
@@ -520,7 +521,7 @@ $(document).ready(() => {
                 start_date: $("#create-time-start").val(),
                 end_regist: $("#create-time-register").val(),
                 create_at: Date.now(),
-                delete_at: Date.now(),
+                delete_at: Date,
                 update_at: Date.now(),
                 image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
                 users_id: "6437b0c684ab3117410be702",
