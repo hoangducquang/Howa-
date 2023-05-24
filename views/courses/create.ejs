@@ -16,6 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="/scripts/web3.js"></script>
     <script src="/process.js"></script>
+    <script src="/scripts/create.js"></script>
 </head>
 <header class="header" id="top">
     <div class="w3-top">
@@ -71,10 +72,12 @@
         <div class="course-form" style="margin-top: 70px;">
             <div class="course-center">
                 <h1>Create a Course</h1>
-                <div>
-                    <button id="btnConnectMM">Connect metamask</button>
-                </div>
+                
                 <form method="post">
+                    <div class="btn-connect-wallet">
+                        <button id="btnConnectMM">Connect Metamask wallet</button>
+                        <p id="successConnectMM" style="margin-top: 10px; color: red;"></p>
+                    </div>
                     <div class="text-field">
                         <input id="create-course-name" type="text" name="course-name" required="">
                         <span></span>
@@ -84,15 +87,17 @@
                         <span></span>
                         <label id="dropdown-container">Category</label>
                         <!-- Cho nay can fix lai design -->
-                         <select id="create-category" name="category"
+                        <select id="create-category" name="category"
                             style="padding: 10px 200px; background-color: #fff; width:100%; border: none;">
-                            <option value="foreignlanguage">Foreign Language</option>
+                            <% category.forEach(cate => { %>
+                            <option><%= cate.name %></option>})
+                            <!-- <option value="foreignlanguage">Foreign Language</option>
                             <option value="programming">Programming</option>
                             <option value="design">Design</option>
                             <option value="music">Music</option>
                             <option value="videoediting">Video Editing</option>
                             <option value="photography">Photography</option>
-                            <option value="others">Others</option>
+                            <option value="others">Others</option> -->
                         </select>
                         <!-- <script>
                             const categoryList = require("../../models/category");
@@ -135,32 +140,36 @@
                     </div>
                     <div class="text-field date">
                         <label>Course start time</label>
-                        <input id="create-time-start" type="datetime-local" required="" name="coursestartdate" id="coursestartdate" value="<?= date('Y-m-d') ?>"
-                            min="today" max="2030-12-31" style="padding-left: 200px;">
+                        <input id="create-time-start" type="datetime-local" required="" name="coursestartdate"
+                            id="coursestartdate" value="<?= date('Y-m-d') ?>" min="today" max="2030-12-31"
+                            style="padding-left: 200px;">
                         <span></span>
                     </div>
                     <div class="text-field date">
                         <label>Course end time</label>
-                        <input id="create-time-end" type="datetime-local" required="" name="courseenddate" value="<?= date('Y-m-d') ?>"
-                            max="2030-12-31" style="padding-left: 200px;">
+                        <input id="create-time-end" type="datetime-local" required="" name="courseenddate"
+                            value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
                         <span></span>
                     </div>
                     <div class="text-field date">
                         <label>Registration closing time</label>
-                        <input id="create-time-register" type="datetime-local" required="" name="registenddate" value="<?= date('Y-m-d') ?>"
-                            max="2030-12-31" style="padding-left: 200px;">
+                        <input id="create-time-register" type="datetime-local" required="" name="registenddate"
+                            value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
                         <span></span>
                     </div>
                     <div class="text-field select">
                         <label>Select course's picture:</label>
-                        <input id="create-select-picture" type="file" required="none" name="img" style="padding-left: 200px; padding-top: 10px;"
-                            accept="image/*">
+                        <input id="create-select-picture" type="file" required="none" name="img"
+                            style="padding-left: 200px; padding-top: 10px;" accept="image/*">
                         <span></span>
                     </div>
                     <div class="text-field" style="border-bottom: none;">
-                        <button id="btn-create" type="button">Create</button>
+                        <button id="btn-create" type="submit" onclick="loaderIcon()">Create</button>
+                        <div class="loader w3-center">
+                            <div class="loading w3-center"></div>
+                            <p style="margin-top: 10px; padding: auto;">Loading...</p>
+                        </div>
                     </div>
-                    
                 </form>
             </div>
         </div>
