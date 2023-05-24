@@ -160,3 +160,32 @@ text-field[date] input:valid~label {
   background: #c676e9;
   transition: .5s;
 }
+
+.loader {
+  display: none;
+  top: 50%;
+  left: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  background-color: #f8fdef;
+  padding: 20px;
+}
+
+.loading {
+  border: 3px solid #2691d9;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border-left-color: #fbc7d4;
+  animation: spin 1s infinite ease-in;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
