@@ -29,6 +29,16 @@ router.get('/account/profile/:id',function(req, res){
     });
 });
 
+router.get('/courses/create.html', (req, res) => {
+	db.collection('categories').find().toArray((err, categories) => {
+		if (err) {
+			console.error(err);
+			return;
+		}
+		res.render('../views/courses/create',{categories: categories});
+	});
+});
+
 router.get('/', verifyToken, (request, response) => {
     User.find({}).exec(function (err, users) {
         response.send(users);
