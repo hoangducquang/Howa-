@@ -89,13 +89,15 @@
                         <!-- Cho nay can fix lai design -->
                         <select id="create-category" name="category"
                             style="padding: 10px 200px; background-color: #fff; width:100%; border: none;">
-                            <option value="foreignlanguage">Foreign Language</option>
+                            <% category.forEach(cate => { %>
+                            <option><%= cate.name %></option>})
+                            <!-- <option value="foreignlanguage">Foreign Language</option>
                             <option value="programming">Programming</option>
                             <option value="design">Design</option>
                             <option value="music">Music</option>
                             <option value="videoediting">Video Editing</option>
                             <option value="photography">Photography</option>
-                            <option value="others">Others</option>
+                            <option value="others">Others</option> -->
                         </select>
                         <!-- <script>
                             const categoryList = require("../../models/category");

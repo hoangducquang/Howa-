@@ -1,5 +1,5 @@
 var express = require("express");
-var app = express();
+const app = express();
 const route = express.Router();
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/users');
@@ -121,14 +121,6 @@ const userDB = require("./models/user");
 const courseDB = require("./models/course");
 const lectureDB = require("./models/lecture");
 const categoryDB = require("./models/category");
-mongoose.connect("mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt65b.mongodb.net/projectblockchain?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-	if (err) {
-		console.log("Mongoose connect error!" + err);
-	}
-	else {
-		console.log("Mongoose connected successfully!");
-	}
-});
 
 //get user profile
 app.get('/account/profile/:id', async function (req, res) {
@@ -157,14 +149,10 @@ app.get('/courses/detail/:id', async function (req, res) {
 	res.render("../views/courses/coursedetail", { course: course });
 });
 
-//
-app.get('/courses/create.html', (req, res) => {
-	// if (err) throw err;
-	res.render('../views/courses/create',
-	)
-})
 
 app.get('/upload-image', (req, res) => {
+
+	
 	//if (err) throw err;
 	res.render('scripts/upload-image.',
 	)
