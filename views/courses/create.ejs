@@ -72,12 +72,11 @@
         <div class="course-form" style="margin-top: 70px;">
             <div class="course-center">
                 <h1>Create a Course</h1>
-                
+                <div class="btn-connect-wallet">
+                    <button id="btnConnectMM">Connect Metamask wallet</button>
+                    <p id="successConnectMM" style="margin-top: 10px; color: red;"></p>
+                </div>
                 <form method="post">
-                    <div class="btn-connect-wallet">
-                        <button id="btnConnectMM">Connect Metamask wallet</button>
-                        <p id="successConnectMM" style="margin-top: 10px; color: red;"></p>
-                    </div>
                     <div class="text-field">
                         <input id="create-course-name" type="text" name="course-name" required="">
                         <span></span>
@@ -89,15 +88,13 @@
                         <!-- Cho nay can fix lai design -->
                         <select id="create-category" name="category"
                             style="padding: 10px 200px; background-color: #fff; width:100%; border: none;">
-                            <% category.forEach(cate => { %>
-                            <option><%= cate.name %></option>})
-                            <!-- <option value="foreignlanguage">Foreign Language</option>
+                            <option value="foreignlanguage">Foreign Language</option>
                             <option value="programming">Programming</option>
                             <option value="design">Design</option>
                             <option value="music">Music</option>
                             <option value="videoediting">Video Editing</option>
                             <option value="photography">Photography</option>
-                            <option value="others">Others</option> -->
+                            <option value="others">Others</option> >
                         </select>
                         <!-- <script>
                             const categoryList = require("../../models/category");
@@ -164,7 +161,7 @@
                         <span></span>
                     </div>
                     <div class="text-field" style="border-bottom: none;">
-                        <button id="btn-create" type="submit" onclick="loaderIcon()">Create</button>
+                        <button id="btn-create" type="button">Create</button>
                         <div class="loader w3-center">
                             <div class="loading w3-center"></div>
                             <p style="margin-top: 10px; padding: auto;">Loading...</p>

@@ -8,7 +8,7 @@ const verifyToken = require('../middlewares/verifyToken');
 mongoose.connect('mongodb+srv://projectblockchain:HDQMTnp05102001@cluster0.qyrt65b.mongodb.net/projectblockchain?retryWrites=true&w=majority')
 
 mongoose.connection.on('open',()=>{
-  console.log("Connection OK");
+  console.log("Connection OK!");
 });
 
 mongoose.connection.on('error',(err)=>{
@@ -29,7 +29,7 @@ router.get('/account/profile/:id',function(req, res){
     });
 });
 
-router.get('/courses/create.html', (req, res) => {
+router.get('/courses/create.html', function(req, res) {
 	db.collection('categories').find().toArray((err, categories) => {
 		if (err) {
 			console.error(err);
@@ -42,6 +42,7 @@ router.get('/courses/create.html', (req, res) => {
 router.get('/', verifyToken, (request, response) => {
     User.find({}).exec(function (err, users) {
         response.send(users);
+        console.log(users);
     });
 });
 
