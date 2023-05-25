@@ -496,7 +496,7 @@ $(document).ready(() => {
         connectMM().then((data) => {
             currentAccount = data[0];
             console.log(currentAccount);
-            document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4,38), "***") + "!";
+            document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4, 38), "***") + "!";
             document.getElementById("btnConnectMM").disabled = true;
         }).catch((err) => {
             document.getElementById("successConnectMM").innerHTML = err;
@@ -510,26 +510,28 @@ $(document).ready(() => {
             alert("Please login metamask!");
         }
         else {
-            $.post("./courses", {
+            $.post("/courses/create.html", {
                 categories_id: $("#create-category").val(),
                 description: $("#create-description").val(),
                 lectures_id: $("#create-lecturer").val(),
                 name: $("#create-course-name").val(),
                 price: $("#create-tuition-fee").val(),
+                old_price: $("#create-tuition-fee").val(),
                 num_days: $("#create-days-of-course").val(),
                 end_date: $("#create-time-end").val(),
                 start_date: $("#create-time-start").val(),
                 end_regist: $("#create-time-register").val(),
                 create_at: Date.now(),
-                delete_at: Date,
+                delete_at: Date.now(),
                 update_at: Date.now(),
                 image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
                 users_id: "6437b0c684ab3117410be702",
             }, async (data) => {
                 if (data.result == 1) {
+                    console.log("Submit")
                     let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
                     let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
-                    
+
                     // Call smart contract create course 
                     contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
                         from: currentAccount,

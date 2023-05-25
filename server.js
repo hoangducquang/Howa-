@@ -149,10 +149,13 @@ app.get('/courses/detail/:id', async function (req, res) {
 	res.render("../views/courses/coursedetail", { course: course });
 });
 
+//get create course form
+app.get('/courses/create.html', async function (req, res) {
+	res.render('courses/create')
+})
+
 
 app.get('/upload-image', (req, res) => {
-
-	
 	//if (err) throw err;
 	res.render('scripts/upload-image.',
 	)

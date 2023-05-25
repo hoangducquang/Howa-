@@ -51,7 +51,8 @@ form .text-field {
   margin: 30px 0;
 }
 
-form .btn-connect-wallet {
+.btn-connect-wallet {
+  padding: 0px 70px;
   position: relative;
   margin: 30px 0;
 }
