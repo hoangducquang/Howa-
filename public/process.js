@@ -439,8 +439,12 @@ $(document).ready(() => {
             console.log(err);
         } else {
             console.log(returnEvent);
-            let ssIDSubject = sessionStorage.getItem("ssIdSubject")
-            window.location.href = "/courses/detail/" + ssIDSubject
+            let cookieIDSubject = document.cookie
+                .split(';')
+                .map(cookie => cookie.trim())
+                .find(cookie => cookie.startsWith('cookieIdSubject='))
+                ?.split('=')[1];
+            window.location.href = "/courses/detail/" + cookieIDSubject
         }
         // returnEvent.returnValues.address_SmartContract
     });
@@ -516,30 +520,18 @@ $(document).ready(() => {
                 image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
                 users_id: "6437b0c684ab3117410be702",
             }, async (data) => {
-                console.log("Herre")
                 if (data.result == 1) {
-                    console.log("Submit")
                     let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
                     let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
                     
-                    sessionStorage.setItem("ssIdSubject", data.err._id);
-                    sessionStorage.setItem("ssPrice", data.err.price);
+                    document.cookie = "cookieIdSubject=" + data.err._id + ";path=/"
+                    document.cookie = "cookiePrice=" + data.err.price + ";path=/"
 
                     // Call smart contract create course 
                     await contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
                         from: currentAccount,
                         value: data.err.price,
                     })
-                    // .on('receipt', function(receipt){
-                    //     console.log(receipt.events.eventAddCourse.returnValues.address_SmartContract);
-                    // })
-                    // .on('error', function(error, receipt) {
-                    //     console.log(error);
-                    // });
-
-                    // var _idSubjectCurrent = data.err.id
-
-                    // data storage
                 }
             });
 
@@ -563,15 +555,22 @@ $(document).ready(() => {
         if (currentAccount.length == 0) {
             alert("Please login metamask!");
         } else {
-            console.log("here")
             let idStudentCurrent = "6437b0c684ab3117410be702"
-            let ssIDSubject = sessionStorage.getItem("ssIdSubject")
-            let priceCurrent = sessionStorage.getItem("ss")
-            console.log(ssIDSubject)
-            if (ssIDSubject != '' && idStudentCurrent != '') {
-                contractMM.methods.studentRegisterCourse(idStudentCurrent, ssIDSubject).send({
+            let cookieIDSubject = document.cookie
+                .split(';')
+                .map(cookie => cookie.trim())
+                .find(cookie => cookie.startsWith('cookieIdSubject='))
+                ?.split('=')[1];
+            let cookieprice = document.cookie
+                .split(';')
+                .map(cookie => cookie.trim())
+                .find(cookie => cookie.startsWith('cookiePrice='))
+                ?.split('=')[1];
+            if (cookieIDSubject != '' && idStudentCurrent != '') {
+                console.log(cookieIDSubject)
+                contractMM.methods.studentRegisterCourse(idStudentCurrent, cookieIDSubject).send({
                     from: currentAccount,
-                    value: priceCurrent,
+                    value: cookieprice,
                 })
             }
         }

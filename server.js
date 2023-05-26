@@ -18,6 +18,7 @@ app.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Credentials', 'true');
 	next();
 });
+var Cookies = require('js-cookie');
 
 const controller = require('./controllers/userController');
 
