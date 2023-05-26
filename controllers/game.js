@@ -49,6 +49,7 @@ module.exports = (app) => {
                 lectures_id: req.body.lectures_id,
                 name: req.body.name,
                 price: req.body.price,
+                old_price: req.body.old_price,
                 num_days: req.body.num_days,
                 end_date: req.body.end_date,
                 start_date: req.body.start_date,
