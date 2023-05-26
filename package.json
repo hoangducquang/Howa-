@@ -26,6 +26,7 @@
     "express": "^4.18.2",
     "express-handlebars": "^7.0.7",
     "infura-web3-provider": "^0.0.3",
+    "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.5.0",
     "mongoose": "^6.11.1",
