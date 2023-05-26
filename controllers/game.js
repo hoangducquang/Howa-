@@ -42,12 +42,14 @@ module.exports = (app) => {
         if(!req.body.name || !req.body.lectures_id || !req.body.end_regist || !req.body.end_date  || !req.body.price){
             res.json({result:0, err: "Not enough information"});
         }else{
+            console.log("222")
             var newCourse = new courseDB({
                 categories_id: req.body.categories_id,
                 description: req.body.description,
                 lectures_id: req.body.lectures_id,
                 name: req.body.name,
                 price: req.body.price,
+                old_price: req.body.old_price,
                 num_days: req.body.num_days,
                 end_date: req.body.end_date,
                 start_date: req.body.start_date,
@@ -61,8 +63,11 @@ module.exports = (app) => {
         }
         newCourse.save((err) => {
             if(err){
+                
+                console.log("333")
                 res.json({result: 0, err: "MongooseDB save error! " + err}); 
             }else{
+                console.log("444")
                 res.json({result: 1, err: newCourse});
             }
         })

@@ -439,12 +439,8 @@ $(document).ready(() => {
             console.log(err);
         } else {
             console.log(returnEvent);
-            $("#listTB").append(`
-                <tr id="dong1">
-                    <td>`+ returnEvent.returnValues[1] + `</td>
-                    <td>`+ returnEvent.returnValues[0] + `</td>
-                </tr>
-            `)
+            let ssIDSubject = sessionStorage.getItem("ssIdSubject")
+            window.location.href = "/courses/detail/" + ssIDSubject
         }
         // returnEvent.returnValues.address_SmartContract
     });
@@ -456,13 +452,6 @@ $(document).ready(() => {
             console.log(err);
         } else {
             console.log(returnEvent);
-            $("#listTB").append(`
-                <tr id="dong1">
-                    <td>`+ returnEvent.returnValues[1] + `</td>
-                    <td>`+ returnEvent.returnValues[0] + `</td>
-                    <td>`+ returnEvent.returnValues[2] + `</td>
-                </tr>
-            `)
         }
     });
     contractInfura.events.eventListStudent({
@@ -499,7 +488,7 @@ $(document).ready(() => {
             document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4, 38), "***") + "!";
             document.getElementById("btnConnectMM").disabled = true;
         }).catch((err) => {
-            document.getElementById("successConnectMM").innerHTML = err;
+            // document.getElementById("successConnectMM").innerHTML = err;
             console.log(err);
         })
     })
@@ -510,7 +499,7 @@ $(document).ready(() => {
             alert("Please login metamask!");
         }
         else {
-            $.post("/courses/create.html", {
+            $.post("/courses", {
                 categories_id: $("#create-category").val(),
                 description: $("#create-description").val(),
                 lectures_id: $("#create-lecturer").val(),
@@ -527,13 +516,17 @@ $(document).ready(() => {
                 image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
                 users_id: "6437b0c684ab3117410be702",
             }, async (data) => {
+                console.log("Herre")
                 if (data.result == 1) {
                     console.log("Submit")
                     let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
                     let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
+                    
+                    sessionStorage.setItem("ssIdSubject", data.err._id);
+                    sessionStorage.setItem("ssPrice", data.err.price);
 
                     // Call smart contract create course 
-                    contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
+                    await contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
                         from: currentAccount,
                         value: data.err.price,
                     })
@@ -547,11 +540,6 @@ $(document).ready(() => {
                     // var _idSubjectCurrent = data.err.id
 
                     // data storage
-                    localStorage.setItem("_idSubjectCurrent", data.err._id);
-                    localStorage.setItem("_priceCurrent", data.err.price);
-                    // setTimeout(() => {
-                    //     window.location.href = "/courses/detail/" + data.err._id
-                    // },30000)
                 }
             });
 
@@ -577,12 +565,13 @@ $(document).ready(() => {
         } else {
             console.log("here")
             let idStudentCurrent = "6437b0c684ab3117410be702"
-            let _idSubjectCurrent = localStorage.getItem("_idSubjectCurrent")
-            console.log(_idSubjectCurrent)
-            if (_idSubjectCurrent != '' && idStudentCurrent != '') {
-                contractMM.methods.studentRegisterCourse(idStudentCurrent, _idSubjectCurrent).send({
+            let ssIDSubject = sessionStorage.getItem("ssIdSubject")
+            let priceCurrent = sessionStorage.getItem("ss")
+            console.log(ssIDSubject)
+            if (ssIDSubject != '' && idStudentCurrent != '') {
+                contractMM.methods.studentRegisterCourse(idStudentCurrent, ssIDSubject).send({
                     from: currentAccount,
-                    value: localStorage.getItem("_priceCurrent"),
+                    value: priceCurrent,
                 })
             }
         }
