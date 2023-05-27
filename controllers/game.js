@@ -1,5 +1,6 @@
 var member = require("../models/member");
 const courseDB = require("../models/course");
+const ordersDB = require("../models/orders")
 
 module.exports = (app) => {
 
@@ -42,7 +43,6 @@ module.exports = (app) => {
         if(!req.body.name || !req.body.lectures_id || !req.body.end_regist || !req.body.end_date  || !req.body.price){
             res.json({result:0, err: "Not enough information"});
         }else{
-            console.log("222")
             var newCourse = new courseDB({
                 categories_id: req.body.categories_id,
                 description: req.body.description,
@@ -63,11 +63,31 @@ module.exports = (app) => {
         }
         newCourse.save((err) => {
             if(err){
+                res.json({result: 0, err: "MongooseDB save error! " + err}); 
+            }else{
+                res.json({result: 1, err: newCourse});
+            }
+        })
+    })
+
+    app.post("/account", (req, res) => {
+        if(!req.body.courses_id || !req.body.create_at || !req.body.users_id ){
+            res.json({result:0, err: "Not enough information"});
+        }else{
+            console.log("222")
+            var newOrders = new ordersDB({
+                courses_id: req.body.courses_id,
+                create_at: req.body.create_at,
+                users_id: req.body.users_id,
+            })
+        }
+        newOrders.save((err) => {
+            if(err){
                 console.log("333")
                 res.json({result: 0, err: "MongooseDB save error! " + err}); 
             }else{
                 console.log("444")
-                res.json({result: 1, err: newCourse});
+                res.json({result: 1, err: newOrders});
             }
         })
     })

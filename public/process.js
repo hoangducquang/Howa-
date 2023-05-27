@@ -439,12 +439,12 @@ $(document).ready(() => {
             console.log(err);
         } else {
             console.log(returnEvent);
-            // let cookieIDSubject = document.cookie
-            //     .split(';')
-            //     .map(cookie => cookie.trim())
-            //     .find(cookie => cookie.startsWith('cookieIdSubject='))
-            //     ?.split('=')[1];
-            window.location.href = "./index.html"
+            let cookieIDSubject = document.cookie
+                .split(';')
+                .map(cookie => cookie.trim())
+                .find(cookie => cookie.startsWith('cookieIdSubject='))
+                ?.split('=')[1];
+            window.location.href = "/courses/detail/" + cookieIDSubject
         }
         // returnEvent.returnValues.address_SmartContract
     });
@@ -455,8 +455,25 @@ $(document).ready(() => {
         if (err) {
             console.log(err);
         } else {
+            let idStudentCurrent = "6437b0c684ab3117410be702"
+            let cookieIDSubject = document.cookie
+                .split(';')
+                .map(cookie => cookie.trim())
+                .find(cookie => cookie.startsWith('cookieIdSubject='))
+                ?.split('=')[1];
             console.log(returnEvent);
-            
+            $.post("/account", {
+                courses_id: cookieIDSubject,
+                create_at: Date.now(),
+                users_id: idStudentCurrent,
+            }, async (data) => {
+                if(data.result == 1){
+                    console.log("Success")
+                }
+                else{
+                    console.log("Fail")
+                }
+            });
         }
     });
     contractInfura.events.eventListStudent({
@@ -559,6 +576,8 @@ $(document).ready(() => {
             alert("Please login metamask!");
         } else {
             let idStudentCurrent = "6437b0c684ab3117410be702"
+
+            // Get cookie
             let cookieIDSubject = document.cookie
                 .split(';')
                 .map(cookie => cookie.trim())
@@ -569,13 +588,14 @@ $(document).ready(() => {
                 .map(cookie => cookie.trim())
                 .find(cookie => cookie.startsWith('cookiePrice='))
                 ?.split('=')[1];
+
             if (cookieIDSubject != '' && idStudentCurrent != '') {
                 console.log(cookieIDSubject)
                 await contractMM.methods.studentRegisterCourse(idStudentCurrent, cookieIDSubject).send({
                     from: currentAccount,
                     value: cookieprice,
                 }).then(() => {
-
+                    
                 });
             }
         }
