@@ -63,6 +63,7 @@ module.exports = (app) => {
         }
         newCourse.save((err) => {
             if(err){
+                console.log('err: ', err)
                 res.json({result: 0, err: "MongooseDB save error! " + err}); 
             }else{
                 res.json({result: 1, err: newCourse});

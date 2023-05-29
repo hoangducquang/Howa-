@@ -538,7 +538,9 @@ $(document).ready(() => {
                             image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
                             users_id: "6437b0c684ab3117410be702",
                         }, async (data) => {
+                            console.log("Here")
                             if (data.result == 1) {
+                                console.log("Here 1")
                                 let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
                                 let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
                                 
