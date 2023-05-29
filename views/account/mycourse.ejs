@@ -15,56 +15,28 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="/scripts/mycourse.js"></script>
     <script>
-        // for(let i = 0; i < orders.length; i++)
-        // {
-        //     $("#tblist").append(`
-        //         <a href="/courses/basic-python.html" style="text-decoration: none;">
-        //             <div class="course-image">
-        //                 <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-        //             </div>
-        //             <div class="course-short-details">
-        //                 <p class="cate-name">Programming</p>
-        //                 <h4
-        //                     style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">
-        //                     `+ <%= orders[0].courses_id %> + `
-        //                 </h4>
-        //                 <p class="w3-small">Nguyen Duy Tan</p>
-        //                 <div class="price-course">
-        //                     <span class="new-price">1.000.000 VND</span>
-        //                     <span class="old-price">1.200.000 VND</span>
-        //                 </div>
-        //                 <p class="duration">17/03/2023 - 17/04/2023</p>
-        //             </div>
-        //         </a>
-        // `)
-            
-        // }
-//         $(document).ready(function() {
-//             var c =  orders[0].courses_id 
-//             $("#tblist").append(`
-//                 <a href="/courses/basic-python.html" style="text-decoration: none;">
-//                     <div class="course-image">
-//                         <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-//                     </div>
-//                     <div class="course-short-details">
-//                         <p class="cate-name">Programming</p>
-//                         <h4
-//                             style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">
-//                              ${c}
-//                         </h4>
-//                         <p class="w3-small">Nguyen Duy Tan</p>
-//                         <div class="price-course">
-//                             <span class="new-price">1.000.000 VND</span>
-//                             <span class="old-price">1.200.000 VND</span>
-//                         </div>
-//                         <p class="duration">17/03/2023 - 17/04/2023</p>
-//                     </div>
-//                 </a>
-//             `)
+        var id = "<%= id %>";
 
-// });
-        console.log(orders)
+        fetch(`/api/account/mycourse/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            // Nhận kết quả từ server
+            const getOrders = data.getOrders;
+            const id = data.id;
+
+            // Xử lý dữ liệu nhận được
+            console.log('Orders:', getOrders);
+            console.log('ID:', id);
+
+            // Thực hiện các hành động khác dựa trên dữ liệu nhận được
+            // ...
+        })
+        .catch(error => {
+            // Xử lý lỗi nếu có
+            console.error('Lỗi:', error);
+        });
     </script>
+      
 </head>
 <header class="header" id="top">
     <div class="w3-top">

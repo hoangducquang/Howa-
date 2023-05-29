@@ -157,11 +157,30 @@ app.get('/account/mycourse/:id', async(req, res) => {
 	orders = await ordersDB.find({
 		users_id: req.params.id
 	})
-	console.log(orders)
+	// console.log(orders)
 	res.render('../views/account/mycourse', { orders: orders, id: req.params.id});
 
 });
 
+app.get('/api/account/mycourse/:id', async (req, res) => {
+    try {
+        const orders = await ordersDB.find({ users_id: req.params.id });
+		var getOrders = []
+		for (let elm of orders) {
+			let course = await courseDB.findOne({
+				_id: elm.courses_id,
+			})
+			
+			getOrders.push(course)
+		};
+		
+		console.log(getOrders)
+        res.json({ getOrders, id: req.params.id });
+    } catch (error) {
+        console.error('Lỗi:', error);
+        res.status(500).json({ error: 'Lỗi server' });
+    }
+});
 
 
 app.get('/upload-image', (req, res) => {
