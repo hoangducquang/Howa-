@@ -153,16 +153,16 @@ app.get('/courses/create.html', async function (req, res) {
 })
 
 // get my course
-app.get('/account/mycourse/:id', async(req, res) => {
-	orders = await ordersDB.find({
-		users_id: req.params.id
-	})
-	console.log(orders)
-	res.render('../views/account/mycourse', { orders: orders, id: req.params.id});
-
-});
-
-
+app.get('/account/mycourse/:id', async (req, res) => {
+	try {
+		const orders = await ordersDB.find({ users_id: req.params.id }).exec();
+		console.log(orders);
+		res.render('../views/account/mycourse', { orders });
+	  } catch (error) {
+		console.error(error);
+		res.status(500).send('Internal Server Error');
+	  }
+  });
 
 app.get('/upload-image', (req, res) => {
 	//if (err) throw err;
