@@ -5,6 +5,11 @@ var ObjectId = mongoose.Schema.ObjectId;
 var Schema = mongoose.Schema;
 
 var orders = new mongoose.Schema({
+    id:{
+        type: ObjectId,
+        required: true,
+        unique: true
+    },
     courses_id:{
         type: String,
         required: true,
@@ -19,7 +24,7 @@ var orders = new mongoose.Schema({
     }
 });
 
-const ordersDB = mongoose.model('ordersDB', orders);
+const ordersDB = mongoose.model('ordersdbs', orders);
 
 
 module.exports = ordersDB;

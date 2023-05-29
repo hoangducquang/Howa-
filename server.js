@@ -153,6 +153,7 @@ app.get('/courses/create.html', async function (req, res) {
 })
 
 // get my course
+
 app.get('/account/mycourse/:id', async(req, res) => {
 	orders = await ordersDB.find({
 		users_id: req.params.id
@@ -181,6 +182,7 @@ app.get('/api/account/mycourse/:id', async (req, res) => {
         res.status(500).json({ error: 'Lỗi server' });
     }
 });
+
 
 
 app.get('/upload-image', (req, res) => {

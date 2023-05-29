@@ -15,6 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="/scripts/mycourse.js"></script>
     <script>
+
         var id = "<%= id %>";
 
         fetch(`/api/account/mycourse/${id}`)
@@ -35,6 +36,7 @@
             // Xử lý lỗi nếu có
             console.error('Lỗi:', error);
         });
+
     </script>
       
 </head>
@@ -97,10 +99,10 @@
                 <div class="mg-10">
                     <div class="col-4 pd-10 programming python">
                         <div class="category-course-card" id="tblist">
-                            
+
                         </div>
                     </div>
-                    
+
                 </div>
             </section>
 
