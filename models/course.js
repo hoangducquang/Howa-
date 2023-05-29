@@ -72,7 +72,7 @@ var courseList = new mongoose.Schema({
         required: false
     },
     users_id: {
-        type: ObjectId,
+        type: String,
         required: true
     }
 });
