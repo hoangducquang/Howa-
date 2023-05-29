@@ -40,10 +40,6 @@ app.get('/account', (req, res) => {
 	)
 })
 
-app.get('/account/mycourse.html', (req, res) => {
-	res.render('account/mycourse',
-	)
-})
 
 app.get('/account/edit-profile.html', (req, res) => {
 	res.render('account/edit-profile',
@@ -122,6 +118,7 @@ const userDB = require("./models/user");
 const courseDB = require("./models/course");
 const lectureDB = require("./models/lecture");
 const categoryDB = require("./models/category");
+const ordersDB = require("./models/orders")
 
 //get user profile
 app.get('/account/profile/:id', async function (req, res) {
@@ -154,6 +151,17 @@ app.get('/courses/detail/:id', async function (req, res) {
 app.get('/courses/create.html', async function (req, res) {
 	res.render('courses/create')
 })
+
+// get my course
+app.get('/account/mycourse/:id', async(req, res) => {
+	orders = await ordersDB.find({
+		users_id: req.params.id
+	})
+	console.log(orders)
+	res.render('../views/account/mycourse', { orders: orders, id: req.params.id});
+
+});
+
 
 
 app.get('/upload-image', (req, res) => {
