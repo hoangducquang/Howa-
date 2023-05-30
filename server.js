@@ -229,7 +229,6 @@ app.post('/upload', upload.single('image'), (req, res) => {
 	blobStream.end(file.buffer);
 });
 
-
 //post login form
 app.post('/login', async (request, response) => {
 	const user = await userDB.findOne({ email: request.body.email });
