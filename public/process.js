@@ -471,6 +471,7 @@ $(document).ready(() => {
                     console.log("Success")
                 }
                 else{
+                    console.log(cookieIDSubject, '   ', idStudentCurrent)
                     console.log("Fail")
                 }
             });

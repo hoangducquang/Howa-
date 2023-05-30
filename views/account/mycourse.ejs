@@ -28,9 +28,33 @@
             // Xử lý dữ liệu nhận được
             console.log('Orders:', getOrders);
             console.log('ID:', id);
+            
+            // Fix link image
+            for (let i = 0; i < getOrders.length; i++) {
+                const order = getOrders[i];
 
-            // Thực hiện các hành động khác dựa trên dữ liệu nhận được
-            // ...
+                $("#tblist").append(`
+                    <a href="/courses/detail/${order._id}" style="text-decoration: none;">
+                        <div class="course-image">
+                            <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
+                        </div>
+                        <div class="course-short-details">
+                            <p class="cate-name">${order.categories_id}</p>
+                            <h4
+                                style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">
+                                ${order.name}
+                            </h4>
+                            <p class="w3-small">${order.lectures_id}</p>
+                            <div class="price-course">
+                                <span class="new-price">${order.price} VND</span>
+                                <span class="old-price">${order.old_price} VND</span>
+                            </div>
+                            <p class="duration">${changeDate(order.start_date)} - ${changeDate(order.end_date)}</p>
+                        </div>
+                    </a>
+                `)
+            }
+            
         })
         .catch(error => {
             // Xử lý lỗi nếu có
