@@ -1,24 +1,22 @@
-const imageInput = document.querySelector('input[name="image"]');
-const uploadedImage = document.getElementById('uploaded-image');
+const { Storage } = require('@google-cloud/storage');
 
-imageInput.addEventListener('change', (event) => {
-  const file = event.target.files[0];
+// Khởi tạo client của Firebase Storage
+const storage = new Storage({
+  projectId: 'blockchain-project-5d4d4',
+  keyFilename: 'serviceAccountKey.json',
+});
 
-  if (file) {
-    const formData = new FormData();
-    formData.append('image', file);
+// Lấy tham chiếu đến tệp trên Firebase Storage
+const fileRef = storage.bucket('blockchain-project-5d4d4.appspot.com').file('fmu3yccvr1f51.png');
 
-    fetch('/upload', {
-      method: 'POST',
-      body: formData,
-    })
-      .then(response => response.text())
-      .then(publicUrl => {
-        uploadedImage.src = publicUrl; // Hiển thị ảnh đã tải lên
-      })
-      .catch(error => {
-        console.error(error);
-        alert('Upload failed.');
-      });
+// Lấy URL công khai của tệp
+fileRef.getSignedUrl({
+  action: 'read',
+  expires: '03-09-2024', // Ngày hết hạn (có thể để trống hoặc chỉ định ngày hết hạn)
+}, (err, url) => {
+  if (err) {
+    console.error('Lỗi khi lấy URL công khai:', err);
+    return;
   }
+  console.log('URL công khai:', url);
 });

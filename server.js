@@ -212,7 +212,7 @@ app.post('/upload', upload.single('image'), (req, res) => {
 
 	// Lưu ảnh vào Firebase Storage
 	const bucket = admin.storage().bucket();
-	const blob = bucket.file(file.originalname);
+	const blob = bucket.file(Date.now()+'_'+file.originalname);
 	const blobStream = blob.createWriteStream();
 
 	blobStream.on('error', (err) => {
@@ -222,12 +222,13 @@ app.post('/upload', upload.single('image'), (req, res) => {
 
 	blobStream.on('finish', () => {
 		// Lấy đường dẫn public của ảnh đã upload
-		const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${blob.name}?alt=media&token=1ed393ed-3f83-4d3f-b975-f7bb737e0b4f`;
+		const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${blob.name}?alt=media&token=`;
 		res.status(200).send(`Image uploaded successfully. Public URL: ${publicUrl}`);
 	});
 
 	blobStream.end(file.buffer);
 });
+
 
 //post login form
 app.post('/login', async (request, response) => {
