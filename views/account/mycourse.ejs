@@ -9,60 +9,58 @@
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/course-category.css">
+    <link rel="stylesheet" href="/styles/my-courses.css">
     <link rel="icon" href="images/logo-hez.png" type="image/x-icon">
     <title>Course Categories | HOWA</title>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="/scripts/mycourse.js"></script>
     <script>
-
         var id = "<%= id %>";
-
         fetch(`/api/account/mycourse/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            // Nhận kết quả từ server
-            const getOrders = data.getOrders;
-            const id = data.id;
+            .then(response => response.json())
+            .then(data => {
+                // Nhận kết quả từ server
+                const getOrders = data.getOrders;
+                const id = data.id;
 
-            // Xử lý dữ liệu nhận được
-            console.log('Orders:', getOrders);
-            console.log('ID:', id);
-            
-            // Fix link image
-            for (let i = 0; i < getOrders.length; i++) {
-                const order = getOrders[i];
+                // Xử lý dữ liệu nhận được
+                console.log('Orders:', getOrders);
+                console.log('ID:', id);
 
-                $("#tblist").append(`
-                    <a href="/courses/detail/${order._id}" style="text-decoration: none;">
-                        <div class="course-image">
-                            <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                        </div>
-                        <div class="course-short-details">
-                            <p class="cate-name">${order.categories_id}</p>
-                            <h4
-                                style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">
-                                ${order.name}
-                            </h4>
-                            <p class="w3-small">${order.lectures_id}</p>
-                            <div class="price-course">
-                                <span class="new-price">${order.price} VND</span>
-                                <span class="old-price">${order.old_price} VND</span>
+                // Fix link image
+                for (let i = 0; i < getOrders.length; i++) {
+                    const order = getOrders[i];
+
+                    $("#tblist").append(`
+                    <div class="category-course-card">
+                        <a href="/courses/detail/${order._id}" style="text-decoration: none;">
+                            <div class="course-image">
+                                <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
+                                <div class="course-short-details">
+                                    <p class="cate-name">${order.categories_id}</p>
+                                    <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">
+                                        ${order.name}
+                                    </h4>
+                                    <p class="w3-small">${order.lectures_id}</p>
+                                    <div class="price-course">
+                                        <span class="new-price">${order.price.toLocaleString('en-US')} ETH</span>
+                                    </div>
+                                    <p class="duration">${changeDate(order.start_date)} - ${changeDate(order.end_date)}</p>
+                                </div>
                             </div>
-                            <p class="duration">${changeDate(order.start_date)} - ${changeDate(order.end_date)}</p>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 `)
-            }
-            
-        })
-        .catch(error => {
-            // Xử lý lỗi nếu có
-            console.error('Lỗi:', error);
-        });
+                }
+
+            })
+            .catch(error => {
+                // Xử lý lỗi nếu có
+                console.error('Lỗi:', error);
+            });
 
     </script>
-      
+
 </head>
 <header class="header" id="top">
     <div class="w3-top">
@@ -119,14 +117,9 @@
     </div>
     <main class="category" style="min-height: max-content;">
         <div class="wrapper">
-            <section class="course">
+            <section class="course .center">
                 <div class="mg-10">
-                    <div class="col-4 pd-10 programming python">
-                        <div class="category-course-card" id="tblist">
-
-                        </div>
-                    </div>
-
+                    <div id="tblist"></div>
                 </div>
             </section>
 
