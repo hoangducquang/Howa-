@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var orders = new mongoose.Schema({
     id:{
         type: ObjectId,
-        required: true,
+        // required: true,
         unique: true
     },
     courses_id:{

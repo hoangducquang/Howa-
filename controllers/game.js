@@ -84,7 +84,7 @@ module.exports = (app) => {
         }
         newOrders.save((err) => {
             if(err){
-                console.log("333")
+                console.log(err)
                 res.json({result: 0, err: "MongooseDB save error! " + err}); 
             }else{
                 console.log("444")
