@@ -19,7 +19,7 @@ app.use(function (req, res, next) {
 	next();
 });
 var Cookies = require('js-cookie');
-
+//const validations = require('/js/serviceAccountKey.json');
 const controller = require('./controllers/userController');
 
 app.use('/api/auth', authRouter);
@@ -154,42 +154,80 @@ app.get('/courses/create.html', async function (req, res) {
 
 // get my course
 
-app.get('/account/mycourse/:id', async(req, res) => {
+app.get('/account/mycourse/:id', async (req, res) => {
 	orders = await ordersDB.find({
 		users_id: req.params.id
 	})
 	// console.log(orders)
-	res.render('../views/account/mycourse', { orders: orders, id: req.params.id});
+	res.render('../views/account/mycourse', { orders: orders, id: req.params.id });
 
 });
 
 app.get('/api/account/mycourse/:id', async (req, res) => {
-    try {
-        const orders = await ordersDB.find({ users_id: req.params.id });
+	try {
+		const orders = await ordersDB.find({ users_id: req.params.id });
 		var getOrders = []
 		for (let elm of orders) {
 			let course = await courseDB.findOne({
 				_id: elm.courses_id,
 			})
-			
+
 			getOrders.push(course)
 		};
-		
+
 		console.log(getOrders)
-        res.json({ getOrders, id: req.params.id });
-    } catch (error) {
-        console.error('Lỗi:', error);
-        res.status(500).json({ error: 'Lỗi server' });
-    }
+		res.json({ getOrders, id: req.params.id });
+	} catch (error) {
+		console.error('Lỗi:', error);
+		res.status(500).json({ error: 'Lỗi server' });
+	}
 });
 
+const multer = require('multer');
+const admin = require('firebase-admin');
 
+// Khởi tạo Firebase Admin SDK
+const serviceAccount = require('./serviceAccountKey.json');
+admin.initializeApp({
+	credential: admin.credential.cert(serviceAccount),
+	storageBucket: 'blockchain-project-5d4d4.appspot.com'
+});
 
+// Thiết lập Multer để xử lý upload file
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+// Hiển thị trang upload ảnh
 app.get('/upload-image', (req, res) => {
-	//if (err) throw err;
-	res.render('scripts/upload-image.',
-	)
-})
+	res.render('courses/upload-img',)
+});
+
+// Xử lý upload ảnh
+app.post('/upload', upload.single('image'), (req, res) => {
+	const file = req.file;
+
+	if (!file) {
+		return res.status(400).send('No file uploaded.');
+	}
+
+	// Lưu ảnh vào Firebase Storage
+	const bucket = admin.storage().bucket();
+	const blob = bucket.file(file.originalname);
+	const blobStream = blob.createWriteStream();
+
+	blobStream.on('error', (err) => {
+		console.error(err);
+		res.status(500).send('Upload failed.');
+	});
+
+	blobStream.on('finish', () => {
+		// Lấy đường dẫn public của ảnh đã upload
+		const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${blob.name}?alt=media&token=1ed393ed-3f83-4d3f-b975-f7bb737e0b4f`;
+		res.status(200).send(`Image uploaded successfully. Public URL: ${publicUrl}`);
+	});
+
+	blobStream.end(file.buffer);
+});
 
 //post login form
 app.post('/login', async (request, response) => {
@@ -224,6 +262,12 @@ app.get('/', verifyToken, (request, response) => {
 	});
 });
 
+app.get('/service', (req, res) => {
+	//if (err) throw err;
+	console.log("Testing service");
+	res.render(validations,
+	)
+})
 
 require("./controllers/game")(app);
 
