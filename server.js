@@ -77,14 +77,27 @@ app.get('/auth/signup.html', (req, res) => {
 })
 
 app.get('/courses', (req, res) => {
+
 	res.render('courses/index',
 	)
 })
 
-app.get('/courses/index.html', (req, res) => {
+app.get('/courses/index.html', async(req, res) => {
 	res.render('courses/index',
 	)
 })
+
+app.get('/api/courses/index', async (req, res) => {
+	try {
+		const coursesAll = await courseDB.find({});
+		console.log("nonce")
+		console.log(coursesAll)
+		res.json( { coursesAll } );
+	} catch (error) {
+		console.error('Lỗi:', error);
+		res.status(500).json({ error: 'Lỗi server' });
+	}
+});
 
 app.get('/layout', (req, res) => {
 	res.render('layout',

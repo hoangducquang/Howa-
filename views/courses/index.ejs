@@ -12,6 +12,52 @@
   <link rel="stylesheet" href="/styles/course-category.css">
   <link rel="icon" href="../../public/images/logo-hez.png" type="image/x-icon">
   <title>Course Categories | HOWA</title>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/scripts/mycourse.js"></script>
+  <script>
+    console.log("hjiuhi")
+    fetch(`/api/courses/index`)
+      .then(response => response.json())
+      .then(data => {
+        console.log("hhh")
+          // Nhận kết quả từ server
+          const getCourseAll = data.coursesAll
+
+          // Xử lý dữ liệu nhận được
+          console.log('Course:', getCourseAll);
+
+          // Fix link image
+          for (let i = 0; i < getCourseAll.length; i++) {
+              const course = getCourseAll[i];
+
+              $("#tblistCourse").append(`
+              <div class="category-course-card">
+                  <a href="/courses/detail/${course._id}" style="text-decoration: none;">
+                      <div class="course-image">
+                          <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
+                          <div class="course-short-details">
+                              <p class="cate-name">${course.categories_id}</p>
+                              <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">
+                                  ${course.name}
+                              </h4>
+                              <p class="w3-small">${course.lectures_id}</p>
+                              <div class="price-course">
+                                  <span class="new-price">${course.price.toLocaleString('en-US')} ETH</span>
+                              </div>
+                              <p class="duration">${changeDate(course.start_date)} - ${changeDate(course.end_date)}</p>
+                          </div>
+                      </div>
+                  </a>
+              </div>
+          `)
+          }
+
+      })
+      .catch(error => {
+          // Xử lý lỗi nếu có
+          console.error('Lỗi:', error);
+      });
+  </script>
 </head>
 <header class="header" id="top">
   <div class="w3-top">
@@ -112,125 +158,8 @@
       <section class="course">
         <div class="mg-10">
           <div class="col-4 pd-10 programming python">
-            <div class="category-course-card">
-              <a href="/courses/basic-python.html" style="text-decoration: none;">
-                <div class="course-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="course-short-details">
-                  <p class="cate-name">Programming</p>
-                  <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">Basic
-                    Python
-                  </h4>
-                  <p class="w3-small">Nguyen Duy Tan</p>
-                  <div class="price-course">
-                    <span class="new-price">1.000.000 VND</span>
-                    <span class="old-price">1.200.000 VND</span>
-                  </div>
-                  <p class="duration">17/03/2023 - 17/04/2023</p>
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="col-4 pd-10 programming python">
-            <div class="category-course-card">
-              <a href="/courses/basic-python.html" style="text-decoration: none;">
-                <div class="course-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="course-short-details">
-                  <p class="cate-name">Programming</p>
-                  <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">Basic
-                    Python
-                  </h4>
-                  <p class="w3-small">Nguyen Duy Tan</p>
-                  <div class="price-course">
-                    <span class="new-price">1.000.000 VND</span>
-                    <span class="old-price">1.200.000 VND</span>
-                  </div>
-                  <p class="duration">17/03/2023 - 17/04/2023</p>
-                </div>
-              </a>
-            </div>
-          </div><div class="col-4 pd-10 programming python">
-            <div class="category-course-card">
-              <a href="/courses/basic-python.html" style="text-decoration: none;">
-                <div class="course-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="course-short-details">
-                  <p class="cate-name">Programming</p>
-                  <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">Basic
-                    Python
-                  </h4>
-                  <p class="w3-small">Nguyen Duy Tan</p>
-                  <div class="price-course">
-                    <span class="new-price">1.000.000 VND</span>
-                    <span class="old-price">1.200.000 VND</span>
-                  </div>
-                  <p class="duration">17/03/2023 - 17/04/2023</p>
-                </div>
-              </a>
-            </div>
-          </div><div class="col-4 pd-10 programming python">
-            <div class="category-course-card">
-              <a href="/courses/basic-python.html" style="text-decoration: none;">
-                <div class="course-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="course-short-details">
-                  <p class="cate-name">Programming</p>
-                  <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">Basic
-                    Python
-                  </h4>
-                  <p class="w3-small">Nguyen Duy Tan</p>
-                  <div class="price-course">
-                    <span class="new-price">1.000.000 VND</span>
-                    <span class="old-price">1.200.000 VND</span>
-                  </div>
-                  <p class="duration">17/03/2023 - 17/04/2023</p>
-                </div>
-              </a>
-            </div>
-          </div><div class="col-4 pd-10 programming python">
-            <div class="category-course-card">
-              <a href="/courses/basic-python.html" style="text-decoration: none;">
-                <div class="course-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="course-short-details">
-                  <p class="cate-name">Programming</p>
-                  <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">Basic
-                    Python
-                  </h4>
-                  <p class="w3-small">Nguyen Duy Tan</p>
-                  <div class="price-course">
-                    <span class="new-price">1.000.000 VND</span>
-                    <span class="old-price">1.200.000 VND</span>
-                  </div>
-                  <p class="duration">17/03/2023 - 17/04/2023</p>
-                </div>
-              </a>
-            </div>
-          </div><div class="col-4 pd-10 programming python">
-            <div class="category-course-card">
-              <a href="/courses/basic-python.html" style="text-decoration: none;">
-                <div class="course-image">
-                  <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-                </div>
-                <div class="course-short-details">
-                  <p class="cate-name">Programming</p>
-                  <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">Basic
-                    Python
-                  </h4>
-                  <p class="w3-small">Nguyen Duy Tan</p>
-                  <div class="price-course">
-                    <span class="new-price">1.000.000 VND</span>
-                    <span class="old-price">1.200.000 VND</span>
-                  </div>
-                  <p class="duration">17/03/2023 - 17/04/2023</p>
-                </div>
-              </a>
+            <div class="category-course-card" id="tblistCourse">
+              
             </div>
           </div>
         </div>
