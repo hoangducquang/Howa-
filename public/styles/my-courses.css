@@ -14,21 +14,21 @@ body {
   height: auto;
 }
 
-.column{
+.column {
   display: table-cell;
 }
 
-.course-image{
+.course-image {
   position: relative;
 }
 
-.course-image img{
+.course-image img {
   width: 250px;
   position: inherit;
   border-radius: 15px 15px 0px 0px;
 }
 
-.show-list-courses{
+.show-list-courses {
   display: inline-flex !important;
   position: relative;
   flex-wrap: wrap;
@@ -42,7 +42,7 @@ body {
 
 .category-course-card {
   position: relative !important;
-  display:inline-flex;
+  display: inline-flex;
   width: 250px;
   height: auto;
   color: rgb(8, 27, 105);
@@ -52,12 +52,12 @@ body {
   margin: 2% 2%;
 }
 
-.course-short-details{
+.course-short-details {
   position: relative !important;
   padding: 5px 15px;
 }
 
-.price-course{
+.price-course {
   margin: 5px 0px;
 }
 
@@ -68,19 +68,19 @@ body {
   margin-top: 8px;
 }
 
-.price-course .old-price{
+.price-course .old-price {
   font-size: 12px;
-  color: rgb(128, 128, 137); 
+  color: rgb(128, 128, 137);
   text-decoration: line-through;
 }
 
-.duration{
+.duration {
   color: darkgoldenrod;
   font-size: 12px;
   margin-bottom: 10px;
 }
 
-.cate-name{
+.cate-name {
   color: #dbb300;
   height: 17px;
   overflow: hidden;
@@ -191,21 +191,25 @@ li a:hover {
   background: none;
   padding: 0 10%;
 }
-#head-categories .cols, #head-categories .woocommerce-variation {
+
+#head-categories .cols,
+#head-categories .woocommerce-variation {
   justify-content: left;
   max-width: none;
 }
 
-.cols, .woocommerce-variation {
+.cols,
+.woocommerce-variation {
   flex-wrap: wrap;
 }
 
-.cols, .woocommerce-variation {
+.cols,
+.woocommerce-variation {
   display: flex;
 }
 
 .container {
-  width:fit-content;
+  width: fit-content;
   padding: 0 20px;
   margin: 0 auto;
 }
@@ -226,16 +230,18 @@ li a:hover {
 #head-categories .cat:last-child {
   margin-right: 0;
 }
+
 #head-categories .cat span {
   width: 100%;
   text-align: left;
 }
+
 #head-categories .cat.current {
   color: #7913ec;
   border-bottom: 3px solid #7913ec;
 }
 
-#head-categories .cat:hover{
+#head-categories .cat:hover {
   color: #7913ec;
   border-bottom: 3px solid #7913ec;
 }
@@ -282,4 +288,3 @@ li a:hover {
 .pd-10 {
   padding: 0px 20px;
 }
-
