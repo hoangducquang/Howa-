@@ -429,6 +429,8 @@ $(document).ready(() => {
     var web3_infura = new Web3(provider);
     var contractInfura = new web3_infura.eth.Contract(ABI, addressSC);
     console.log(contractInfura);
+
+    
     
     // Start listen Infura
     contractInfura.events.eventCreateCourse({
@@ -489,74 +491,74 @@ $(document).ready(() => {
     });
     
     // contractInfura.events.eventRegisterCourse({filter:{}, fromBlock : "latest"}, function(err, eventReturn){
-        //     if(err){
-            //         console.log(err);
-            //     }else{
-                //         console.log(eventReturn);
-                //     }
-                // });
-                
-                // Var account
-                var currentAccount = "";
-                var price = 0;
-                var timeRegister = 0, timeCourse = 0;
-                
-                // Check metamask install
-                checkMM();
-                
-                $("#btnConnectMM").click(() => {
-                    connectMM().then((data) => {
-                        currentAccount = data[0];
-                        console.log(currentAccount);
-                        document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4, 38), "***") + "!";
-                        document.getElementById("btnConnectMM").disabled = true;
-                    }).catch((err) => {
-                        // document.getElementById("successConnectMM").innerHTML = err;
-                        console.log(err);
+    //     if(err){
+    //         console.log(err);
+    //     }else{
+    //         console.log(eventReturn);
+    //     }
+    // });
+    
+    // Var account
+    var currentAccount = "";
+    var price = 0;
+    var timeRegister = 0, timeCourse = 0;
+    
+    // Check metamask install
+    checkMM();
+    
+    $("#btnConnectMM").click(() => {
+        connectMM().then((data) => {
+            currentAccount = data[0];
+            console.log(currentAccount);
+            document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4, 38), "***") + "!";
+            document.getElementById("btnConnectMM").disabled = true;
+        }).catch((err) => {
+            // document.getElementById("successConnectMM").innerHTML = err;
+            console.log(err);
+        })
+    })
+    
+    
+    $("#btn-create").click(() => {
+        if (currentAccount.length == 0) {
+            alert("Please login metamask!");
+        }
+        else {
+            $.post("/courses", {
+                categories_id: $("#create-category").val(),
+                description: $("#create-description").val(),
+                lectures_id: $("#create-lecturer").val(),
+                name: $("#create-course-name").val(),
+                price: $("#create-tuition-fee").val(),
+                old_price: $("#create-tuition-fee").val(),
+                num_days: $("#create-days-of-course").val(),
+                end_date: $("#create-time-end").val(),
+                start_date: $("#create-time-start").val(),
+                end_regist: $("#create-time-register").val(),
+                create_at: Date.now(),
+                delete_at: Date.now(),
+                update_at: Date.now(),
+                image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
+                users_id: "6437b0c684ab3117410be702",
+            }, async (data) => {
+                console.log("Here")
+                if (data.result == 1) {
+                    console.log("Here 1")
+                    let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
+                    let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
+                    
+                    document.cookie = "cookieIdSubject=" + data.err._id + ";path=/"
+                    document.cookie = "cookiePrice=" + data.err.price + ";path=/"
+                    
+                    // Call smart contract create course 
+                    await contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
+                        from: currentAccount,
+                        value: data.err.price,
+                    }).then(() => {
+                        // window.location.href = `./courses/detail/${data.err._id}`
                     })
-                })
-                
-                
-                $("#btn-create").click(() => {
-                    if (currentAccount.length == 0) {
-                        alert("Please login metamask!");
-                    }
-                    else {
-                        $.post("/courses", {
-                            categories_id: $("#create-category").val(),
-                            description: $("#create-description").val(),
-                            lectures_id: $("#create-lecturer").val(),
-                            name: $("#create-course-name").val(),
-                            price: $("#create-tuition-fee").val(),
-                            old_price: $("#create-tuition-fee").val(),
-                            num_days: $("#create-days-of-course").val(),
-                            end_date: $("#create-time-end").val(),
-                            start_date: $("#create-time-start").val(),
-                            end_regist: $("#create-time-register").val(),
-                            create_at: Date.now(),
-                            delete_at: Date.now(),
-                            update_at: Date.now(),
-                            image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
-                            users_id: "6437b0c684ab3117410be702",
-                        }, async (data) => {
-                            console.log("Here")
-                            if (data.result == 1) {
-                                console.log("Here 1")
-                                let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
-                                let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
-                                
-                                document.cookie = "cookieIdSubject=" + data.err._id + ";path=/"
-                                document.cookie = "cookiePrice=" + data.err.price + ";path=/"
-                                
-                                // Call smart contract create course 
-                                await contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
-                                    from: currentAccount,
-                                    value: data.err.price,
-                                }).then(() => {
-                                    // window.location.href = `./courses/detail/${data.err._id}`
-                                })
-                            }
-                        });
+                }
+            });
 
         }
     });

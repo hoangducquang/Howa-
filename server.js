@@ -82,7 +82,7 @@ app.get('/courses', (req, res) => {
 	)
 })
 
-app.get('/courses/index.html', async(req, res) => {
+app.get('/courses/index.html', (req, res) => {
 	res.render('courses/index',
 	)
 })
@@ -90,8 +90,7 @@ app.get('/courses/index.html', async(req, res) => {
 app.get('/api/courses/index', async (req, res) => {
 	try {
 		const coursesAll = await courseDB.find({});
-		console.log("nonce")
-		console.log(coursesAll)
+		// console.log(coursesAll)
 		res.json( { coursesAll } );
 	} catch (error) {
 		console.error('Lỗi:', error);
@@ -166,7 +165,6 @@ app.get('/courses/create.html', async function (req, res) {
 })
 
 // get my course
-
 app.get('/account/mycourse/:id', async (req, res) => {
 	orders = await ordersDB.find({
 		users_id: req.params.id

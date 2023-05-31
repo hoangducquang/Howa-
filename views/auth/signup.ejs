@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="/styles/signup.css">
     <link rel="icon" href="images/logo-hez.png" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="/scripts/web3.js"></script>
     <script src="/scripts/signup.js"></script>
     <title>Sign up | HOWA - Course Register</title>
 </head>
@@ -48,22 +50,22 @@
         <h1>Sign up</h1>
         <form method="post" onsubmit="validSignup()">
             <div class="text-field">
-                <input type="email" required="" name="email" id="email">
+                <input id="email" type="email" required="" name="email" id="email">
                 <span></span>
                 <label>Email</label>
             </div>
             <div class="text-field">
-                <input type="text" required="" name="fname" id="fname">
+                <input id="name" type="text" required="" name="fname" id="fname">
                 <span></span>
                 <label>Fullname</label>
             </div>
             <div class="text-field date">
                 <label>Date of birth</label>
-                <input type="date" required="" name="date" id="date" style="padding-left: 150px;">
+                <input id="date" type="date" required="" name="date" id="date" style="padding-left: 150px;">
                 <span></span>
             </div>
             <div class="text-field">
-                <input type="password" required="" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                <input id="password" type="password" required="" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
                 title="
                 • At least 8 characters - the more characters, the better
                 • A mixture of both uppercase and lowercase letters
@@ -73,7 +75,7 @@
                 <label>Password</label>
             </div>
             <div class="text-field" style="border-bottom: none;">
-                <button onclick="validSignup()">Sign up</button>
+                <button id="btnSignup" onclick="validSignup()">Sign up</button>
             </div>
             <div class="login-url">Already have an account? <a href=login.html>Login</a></div>
         </form>

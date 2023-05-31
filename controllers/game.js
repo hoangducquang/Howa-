@@ -1,6 +1,7 @@
 var member = require("../models/member");
 const courseDB = require("../models/course");
 const ordersDB = require("../models/orders")
+const userDB = require('../models/user')
 
 module.exports = (app) => {
 
@@ -12,7 +13,7 @@ module.exports = (app) => {
         res.render("auth/login")
     });
     
-    app.get("/signup", (req, res) => {
+    app.get("/auth/signup", (req, res) => {
         res.render("auth/signup")
     });
 
@@ -92,4 +93,29 @@ module.exports = (app) => {
             }
         })
     })
+    
+    app.post('/auth/signup', (req, res) => {
+        if(!req.body.name || !req.body.email || !req.body.password) {
+            res.json({result:0, err: "Not enough information"});
+        }else {
+            console.log("on")
+            var newUser = new userDB({
+                name: req.body.name,
+                dob:req.body.dob,
+                email: req.body.email,
+                phone: req.body.phone,
+                address: req.body.address, 
+                update_at: req.body.update_at,
+            })
+        }
+        newUser.save((err) => {
+            if(err){
+                console.log(err)
+                res.json({result: 0, err: "MongooseDB save error! " + err}); 
+            }else{
+                console.log("444")
+                res.json({result: 1, err: newUser});
+            }
+        })
+    });
 }

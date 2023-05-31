@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var account = new mongoose.Schema({
     id:{
         type: ObjectId,
-        required: true,
+        // required: true,
         unique: true
     },
     password:{

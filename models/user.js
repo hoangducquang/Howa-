@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var userAccount = new mongoose.Schema({
     id:{
         type: ObjectId,
-        required: true,
+        // required: true,
         unique: true
     },
     name:{
@@ -26,7 +26,7 @@ var userAccount = new mongoose.Schema({
     phone:{
         type: String,
         required: false,
-        unique: true
+        // unique: true
     },
     address:{
         type: String,
