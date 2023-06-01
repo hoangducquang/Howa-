@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="/styles/signup.css">
-    <link rel="icon" href="images/logo-hez.png" type="image/x-icon">
+    <link rel="icon" href="/images/logo-hez.png" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="/scripts/web3.js"></script>
     <script src="/scripts/signup.js"></script>
@@ -24,7 +24,6 @@
                     class="fa fa-bars"></i></a>
             <a href="/index.html" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
             <span class="w3-right">
-
                 <a href="/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
                 <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Courses</a>
                 <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
@@ -48,24 +47,30 @@
 <body>
     <div class="signup-center">
         <h1>Sign up</h1>
-        <form method="post" onsubmit="validSignup()">
+        <form method="post" action="/auth/signup">
             <div class="text-field">
-                <input id="email" type="email" required="" name="email" id="email">
+                <input id="email" type="email" required="" name="email">
                 <span></span>
                 <label>Email</label>
             </div>
             <div class="text-field">
-                <input id="name" type="text" required="" name="fname" id="fname">
+                <input type="text" required="" name="name" id="name">
                 <span></span>
                 <label>Fullname</label>
             </div>
             <div class="text-field date">
                 <label>Date of birth</label>
-                <input id="date" type="date" required="" name="date" id="date" style="padding-left: 150px;">
+                <input type="date" required="" name="dob" id="dob" style="padding-left: 150px;">
                 <span></span>
             </div>
             <div class="text-field">
-                <input id="password" type="password" required="" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                <input type="text" required="" name="phone" id="phone" pattern="(0[3|5|7|8|9])+([0-9]{8})\b"
+                title="Please enter a valid phone number!">
+                <span></span>   
+                <label>Phone number</label>
+            </div>
+            <div class="text-field">
+                <input id="password" type="password" required="" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
                 title="
                 • At least 8 characters - the more characters, the better
                 • A mixture of both uppercase and lowercase letters
@@ -75,7 +80,7 @@
                 <label>Password</label>
             </div>
             <div class="text-field" style="border-bottom: none;">
-                <button id="btnSignup" onclick="validSignup()">Sign up</button>
+                <button id="btnSignup" type="submit">Sign up</button>
             </div>
             <div class="login-url">Already have an account? <a href=login.html>Login</a></div>
         </form>
