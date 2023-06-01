@@ -27,6 +27,10 @@ body {
   width: auto;
 }
 
+.detail-profile{
+  padding: 0 5%;
+}
+
 .btn-save {
   width: 200px;
   height: 50px;

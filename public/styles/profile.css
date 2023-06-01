@@ -27,6 +27,10 @@ body {
   width: auto;
 }
 
+.detail-profile{
+  padding: 0 5%;
+}
+
 .btn-edit {
   width: 200px;
   height: 50px;

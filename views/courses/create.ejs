@@ -98,19 +98,6 @@
                             <option value="photography">Photography</option>
                             <option value="others">Others</option> >
                         </select>
-                        <!-- <script>
-                            const categoryList = require("../../models/category");
-                            var dropdownHTML = '<select>';
-                            for (var i = 0; i < categoryList.length; i++) {
-                                var name = categoryList[i].name;
-                                var code = categoryList[i].code;
-                                dropdownHTML += '<option value="' + code + '">' + name + '</option>';
-                            }
-                            dropdownHTML += '</select>';
-                            //Load the dynamically created dropdown in container
-                            var container = document.getElementById("dropdown-container");
-                            container.innerHTML = dropdownHTML;
-                        </script> -->
                     </div>
                     <div class="text-field">
                         <input id="create-lecturer" type="text" name="lecture" required="">
@@ -169,12 +156,7 @@
                             <p style="margin-top: 10px; padding: auto;">Loading...</p>
                         </div>
                     </div>
-                </form>
-                <form action="/upload" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="imageFile" accept="image/*">
-                    <button type="submit">Upload</button>
-                  </form>
-               
+                </form>          
             </div>
         </div>
     </main>
