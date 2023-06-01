@@ -7,7 +7,6 @@ var Schema = mongoose.Schema;
 var userAccount = new mongoose.Schema({
     id:{
         type: ObjectId,
-        // required: true,
         unique: true
     },
     name:{
@@ -26,7 +25,7 @@ var userAccount = new mongoose.Schema({
     phone:{
         type: String,
         required: false,
-        // unique: true
+        unique: false //after changing: true
     },
     address:{
         type: String,
@@ -35,6 +34,10 @@ var userAccount = new mongoose.Schema({
     update_at:{
         type: Date,
         default: Date.now
+    },
+    password:{
+        type: String,
+        required: true
     }
 });
 
