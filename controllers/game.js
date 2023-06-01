@@ -2,6 +2,7 @@ var member = require("../models/member");
 const courseDB = require("../models/course");
 const ordersDB = require("../models/orders")
 const userDB = require('../models/user')
+const CryptoJS = require('crypto-js');
 
 module.exports = (app) => {
 
@@ -76,7 +77,6 @@ module.exports = (app) => {
         if(!req.body.name || !req.body.email || !req.body.password || !req.body.dob || !req.body.phone) {
             res.json({result:0, err: "Not enough information!"});
         }else {
-            const CryptoJS = require('crypto-js');
 	        const hashPassword = CryptoJS.SHA256(req.body.password);
             console.log("on")
             var newUser = new userDB({
@@ -110,15 +110,13 @@ module.exports = (app) => {
             if(userCurrent == null) {
                 res.json({result: 0, err: 'Email is not exist'})
             }else {
-                const CryptoJS = require('crypto-js');
-	            const hashPassword = CryptoJS.SHA256(req.body.password);
-
+	            const hashPassword = CryptoJS.SHA256(req.body.password).toString();
                 if(userCurrent.password === hashPassword) {
-                    res.json({result: 1, err: userCurrent._id})
+                    res.json({result: 1, err: userCurrent._id + " Login successful!"})
                 }else {
+                    console.log(hashPassword);
                     res.json({result: 0, err: "Password is not right"})
                 }
-                
             }
             
         }
