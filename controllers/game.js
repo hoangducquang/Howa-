@@ -86,7 +86,7 @@ module.exports = (app) => {
                 phone: req.body.phone,
                 address: null, 
                 update_at: Date.now(),
-                password: hashPassword
+                password: hashPassword,
             })
         }
         newUser.save((err) => {
@@ -95,9 +95,32 @@ module.exports = (app) => {
                 console.log(err)
                 res.json({result: 0, err: "MongooseDB save error! " + err}); 
             }else{
-                console.log("444")
-                res.json({result: 1, err: newUser});
+                res.render('../views/auth/login.ejs', {User: newUser})
             }
         })
     });
+
+    app.post('/auth/login', async(req, res) => {
+        if(!req.body.email || !req.body.password) {
+            res.json({result: 0, err: "Not enough info"})
+        }else{
+            var userCurrent = await userDB.findOne({
+                email: req.body.email,
+            })
+            if(userCurrent == null) {
+                res.json({result: 0, err: 'Email is not exist'})
+            }else {
+                const CryptoJS = require('crypto-js');
+	            const hashPassword = CryptoJS.SHA256(req.body.password);
+
+                if(userCurrent.password === hashPassword) {
+                    res.json({result: 1, err: userCurrent._id})
+                }else {
+                    res.json({result: 0, err: "Password is not right"})
+                }
+                
+            }
+            
+        }
+    })
 }
