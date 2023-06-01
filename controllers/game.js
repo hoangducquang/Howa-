@@ -95,7 +95,7 @@ module.exports = (app) => {
     })
     
     app.post('/auth/signup', (req, res) => {
-        if(!req.body.name || !req.body.email || !req.body.password || !req.body.dob) {
+        if(!req.body.name || !req.body.email || !req.body.password || !req.body.dob || !req.body.phone) {
             res.json({result:0, err: "Not enough information!"});
         }else {
             const CryptoJS = require('crypto-js');
@@ -105,13 +105,14 @@ module.exports = (app) => {
                 name: req.body.name,
                 dob:req.body.dob,
                 email: req.body.email,
-                phone: null,
+                phone: req.body.phone,
                 address: null, 
                 update_at: Date.now(),
                 password: hashPassword
             })
         }
         newUser.save((err) => {
+            //Cần hiển thị từng error riêng để người dùng biết được field nào đã tồn tại.
             if(err){
                 console.log(err)
                 res.json({result: 0, err: "MongooseDB save error! " + err}); 
