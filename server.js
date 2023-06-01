@@ -4,6 +4,7 @@ const route = express.Router();
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/users');
 const jwt = require('jsonwebtoken');
+app.use(express.json());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.set('views', 'views')
@@ -131,6 +132,7 @@ const courseDB = require("./models/course");
 const lectureDB = require("./models/lecture");
 const categoryDB = require("./models/category");
 const ordersDB = require("./models/orders")
+const CryptoJS = require('crypto-js');
 
 //get user profile
 app.get('/account/profile/:id', async function (req, res) {
@@ -278,6 +280,28 @@ app.get('/service', (req, res) => {
 	console.log("Testing service");
 	res.render(validations,
 	)
+})
+
+app.post('/auth/login', async(req, res) => {
+	if(!req.body.email || !req.body.password) {
+		res.json({result: 0, err: "Not enough info"})
+	}else{
+		var userCurrent = await userDB.findOne({
+			email: req.body.email,
+		})
+		if(userCurrent == null) {
+			res.json({result: 0, err: 'Email is not exist'})
+		}else {
+			const hashPassword = CryptoJS.SHA256(req.body.password).toString();
+			if(userCurrent.password === hashPassword) {
+				res.json({result: 1, err: " Login successful!", valReturn: userCurrent._id})
+			}else {
+				console.log(hashPassword);
+				res.json({result: 0, err: "Password is not right"})
+			}
+		}
+		
+	}
 })
 
 require("./controllers/game")(app);

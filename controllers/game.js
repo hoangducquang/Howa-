@@ -100,25 +100,5 @@ module.exports = (app) => {
         })
     });
 
-    app.post('/auth/login', async(req, res) => {
-        if(!req.body.email || !req.body.password) {
-            res.json({result: 0, err: "Not enough info"})
-        }else{
-            var userCurrent = await userDB.findOne({
-                email: req.body.email,
-            })
-            if(userCurrent == null) {
-                res.json({result: 0, err: 'Email is not exist'})
-            }else {
-	            const hashPassword = CryptoJS.SHA256(req.body.password).toString();
-                if(userCurrent.password === hashPassword) {
-                    res.json({result: 1, err: userCurrent._id + " Login successful!"})
-                }else {
-                    console.log(hashPassword);
-                    res.json({result: 0, err: "Password is not right"})
-                }
-            }
-            
-        }
-    })
+    
 }
