@@ -464,7 +464,7 @@ $(document).ready(() => {
                 .find(cookie => cookie.startsWith('cookieIdSubject='))
                 ?.split('=')[1];
             console.log(returnEvent);
-            $.post("/account", {
+            $.post("/account/order", {
                 courses_id: cookieIDSubject,
                 create_at: Date.now(),
                 users_id: idStudentCurrent,
@@ -524,7 +524,7 @@ $(document).ready(() => {
             alert("Please login metamask!");
         }
         else {
-            $.post("/courses", {
+            $.post("/courses/create", {
                 categories_id: $("#create-category").val(),
                 description: $("#create-description").val(),
                 lectures_id: $("#create-lecturer").val(),

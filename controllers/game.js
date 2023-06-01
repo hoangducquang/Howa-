@@ -18,29 +18,7 @@ module.exports = (app) => {
     });
 
 
-    // app.post("/register", (req, res) => {
-    //     if(!req.body.name || !req.body.numberDay || !req.body.endTimeRegister || !req.body.endTimeCourse || !req.body.price){
-    //         res.json({result:0, err: "Not enough information"});
-    //     }else{
-    //         var newCourse = new member({
-    //             name: req.body.name,
-    //             numberDay: req.body.numberDay,
-    //             endTimeRegister: req.body.endTimeRegister,
-    //             endTimeCourse: req.body.endTimeCourse,
-    //             price: req.body.price,
-    //             dayTime: Date.now()
-    //         })
-    //     }
-    //     newCourse.save((err) => {
-    //         if(err){
-    //             res.json({result: 0, err: "MongooseDB save error! " + err}); 
-    //         }else{
-    //             res.json({result: 1, err: newCourse});
-    //         }
-    //     })
-    // })
-
-    app.post("/courses", (req, res) => {
+    app.post("/courses/create", (req, res) => {
         if(!req.body.name || !req.body.lectures_id || !req.body.end_regist || !req.body.end_date  || !req.body.price){
             res.json({result:0, err: "Not enough information"});
         }else{
@@ -72,7 +50,7 @@ module.exports = (app) => {
         })
     })
 
-    app.post("/account", (req, res) => {
+    app.post("/account/order", (req, res) => {
         if(!req.body.courses_id || !req.body.create_at || !req.body.users_id ){
             res.json({result:0, err: "Not enough information"});
         }else{
