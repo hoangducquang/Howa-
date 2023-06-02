@@ -36,9 +36,24 @@ app.get('', (req, res) => {
 	)
 })
 
+// Profile account
 app.get('/account', (req, res) => {
 	res.render('account/profile',
 	)
+})
+
+app.get('/api/account/profile/:id', async (req, res) => {
+	try {
+		const userCurrent = await userDB.findOne({
+			_id: req.params.id,
+		})
+		
+		res.json({userCurrent})
+	} catch (error) {
+		console.error("Lỗi: ", error)
+		res.status(500).json({err: "Lỗi server"})
+	}
+
 })
 
 
@@ -67,23 +82,76 @@ app.get('/auth', (req, res) => {
 	)
 })
 
+
+// Login
 app.get('/auth/login.html', (req, res) => {
 	res.render('auth/login',
 	)
 })
 
+app.post('/auth/login', async(req, res) => {
+	if(!req.body.email || !req.body.password) {
+		res.json({result: 0, err: "Not enough info"})
+	}else{
+		var userCurrent = await userDB.findOne({
+			email: req.body.email,
+		})
+		if(userCurrent == null) {
+			res.json({result: 0, err: 'Email is not exist'})
+		}else {
+			const hashPassword = CryptoJS.SHA256(req.body.password).toString();
+			if(userCurrent.password === hashPassword) {
+				res.json({result: 1, err: " Login successful!", valReturn: userCurrent._id})
+			}else {
+				console.log(hashPassword);
+				res.json({result: 0, err: "Password is not right"})
+			}
+		}
+		
+	}
+})
+
+// Sign up
 app.get('/auth/signup.html', (req, res) => {
 	res.render('auth/signup',
 	)
 })
 
+app.post('/auth/signup', (req, res) => {
+	if(!req.body.name || !req.body.email || !req.body.password || !req.body.dob || !req.body.phone) {
+		res.json({result:0, err: "Not enough information!"});
+	}else {
+		const hashPassword = CryptoJS.SHA256(req.body.password);
+		console.log("on")
+		var newUser = new userDB({
+			name: req.body.name,
+			dob:req.body.dob,
+			email: req.body.email,
+			phone: req.body.phone,
+			address: null, 
+			update_at: Date.now(),
+			password: hashPassword,
+		})
+	}
+	newUser.save((err) => {
+		//Cần hiển thị từng error riêng để người dùng biết được field nào đã tồn tại.
+		if(err){
+			console.log(err)
+			res.json({result: 0, err: "MongooseDB save error! " + err}); 
+		}else{
+			res.render('../views/auth/login.ejs', {User: newUser})
+		}
+	})
+});
+
+// Course Home
 app.get('/courses', (req, res) => {
 
 	res.render('courses/index',
 	)
 })
 
-app.get('/courses/index.html', (req, res) => {
+app.get('/courses/index', (req, res) => {
 	res.render('courses/index',
 	)
 })
@@ -98,6 +166,7 @@ app.get('/api/courses/index', async (req, res) => {
 		res.status(500).json({ error: 'Lỗi server' });
 	}
 });
+
 
 app.get('/layout', (req, res) => {
 	res.render('layout',
@@ -135,13 +204,13 @@ const ordersDB = require("./models/orders")
 const CryptoJS = require('crypto-js');
 
 //get user profile
-app.get('/account/profile/:id', async function (req, res) {
-	user = await userDB.findOne({
-		_id: req.params.id
-	})
-	console.log(user);
-	res.render("../views/account/profile", { user: user });
-});
+// app.get('/account/profile/:id', async function (req, res) {
+// 	user = await userDB.findOne({
+// 		_id: req.params.id
+// 	})
+// 	console.log(user);
+// 	res.render("../views/account/profile", { user: user });
+// });
 
 //get user profile - edit
 app.get('/account/edit-profile/:id', async function (req, res) {
@@ -282,27 +351,7 @@ app.get('/service', (req, res) => {
 	)
 })
 
-app.post('/auth/login', async(req, res) => {
-	if(!req.body.email || !req.body.password) {
-		res.json({result: 0, err: "Not enough info"})
-	}else{
-		var userCurrent = await userDB.findOne({
-			email: req.body.email,
-		})
-		if(userCurrent == null) {
-			res.json({result: 0, err: 'Email is not exist'})
-		}else {
-			const hashPassword = CryptoJS.SHA256(req.body.password).toString();
-			if(userCurrent.password === hashPassword) {
-				res.json({result: 1, err: " Login successful!", valReturn: userCurrent._id})
-			}else {
-				console.log(hashPassword);
-				res.json({result: 0, err: "Password is not right"})
-			}
-		}
-		
-	}
-})
+
 
 require("./controllers/game")(app);
 
