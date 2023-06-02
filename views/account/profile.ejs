@@ -10,7 +10,41 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/styles/style.css">
   <link rel="stylesheet" href="/styles/profile.css">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script src="/scripts/profile.js"></script>
+  <script>
+
+    var ssIdUser = sessionStorage.getItem('ssIdUser')
+    console.log(ssIdUser)
+    fetch('/api/account/profile/' + ssIdUser)
+    .then(response => response.json())
+    .then(data => {
+      // Nhận dữ liệu userCurrent từ server
+      const userCurrent = data.userCurrent;
+      $("#detail-profile").append(`
+          <label for="fname"><i class="fa fa-user"></i>&ensp;Full Name</label>
+          <input type="text" id="fname" name="firstname" value="${userCurrent.name}" readonly>
+          <label for="email"><i class="fa fa-envelope"></i>&ensp;Email</label>
+          <input type="text" id="email" name="email" value="${userCurrent.email}" readonly>
+          <label for="dob"><i class="fa fa-birthday-cake"></i>&ensp;Date of birth</label>
+          <input type="text" id="dob" name="dob" value="${userCurrent.dob}" readonly>
+          <label for="adr"><i class="fa fa-address-card-o"></i>&ensp;Address</label>
+          <input type="text" id="adr" name="address" value="${userCurrent.address}" readonly>
+          <label for="phone"><i class="fa fa-phone"></i>&ensp;Phone</label>
+          <input type="text" id="phone" name="phone" value="${userCurrent.phone}" readonly>
+          <div class="group-button w3-center" style="margin: 5% 0;">
+            <a href="/account/edit-profile.html"><button class="btn btn-edit" type="button">Edit Profile</button></a>
+            <a href="/account/edit-password.html"><button class="btn btn-change-pass" type="button"
+                style="margin-left: 5%;">Change password</button></a>
+          </div>
+        `)
+      // Tiếp tục xử lý dữ liệu tại đây
+    })
+    .catch(error => {
+      console.error('Lỗi khi gọi API: ', error);
+      // Xử lý lỗi tại đây
+    });
+  </script>
   <link rel="icon" href="/images/logo-hez.png" type="image/x-icon">
   <title>Profile | HOWA</title>
 </head>
@@ -70,21 +104,7 @@
             </div>
           </div>
           <div id="detail-profile" class="detail-profile not-delayed">
-            <label for="fname"><i class="fa fa-user"></i>&ensp;Full Name</label>
-            <input type="text" id="fname" name="firstname" value="<%= user.name %>" readonly>
-            <label for="email"><i class="fa fa-envelope"></i>&ensp;Email</label>
-            <input type="text" id="email" name="email" value="<%= user.email %>" readonly>
-            <label for="dob"><i class="fa fa-birthday-cake"></i>&ensp;Date of birth</label>
-            <input type="text" id="dob" name="dob" value="<%= user.dob %>" readonly>
-            <label for="adr"><i class="fa fa-address-card-o"></i>&ensp;Address</label>
-            <input type="text" id="adr" name="address" value="<%= user.address %>" readonly>
-            <label for="phone"><i class="fa fa-phone"></i>&ensp;Phone</label>
-            <input type="text" id="phone" name="phone" value="<%= user.phone %>" readonly>
-            <div class="group-button w3-center" style="margin: 5% 0;">
-              <a href="/account/edit-profile.html"><button class="btn btn-edit" type="button">Edit Profile</button></a>
-              <a href="/account/edit-password.html"><button class="btn btn-change-pass" type="button"
-                  style="margin-left: 5%;">Change password</button></a>
-            </div>
+            
           </div>
         </div>
       </div>
