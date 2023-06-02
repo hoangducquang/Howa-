@@ -13,7 +13,6 @@
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script src="/scripts/profile.js"></script>
   <script>
-
     var ssIdUser = sessionStorage.getItem('ssIdUser')
     console.log(ssIdUser)
     fetch('/api/account/profile/' + ssIdUser)

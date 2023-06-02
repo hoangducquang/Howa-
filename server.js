@@ -82,7 +82,6 @@ app.get('/auth', (req, res) => {
 	)
 })
 
-
 // Login
 app.get('/auth/login.html', (req, res) => {
 	res.render('auth/login',
@@ -349,8 +348,6 @@ app.get('/service', (req, res) => {
 	res.render(validations,
 	)
 })
-
-
 
 require("./controllers/game")(app);
 
