@@ -457,7 +457,7 @@ $(document).ready(() => {
         if (err) {
             console.log(err);
         } else {
-            let idStudentCurrent = "6437b0c684ab3117410be702"
+            let idStudentCurrent = sessionStorage.getItem('ssIdUser')
             let cookieIDSubject = document.cookie
                 .split(';')
                 .map(cookie => cookie.trim())
@@ -580,7 +580,7 @@ $(document).ready(() => {
         if (currentAccount.length == 0) {
             alert("Please login metamask!");
         } else {
-            let idStudentCurrent = "6437b0c684ab3117410be702"
+            let idStudentCurrent = sessionStorage.getItem("ssIdUser")
 
             // Get cookie
             let cookieIDSubject = document.cookie

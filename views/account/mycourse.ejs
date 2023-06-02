@@ -15,8 +15,8 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="/scripts/mycourse.js"></script>
     <script>
-        var id = "<%= id %>";
-        fetch(`/api/account/mycourse/${id}`)
+        var ssIdUser = sessionStorage.getItem('ssIdUser')
+        fetch(`/api/account/mycourse/` + ssIdUser)
             .then(response => response.json())
             .then(data => {
                 // Nhận kết quả từ server
