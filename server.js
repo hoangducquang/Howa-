@@ -146,7 +146,6 @@ app.post('/auth/signup', (req, res) => {
 
 // Course Home
 app.get('/courses', (req, res) => {
-
 	res.render('courses/index',
 	)
 })
