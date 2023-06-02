@@ -78,7 +78,6 @@ app.get('/auth/signup.html', (req, res) => {
 })
 
 app.get('/courses', (req, res) => {
-
 	res.render('courses/index',
 	)
 })
