@@ -272,6 +272,24 @@ app.get('/courses/detail/:id', async function (req, res) {
 	res.render("../views/courses/coursedetail", { course: course });
 });
 
+// Check buy course
+app.get('/check-buycourse', (req, res) => {
+	const { courses_id, users_id } = req.query;
+  
+	ordersDB.findOne({ courses_id, users_id }, (err, result) => {
+	  if (err) {
+		console.error(err);
+		return res.status(500).json({ result: 0, error: 'Đã xảy ra lỗi' });
+	  }
+  
+	  if (result) {
+		return res.json({ result: 1, error: 'Success' });
+	  } else {
+		return res.json({ result: -1, error: 'Not exist' });
+	  }
+	});
+  });
+
 //get create course form
 app.get('/courses/create.html', async function (req, res) {
 	res.render('courses/create')

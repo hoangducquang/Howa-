@@ -25,33 +25,39 @@
 
     // Lấy giá trị cuối cùng sau dấu "/"
     const courseId = urlParts[urlParts.length - 1];
-    
+    const userId = sessionStorage.getItem('ssIdUser')
     const priceCurrent = '<%= course.price %>'
-    
+    var hasPurchased = false
     sessionStorage.setItem('ssIdCourse', courseId)
     sessionStorage.setItem('ssPriceCourse', priceCurrent)
 
-    // document.getElementById('btnLogout').addEventListener('click', function(event) {
-    //   event.preventDefault()
-
-    //   window.location.href = '/auth/login.html'
-    // })
-
-
-    
-
-    const hasPurchased = true; // Thay đổi giá trị này thành true hoặc false tùy theo trạng thái mua của người dùng
-
-    document.addEventListener('DOMContentLoaded', function() {
-    // Lấy tham chiếu đến button
-      const btnBuyNow = document.getElementById('btnBuyNow');
-
-      // Ẩn button nếu người dùng đã mua khóa học
-      if (hasPurchased) {
-        btnBuyNow.style.display = 'none';
+    fetch(`/check-buycourse?courses_id=${courseId}&users_id=${userId}`)
+    .then((response) => response.json())
+    .then(data => {
+      if(data.result === 1){
+        hasPurchased = true; // Thay đổi giá trị này thành true hoặc false tùy theo trạng thái mua của người dùng
       }
-    });
-    
+      console.log(data.result)
+      console.log(hasPurchased)
+      
+      document.addEventListener('DOMContentLoaded', function() {
+      // Lấy tham chiếu đến button
+        const btnBuyNow = document.getElementById('btnBuyNow');
+        const btnCancel = document.getElementById('btnCancelCourse');
+        console.log(hasPurchased)
+        // Ẩn button nếu người dùng đã mua khóa học
+        if (hasPurchased) {
+          btnBuyNow.style.display = 'none';
+          btnCancel.style.display = 'block';
+        }else{
+          btnBuyNow.style.display = 'block';
+          btnCancel.style.display = 'none';
+        }
+      });
+    })
+    .catch(err => {
+      console.log(err)
+    })
 
   </script>
 
