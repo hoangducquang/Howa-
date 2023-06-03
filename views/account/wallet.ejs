@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="/styles/style.css">
     <link rel="stylesheet" href="/styles/wallet.css">
     <link rel="icon" href="/images/logo-hez.png" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="/scripts/web3.js"></script>
+    <script src="/process.js"></script>
     <title>My wallet | HOWA</title>
 </head>
 <header class="header" id="top">
@@ -76,7 +79,7 @@
                 <div id="pitch">
                     <h1 style="margin-bottom: 20px;">My wallet</h1>
                     <div id="detail-wallet" class="not-delayed">
-                        <div class="list-card" style="border-top: 1px solid #d1cccc;">
+                        <div class="list-card" style="border-top: 1px solid #d1cccc;" id="wallet">
                             <div class="creditcard-card">
                                 <div class="creditcard-card__logo"><img
                                         src="https://cdn.visa.com/v2/assets/images/logos/visa/blue/logo.png">
@@ -86,7 +89,7 @@
                                 </div>
                                 <div class="bacc-default-badge">Default</div>
                                 <div class="creditcard-card__spacer"></div>
-                                <div class="GBIZS7 "> **** **** **** 9150</div>
+                                <div class="GBIZS7 " id="addressWallet"> </div>
                                 <div class="creditcard-card__actions"><button
                                         class="bacc-secondary-action-btn">Delete</button><button type="button"
                                         class="btn btn-light btn--s btn--inline btn-light--disabled"
@@ -94,7 +97,7 @@
                             </div>
                         </div>
                         <div class="group-button" style="margin-bottom: 30px;">
-                            <button class="btn2-connect-wallet" type="button">Connect your wallet</button>
+                            <button class="btn2-connect-wallet" type="button" id="btnConnectMM">Connect your wallet</button>
                             <button class="btn2-remove-wallet" type="button" style="margin-left: 20px;">Remove your
                                 wallet</button>
                         </div>
