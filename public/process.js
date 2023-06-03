@@ -441,12 +441,7 @@ $(document).ready(() => {
             console.log(err);
         } else {
             console.log(returnEvent);
-            let cookieIDSubject = document.cookie
-                .split(';')
-                .map(cookie => cookie.trim())
-                .find(cookie => cookie.startsWith('cookieIdSubject='))
-                ?.split('=')[1];
-            window.location.href = "/courses/detail/" + cookieIDSubject
+            window.location.href = "/courses/index.html"
         }
         // returnEvent.returnValues.address_SmartContract
     });
@@ -458,14 +453,10 @@ $(document).ready(() => {
             console.log(err);
         } else {
             let idStudentCurrent = sessionStorage.getItem('ssIdUser')
-            let cookieIDSubject = document.cookie
-                .split(';')
-                .map(cookie => cookie.trim())
-                .find(cookie => cookie.startsWith('cookieIdSubject='))
-                ?.split('=')[1];
+            let idSubjectCurrent = sessionStorage.getItem('ssIdCourse')
             console.log(returnEvent);
             $.post("/account/order", {
-                courses_id: cookieIDSubject,
+                courses_id: idSubjectCurrent,
                 create_at: Date.now(),
                 users_id: idStudentCurrent,
             }, async (data) => {
@@ -473,7 +464,6 @@ $(document).ready(() => {
                     console.log("Success")
                 }
                 else{
-                    console.log(cookieIDSubject, '   ', idStudentCurrent)
                     console.log("Fail")
                 }
             });
@@ -500,8 +490,6 @@ $(document).ready(() => {
     
     // Var account
     var currentAccount = "";
-    var price = 0;
-    var timeRegister = 0, timeCourse = 0;
     
     // Check metamask install
     checkMM();
@@ -547,7 +535,6 @@ $(document).ready(() => {
                     let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
                     let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
                     
-                    document.cookie = "cookieIdSubject=" + data.err._id + ";path=/"
                     document.cookie = "cookiePrice=" + data.err.price + ";path=/"
                     
                     // Call smart contract create course 
@@ -580,25 +567,19 @@ $(document).ready(() => {
         if (currentAccount.length == 0) {
             alert("Please login metamask!");
         } else {
-            let idStudentCurrent = sessionStorage.getItem("ssIdUser")
+            var idStudentCurrent = sessionStorage.getItem('ssIdUser')
+            var idSubjectCurrent = sessionStorage.getItem('ssIdCourse')
 
-            // Get cookie
-            let cookieIDSubject = document.cookie
-                .split(';')
-                .map(cookie => cookie.trim())
-                .find(cookie => cookie.startsWith('cookieIdSubject='))
-                ?.split('=')[1];
-            let cookieprice = document.cookie
-                .split(';')
-                .map(cookie => cookie.trim())
-                .find(cookie => cookie.startsWith('cookiePrice='))
-                ?.split('=')[1];
-
-            if (cookieIDSubject != '' && idStudentCurrent != '') {
-                console.log(cookieIDSubject)
-                await contractMM.methods.studentRegisterCourse(idStudentCurrent, cookieIDSubject).send({
+            console.log(idStudentCurrent, '   ', idSubjectCurrent);
+            
+            // Cần lầy giá trên db
+            var priceCurrent = sessionStorage.getItem('ssPriceCourse')
+        
+            
+            if (idSubjectCurrent != '' && idStudentCurrent != '') {
+                await contractMM.methods.studentRegisterCourse(idStudentCurrent, idSubjectCurrent).send({
                     from: currentAccount,
-                    value: cookieprice,
+                    value: priceCurrent,
                 }).then(() => {
                     
                 });
