@@ -37,7 +37,7 @@ app.get('', (req, res) => {
 })
 
 // Profile account
-app.get('/account', (req, res) => {
+app.get('/account/profile.html', (req, res) => {
 	res.render('account/profile',
 	)
 })
@@ -149,7 +149,7 @@ app.get('/courses', (req, res) => {
 	)
 })
 
-app.get('/courses/index', (req, res) => {
+app.get('/courses/index.html', (req, res) => {
 	res.render('courses/index',
 	)
 })
@@ -240,8 +240,14 @@ app.get('/account/mycourse/:id', async (req, res) => {
 	})
 	// console.log(orders)
 	res.render('../views/account/mycourse', { orders: orders, id: req.params.id });
-
+	
 });
+
+app.get('/account/mycourse.html', (req, res) => {
+	res.render('../views/account/mycourse');
+	
+})
+
 
 app.get('/api/account/mycourse/:id', async (req, res) => {
 	try {

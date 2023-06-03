@@ -17,6 +17,28 @@
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script src="/scripts/web3.js"></script>
   <script src="/process.js"></script>
+  <script>
+    const urlCurrent = window.location.href;
+
+    // Tách URL thành các phần tử bằng "/"
+    const urlParts = urlCurrent.split("/");
+
+    // Lấy giá trị cuối cùng sau dấu "/"
+    const courseId = urlParts[urlParts.length - 1];
+    
+    const priceCurrent = '<%= course.price %>'
+    
+    sessionStorage.setItem('ssIdCourse', courseId)
+    sessionStorage.setItem('ssPriceCourse', priceCurrent)
+
+    // document.getElementById('btnLogout').addEventListener('click', function(event) {
+    //   event.preventDefault()
+
+    //   window.location.href = '/auth/login.html'
+    // })
+
+  </script>
+
 </head>
 <header class="header" id="top">
   <div class="w3-top">
