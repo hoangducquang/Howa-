@@ -37,6 +37,22 @@
     //   window.location.href = '/auth/login.html'
     // })
 
+
+    
+
+    const hasPurchased = true; // Thay đổi giá trị này thành true hoặc false tùy theo trạng thái mua của người dùng
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Lấy tham chiếu đến button
+      const btnBuyNow = document.getElementById('btnBuyNow');
+
+      // Ẩn button nếu người dùng đã mua khóa học
+      if (hasPurchased) {
+        btnBuyNow.style.display = 'none';
+      }
+    });
+    
+
   </script>
 
 </head>
@@ -137,6 +153,7 @@
             </div>
             <div class="group-button" style="margin-bottom: 30px;">
               <button id="btnBuyNow" class="btn btn-buy-now" type="button">Buy now</button>
+              <button id="btnCancelCourse" class="btn btn-buy-now" type="button">Cancel Course</button>
               <p class="countdown-time" id="countdown" style="margin-top: 10px; color: red;"></p>
               <script>
                 var endTime = course.end_regist;
