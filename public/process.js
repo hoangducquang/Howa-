@@ -510,6 +510,7 @@ $(document).ready(() => {
         connectMM().then((data) => {
             currentAccount = data[0];
             console.log(currentAccount);
+            sessionStorage.setItem('ssCurrentAccount', currentAccount)
             document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4, 38), "***") + "!";
             document.getElementById("btnConnectMM").disabled = true;
         }).catch((err) => {

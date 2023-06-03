@@ -62,6 +62,40 @@ app.get('/account/edit-profile.html', (req, res) => {
 	)
 })
 
+app.put('/account/edit-profile/:id', async (req, res) => {
+	if (!req.body.name || !req.body.dob || !req.body.email || !req.body.phone || !req.body.address) {
+	  res.status(500).json({ result: 0, err: 'Vui lòng cung cấp đầy đủ thông tin.' + req.body.name });
+	} else {
+	  try {
+		const changeProfile = await userDB.findByIdAndUpdate(
+		  req.params.id,
+		  {
+			name: req.body.name,
+			dob: req.body.dob,
+			email: req.body.email,
+			phone: req.body.phone,
+			address: req.body.address,
+			update_at: Date.now(),
+		  },
+		  {
+			new: true,
+			runValidators: true,
+		  }
+		);
+  
+		if (!changeProfile) {
+		  return res.status(500).json({ result: 0, err: 'Có lỗi xảy ra khi chỉnh sửa hồ sơ.' });
+		}
+		res.json({ result: 1, err: 'Chỉnh sửa hồ sơ thành công.' });
+	  } catch (err) {
+		console.error(err);
+		return res.status(500).json({ result: 0, err: 'Có lỗi xảy ra khi chỉnh sửa hồ sơ.' });
+	  }
+	}
+});
+
+
+
 app.get('/account/edit-password.html', (req, res) => {
 	res.render('account/edit-password',
 	)
@@ -119,7 +153,7 @@ app.get('/auth/signup.html', (req, res) => {
 
 app.post('/auth/signup', (req, res) => {
 	if(!req.body.name || !req.body.email || !req.body.password || !req.body.dob || !req.body.phone) {
-		res.json({result:0, err: "Not enough information!"});
+		res.json({result:0, err: "Not enough information!" + req.body.name});
 	}else {
 		const hashPassword = CryptoJS.SHA256(req.body.password);
 		console.log("on")
