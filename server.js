@@ -77,6 +77,16 @@ app.get('/auth/forgot.html', (req, res) => {
 	)
 })
 
+app.get('/partials/header', (req, res) => {
+	res.render('partials/header',
+	)
+})
+
+app.get('/header.html', (req, res) => {
+	res.render('header',
+	)
+})
+
 app.get('/auth', (req, res) => {
 	res.render('auth/login',
 	)
