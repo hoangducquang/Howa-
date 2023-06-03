@@ -15,9 +15,9 @@
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script src="/scripts/mycourse.js"></script>
   <script>
-  fetch(`/api/courses/index`)
-    .then(response => response.json())
-    .then(data => {
+    fetch(`/api/courses/index`)
+      .then(response => response.json())
+      .then(data => {
         // Nhận kết quả từ server
         const getCourseAll = data.coursesAll
 
@@ -26,9 +26,9 @@
 
         // Fix link image
         for (let i = 0; i < getCourseAll.length; i++) {
-            const course = getCourseAll[i];
+          const course = getCourseAll[i];
 
-            $("#tblistCourse").append(`
+          $("#tblistCourse").append(`
             <div class="category-course-card">
                 <a href="/courses/detail/${course._id}" style="text-decoration: none;">
                     <div class="course-image">
@@ -50,144 +50,96 @@
         `)
         }
 
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         // Xử lý lỗi nếu có
         console.error('Lỗi:', error);
-    });
+      });
   </script>
-  
-  
-  </head>
-<header class="header" id="top">
-  <div class="w3-top">
-    <div class="w3-bar w3-black w3-card header">
-      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
-        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-      <a href="/index.html" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
-      <span class="w3-right">
-        <a href="/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
-        <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
-          style="background-color: white; color: black;">Courses</a>
-        <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
-        <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
-        <a href="/auth/login.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
-        <div class="w3-dropdown-hover w3-right w3-hide-small">
-          <button class="w3-button w3-black w3-padding-large">Account</button>
-          <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-            <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
-            <a href="/account/wallet.html" class="w3-bar-item w3-button">My wallet</a>
-            <a href="/account/mycourse.html" class="w3-bar-item w3-button">My courses</a>
-            <a href="/account/edit-password.html" class="w3-bar-item w3-button">Edit password</a>
-            <a href="#" class="w3-bar-item w3-button">Log out</a>
-          </div>
+</head>
+<%- include("../partials/header") %>
+  <body>
+    <div style="margin-top: 70px;">
+      <style>
+        .button {
+          background-color: #704caf;
+          border: none;
+          color: #fff;
+          padding: 10px 20px;
+          text-align: right;
+          text-decoration: none;
+          font-size: 16px;
+          margin: 4px 2px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+          float: right;
+          margin-right: 50px;
+          border-radius: 15px;
+        }
+
+        .btn-add-course {
+          background-color: #fff;
+          color: #704caf;
+          border: 2px solid #704caf;
+        }
+
+        .btn-add-course:hover {
+          background-color: #704caf;
+          color: #fff;
+        }
+      </style>
+      <div class="add-course">
+        <button class="button btn-add-course" type="button">
+          <a href="/courses/create.html" style="text-decoration: none;">Create a course</a>
+        </button>
+      </div>
+      <div id="head-categories">
+        <div class="container cols">
+          <a href="#" class="cat current"><span>All</span></a>
+          <a href="#languages" class="cat "><span>Foreign Language</span></a>
+          <a href="#programming" class="cat "><span>Programming</span></a>
+          <a href="#design" class="cat "><span>Design</span></a>
+          <a href="#music" class="cat "><span>Music</span></a>
+          <a href="#video-editting" class="cat "><span>Video editing</span></a>
+          <a href="#photography" class="cat "><span>Photography</span></a>
+          <a href="#others" class="cat "><span>Others</span></a>
         </div>
-      </span>
-    </div>
-  </div>
-
-  <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-    <a href="/index.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Home</a>
-    <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large"
-      style="background-color: white; color: black;" onclick="myFunction()">Couses</a>
-    <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
-    <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
-    <a href="/auth/login.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
-    <div class="w3-dropdown-hover w3-right">
-      <button class="w3-button w3-black w3-padding-large">My Account</button>
-      <div class="w3-dropdown-content w3-bar-block w3-border">
-        <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
-        <a href="/account/wallet.html" class="w3-bar-item w3-button">My wallet</a>
-        <a href="/account/mycourse.html" class="w3-bar-item w3-button">My courses</a>
-        <a href="/account/edit-password.html" class="w3-bar-item w3-button">Edit password</a>
-        <a href="#" class="w3-bar-item w3-button">Log out</a>
       </div>
     </div>
-  </div>
-</header>
-
-<body>
-  <div style="margin-top: 70px;">
-    <style>
-      .button {
-        background-color: #704caf;
-        border: none;
-        color: #fff;
-        padding: 10px 20px;
-        text-align: right;
-        text-decoration: none;
-        font-size: 16px;
-        margin: 4px 2px;
-        transition-duration: 0.4s;
-        cursor: pointer;
-        float: right;
-        margin-right: 50px;
-        border-radius: 15px;
-      }
-
-      .btn-add-course {
-        background-color: #fff;
-        color: #704caf;
-        border: 2px solid #704caf;
-      }
-
-      .btn-add-course:hover {
-        background-color: #704caf;
-        color: #fff;
-      }
-    </style>
-    <div class="add-course">
-      <button class="button btn-add-course" type="button">
-        <a href="/courses/create.html" style="text-decoration: none;">Create a course</a>
-      </button>
-    </div>
-    <div id="head-categories">
-      <div class="container cols">
-        <a href="#" class="cat current"><span>All</span></a>
-        <a href="#languages" class="cat "><span>Foreign Language</span></a>
-        <a href="#programming" class="cat "><span>Programming</span></a>
-        <a href="#design" class="cat "><span>Design</span></a>
-        <a href="#music" class="cat "><span>Music</span></a>
-        <a href="#video-editting" class="cat "><span>Video editing</span></a>
-        <a href="#photography" class="cat "><span>Photography</span></a>
-        <a href="#others" class="cat "><span>Others</span></a>
-      </div>
-    </div>
-  </div>
-  <main class="category" style="min-height: max-content;">
-    <div class="wrapper">
-      <section class="course .center">
-        <div class="mg-10">
-            <div id="tblistCourse">   
+    <main class="category" style="min-height: max-content;">
+      <div class="wrapper">
+        <section class="course .center">
+          <div class="mg-10">
+            <div id="tblistCourse">
             </div>
           </div>
-        </div>
+      </div>
       </section>
 
-    </div>
-  </main>
-  <div class="w3-center contact" id="contact" style="color: white;">
-    <div class=" w3-left-align w3-margin-top contact-info ">
-      <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
-      <h4 style="font-weight: 600;">Your styles at low cost
-      </h4>
-      <p>We care about our customers<br>you can contact us for any feedback</p>
-      <h4 style="font-weight: 600;">Follow Us </h4>
+      </div>
+    </main>
+    <div class="w3-center contact" id="contact" style="color: white;">
+      <div class=" w3-left-align w3-margin-top contact-info ">
+        <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
+        <h4 style="font-weight: 600;">Your styles at low cost
+        </h4>
+        <p>We care about our customers<br>you can contact us for any feedback</p>
+        <h4 style="font-weight: 600;">Follow Us </h4>
 
-      <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
-      <i class="fa fa-instagram w3-hover-opacity icons"></i>
-      <i class="fa fa-snapchat w3-hover-opacity icons"></i>
-      <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
-      <i class="fa fa-twitter w3-hover-opacity icons"></i>
-      <i class="fa fa-linkedin w3-hover-opacity icons"></i>
+        <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
+        <i class="fa fa-instagram w3-hover-opacity icons"></i>
+        <i class="fa fa-snapchat w3-hover-opacity icons"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
+        <i class="fa fa-twitter w3-hover-opacity icons"></i>
+        <i class="fa fa-linkedin w3-hover-opacity icons"></i>
+      </div>
+      <div class="w3-left-align w3-margin-top contact-info">
+        <h3 style="font-weight: 600;">OPENING HOURS</h3>
+        <p>Mon - Sat 7am - 9pm:</p>
+        <p>Opening on Morning | Off at afternoon</p>
+        <p>Delivery only on opening hours</p>
+      </div>
     </div>
-    <div class="w3-left-align w3-margin-top contact-info">
-      <h3 style="font-weight: 600;">OPENING HOURS</h3>
-      <p>Mon - Sat 7am - 9pm:</p>
-      <p>Opening on Morning | Off at afternoon</p>
-      <p>Delivery only on opening hours</p>
-    </div>
-  </div>
-</body>
+  </body>
 
 </html>
