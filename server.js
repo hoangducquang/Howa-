@@ -463,51 +463,74 @@ admin.initializeApp({
 
 // Thiết lập Multer để xử lý upload file
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
 
 // Hiển thị trang upload ảnh
 app.get("/upload-image", (req, res) => {
   res.render("courses/upload-img");
 });
 
-// Xử lý upload ảnh
-app.post("/upload", upload.single("image"), (req, res) => {
-  const file = req.file;
-
-  if (!file) {
-    return res.status(400).send("No file uploaded.");
-  }
-
-  // Lấy thời gian hiện tại dưới dạng Unix
-  const unixTime = Date.now();
-
-  // Tạo tên file mới dựa trên thời gian Unix và định dạng của file gốc
-  const fileName = `${unixTime}.${file.originalname.split('.').pop()}`;
-
-  // Lưu ảnh vào Firebase Storage
-  const bucket = admin.storage().bucket();
-  const blob = bucket.file(fileName);
-  const blobStream = blob.createWriteStream();
-
-  blobStream.on("error", (err) => {
-    console.error(err);
-    res.status(500).send("Upload failed.");
-  });
-
-  blobStream.on('finish', () => {
-    // Get the public URL of the uploaded image
-    blob.makePublic()
-      .then(() => {
-        const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
-        res.status(200).send(`Image uploaded successfully. Public URL: ${publicUrl}`);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).send('Error retrieving public URL.');
-      });
-  });
-  blobStream.end(file.buffer);
+const upload = multer({
+  limits: {
+    fileSize: 2 * 1024 * 1024, // 3MB
+  },
 });
+
+app.post(
+  "/upload",
+  (req, res, next) => {
+    upload.single("image")(req, res, (err) => {
+      if (err instanceof multer.MulterError && err.code === "LIMIT_FILE_SIZE") {
+        // Xử lý lỗi khi dung lượng vượt quá giới hạn
+        return res.status(400).send("File size exceeds the limit < 2MB");
+      } else if (err) {
+        // Xử lý lỗi multer khác
+        return res.status(500).send("Upload failed.");
+      }
+
+      next();
+    });
+  },
+  (req, res) => {
+    const file = req.file;
+
+    if (!file) {
+      return res.status(400).send("No file uploaded.");
+    }
+
+    // Lấy thời gian hiện tại dưới dạng Unix
+    const unixTime = Date.now();
+
+    // Tạo tên file mới dựa trên thời gian Unix và định dạng của file gốc
+    const fileName = `${unixTime}.${file.originalname.split(".").pop()}`;
+
+    // Lưu ảnh vào Firebase Storage
+    const bucket = admin.storage().bucket();
+    const blob = bucket.file(fileName);
+    const blobStream = blob.createWriteStream();
+
+    blobStream.on("error", (err) => {
+      console.error(err);
+      res.status(500).send("Upload failed.");
+    });
+
+    blobStream.on("finish", () => {
+      // Get the public URL of the uploaded image
+      blob
+        .makePublic()
+        .then(() => {
+          const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
+          res
+            .status(200)
+            .send(`Image uploaded successfully. Public URL: ${publicUrl}`);
+        })
+        .catch((err) => {
+          console.error(err);
+          res.status(500).send("Error retrieving public URL.");
+        });
+    });
+    blobStream.end(file.buffer);
+  }
+);
 
 //post login form
 app.post("/login", async (request, response) => {
