@@ -126,7 +126,6 @@ app.get("/api/account/edit-profile/:id", async (req, res) => {
 	});
 	
 app.post('/account/edit-password/:id', async(req, res) => {
-	console.log(req.body.currentpassword + " and " + req.body.newpassword)
 	if(!req.body.currentpassword || !req.body.newpassword || !req.body.renewpassword){
 		res.json({result: 0, err: 'Not enough info'})
 	}else if(req.body.newpassword !== req.body.renewpassword){
@@ -176,20 +175,22 @@ app.get("/account/edit-profile.html", (req, res) => {
 });
 
 app.put("/account/edit-profile/:id", async (req, res) => {
-  if (
-    !req.body.name ||
-    !req.body.dob ||
-    !req.body.email ||
-    !req.body.phone ||
-    !req.body.address
-  ) {
-    res
-      .status(500)
-      .json({
+  if (!req.body.name && req.body.phone) {
+    res.status(500).json({
         result: 0,
-        err: "Vui lòng cung cấp đầy đủ thông tin." + req.body.name,
+        err: "Please enter name"
       });
-  } else {
+  }else if (!req.body.phone && req.body.name){
+	res.status(500).json({
+        result: 0,
+        err: "Please enter phone"
+      });
+	}else if(!req.body.name && !req.body.phone){
+	  res.status(500).json({
+		  result: 0,
+		  err: "Please enter name and phone"
+		});
+	}else {
     try {
       const changeProfile = await userDB.findByIdAndUpdate(
         req.params.id,
@@ -206,7 +207,6 @@ app.put("/account/edit-profile/:id", async (req, res) => {
           runValidators: true,
         }
       );
-
       if (!changeProfile) {
         return res
           .status(500)
