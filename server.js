@@ -427,7 +427,7 @@ app.get('/check-canceled', (req, res) => {
 app.get("/check-buycourse", (req, res) => {
   const { courses_id, users_id } = req.query;
 
-  ordersDB.findOne({ courses_id, users_id }, (err, result) => {
+  ordersDB.findOne({ courses_id, users_id, canceled: false }, (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ result: 0, error: "Đã xảy ra lỗi" });
