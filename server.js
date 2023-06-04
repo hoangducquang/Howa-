@@ -56,6 +56,19 @@ app.get('/api/account/profile/:id', async (req, res) => {
 
 })
 
+app.get('/api/account/edit-profile/:id', async (req, res) => {
+	try {
+		const userCurrent = await userDB.findOne({
+			_id: req.params.id,
+		})
+		
+		res.json({userCurrent})
+	} catch (error) {
+		console.error("Lỗi: ", error)
+		res.status(500).json({err: "Lỗi server"})
+	}
+
+})
 
 app.get('/account/edit-profile.html', (req, res) => {
 	res.render('account/edit-profile',
@@ -93,8 +106,6 @@ app.put('/account/edit-profile/:id', async (req, res) => {
 	  }
 	}
 });
-
-
 
 app.get('/account/edit-password.html', (req, res) => {
 	res.render('account/edit-password',
@@ -309,7 +320,6 @@ app.get('/account/mycourse.html', (req, res) => {
 	res.render('../views/account/mycourse');
 	
 })
-
 
 app.get('/api/account/mycourse/:id', async (req, res) => {
 	try {
