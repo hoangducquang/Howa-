@@ -41,8 +41,62 @@ app.get("", (req, res) => {
 });
 
 // Profile account
-app.get("/account/profile.html", (req, res) => {
-  res.render("account/profile");
+
+app.get('/account/profile.html', (req, res) => {
+	res.render('account/profile',
+	)
+})
+
+app.get('/api/account/profile/:id', async (req, res) => {
+	try {
+		const userCurrent = await userDB.findOne({
+			_id: req.params.id,
+		})
+		
+		res.json({userCurrent})
+	} catch (error) {
+		console.error("Lỗi: ", error)
+		res.status(500).json({err: "Lỗi server"})
+	}
+
+})
+
+
+app.get('/account/edit-profile.html', (req, res) => {
+	res.render('account/edit-profile',
+	)
+})
+
+app.put('/account/edit-profile/:id', async (req, res) => {
+	if (!req.body.name) {
+	  res.status(500).json({ result: 0, err: 'Vui lòng cung cấp đầy đủ thông tin.' + req.body.name });
+	} else {
+	  try {
+		const changeProfile = await userDB.findByIdAndUpdate(
+		  req.params.id,
+		  {
+			name: req.body.name,
+			dob: req.body.dob,
+			email: req.body.email,
+			phone: req.body.phone,
+			address: req.body.address,
+			update_at: Date.now(),
+		  },
+		  {
+			new: true,
+			runValidators: true,
+		  }
+		);
+  
+		if (!changeProfile) {
+		  return res.status(500).json({ result: 0, err: 'Có lỗi xảy ra khi chỉnh sửa hồ sơ.' });
+		}
+		res.json({ result: 1, err: 'Chỉnh sửa hồ sơ thành công.' });
+	  } catch (err) {
+		console.error(err);
+		return res.status(500).json({ result: 0, err: 'Có lỗi xảy ra khi chỉnh sửa hồ sơ.' });
+	  }
+	}
 });
 
 app.get("/api/account/profile/:id", async (req, res) => {
@@ -59,17 +113,63 @@ app.get("/api/account/profile/:id", async (req, res) => {
 });
 
 app.get("/api/account/edit-profile/:id", async (req, res) => {
-  try {
-    const userCurrent = await userDB.findOne({
-      _id: req.params.id,
-    });
+	try {
+		const userCurrent = await userDB.findOne({
+		  _id: req.params.id,
+		});
+	
+		res.json({ userCurrent });
+	  } catch (error) {
+		console.error("Lỗi: ", error);
+		res.status(500).json({ err: "Lỗi server" });
+	  }
+	});
+	
+app.post('/account/edit-password/:id', async(req, res) => {
+	console.log(req.body.currentpassword + " and " + req.body.newpassword)
+	if(!req.body.currentpassword || !req.body.newpassword || !req.body.renewpassword){
+		res.json({result: 0, err: 'Not enough info'})
+	}else if(req.body.newpassword !== req.body.renewpassword){
+		res.json({result: 0, err: "New Password not equal renew Password"})
+	}
+	else{
+		var userCurrent = await userDB.findOne({
+			_id: req.params.id,
+		})
+		if(userCurrent == null){
+			res.json({result: 0, err: "Id not exist"})
+		}else{
+			const hashPassword = CryptoJS.SHA256(req.body.currentpassword).toString();
+			if(userCurrent.password == hashPassword){
+				try{
+					const changeProfile = await userDB.findByIdAndUpdate(
+						req.params.id,
+						{
+						  password: CryptoJS.SHA256(req.body.newpassword).toString(),
+						},
+						{
+						  new: true,
+						  runValidators: true,
+						}
+					);
+					if(!changeProfile){
+						return res.status(500).json({ result: 0, err: 'Err when edit' });
+					}  
+					res.json({result: 1, err: 'Change success'})
+				}catch(err){
+					console.error(err);
+					return res.status(500).json({ result: 0, err: 'Err edit' });
+				}
+			
+			}
+		}
+	}
+})
 
-    res.json({ userCurrent });
-  } catch (error) {
-    console.error("Lỗi: ", error);
-    res.status(500).json({ err: "Lỗi server" });
-  }
-});
+app.get('/account/wallet.html', (req, res) => {
+	res.render('account/wallet',
+	)
+})
 
 app.get("/account/edit-profile.html", (req, res) => {
   res.render("account/edit-profile");
@@ -151,30 +251,28 @@ app.get("/auth/login.html", (req, res) => {
   res.render("auth/login");
 });
 
-app.post("/auth/login", async (req, res) => {
-  if (!req.body.email || !req.body.password) {
-    res.json({ result: 0, err: "Not enough info" });
-  } else {
-    var userCurrent = await userDB.findOne({
-      email: req.body.email,
-    });
-    if (userCurrent == null) {
-      res.json({ result: 0, err: "Email is not exist" });
-    } else {
-      const hashPassword = CryptoJS.SHA256(req.body.password).toString();
-      if (userCurrent.password === hashPassword) {
-        res.json({
-          result: 1,
-          err: " Login successful!",
-          valReturn: userCurrent._id,
-        });
-      } else {
-        console.log(hashPassword);
-        res.json({ result: 0, err: "Password is not right" });
-      }
-    }
-  }
-});
+
+app.post('/auth/login', async(req, res) => {
+	if(!req.body.email || !req.body.password) {
+		res.json({result: 0, err: "Not enough info" + req.body.email + ' ' + req.body.password})
+	}else{
+		var userCurrent = await userDB.findOne({
+			email: req.body.email,
+		})
+		if(userCurrent == null) {
+			res.json({result: 0, err: 'Email is not exist'})
+		}else {
+			const hashPassword = CryptoJS.SHA256(req.body.password).toString();
+			if(userCurrent.password === hashPassword) {
+				res.json({result: 1, err: " Login successful!", valReturn: userCurrent._id})
+			}else {
+				console.log(hashPassword);
+				res.json({result: 0, err: "Password is not right"})
+			}
+		}
+		
+	}
+})
 
 // Sign up
 app.get("/auth/signup.html", (req, res) => {
