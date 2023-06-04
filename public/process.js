@@ -445,6 +445,20 @@ $(document).ready(() => {
         }
         // returnEvent.returnValues.address_SmartContract
     });
+    
+    contractInfura.events.eventStudentCancelCourse({
+        filter: {},
+        fromBlock: "latest"
+    }, (err, returnEvent) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(returnEvent);
+            // window.location.href = "/courses/index.html"
+        }
+        // returnEvent.returnValues.address_SmartContract
+    });
+
     contractInfura.events.eventStudentRegisterCourse({
         filter: {},
         fromBlock: "latest"
@@ -459,7 +473,6 @@ $(document).ready(() => {
                 courses_id: idSubjectCurrent,
                 create_at: Date.now(),
                 users_id: idStudentCurrent,
-                cancel: false
             }, async (data) => {
                 if(data.result == 1){
                     console.log("Success")
@@ -589,7 +602,27 @@ $(document).ready(() => {
         }
     });
 
-    $()
+    $('#btnCancelCourse').click(async () => {
+        const currentAccount = sessionStorage.getItem('ssCurrentAccount')
+        const ssIdCourse = sessionStorage.getItem('ssIdCourse');
+        const ssIdUser = sessionStorage.getItem('ssIdUser');
+        
+        try {
+          const response = await fetch(`/check-canceled?courses_id=${ssIdCourse}&users_id=${ssIdUser}`);
+          const data = await response.json();
+      
+          if (data.result === 1) {
+            await contractMM.methods.studentCancelRegisterCourse(ssIdCourse).send({
+              from: currentAccount,
+              value: 1000000000,
+            });
+      
+            // Xử lý sau khi hủy khóa học thành công
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      });
 
 });
 
