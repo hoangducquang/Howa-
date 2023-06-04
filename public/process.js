@@ -509,7 +509,8 @@ $(document).ready(() => {
     
     
     $("#btn-create").click(() => {
-        if (currentAccount.length == 0) {
+        const currentAccount = sessionStorage.getItem('ssCurrentAccount')
+        if (currentAccount == null) {
             alert("Please login metamask!");
         }
         else {
@@ -530,13 +531,9 @@ $(document).ready(() => {
                 image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
                 users_id: "6437b0c684ab3117410be702",
             }, async (data) => {
-                console.log("Here")
                 if (data.result == 1) {
-                    console.log("Here 1")
                     let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
                     let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
-                    
-                    document.cookie = "cookiePrice=" + data.err.price + ";path=/"
                     
                     // Call smart contract create course 
                     await contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
@@ -551,31 +548,34 @@ $(document).ready(() => {
         }
     });
 
-    $("#btnGetListStudent").click(() => {
-        if (currentAccount.length == 0) {
+    // $("#btnGetListStudent").click(() => {
+    //     if (currentAccount.length == 0) {
+    //         alert("Please login metamask!");
+    //     }
+    //     else {
+    //         if (_idSubjectCurrent != '') {
+    //             contractMM.methods.getListStudent(_idSubjectCurrent).send({
+    //                 from: currentAccount,
+    //             })
+    //         }
+    //     }
+    // });
+    $('#btnBuyNow').click(async() => {
+        const currentAccount = sessionStorage.getItem('ssCurrentAccount')
+        var idStudentCurrent = sessionStorage.getItem('ssIdUser')
+        var idSubjectCurrent = sessionStorage.getItem('ssIdCourse')
+
+        if (currentAccount == null) {
             alert("Please login metamask!");
+        } else if(idStudentCurrent == null){
+            alert("Please login account!");
         }
         else {
-            if (_idSubjectCurrent != '') {
-                contractMM.methods.getListStudent(_idSubjectCurrent).send({
-                    from: currentAccount,
-                })
-            }
-        }
-    });
-    $('#btnBuyNow').click(async() => {
-
-        if (currentAccount.length == 0) {
-            alert("Please login metamask!");
-        } else {
-            var idStudentCurrent = sessionStorage.getItem('ssIdUser')
-            var idSubjectCurrent = sessionStorage.getItem('ssIdCourse')
-
-            console.log(idStudentCurrent, '   ', idSubjectCurrent);
-            
             // Cần lầy giá trên db
             var priceCurrent = sessionStorage.getItem('ssPriceCourse')
-        
+            console.log(currentAccount)
+            console.log(idStudentCurrent)
+            console.log(idSubjectCurrent)
             
             if (idSubjectCurrent != '' && idStudentCurrent != '') {
                 await contractMM.methods.studentRegisterCourse(idStudentCurrent, idSubjectCurrent).send({
