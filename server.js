@@ -392,6 +392,37 @@ app.get("/courses/detail/:id", async function (req, res) {
   res.render("../views/courses/coursedetail", { course: course });
 });
 
+// Check canceled
+app.get('/check-canceled', (req, res) => {
+  const { courses_id, users_id } = req.query;
+
+  ordersDB.findOne({ courses_id, users_id }, (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ result: 0, error: "Đã xảy ra lỗi" });
+    }
+
+    if (result) {
+      if(result.canceled == false){
+        result.canceled = true
+        result.save()
+        .then(updatedOrder => {
+          // Thực hiện các hành động khác sau khi lưu thành công
+          console.log('Đã thay đổi trạng thái của đơn hàng');
+          console.log(updatedOrder);
+        })
+        .catch(error => {
+          // Xử lý lỗi nếu có
+          console.error('Lỗi khi cập nhật trạng thái đơn hàng:', error);
+        });
+      }
+      return res.json({ result: 1, error: "Success" });
+    } else {
+      return res.json({ result: -1, error: "Not exist" });
+    }
+  });
+})
+
 // Check buy course
 app.get("/check-buycourse", (req, res) => {
   const { courses_id, users_id } = req.query;
