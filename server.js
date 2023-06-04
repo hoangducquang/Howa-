@@ -63,7 +63,7 @@ app.get('/account/edit-profile.html', (req, res) => {
 })
 
 app.put('/account/edit-profile/:id', async (req, res) => {
-	if (!req.body.name || !req.body.dob || !req.body.email || !req.body.phone || !req.body.address) {
+	if (!req.body.name) {
 	  res.status(500).json({ result: 0, err: 'Vui lòng cung cấp đầy đủ thông tin.' + req.body.name });
 	} else {
 	  try {
@@ -101,6 +101,47 @@ app.get('/account/edit-password.html', (req, res) => {
 	)
 })
 
+app.post('/account/edit-password/:id', async(req, res) => {
+	console.log(req.body.currentpassword + " and " + req.body.newpassword)
+	if(!req.body.currentpassword || !req.body.newpassword || !req.body.renewpassword){
+		res.json({result: 0, err: 'Not enough info'})
+	}else if(req.body.newpassword !== req.body.renewpassword){
+		res.json({result: 0, err: "New Password not equal renew Password"})
+	}
+	else{
+		var userCurrent = await userDB.findOne({
+			_id: req.params.id,
+		})
+		if(userCurrent == null){
+			res.json({result: 0, err: "Id not exist"})
+		}else{
+			const hashPassword = CryptoJS.SHA256(req.body.currentpassword).toString();
+			if(userCurrent.password == hashPassword){
+				try{
+					const changeProfile = await userDB.findByIdAndUpdate(
+						req.params.id,
+						{
+						  password: CryptoJS.SHA256(req.body.newpassword).toString(),
+						},
+						{
+						  new: true,
+						  runValidators: true,
+						}
+					);
+					if(!changeProfile){
+						return res.status(500).json({ result: 0, err: 'Err when edit' });
+					}  
+					res.json({result: 1, err: 'Change success'})
+				}catch(err){
+					console.error(err);
+					return res.status(500).json({ result: 0, err: 'Err edit' });
+				}
+			
+			}
+		}
+	}
+})
+
 app.get('/account/wallet.html', (req, res) => {
 	res.render('account/wallet',
 	)
@@ -134,7 +175,7 @@ app.get('/auth/login.html', (req, res) => {
 
 app.post('/auth/login', async(req, res) => {
 	if(!req.body.email || !req.body.password) {
-		res.json({result: 0, err: "Not enough info"})
+		res.json({result: 0, err: "Not enough info" + req.body.email + ' ' + req.body.password})
 	}else{
 		var userCurrent = await userDB.findOne({
 			email: req.body.email,

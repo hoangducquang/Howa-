@@ -588,6 +588,8 @@ $(document).ready(() => {
         }
     });
 
+    $()
+
 });
 
 async function connectMM() {
