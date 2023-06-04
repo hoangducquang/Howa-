@@ -28,7 +28,25 @@
                 <br>
               </div>
             </div>
-            <div id="detail-profile" class="detail-profile not-delayed">
+
+          </div>
+          <div id="detail-profile" class="detail-profile not-delayed">
+            <label for="name"><i class="fa fa-user"></i>&ensp;Full Name</label>
+            <input class="name" type="text" id="name" name="name" value="<%= user.name %>" style="background-color: white;">
+            <label for="email"><i class="fa fa-envelope"></i>&ensp;Email</label>
+            <input class="email" type="text" id="email" name="email" value="<%= user.email %>" readonly>
+            <label for="dob"><i class="fa fa-birthday-cake"></i>&ensp;Date of birth</label>
+            <input type="text" id="dob" name="dob" value="<%= user.dob %>" readonly>
+            <label for="adr"><i class="fa fa-address-card-o"></i>&ensp;Address</label>
+            <input class="address" type="text" id="address" name="address" value="<%= user.address %>" style="background-color: white;">
+            <label for="phone"><i class="fa fa-phone" pattern="(0[3|5|7|8|9])+([0-9]{8})\b"
+              title="Please enter a valid phone number!"></i>&ensp;Phone</label>
+            <input class="phone" type="text" id="phone" name="phone" value="<%= user.phone %>" style="background-color: white;">
+            <div class="group-button w3-center" style="margin: 5% 0;">
+              <button class="btn btn-save" type="button">Save</button>
+              <a href="/account/profile/<%= user._id %>">
+                <button class="btn btn-cancel" type="button" style="margin-left: 5%;">Cancel</button></a>
+
             </div>
             <script>
               let input = document.querySelector(".name");
