@@ -60,6 +60,7 @@ module.exports = (app) => {
                 courses_id: req.body.courses_id,
                 create_at: req.body.create_at,
                 users_id: req.body.users_id,
+                cancel: false
             })
         }
         newOrders.save((err) => {

@@ -21,6 +21,10 @@ var orders = new mongoose.Schema({
     users_id:{
         type: String,
         required: true
+    },
+    canceled:{
+        type: Boolean,
+        required: true
     }
 });
 

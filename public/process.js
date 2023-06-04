@@ -459,6 +459,7 @@ $(document).ready(() => {
                 courses_id: idSubjectCurrent,
                 create_at: Date.now(),
                 users_id: idStudentCurrent,
+                cancel: false
             }, async (data) => {
                 if(data.result == 1){
                     console.log("Success")
