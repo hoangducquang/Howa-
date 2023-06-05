@@ -11,90 +11,34 @@
   <link rel="stylesheet" href="/styles/style.css">
   <link rel="stylesheet" href="/styles/edit-profile.css">
   <link rel="icon" href="/images/logo-hez.png" type="image/x-icon">
+  <script src="/scripts/edit-profile.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <title>Edit profile | HOWA</title>
 </head>
-<header class="header" id="top">
-  <div class="w3-top">
-    <div class="w3-bar w3-black w3-card header">
-      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
-        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-      <a href="/index.html" class="w3-bar-item w3-button w3-padding-large "><b>HOWA</b></a>
-      <span class="w3-right">
-        <a href="/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
-        <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Courses</a>
-        <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hide-small">About</a>
-        <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
-        <a href="/auth/login.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Login</a>
-        <div class="w3-dropdown-hover w3-right w3-hide-small" style="background-color: white; color: black;">
-          <button class="w3-button w3-black w3-padding-large">Account</button>
-          <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
-            <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
-            <a href="/account/wallet.html" class="w3-bar-item w3-button">My wallet</a>
-            <a href="/account/mycourse.html" class="w3-bar-item w3-button">My courses</a>
-            <a href="/account/edit-password.html" class="w3-bar-item w3-button">Edit password</a>
-            <a href="#" class="w3-bar-item w3-button">Log out</a>
-          </div>
-        </div>
-      </span>
-    </div>
-  </div>
+<%- include("../partials/header") %>
 
-  <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-    <a href="/index.html" class="w3-bar-item w3-button w3-padding-large" style="background-color: white; color: black;"
-      onclick="myFunction()">Home</a>
-    <a href="/courses/index.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Couses</a>
-    <a href="#about" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">About</a>
-    <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Contact</a>
-    <a href="/auth/login.html" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Login</a>
-    <div class="w3-dropdown-hover w3-right" style="background-color: white; color: black;">
-      <button class="w3-button w3-black w3-padding-large">My Account</button>
-      <div class="w3-dropdown-content w3-bar-block w3-border">
-        <a href="/account/profile.html" class="w3-bar-item w3-button">Profile</a>
-        <a href="/account/wallet.html" class="w3-bar-item w3-button">My wallet</a>
-        <a href="/account/mycourse.html" class="w3-bar-item w3-button">My courses</a>
-        <a href="/account/edit-password.html" class="w3-bar-item w3-button">Edit password</a>
-        <a href="#" class="w3-bar-item w3-button">Log out</a>
-      </div>
-    </div>
-  </div>
-</header>
+  <body>
+    <section style="margin-top: 100px;">
+      <div class="card" style="height: auto; display: block; margin: auto; margin-top: 30px; width: 1200px;">
+        <div id="main" style="margin: auto;">
+          <div id="pitch">
+            <div id="img-profile" style="float:left; margin: 5% 0;">
+              <div>
+                <img src="/images/IMG_8440.jpg" class="center" style="border: 5px solid #6be04e;" salt="Profile image">
+                <br>
+              </div>
+            </div>
 
-<body>
-  <section style="margin-top: 100px;">
-    <div class="card" style="height: auto; display: block; margin: auto; margin-top: 30px; width: 1200px;">
-      <div id="main" style="margin: auto;">
-        <div id="pitch">
-          <div id="img-profile" style="float:left; margin: 5% 0;">
-            <div>
-              <img src="/images/IMG_8440.jpg" class="center" style="border: 5px solid #6be04e;" salt="Profile image">
-              <br>
-            </div>
           </div>
-          <div id="detail-profile" class="detail-profile not-delayed">
-            <label for="fname"><i class="fa fa-user"></i>&ensp;Full Name</label>
-            <input class="fname" type="text" id="fname" name="firstname" value="<%= user.name %>" style="background-color: white;">
-            <label for="email"><i class="fa fa-envelope"></i>&ensp;Email</label>
-            <input class="email" type="text" id="email" name="email" value="<%= user.email %>" readonly>
-            <label for="dob"><i class="fa fa-birthday-cake"></i>&ensp;Date of birth</label>
-            <input type="text" id="dob" name="dob" value="<%= user.dob %>" readonly>
-            <label for="adr"><i class="fa fa-address-card-o"></i>&ensp;Address</label>
-            <input class="address" type="text" id="adr" name="address" value="<%= user.address %>" style="background-color: white;">
-            <label for="phone"><i class="fa fa-phone" pattern="(0[3|5|7|8|9])+([0-9]{8})\b"
-              title="Please enter a valid phone number!"></i>&ensp;Phone</label>
-            <input class="phone" type="text" id="phone" name="phone" value="<%= user.phone %>" style="background-color: white;">
-            <div class="group-button w3-center" style="margin: 5% 0;">
-              <button class="btn btn-save" type="button">Save</button>
-              <a href="/account/profile/<%= user._id %>">
-                <button class="btn btn-cancel" type="button" style="margin-left: 5%;">Cancel</button></a>
-            </div>
+          <div id="detail-profile" class="detail-profile not-delayed"></div></div>
             <script>
-              let input = document.querySelector(".fname");
+              let input = document.querySelector(".name");
               let button = document.querySelector(".btn-save");
               button.disabled = true;
               input.addEventListener("change", stateHandle);
               console.log(input);
               function stateHandle() {
-                  if(document.querySelector(".fname").value === "Dinh Quoc Khiem") {
+                  if(document.querySelector(".name").value === "Dinh Quoc Khiem") {
                       button.disabled = true;
                   } else {
                       button.disabled = false;
@@ -104,31 +48,31 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <div class="w3-center contact" id="contact" style="color: white;">
-    <div class=" w3-left-align w3-margin-top contact-info ">
-      <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
-      <h4 style="font-weight: 600;">Your styles at low cost
-      </h4>
-      <p>We care about our customers<br>you can contact us for any feedback</p>
-      <h4 style="font-weight: 600;">Follow Us </h4>
+      </div>
+    </section>
+    <div class="w3-center contact" id="contact" style="color: white;">
+      <div class=" w3-left-align w3-margin-top contact-info ">
+        <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
+        <h4 style="font-weight: 600;">Your styles at low cost
+        </h4>
+        <p>We care about our customers<br>you can contact us for any feedback</p>
+        <h4 style="font-weight: 600;">Follow Us </h4>
 
-      <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
-      <i class="fa fa-instagram w3-hover-opacity icons"></i>
-      <i class="fa fa-snapchat w3-hover-opacity icons"></i>
-      <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
-      <i class="fa fa-twitter w3-hover-opacity icons"></i>
-      <i class="fa fa-linkedin w3-hover-opacity icons"></i>
-    </div>
-    <div class="w3-left-align w3-margin-top contact-info">
-      <h3 style="font-weight: 600;">OPENING HOURS</h3>
-      <p>Mon - Sat 7am - 9pm:</p>
-      <p>Opening on Morning | Off at afternoon</p>
-      <p>Delivery only on opening hours</p>
-    </div>
+        <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
+        <i class="fa fa-instagram w3-hover-opacity icons"></i>
+        <i class="fa fa-snapchat w3-hover-opacity icons"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
+        <i class="fa fa-twitter w3-hover-opacity icons"></i>
+        <i class="fa fa-linkedin w3-hover-opacity icons"></i>
+      </div>
+      <div class="w3-left-align w3-margin-top contact-info">
+        <h3 style="font-weight: 600;">OPENING HOURS</h3>
+        <p>Mon - Sat 7am - 9pm:</p>
+        <p>Opening on Morning | Off at afternoon</p>
+        <p>Delivery only on opening hours</p>
+      </div>
 
-  </div>
-</body>
+    </div>
+  </body>
 
 </html>

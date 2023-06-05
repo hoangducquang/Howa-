@@ -56,21 +56,48 @@ module.exports = (app) => {
             res.json({result:0, err: "Not enough information"});
         }else{
             console.log("222")
-            var newOrders = new ordersDB({
-                courses_id: req.body.courses_id,
-                create_at: req.body.create_at,
-                users_id: req.body.users_id,
-            })
+            ordersDB.findOne({ courses_id: req.body.courses_id, users_id: req.body.users_id }, (err, result) => {
+                if (err) {
+                  console.error(err);
+                  return res.status(500).json({ result: 0, error: "Đã xảy ra lỗi" });
+                }
+            
+                if (result) {
+                  if(result.canceled == true){
+                    result.canceled = false
+                    result.save().then(updatedOrder => {
+                      // Thực hiện các hành động khác sau khi lưu thành công
+                      console.log('Đã đăng kí lại đơn hàng');
+                      console.log(updatedOrder);
+                    })
+                    .catch(error => {
+                      // Xử lý lỗi nếu có
+                      console.error('Lỗi khi cập nhật trạng thái đơn hàng:', error);
+                    });
+                  }
+                  return res.json({ result: 1, error: "Success" });
+                } else {
+                    var newOrders = new ordersDB({
+                        courses_id: req.body.courses_id,
+                        create_at: req.body.create_at,
+                        users_id: req.body.users_id,
+                        canceled: false
+                    })
+                    newOrders.save((err) => {
+                        if(err){
+                            console.log(err)
+                            res.json({result: 0, err: "MongooseDB save error! " + err}); 
+                        }else{
+                            console.log("444")
+                            res.json({result: 1, err: newOrders});
+                        }
+                    })
+                  return res.json({ result: -1, error: "Not exist" });
+                }
+              });
+            
         }
-        newOrders.save((err) => {
-            if(err){
-                console.log(err)
-                res.json({result: 0, err: "MongooseDB save error! " + err}); 
-            }else{
-                console.log("444")
-                res.json({result: 1, err: newOrders});
-            }
-        })
+        
     })
     
     

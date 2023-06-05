@@ -8,7 +8,6 @@ html {
 }
 
 .hero-section {
-    margin-top: 46px !important;
     background-image: url("/images/blockchain.jpg");
     background-repeat: no-repeat;
     box-sizing: border-box;
@@ -23,7 +22,6 @@ html {
 .hero-section-into-text {
     padding: 40px;
     width: 90%;
-    ;
     margin-bottom: 30px;
     border: 2px solid white !important;
     border-radius: 30px !important;
@@ -295,7 +293,6 @@ html {
     }
 
     .hero-section {
-        margin-top: 50px;
         background-image: url("https://spaces.w3schools.com/images/L1jYYtjgIic_780_500.jpg");
         background-repeat: no-repeat;
     }

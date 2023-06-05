@@ -441,15 +441,26 @@ $(document).ready(() => {
             console.log(err);
         } else {
             console.log(returnEvent);
-            let cookieIDSubject = document.cookie
-                .split(';')
-                .map(cookie => cookie.trim())
-                .find(cookie => cookie.startsWith('cookieIdSubject='))
-                ?.split('=')[1];
-            window.location.href = "/courses/detail/" + cookieIDSubject
+            window.location.href = "/courses/index.html"
         }
         // returnEvent.returnValues.address_SmartContract
     });
+    
+    contractInfura.events.eventStudentCancelCourse({
+        filter: {},
+        fromBlock: "latest"
+    }, (err, returnEvent) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(returnEvent);
+            document.getElementById('btnBuyNow').style.display = 'block'
+            document.getElementById('btnCancelCourse').style.display = 'none'
+            // window.location.href = "/courses/index.html"
+        }
+        // returnEvent.returnValues.address_SmartContract
+    });
+
     contractInfura.events.eventStudentRegisterCourse({
         filter: {},
         fromBlock: "latest"
@@ -457,15 +468,14 @@ $(document).ready(() => {
         if (err) {
             console.log(err);
         } else {
+            document.getElementById('btnBuyNow').style.display = 'none'
+            document.getElementById('btnCancelCourse').style.display = 'block'
+            
             let idStudentCurrent = sessionStorage.getItem('ssIdUser')
-            let cookieIDSubject = document.cookie
-                .split(';')
-                .map(cookie => cookie.trim())
-                .find(cookie => cookie.startsWith('cookieIdSubject='))
-                ?.split('=')[1];
+            let idSubjectCurrent = sessionStorage.getItem('ssIdCourse')
             console.log(returnEvent);
             $.post("/account/order", {
-                courses_id: cookieIDSubject,
+                courses_id: idSubjectCurrent,
                 create_at: Date.now(),
                 users_id: idStudentCurrent,
             }, async (data) => {
@@ -473,7 +483,6 @@ $(document).ready(() => {
                     console.log("Success")
                 }
                 else{
-                    console.log(cookieIDSubject, '   ', idStudentCurrent)
                     console.log("Fail")
                 }
             });
@@ -500,8 +509,6 @@ $(document).ready(() => {
     
     // Var account
     var currentAccount = "";
-    var price = 0;
-    var timeRegister = 0, timeCourse = 0;
     
     // Check metamask install
     checkMM();
@@ -510,6 +517,7 @@ $(document).ready(() => {
         connectMM().then((data) => {
             currentAccount = data[0];
             console.log(currentAccount);
+            sessionStorage.setItem('ssCurrentAccount', currentAccount)
             document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4, 38), "***") + "!";
             document.getElementById("btnConnectMM").disabled = true;
         }).catch((err) => {
@@ -520,7 +528,8 @@ $(document).ready(() => {
     
     
     $("#btn-create").click(() => {
-        if (currentAccount.length == 0) {
+        const currentAccount = sessionStorage.getItem('ssCurrentAccount')
+        if (currentAccount == null) {
             alert("Please login metamask!");
         }
         else {
@@ -541,14 +550,9 @@ $(document).ready(() => {
                 image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
                 users_id: "6437b0c684ab3117410be702",
             }, async (data) => {
-                console.log("Here")
                 if (data.result == 1) {
-                    console.log("Here 1")
                     let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000
                     let endTimeCourse = new Date(data.err.end_date).getTime() / 1000
-                    
-                    document.cookie = "cookieIdSubject=" + data.err._id + ";path=/"
-                    document.cookie = "cookiePrice=" + data.err.price + ";path=/"
                     
                     // Call smart contract create course 
                     await contractMM.methods.createCourse(data.err._id, data.err.num_days, endTimeRegister, endTimeCourse, data.err.price).send({
@@ -563,48 +567,73 @@ $(document).ready(() => {
         }
     });
 
-    $("#btnGetListStudent").click(() => {
-        if (currentAccount.length == 0) {
+    // $("#btnGetListStudent").click(() => {
+    //     if (currentAccount.length == 0) {
+    //         alert("Please login metamask!");
+    //     }
+    //     else {
+    //         if (_idSubjectCurrent != '') {
+    //             contractMM.methods.getListStudent(_idSubjectCurrent).send({
+    //                 from: currentAccount,
+    //             })
+    //         }
+    //     }
+    // });
+    $('#btnBuyNow').click(async() => {
+        const currentAccount = sessionStorage.getItem('ssCurrentAccount')
+        var idStudentCurrent = sessionStorage.getItem('ssIdUser')
+        var idSubjectCurrent = sessionStorage.getItem('ssIdCourse')
+
+        if (currentAccount == null) {
             alert("Please login metamask!");
+        } else if(idStudentCurrent == null){
+            alert("Please login account!");
         }
         else {
-            if (_idSubjectCurrent != '') {
-                contractMM.methods.getListStudent(_idSubjectCurrent).send({
+            // Cần lầy giá trên db
+            var priceCurrent = sessionStorage.getItem('ssPriceCourse')
+            console.log(currentAccount)
+            console.log(idStudentCurrent)
+            console.log(idSubjectCurrent)
+            
+            if (idSubjectCurrent != '' && idStudentCurrent != '') {
+                await contractMM.methods.studentRegisterCourse(idStudentCurrent, idSubjectCurrent).send({
                     from: currentAccount,
-                })
-            }
-        }
-    });
-    $('#btnBuyNow').click(async() => {
-
-        if (currentAccount.length == 0) {
-            alert("Please login metamask!");
-        } else {
-            let idStudentCurrent = sessionStorage.getItem("ssIdUser")
-
-            // Get cookie
-            let cookieIDSubject = document.cookie
-                .split(';')
-                .map(cookie => cookie.trim())
-                .find(cookie => cookie.startsWith('cookieIdSubject='))
-                ?.split('=')[1];
-            let cookieprice = document.cookie
-                .split(';')
-                .map(cookie => cookie.trim())
-                .find(cookie => cookie.startsWith('cookiePrice='))
-                ?.split('=')[1];
-
-            if (cookieIDSubject != '' && idStudentCurrent != '') {
-                console.log(cookieIDSubject)
-                await contractMM.methods.studentRegisterCourse(idStudentCurrent, cookieIDSubject).send({
-                    from: currentAccount,
-                    value: cookieprice,
+                    value: priceCurrent,
                 }).then(() => {
                     
                 });
             }
         }
     });
+
+    $('#btnCancelCourse').click(async () => {
+        const currentAccount = sessionStorage.getItem('ssCurrentAccount')
+        const ssIdCourse = sessionStorage.getItem('ssIdCourse');
+        const ssIdUser = sessionStorage.getItem('ssIdUser');
+        const ssPriceCourse = sessionStorage.getItem('ssPriceCourse')
+
+        if (currentAccount == null) {
+            alert("Please login metamask!");
+        }else {
+            try {
+              const response = await fetch(`/check-canceled?courses_id=${ssIdCourse}&users_id=${ssIdUser}`);
+              const data = await response.json();
+          
+              if (data.result === 1) {
+                await contractMM.methods.studentCancelRegisterCourse(ssIdCourse).send({
+                  from: currentAccount,
+                }).then(() => {
+                    
+                });
+          
+                // Xử lý sau khi hủy khóa học thành công
+              }
+            } catch (err) {
+              console.log(err);
+            }
+        }
+      });
 
 });
 
