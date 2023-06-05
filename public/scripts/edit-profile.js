@@ -1,3 +1,5 @@
+
+
 var ssIdUser = sessionStorage.getItem("ssIdUser");
 console.log(ssIdUser);
 
@@ -39,7 +41,6 @@ function validEdit_profile(event) {
   }
 }
 
-
 fetch("/api/account/edit-profile/" + ssIdUser)
   .then((response) => response.json())
   .then((data) => {
@@ -69,6 +70,16 @@ fetch("/api/account/edit-profile/" + ssIdUser)
     console.error("Lỗi khi gọi API: ", error);
     // Xử lý lỗi tại đây
   });
+
+window.onload = function() {
+        if (ssIdUser != null) {
+          document.getElementById("menuLogin").style.display = "none";
+          document.getElementById("menuAccount").style.display = "block";
+        }else{
+          document.getElementById("menuLogin").style.display = "block";
+          document.getElementById("menuAccount").style.display = "none";
+        }
+};
 
 
 
