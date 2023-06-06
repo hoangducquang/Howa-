@@ -13,6 +13,48 @@
   <title>HOWA - Course Register</title>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script src="/scripts/home.js"></script>
+  <script>
+    fetch(`/api/courses/index`)
+      .then(response => response.json())
+      .then(data => {
+        // Nhận kết quả từ server
+        const getCourseAll = data.coursesAll
+
+        // Sắp xếp danh sách theo course.start_date giảm dần
+        getCourseAll.sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
+
+        // Fix link image
+        for (let i = 0; i < 8; i++) {
+          const course = getCourseAll[i];
+
+          $("#new-courses").append(`
+            <div class="category-course-card">
+                <a href="/courses/detail/${course._id}" style="text-decoration: none;">
+                    <div class="course-image">
+                        <img src="${course.image}" alt="${course.name}" max-height=300 />
+                      </div>
+                      <div class="course-short-details">
+                            <p class="cate-name">${course.categories_id}</p>
+                            <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">
+                                ${course.name}
+                            </h4>
+                            <p class="w3-small">${course.lectures_id}</p>
+                            <div class="price-course">
+                                <span class="new-price">${course.price.toLocaleString('en-US')} ETH</span>
+                            </div>
+                            <p class="duration">${changeDate(course.start_date)} - ${changeDate(course.end_date)}</p>
+                    </div>
+                </a>
+            </div>
+        `)
+        }
+
+      })
+      .catch(error => {
+        // Xử lý lỗi nếu có
+        console.error('Lỗi:', error);
+      });
+  </script>
 </head>
 <%- include("partials/header") %>
 <body>  
@@ -22,11 +64,9 @@
         <div class="hero-section-into-text w3-margin-top">
           <h1 class="w3-text-white">HOWA</h1>
           <p class="w3-right w3-text-white w3-small w3-hide-small hero-qoute ">
-            Công nghệ Blockchain là một cơ chế cơ sở dữ liệu tiên tiến cho phép chia sẻ thông tin minh bạch trong một
-            mạng lưới kinh doanh.
-            <br>Cơ sở dữ liệu chuỗi khối lưu trữ dữ liệu trong các khối được liên kết với nhau trong một chuỗi.
-            <br>Dữ liệu có sự nhất quán theo trình tự thời gian vì bạn không thể xóa hoặc sửa đổi chuỗi mà không có sự
-            đồng thuận từ mạng lưới.
+            Howa là một trang web đăng ký khoá học trực tuyến tiên tiến, cho phép bạn trải nghiệm học tập linh hoạt và tiện lợi.
+            <br>Với việc tích hợp công nghệ blockchain, Howa cung cấp phương thức thanh toán an toàn và minh bạch thông qua smart contract Ethereum.
+            <br>Hãy khám phá ngay để tận hưởng trải nghiệm học tập mới mẻ trên Howa!
           </p>
           <div class="w3-text-white l " style="margin-top:60px">
             <p>Follow us on Social media</p>
@@ -39,11 +79,10 @@
               <a href="#"><i class="fa fa-linkedin w3-hover-opacity icons"></i></a>
             </div>
           </div>
-          <a href="#new-arrivals" class="">
-            <button class="w3-text-white w3-small w3-round w3-red w3-btn w3-margin-top">New Products
+          <a href="#new-courses-h2" class="">
+            <button class="w3-text-white w3-small w3-round w3-red w3-btn w3-margin-top">New Courses
             </button>
           </a>
-
         </div>
       </div>
     </div>
@@ -52,131 +91,27 @@
   <section>
     <div class="courses" id="courses">
       <div>
-        <div class="w3-container">
-          <h2 class="section-text-header">Featured Courses</h2>
+        <div class="w3-container" id="new-courses-h2">
+          <h2 class="section-text-header">New Courses</h2>
         </div>
       </div>
     </div>
   </section>
-  <div class="new-courses">
-    <a href="/courses/basic-python.html" style="text-decoration: none;">
-      <div class="course-card programming python">
-        <div class="new-arrived-image">
-          <img src="/images/python-prog.jpg" alt="Basic Python" />
-        </div>
-        <div class="w3-margin-top">
-          <h4 style="text-overflow:ellipsis; overflow: hidden;">Basic Python</h4>
-          <p class="w3-small">Nguyen Duy Tan</p>
-          <p class="price">1.000.000 VND</p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-      <div class="course-card ">
-        <div class="new-arrived-image">
-          <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-        </div>
-        <div class="w3-margin-top">
-          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-          <p class="w3-small">Hieu Thu Hai</p>
-          <p class="price">$12.00</p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-      <div class="course-card ">
-        <div class="new-arrived-image">
-          <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-        </div>
-        <div class="w3-margin-top">
-          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-          <p class="w3-small">Hieu Thu Hai</p>
-          <p class="price">$12.00</p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-      <div class="course-card ">
-        <div class="new-arrived-image">
-          <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-        </div>
-        <div class="w3-margin-top">
-          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-          <p class="w3-small">Hieu Thu Hai</p>
-          <p class="price">$12.00</p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-      <div class="course-card ">
-        <div class="new-arrived-image">
-          <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-        </div>
-        <div class="w3-margin-top">
-          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-          <p class="w3-small">Hieu Thu Hai</p>
-          <p class="price">$12.00</p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-      <div class="course-card ">
-        <div class="new-arrived-image">
-          <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-        </div>
-        <div class="w3-margin-top">
-          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-          <p class="w3-small">Hieu Thu Hai</p>
-          <p class="price">$12.00</p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-      <div class="course-card ">
-        <div class="new-arrived-image">
-          <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-        </div>
-        <div class="w3-margin-top">
-          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-          <p class="w3-small">Hieu Thu Hai</p>
-          <p class="price">$12.00</p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-      <div class="course-card ">
-        <div class="new-arrived-image">
-          <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-        </div>
-        <div class="w3-margin-top">
-          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-          <p class="w3-small">Hieu Thu Hai</p>
-          <p class="price">$12.00</p>
-        </div>
-      </div>
-    </a>
-    <a href="https://github.com/" style="text-decoration: none;" target="_blank">
-      <div class="course-card ">
-        <div class="new-arrived-image">
-          <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
-        </div>
-        <div class="w3-margin-top">
-          <h4 style="text-overflow:ellipsis; overflow: hidden;">Python Programming Language Course</h4>
-          <p class="w3-small">Hieu Thu Hai</p>
-          <p class="price">$12.00</p>
-        </div>
-      </div>
-    </a>
-
+  <section class="course .center">
+    <div class="mg-10">
+      <div id="tblistCourse"></div>
+    </div>
+  </section>
+  <div class="new-courses" id="new-courses">
   </div>
   <!-- Customer Feedback-->
-  <div class="w3-light-gray" style="margin-top: 40px; padding: 50px 0px;" id="testimony">
+  <div class="w3-sand" style="margin-top: 40px; padding: 50px 0px;" id="testimony">
     <div class="feedback">
       <div class="w3-container ">
         <h2 class="section-text-header" style="margin-top: 0px !important;">Customer FeedBack</h2>
       </div>
-      <div class="Customer-feedback" style="display: flex;justify-content: space-evenly;flex-wrap: wrap;">
-        <div class="card">
+      <div class="Customer-feedback w3-left-align" style="display: flex;flex-wrap: wrap;">
+        <div class="feedback-card">
           <div class="customer-feedback-header">
             <div class="customer-profile">
               <img src="https://photo-cms-tpo.epicdn.me/w890/Uploaded/2023/aohuooh/2014_07_08/annabelle_VGIK.jpg"
@@ -187,10 +122,10 @@
             </div>
           </div>
           <div>
-            <p class="w3-small">"10 điểmmmmmmmmmmmmmmmmmmmmmmmm!<br>Tối Beo ghé tặng một nụ hôn!"</p>
+            <p class="w3-small">"10 điểmmmmmmmmmmmmmmmmmm!<br>Tối Beo ghé tặng một nụ hôn!"</p>
           </div>
         </div>
-        <div class="card">
+        <div class="feedback-card">
           <div class="customer-feedback-header">
             <div class="customer-profile">
               <img
@@ -199,7 +134,6 @@
             </div>
             <div>
               <p class="name">Á hậu 8 Miss Fabulous<br>Trần Thanh Tâm</p>
-
             </div>
           </div>
           <div>
@@ -207,7 +141,7 @@
               hoả!"</p>
           </div>
         </div>
-        <div class="card">
+        <div class="feedback-card">
           <div class="customer-feedback-header">
             <div class="customer-profile">
               <img src="https://img.docbao.vn/images/uploads/2023/02/07/doi-song/co-dong-2.jpg"
@@ -223,7 +157,7 @@
               cho cô cái!"</p>
           </div>
         </div>
-        <div class="card">
+        <div class="feedback-card">
           <div class="customer-feedback-header">
             <div class="customer-profile">
               <img
@@ -242,30 +176,7 @@
       </div>
     </div>
   </div>
-
-  <br>
-  <div class="w3-center contact" id="contact">
-    <div class=" w3-left-align w3-margin-top contact-info ">
-      <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
-      <h4 style="font-weight: 600;">Your styles at low cost
-      </h4>
-      <p>We care about our customers<br>you can contact us for any feedback</p>
-      <h4 style="font-weight: 600;">Follow Us </h4>
-
-      <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
-      <i class="fa fa-instagram w3-hover-opacity icons"></i>
-      <i class="fa fa-snapchat w3-hover-opacity icons"></i>
-      <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
-      <i class="fa fa-twitter w3-hover-opacity icons"></i>
-      <i class="fa fa-linkedin w3-hover-opacity icons"></i>
-    </div>
-    <div class="w3-left-align w3-margin-top contact-info">
-      <h3 style="font-weight: 600;">OPENING HOURS</h3>
-      <p>Mon - Sat 7am - 9pm:</p>
-      <p>Opening on Morning | Off at afternoon</p>
-      <p>Delivery only on opening hours</p>
-    </div>
-  </div>
+  <%- include("partials/footer") %>
 </body>
 
 </html>

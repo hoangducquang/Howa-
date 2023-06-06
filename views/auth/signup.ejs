@@ -19,17 +19,18 @@
 <%- include("../partials/header") %>
 
 <body>
-    <div class="signup-center">
+    <section style="margin-top: 6%; ">
+        <div class="card" style="height: max-content; width: 33%; margin: auto;">
         <h1>Sign up</h1>
         
         <form method="post" action="/auth/signup">
             <div class="text-field">
-                <input id="email" type="email" required="" name="email">
+                <input id="email" type="email" required="" name="email" placeholder="Please enter unregistered email">
                 <span></span>
                 <label>Email</label>
             </div>
             <div class="text-field">
-                <input type="text" required="" name="name" id="name">
+                <input type="text" required="" name="name" id="name" placeholder="Please enter your fullname">
                 <span></span>
                 <label>Fullname</label>
             </div>
@@ -40,12 +41,12 @@
             </div>
             <div class="text-field">
                 <input type="text" required="" name="phone" id="phone" pattern="(0[3|5|7|8|9])+([0-9]{8})\b"
-                title="Please enter a valid phone number!">
+                title="Please enter a valid phone number!" placeholder="Please enter your unregistered phone number">
                 <span></span>   
                 <label>Phone number</label>
             </div>
             <div class="text-field">
-                <input id="password" type="password" required="" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                <input id="password" type="password" required="" name="password" placeholder="Please enter your password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
                 title="
                 • At least 8 characters - the more characters, the better
                 • A mixture of both uppercase and lowercase letters
@@ -60,6 +61,8 @@
             <div class="login-url">Already have an account? <a href=login.html>Login</a></div>
         </form>
     </div>
+    </section>
+    <%- include("../partials/footer") %>
 </body>
 
 </html>

@@ -242,6 +242,14 @@ app.get("/header.html", (req, res) => {
   res.render("header");
 });
 
+app.get("/partials/footer", (req, res) => {
+  res.render("partials/footer");
+});
+
+app.get("/footer.html", (req, res) => {
+  res.render("footer");
+});
+
 app.get("/auth", (req, res) => {
   res.render("auth/login");
 });
