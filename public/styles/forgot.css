@@ -10,12 +10,14 @@
 body {
   margin: 0;
   padding: 0px;
-  background: linear-gradient(120deg, #8ab2cd, #c676e9);
+  background: linear-gradient(120deg, #8ab2cd, #c676e9) !important;
   height: 100vh;
   overflow: hidden;
 }
 
 .forgot-center {
+  height: max-content; 
+  margin: auto;
   position: absolute;
   top: 53.5%;
   left: 50%;
@@ -26,19 +28,17 @@ body {
   box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
 }
 
-.forgot-center h1 {
+.card h1 {
   text-align: center;
-  padding: 20px 0;
-  margin-top: 2px;
-  margin-bottom: 20px;
+  padding: 0px 20px 20px 20px;
   border-bottom: 5px solid transparent;
   border-image: linear-gradient(120deg, #8ab2cd, #c676e9);
   border-image-slice: 1;
   width: 100%;
 }
 
-.forgot-center form {
-  padding: 0 40px;
+.card form {
+  padding: 10px 10px;
   box-sizing: border-box;
 }
 
@@ -112,7 +112,7 @@ form .email-field {
 }
 
 .login-url {
-  margin: 30px 0;
+  margin-top: 30px;
   text-align: center;
   font-size: 16px;
   color: #666666;

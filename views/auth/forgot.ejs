@@ -1,48 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/forgot.css">
-    <link rel="icon" href="/images/logo-hez.png" type="image/x-icon">
-    <script>
-        function validForgot() {
-            var em = document.getElementById('email').value;
-            if (em == "john@gmail.com") {
-                window.alert("Email was sent!");
-                window.location = "./auth/signup.html";
-            }
-            else {
-                window.alert("Send email failed! Please try again!");
-                return false;
-            }
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/styles/forgot.css" />
+    <link rel="icon" href="/images/logo-hez.png" type="image/x-icon" />
+    <script src="/scripts/forgot.js">
     </script>
     <title>Forgot password | HOWA - Course Register</title>
-</head>
-<%- include("../partials/header") %>
+  </head>
+  <%- include("../partials/header") %>
 
-<body>
-    <div class="forgot-center">
+  <body>
+    <section style="margin-top: 7%">
+      <div class="card" style="height: max-content; margin: auto">
         <h1>Forgot password</h1>
         <form method="post" onclick="validForgot()">
-            <div class="email-field" style="margin-top: 60px;">
-                <input type="email" required="">
-                <span></span>
-                <label>Email</label>
-            </div>
-            <div class="text-field" style="border-bottom: none; margin-top: 50px;">
-                <button onclick="validForgot()">Submit</button>
-            </div>
-            <div class="login-url">Back to <a href=login.html>Login</a></div>
+          <div class="email-field">
+            <input type="email" required="" placeholder="Please enter your registered email"/>
+            <span></span>
+            <label>Email</label>
+          </div>
+          <div class="text-field" style="border-bottom: none; margin-top: 50px">
+            <button onclick="validForgot()">Submit</button>
+          </div>
+          <div class="login-url">Back to <a href="login.html">Login</a></div>
         </form>
-    </div>
-</body>
-
+      </div>
+    </section>
+    <%- include("../partials/footer") %>
+  </body>
 </html>

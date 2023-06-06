@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://www.w3schools.com/lib/w3-colors-flat.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="stylesheet" href="/styles/course-category.css" />
+    <link rel="icon" href="/images/logo-hez.png" type="image/x-icon" />
+    <title>Course Categories | HOWA</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="/scripts/mycourse.js"></script>
+    <script>
+      fetch(`/api/courses/index`)
+        .then((response) => response.json())
+        .then((data) => {
+          // Nhận kết quả từ server
+          const getCourseAll = data.coursesAll;
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/styles/style.css">
-  <link rel="stylesheet" href="/styles/course-category.css">
-  <link rel="icon" href="/images/logo-hez.png" type="image/x-icon">
-  <title>Course Categories | HOWA</title>
-  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-  <script src="/scripts/mycourse.js"></script>
-  <script>
-    fetch(`/api/courses/index`)
-      .then(response => response.json())
-      .then(data => {
-        // Nhận kết quả từ server
-        const getCourseAll = data.coursesAll
+          // Sắp xếp danh sách theo course.start_date giảm dần
+          getCourseAll.sort(
+            (a, b) => new Date(b.start_date) - new Date(a.start_date)
+          );
 
-        // Xử lý dữ liệu nhận được
-        // console.log('Course:', getCourseAll);
+          // Fix link image
+          for (let i = 0; i < getCourseAll.length; i++) {
+            const course = getCourseAll[i];
 
-        // Fix link image
-        for (let i = 0; i < getCourseAll.length; i++) {
-          const course = getCourseAll[i];
-
-          $("#tblistCourse").append(`
+            $("#tblistCourse").append(`
             <div class="category-course-card">
                 <a href="/courses/detail/${course._id}" style="text-decoration: none;">
                     <div class="course-image">
-                        <img src="/images/python-prog.jpg" alt="Python Programming Language Course" />
+                        <img src="${course.image}" alt="${course.name}" />
                         <div class="course-short-details">
                             <p class="cate-name">${course.categories_id}</p>
-                            <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">
-                                ${course.name}
-                            </h4>
+                            <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">${course.name}</h4>
                             <p class="w3-small">${course.lectures_id}</p>
                             <div class="price-course">
-                                <span class="new-price">${course.price.toLocaleString('en-US')} ETH</span>
+                                <span class="new-price">${course.price.toLocaleString(
+                                  "en-US"
+                                )} ETH</span>
                             </div>
-                            <p class="duration">${changeDate(course.start_date)} - ${changeDate(course.end_date)}</p>
+                            <p class="duration">${changeDate(
+                              course.start_date
+                            )} - ${changeDate(course.end_date)}</p>
                         </div>
                     </div>
                 </a>
             </div>
-        `)
-        }
-
-      })
-      .catch(error => {
-        // Xử lý lỗi nếu có
-        console.error('Lỗi:', error);
-      });
-  </script>
-</head>
-<%- include("../partials/header") %>
+        `);
+          }
+        })
+        .catch((error) => {
+          // Xử lý lỗi nếu có
+          console.error("Lỗi:", error);
+        });
+    </script>
+  </head>
+  <%- include("../partials/header") %>
   <body>
-    <div style="margin-top: 70px;">
+    <div style="margin-top: 70px">
       <style>
         .button {
           background-color: #704caf;
@@ -90,56 +98,43 @@
       </style>
       <div class="add-course">
         <button class="button btn-add-course" type="button">
-          <a href="/courses/create.html" style="text-decoration: none;">Create a course</a>
+          <a href="/courses/create.html" style="text-decoration: none"
+            >Create a course</a
+          >
         </button>
       </div>
       <div id="head-categories">
         <div class="container cols">
           <a href="#" class="cat current"><span>All</span></a>
-          <a href="#languages" class="cat "><span>Foreign Language</span></a>
-          <a href="#programming" class="cat "><span>Programming</span></a>
-          <a href="#design" class="cat "><span>Design</span></a>
-          <a href="#music" class="cat "><span>Music</span></a>
-          <a href="#video-editting" class="cat "><span>Video editing</span></a>
-          <a href="#photography" class="cat "><span>Photography</span></a>
-          <a href="#others" class="cat "><span>Others</span></a>
+          <a href="#languages" class="cat"><span>Foreign Language</span></a>
+          <a href="#programming" class="cat"><span>Programming</span></a>
+          <a href="#design" class="cat"><span>Design</span></a>
+          <a href="#music" class="cat"><span>Music</span></a>
+          <a href="#video-editting" class="cat"><span>Video editing</span></a>
+          <a href="#photography" class="cat"><span>Photography</span></a>
+          <a href="#others" class="cat"><span>Others</span></a>
         </div>
       </div>
     </div>
-    <main class="category" style="min-height: max-content;">
+    <main class="category" style="min-height: max-content">
       <div class="wrapper">
         <section class="course .center">
           <div class="mg-10">
-            <div id="tblistCourse">
-            </div>
+            <div id="tblistCourse"></div>
           </div>
+        </section>
       </div>
-      </section>
-
+      <div class="pagination center">
+        <a href="#">&laquo;</a>
+        <a class="active"href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">6</a>
+        <a href="#">&raquo;</a>
       </div>
     </main>
-    <div class="w3-center contact" id="contact" style="color: white;">
-      <div class=" w3-left-align w3-margin-top contact-info ">
-        <h3 style="font-weight: 800;" class="contact-head">GET IN TOUCH</h3>
-        <h4 style="font-weight: 600;">Your styles at low cost
-        </h4>
-        <p>We care about our customers<br>you can contact us for any feedback</p>
-        <h4 style="font-weight: 600;">Follow Us </h4>
-
-        <i class="fa fa-facebook-official w3-hover-opacity icons"></i>
-        <i class="fa fa-instagram w3-hover-opacity icons"></i>
-        <i class="fa fa-snapchat w3-hover-opacity icons"></i>
-        <i class="fa fa-pinterest-p w3-hover-opacity icons"></i>
-        <i class="fa fa-twitter w3-hover-opacity icons"></i>
-        <i class="fa fa-linkedin w3-hover-opacity icons"></i>
-      </div>
-      <div class="w3-left-align w3-margin-top contact-info">
-        <h3 style="font-weight: 600;">OPENING HOURS</h3>
-        <p>Mon - Sat 7am - 9pm:</p>
-        <p>Opening on Morning | Off at afternoon</p>
-        <p>Delivery only on opening hours</p>
-      </div>
-    </div>
+    <%- include("../partials/footer") %>
   </body>
-
 </html>
