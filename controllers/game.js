@@ -20,7 +20,7 @@ module.exports = (app) => {
 
 
     app.post("/courses/create", (req, res) => {
-        if(!req.body.name || !req.body.lectures_id || !req.body.end_regist || !req.body.end_date  || !req.body.price){
+        if(!req.body.name || !req.body.lectures_id || !req.body.end_regist || !req.body.end_date  || !req.body.price || !req.body.image){
             res.json({result:0, err: "Not enough information"});
         }else{
             var newCourse = new courseDB({
@@ -37,7 +37,7 @@ module.exports = (app) => {
                 create_at: Date.now(),
                 delete_at: Date.now(),
                 update_at: Date.now(),
-                image: "https://rightclickit.com.au/wp-content/uploads/2018/09/Image-Coming-Soon-ECC.png",
+                image: req.body.image,
                 users_id: "6437b0c684ab3117410be702",
             })
         }

@@ -92,13 +92,45 @@
                             value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
                         <span></span>
                     </div>
-                    <div class="text-field select">
+                    <div class="text-field-upload">
                         <label>Select course's picture:</label>
-                        <input id="create-select-picture" type="file" required="none" name="img"
-                            style="padding-left: 200px; padding-top: 10px;" accept="image/*" maxlength="2097152">
-                        <span></span>
-                    </div>
-                    <div class="text-field" style="border-bottom: none;">
+                        <input id="create-select-picture" value="" type="file" required name="image" accept="image/*" maxlength="2097152">
+                      </div>
+                      <script>
+                        const fileInput = document.getElementById('create-select-picture');
+                        
+                        fileInput.addEventListener('change', function() {
+                          const file = fileInput.files[0];
+                          console.log("File upload: "+file.name);
+                          // Kiểm tra nếu có file được chọn
+                          if (file) {
+                            console.log("Upload request");
+                            const formData = new FormData();
+                            formData.append('image', file);
+                      
+                            // Gửi form dữ liệu bằng Fetch API
+                            fetch('/upload', {
+                              method: 'POST',
+                              body: formData
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                              // Xử lý kết quả trả về từ API
+                              const publicUrl = data.publicUrl;
+                              console.log('Public URL:', publicUrl);
+                              // Thay đổi giá trị của input
+                              fileInput.setAttribute('value', publicUrl);
+                            })
+                            .catch(error => {
+                              console.error('Error:', error);
+                              // Xử lý lỗi (nếu có)
+                            });
+                          }else{
+                            console.log("No upload request");
+                          }
+                        });
+                      </script>
+                    <div class="text-field w3-center" style="border-bottom: none;">
                         <button id="btn-create" type="button">Create</button>
                         <div class="loader w3-center">
                             <div class="loading w3-center"></div>

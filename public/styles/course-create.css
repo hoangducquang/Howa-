@@ -51,6 +51,12 @@ form .text-field {
   margin: 30px 0;
 }
 
+form .text-field-upload {
+  position: relative;
+  border-bottom: 2px solid #adadad;
+  margin: 30px 0;
+}
+
 .btn-connect-wallet {
   padding: 0px 70px;
   position: relative;
@@ -106,7 +112,28 @@ form .text-field .date {
   outline: none;
 }
 
+.text-field-upload input {
+  width: 80%;
+  padding-left: 200px;
+  height: 40px;
+  font-size: 14px;
+  border: none;
+  background: none;
+  outline: none;
+}
+
 .text-field label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #0e0276;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none;
+  transition: .5s;
+}
+
+.text-field-upload label {
   position: absolute;
   top: 50%;
   left: 5px;
@@ -128,8 +155,25 @@ form .text-field .date {
   transition: .5s;
 }
 
+.text-field-upload span::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #2691d9;
+  transition: .5s;
+}
+
 .text-field input:focus~label,
 .text-field input:valid~label {
+  top: -5px;
+  color: #2691d9;
+}
+
+.text-field-upload input:focus~label,
+.text-field-upload input:valid~label {
   top: -5px;
   color: #2691d9;
 }
@@ -144,8 +188,13 @@ text-field[date] input:valid~label {
   width: 100%;
 }
 
-.text-field button {
+.text-field-upload input:focus~span::before,
+.text-field-upload input:valid~span::before {
   width: 100%;
+}
+
+.text-field button {
+  width: 60%;
   height: 50px;
   border: 1px solid;
   background: #2691d9;
@@ -155,10 +204,32 @@ text-field[date] input:valid~label {
   font-weight: 700;
   cursor: pointer;
   outline: none;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.text-field-upload button {
+  width: 20%;
+  height: 40px;
+  border: 1px solid;
+  background: #bf84d1;
+  border-radius: 25px;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  align-items: center;
+  position: absolute;
 }
 
 .text-field button:hover {
   background: #c676e9;
+  transition: .5s;
+}
+
+.text-field-upload button:hover {
+  background: #924faf;
   transition: .5s;
 }
 
