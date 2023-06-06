@@ -539,6 +539,8 @@ app.post(
         return res.status(400).send("File size exceeds the limit < 2MB");
       } else if (err) {
         // Xử lý lỗi multer khác
+        console.log("0: "+err);
+        console.log("0_1: "+req.file);
         return res.status(500).send("Upload failed.");
       }
 
@@ -564,7 +566,7 @@ app.post(
     const blobStream = blob.createWriteStream();
 
     blobStream.on("error", (err) => {
-      console.error(err);
+      console.error("1: "+err);
       res.status(500).send("Upload failed.");
     });
 
@@ -574,12 +576,10 @@ app.post(
         .makePublic()
         .then(() => {
           const publicUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
-          res
-            .status(200)
-            .send(`Image uploaded successfully. Public URL: ${publicUrl}`);
+          return res.status(200).json({ publicUrl: publicUrl });
         })
         .catch((err) => {
-          console.error(err);
+          console.error("2: "+err);
           res.status(500).send("Error retrieving public URL.");
         });
     });
