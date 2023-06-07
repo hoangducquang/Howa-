@@ -8,10 +8,12 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" rel="stylesheet" />
   <link rel="stylesheet" href="/styles/style.css">
   <link rel="stylesheet" href="/styles/edit-profile.css">
   <link rel="icon" href="/images/logo-hez.png" type="image/x-icon">
   <script src="/scripts/edit-profile.js"></script>
+  <script src="/scripts/profile.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <title>Edit profile | HOWA</title>
 </head>
@@ -21,16 +23,6 @@
     <section style="margin-top: 100px;">
       <div class="card" style="height: auto; display: block; margin: auto; margin-top: 30px; width: 1200px;">
         <div id="main" style="margin: auto;">
-          <div id="pitch">
-            <div id="img-profile" style="float:left; margin: 5% 0;">
-              <div>
-                <img src="/images/IMG_8440.jpg" class="center" style="border: 5px solid #6be04e;" salt="Profile image">
-                <br>
-              </div>
-            </div>
-
-          </div>
-          <div id="detail-profile" class="detail-profile not-delayed"></div></div>
             <script>
               let input = document.querySelector(".name");
               let button = document.querySelector(".btn-save");
@@ -45,9 +37,7 @@
                   }
               }
               </script>
-          </div>
         </div>
-      </div>
       </div>
     </section>
     <%- include("../partials/footer") %>

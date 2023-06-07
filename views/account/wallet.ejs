@@ -31,16 +31,16 @@
         <div class="card" style="height: auto; display: block; margin: auto; margin-top: 30px; width: 1200px;">
             <div id="main" style="margin: auto;">
                 <div id="pitch">
-                    <h1 style="margin-bottom: 20px;">My wallet</h1>
+                    <h1 class="title">My wallet</h1>
                     <div id="detail-wallet" class="not-delayed">
-                        <div class="list-card" style="border-top: 1px solid #d1cccc;" id="wallet">
+                        <div class="list-card" id="list-wallet">
                             <div class="creditcard-card">
                                 <div class="creditcard-card__logo"><img
-                                        src="https://cdn.visa.com/v2/assets/images/logos/visa/blue/logo.png">
+                                        src="https://firebasestorage.googleapis.com/v0/b/blockchain-project-5d4d4.appspot.com/o/ethereum-icon.png?alt=media&token=5918287f-d832-4042-a555-5babc19aa288">
                                 </div>
-                                <div>
-                                    <div class="creditcard-card__type">VISA</div>
-                                </div>
+                                    <div class="creditcard-card__type">
+                                        <label id="creditcard-card__type"></label>
+                                    </div>
                                 <div class="bacc-default-badge">Default</div>
                                 <div class="creditcard-card__spacer"></div>
                                 <div class="GBIZS7 " id="addressWallet"> </div>
@@ -50,10 +50,11 @@
                                         aria-disabled="true">Set as default</button></div>
                             </div>
                         </div>
-                        <div class="group-button" style="margin-bottom: 30px;">
+                        <div class="not-connect w3-center" id="not-connect">
+                            <p>Your account is not linked to the MetaMask wallet!</p>
+                        </div>
+                        <div class="group-button w3-center">
                             <button class="btn2-connect-wallet" type="button" id="btnConnectMM">Connect your wallet</button>
-                            <button class="btn2-remove-wallet" type="button" style="margin-left: 20px;">Remove your
-                                wallet</button>
                         </div>
                     </div>
                 </div>

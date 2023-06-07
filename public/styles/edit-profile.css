@@ -32,7 +32,7 @@ body {
 }
 
 .btn-save {
-  width: 200px;
+  width: 40%;
   height: 50px;
   border: 1px solid;
   background: #2691d9;
@@ -50,7 +50,7 @@ body {
 }
 
 .btn-cancel {
-  width: 200px;
+  width: 40%;
   height: 50px;
   border: none;
   background: #ccc;
@@ -81,10 +81,12 @@ label {
   display: block;
 }
 
-.center {
+.img-center {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 20%;
-  border-radius: 50%
+  border-radius: 50%;
+  border: 5px solid #6be04e; 
+  width: 25%
 }

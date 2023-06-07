@@ -17,6 +17,7 @@
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script src="/scripts/web3.js"></script>
   <script src="/scripts/coursedetail.js"></script>
+  <script src="/scripts/profile.js"></script>
   <script src="/process.js"></script>
   <script>
     const urlCurrent = window.location.href;
@@ -97,15 +98,11 @@
                   <%= course.name %>
                 </b></h2>
               <p style="margin-bottom: 5px;">Category:&nbsp;
-                <a href="" style="color: rgb(31, 128, 192)">
-                  <%= course.categories_id %>
+                <a href="/courses/index.html#<%= course.categories_id %>" style="color: rgb(31, 128, 192)">
+                  <%= course.categories_id.charAt(0).toUpperCase() + course.categories_id.slice(1) %>
                 </a>
               </p>
-              <p style="margin-bottom: 5px;">
-                Lecturer:&nbsp;
-                <a href="" style="color: rgb(31, 128, 192)">
-                  <%= course.lectures_id %>
-                </a>
+              <p style="margin-bottom: 5px;">Lecturer:&nbsp;<%= course.lectures_id %></p>
               <p style="margin-bottom: 5px">
                 Duration:&ensp;<%= course.start_date %> - <%= course.end_date %>
               </p>
