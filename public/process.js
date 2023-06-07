@@ -495,7 +495,7 @@ $(document).ready(() => {
         if (err) {
             console.log(err);
         } else {
-            console.log(returnEvent);
+            console.log(returnEvent.returnValues);
         }
     });
     
@@ -634,7 +634,55 @@ $(document).ready(() => {
             }
         }
       });
-
+      
+      $('#btnWithdraw').click(async () => {
+          const currentAccount = sessionStorage.getItem('ssCurrentAccount')
+          const ssIdCourse = sessionStorage.getItem('ssIdCourse');
+          const ssIdUser = sessionStorage.getItem('ssIdUser');
+          const ssPriceCourse = sessionStorage.getItem('ssPriceCourse')
+  
+          if (currentAccount == null) {
+              alert("Please login metamask!");
+          }else {
+              try {
+                const response = await fetch(`/check-canceled?courses_id=${ssIdCourse}&users_id=${ssIdUser}`);
+                const data = await response.json();
+            
+                if (data.result === 1) {
+                    try {
+                        await contractMM.methods.withdrawStudent(ssIdCourse, 3).send({
+                          from: currentAccount,
+                        });
+                        // Xử lý khi gọi thành công
+                      } catch (error) {
+                        if (error.message.includes("revert")) {
+                          // Xử lý khi hợp đồng gọi revert
+                          console.log("Lỗi trong hợp đồng: " + error.message);
+                        } else {
+                          // Xử lý các lỗi khác
+                          console.log("Lỗi: " + error.message);
+                        }
+                      }
+                      
+            
+                  // Xử lý sau khi hủy khóa học thành công
+                }
+              } catch (err) {
+                console.log(err);
+              }
+          }
+        });
+        
+        $('#btnGet').click(async () => {
+            const currentAccount = sessionStorage.getItem('ssCurrentAccount')
+            const ssIdCourse = sessionStorage.getItem('ssIdCourse');
+            const ssIdUser = sessionStorage.getItem('ssIdUser');
+            const ssPriceCourse = sessionStorage.getItem('ssPriceCourse')
+            const listStudent = await contractMM.methods.getListStudent(ssIdCourse).send({
+                from: currentAccount
+            });
+        });
+        
 });
 
 async function connectMM() {

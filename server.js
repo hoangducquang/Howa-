@@ -435,14 +435,30 @@ app.get('/check-canceled', (req, res) => {
 app.get("/check-buycourse", (req, res) => {
   const { courses_id, users_id } = req.query;
 
-  ordersDB.findOne({ courses_id, users_id, canceled: false }, (err, result) => {
+  ordersDB.findOne({ courses_id, users_id, canceled: false }, async(err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ result: 0, error: "Đã xảy ra lỗi" });
     }
 
     if (result) {
-      return res.json({ result: 1, error: "Success" });
+      const course = await courseDB.findOne({
+        _id: courses_id,
+      });
+      const currentTime = Math.floor(Date.now() / 1000);
+      const end_registTime = Math.floor(new Date(course.end_regist) / 1000)
+      const end_dateTime = Math.floor(new Date(course.end_regist) / 1000)
+      console.log(currentTime);
+      // Trường hợp người dùng có thể huỷ khoá học(thời gian hiện tại nhỏ hơn thời gian đăng kí)
+      if(currentTime < end_registTime) {
+        return res.json({ result: 1, error: "Success cancel" });
+      // Trường hợp người dùng huỷ khoá học và rút tiền(thời gian hiện tại lớn hơn thời gian đăng kí và nhỏ hơn thời gian kết thúc)
+      }else if(currentTime > end_registTime && currentTime < end_dateTime){
+        return res.json({result: 2, error: "Success withdraw and cancel"})
+      }else {
+        return res.json({result: 3, error: "Success withdraw"})
+      }
+      
     } else {
       return res.json({ result: -1, error: "Not exist" });
     }
