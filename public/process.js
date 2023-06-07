@@ -518,8 +518,10 @@ $(document).ready(() => {
             currentAccount = data[0];
             console.log(currentAccount);
             sessionStorage.setItem('ssCurrentAccount', currentAccount)
-            document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4, 38), "***") + "!";
-            document.getElementById("btnConnectMM").disabled = true;
+            document.getElementById("not-connect").style.display = "none";
+            document.getElementById("list-wallet").style.display = "block";
+            document.getElementById("creditcard-card__type").innerText = currentAccount.replace(currentAccount.substring(4, 38), "***");
+            document.getElementById("btnConnectMM").style.display = "none";
         }).catch((err) => {
             // document.getElementById("successConnectMM").innerHTML = err;
             console.log(err);

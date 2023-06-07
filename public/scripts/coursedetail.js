@@ -10,3 +10,10 @@ window.onload = function() {
           document.getElementById("menuAccount").style.display = "none";
         }
 };
+
+const categoryText = document.getElementById('category');
+const text = categoryText.textContent;
+const capitalizedText = text.charAt(0).toUpperCase() + text.slice(1);
+categoryText.textContent = capitalizedText;
+
+

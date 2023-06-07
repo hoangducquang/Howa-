@@ -20,13 +20,22 @@
     .then(data => {
       // Nhận dữ liệu userCurrent từ server
       const userCurrent = data.userCurrent;
-      $("#detail-profile").append(`
+      $("#main").append(`
+      <div id="pitch">
+        <div id="img-profile" style="float:left; margin: 5% 0;">
+          <div>
+            <img src="${userCurrent.image}" class="img-center" salt="${userCurrent.name}">
+            <br>
+          </div>
+        </div>
+      </div>
+      <div id="detail-profile" class="detail-profile not-delayed">
           <label for="fname"><i class="fa fa-user"></i>&ensp;Full Name</label>
           <input type="text" id="fname" name="firstname" value="${userCurrent.name}" readonly>
           <label for="email"><i class="fa fa-envelope"></i>&ensp;Email</label>
           <input type="text" id="email" name="email" value="${userCurrent.email}" readonly>
           <label for="dob"><i class="fa fa-birthday-cake"></i>&ensp;Date of birth</label>
-          <input type="text" id="dob" name="dob" value="${userCurrent.dob}" readonly>
+          <input type="text" id="dob" name="dob" value="${formatDate(userCurrent.dob)}" readonly>
           <label for="adr"><i class="fa fa-address-card-o"></i>&ensp;Address</label>
           <input type="text" id="adr" name="address" value="${userCurrent.address}" readonly>
           <label for="phone"><i class="fa fa-phone"></i>&ensp;Phone</label>
@@ -36,6 +45,7 @@
             <a href="/account/edit-password.html"><button class="btn btn-change-pass" type="button"
                 style="margin-left: 5%;">Change password</button></a>
           </div>
+        </div>
         `)
       // Tiếp tục xử lý dữ liệu tại đây
     })
@@ -53,17 +63,6 @@
   <section style="margin-top: 100px;">
     <div class="card" style="height: auto; display: block; margin: auto; margin-top: 30px; width: 1200px;">
       <div id="main" style="margin: auto;">
-        <div id="pitch">
-          <div id="img-profile" style="float:left; margin: 5% 0;">
-            <div>
-              <img src="/images/IMG_8440.jpg" class="center" style="border: 5px solid #6be04e;" salt="Profile image">
-              <br>
-            </div>
-          </div>
-          <div id="detail-profile" class="detail-profile not-delayed">
-            
-          </div>
-        </div>
       </div>
     </div>
   </section>

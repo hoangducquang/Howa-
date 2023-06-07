@@ -47,13 +47,22 @@ fetch("/api/account/edit-profile/" + ssIdUser)
     // Nhận dữ liệu userCurrent từ server
     const userCurrent = data.userCurrent;
     console.log(userCurrent);
-    $("#detail-profile").append(`
+    $("#main").append(`
+      <div id="pitch">
+        <div id="img-profile" style="float:left; margin: 5% 0;">
+          <div>
+            <img src="${userCurrent.image}" class="img-center" salt="${userCurrent.name}">
+            <br>
+          </div>
+        </div>
+      </div>
+      <div id="detail-profile" class="detail-profile not-delayed">
           <label for="name"><i class="fa fa-user"></i>&ensp;Full Name</label>
           <input type="text" id="name" name="name" value="${userCurrent.name}" style="background: white">
           <label for="email"><i class="fa fa-envelope"></i>&ensp;Email</label>
           <input type="text" id="email" name="email" value="${userCurrent.email}" readonly>
           <label for="dob"><i class="fa fa-birthday-cake"></i>&ensp;Date of birth</label>
-          <input type="text" id="dob" name="dob" value="${userCurrent.dob}" readonly>
+          <input type="text" id="dob" name="dob" value="${formatDate(userCurrent.dob)}" readonly>
           <label for="adr"><i class="fa fa-address-card-o"></i>&ensp;Address</label>
           <input type="text" id="address" name="address" value="${userCurrent.address}" style="background: white">
           <label for="phone"><i class="fa fa-phone"></i>&ensp;Phone</label>
@@ -63,6 +72,7 @@ fetch("/api/account/edit-profile/" + ssIdUser)
               <a href="/account/profile.html">
                 <button class="btn btn-cancel" type="button" style="margin-left: 5%;">Cancel</button></a>
             </div>
+          </div>
         `);
     // Tiếp tục xử lý dữ liệu tại đây
   })

@@ -1,19 +1,21 @@
-// Tệp JavaScript
-function formatDate(date) {
-    // Kiểm tra nếu date không phải là kiểu Date
-    if (!(date instanceof Date)) {
-        date = new Date(date);
-    }
+function formatDate(dateString) {
+  // Chuyển đổi chuỗi ngày tháng thành đối tượng Date
+  const date = new Date(dateString);
+  
+  // Lấy các thành phần ngày, tháng, năm
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  
+  // Tạo chuỗi định dạng dd/mm/yyyy
+  const formattedDate = `${padZero(day)}/${padZero(month)}/${year}`;
+  
+  return formattedDate;
+}
 
-    // Lấy ngày, tháng và năm
-    var day = date.getDate();
-    var month = date.getMonth() + 1; // Lưu ý: Tháng trong JavaScript bắt đầu từ 0
-    var year = date.getFullYear();
-
-    // Định dạng thành "dd/mm/yyyy"
-    var formattedDate = `${day}/${month}/${year}`;
-
-    return formattedDate;
+function padZero(number) {
+  // Thêm số 0 vào đầu nếu số chỉ có một chữ số
+  return number < 10 ? `0${number}` : number;
 }
 
 var ssIdUser = sessionStorage.getItem('ssIdUser');

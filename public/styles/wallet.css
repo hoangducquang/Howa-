@@ -38,6 +38,24 @@ body {
   outline: none;
 }
 
+.title{
+  margin-bottom: 20px; 
+  border-bottom: 1px solid #d1cccc;
+}
+
+.list-card{
+  display: none;
+}
+
+.not-connect{
+  margin: 30px 0px;
+  font-size: 18px;
+}
+
+.group-button{
+  margin: 30px 0px;
+}
+
 .btn2-connect-wallet:hover {
   background: #c676e9;
   transition: .5s;
@@ -70,7 +88,6 @@ input[type=text] {
 }
 
 label {
-  margin-bottom: 10px;
   display: block;
 }
 
@@ -134,7 +151,7 @@ label {
   border-radius: 10%;
 }
 
-.creditcard-card__type {
+.creditcard-card__type label {
   font-size: 1rem;
   margin-right: 30px;
   margin-left: 30px;
