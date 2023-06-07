@@ -4,6 +4,7 @@ const route = express.Router();
 const authRouter = require("./routes/auth");
 const userRouter = require("./routes/users");
 const jwt = require("jsonwebtoken");
+const axios = require('axios');
 app.use(express.json());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -365,6 +366,7 @@ const categoryDB = require("./models/category");
 const ordersDB = require("./models/orders");
 const CryptoJS = require("crypto-js");
 
+
 //get user profile
 // app.get('/account/profile/:id', async function (req, res) {
 // 	user = await userDB.findOne({
@@ -461,6 +463,16 @@ app.get("/check-buycourse", (req, res) => {
 app.get("/courses/create.html", async function (req, res) {
   res.render("courses/create");
 });
+
+
+
+app.get("/courses/meeting", async function (req, res) {
+  res.render("courses/meeting");
+});
+
+// Heading
+
+// Đường dẫn để tạo cuộc họp Zoom
 
 // get my course
 app.get("/account/mycourse/:id", async (req, res) => {
