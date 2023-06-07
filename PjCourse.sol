@@ -66,7 +66,7 @@ contract RegisterCourse {
             currentCourse.price = _price;
             currentCourse.owner = msg.sender;
             currentCourse.stateCourse = true;
-            currentCourse.balance = 0;
+            currentCourse.balance = msg.value;
             
             numCourses ++;
             numStudents[_idSubject] = 0;
@@ -88,7 +88,7 @@ contract RegisterCourse {
         currentStudent.wallet = msg.sender;
 
         numStudents[_idSubject] ++;
-        courses[_idSubject].balance += msg.value;
+        courses[_idSubject].balance = courses[_idSubject].balance + msg.value;
         emit eventStudentRegisterCourse(_idSubject, _idStudent, msg.sender);
         return true;
     }
@@ -149,16 +149,19 @@ contract RegisterCourse {
         require(msg.sender == courses[_idSubject].owner, "You is not mentor!");
         require(courses[_idSubject].stateCourse == true, "Mentor was withdraw money!");
         uint256 totalPay = courses[_idSubject].price;
-        for (uint256 i = 0; i < lenS; i++)
+        for (uint256 i = 0; i <= lenS; i++)
         {
-            totalPay += (courses[_idSubject].price * (courses[_idSubject].numberDays - numdayStudys[i])) / courses[_idSubject].numberDays;
+            if(i == lenS){
+                totalPay = (totalPay * 19) / 20; 
+                payable (courses[_idSubject].owner).transfer(totalPay);
+                emit eventWithdrawMentor(_idSubject, courses[_idSubject].owner, totalPay);
+                courses[_idSubject].balance -= totalPay; 
+                courses[_idSubject].stateCourse = false;
+                return true;
+            }
+            totalPay += (courses[_idSubject].price * numdayStudys[i]) / courses[_idSubject].numberDays;
         }
-        totalPay = (totalPay * 19) / 20; 
-        payable (courses[_idSubject].owner).transfer(totalPay);
-        emit eventWithdrawMentor(_idSubject, courses[_idSubject].owner, totalPay);
-        courses[_idSubject].balance -= totalPay; 
-        courses[_idSubject].stateCourse = false;
-        return true;
+        return false;
     }
 
     function withdrawStudent(string memory _idSubject, uint256 numdayStudy) public payable returns(bool){
@@ -181,6 +184,7 @@ contract RegisterCourse {
     // Function owner account withdraw
     function withdrawWeb(string memory _idSubject) public payable returns(bool){
         require(block.timestamp > courses[_idSubject].endTimeCourse, "Time is not over!");
+        require(msg.sender == ownerWeb, "You are not owner web");
         payable (ownerWeb).transfer(courses[_idSubject].balance);
         emit eventWeb(_idSubject, ownerWeb, courses[_idSubject].balance);
         courses[_idSubject].balance = 0;
