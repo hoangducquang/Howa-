@@ -20,7 +20,9 @@ module.exports = (app) => {
 
 
     app.post("/courses/create", (req, res) => {
-        if(!req.body.name || !req.body.lectures_id || !req.body.end_regist || !req.body.end_date  || !req.body.price || !req.body.image){
+        if(!req.body.name || !req.body.lectures_id || !req.body.end_regist || !req.body.end_date  || !req.body.price 
+            || !req.body.image || !req.body.start_date || !req.body.categories_id || !req.body.start_date 
+            || !req.body.description || !req.body.num_days){
             res.json({result:0, err: "Not enough information"});
         }else{
             var newCourse = new courseDB({
@@ -38,7 +40,7 @@ module.exports = (app) => {
                 delete_at: Date.now(),
                 update_at: Date.now(),
                 image: req.body.image,
-                users_id: "6437b0c684ab3117410be702",
+                users_id: req.body.users_id,
             })
         }
         newCourse.save((err) => {

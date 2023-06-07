@@ -95,16 +95,15 @@
                     <div class="text-field-upload">
                         <label>Select course's picture:</label>
                         <input id="create-select-picture" value="" type="file" required name="image" accept="image/*" maxlength="2097152">
+                        <label id="selected-picture"></label>
                       </div>
                       <script>
                         const fileInput = document.getElementById('create-select-picture');
                         
                         fileInput.addEventListener('change', function() {
                           const file = fileInput.files[0];
-                          console.log("File upload: "+file.name);
                           // Kiểm tra nếu có file được chọn
                           if (file) {
-                            console.log("Upload request");
                             const formData = new FormData();
                             formData.append('image', file);
                       
@@ -117,16 +116,17 @@
                             .then(data => {
                               // Xử lý kết quả trả về từ API
                               const publicUrl = data.publicUrl;
-                              console.log('Public URL:', publicUrl);
-                              // Thay đổi giá trị của input
-                              fileInput.setAttribute('value', publicUrl);
+                              fileInput.style.display = 'none';
+                              // Cập nhật tên hiển thị thành publicUrl
+                              document.getElementById('selected-picture').innerText = publicUrl;
                             })
                             .catch(error => {
                               console.error('Error:', error);
                               // Xử lý lỗi (nếu có)
                             });
                           }else{
-                            console.log("No upload request");
+                            // Xóa tên hiển thị
+                            fileInputLabel.innerText = "Select course's picture:";
                           }
                         });
                       </script>

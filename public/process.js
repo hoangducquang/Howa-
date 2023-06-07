@@ -528,7 +528,8 @@ $(document).ready(() => {
     
     
     $("#btn-create").click(() => {
-        const currentAccount = sessionStorage.getItem('ssCurrentAccount')
+        const currentAccount = sessionStorage.getItem('ssCurrentAccount');
+        var ssIdUser = sessionStorage.getItem('ssIdUser');
         if (currentAccount == null) {
             alert("Please login metamask!");
         }
@@ -547,8 +548,8 @@ $(document).ready(() => {
                 create_at: Date.now(),
                 delete_at: Date.now(),
                 update_at: Date.now(),
-                image: $("#create-select-picture").val(),
-                users_id: "6437b0c684ab3117410be702",
+                image: $("#selected-picture").text(),
+                users_id: ssIdUser,
             }, async (data) => {
                 if (data.result == 1) {
                     let endTimeRegister = new Date(data.err.end_regist).getTime() / 1000

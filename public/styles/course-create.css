@@ -114,12 +114,12 @@ form .text-field .date {
 
 .text-field-upload input {
   width: 80%;
-  padding-left: 200px;
   height: 40px;
   font-size: 14px;
   border: none;
   background: none;
   outline: none;
+  margin-top: 10px;
 }
 
 .text-field label {
@@ -134,6 +134,15 @@ form .text-field .date {
 }
 
 .text-field-upload label {
+  color: #0e0276;
+  transform: translateY(-50%);
+  font-size: 14px;
+  pointer-events: none;
+  transition: .5s;
+}
+
+
+.text-field-upload file {
   position: absolute;
   top: 50%;
   left: 5px;
@@ -174,8 +183,7 @@ form .text-field .date {
 
 .text-field-upload input:focus~label,
 .text-field-upload input:valid~label {
-  top: -5px;
-  color: #2691d9;
+  color: black;
 }
 
 text-field[date] input:focus~label,
