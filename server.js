@@ -48,6 +48,11 @@ app.get('/account/profile.html', (req, res) => {
 	)
 })
 
+app.get('/terms', (req, res) => {
+	res.render('terms',
+	)
+})
+
 app.get('/api/account/profile/:id', async (req, res) => {
 	try {
 		const userCurrent = await userDB.findOne({

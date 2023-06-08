@@ -1,0 +1,19 @@
+.h2-title{
+    margin-top: 30px;
+    padding-bottom: .3em;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.border-bottom{
+    border-bottom: 1px solid grey !important;
+    padding-left: 20px;
+}
+
+.content{
+    padding: 0px 30px;
+    text-align: justify;
+    line-height: 200%;
+}
