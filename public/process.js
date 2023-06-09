@@ -22,25 +22,6 @@ $(document).ready(() => {
                 },
                 {
                     "indexed": false,
-                    "internalType": "uint256",
-                    "name": "balance",
-                    "type": "uint256"
-                }
-            ],
-            "name": "eventBalanceCourse",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "idSubject",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
                     "internalType": "address",
                     "name": "owner",
                     "type": "address"
@@ -150,81 +131,6 @@ $(document).ready(() => {
             "type": "event"
         },
         {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "idSubject",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "address",
-                    "name": "addressReceiver",
-                    "type": "address"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "uint256",
-                    "name": "totalPay",
-                    "type": "uint256"
-                }
-            ],
-            "name": "eventWeb",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "idSubject",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "address",
-                    "name": "addressReceiver",
-                    "type": "address"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "uint256",
-                    "name": "totalPay",
-                    "type": "uint256"
-                }
-            ],
-            "name": "eventWithdrawMentor",
-            "type": "event"
-        },
-        {
-            "anonymous": false,
-            "inputs": [
-                {
-                    "indexed": false,
-                    "internalType": "string",
-                    "name": "idSubject",
-                    "type": "string"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "address",
-                    "name": "addressReceiver",
-                    "type": "address"
-                },
-                {
-                    "indexed": false,
-                    "internalType": "uint256",
-                    "name": "totalPay",
-                    "type": "uint256"
-                }
-            ],
-            "name": "eventWithdrawStudent",
-            "type": "event"
-        },
-        {
             "inputs": [
                 {
                     "internalType": "string",
@@ -268,11 +174,6 @@ $(document).ready(() => {
                     "internalType": "bool",
                     "name": "stateCourse",
                     "type": "bool"
-                },
-                {
-                    "internalType": "uint256",
-                    "name": "balance",
-                    "type": "uint256"
                 }
             ],
             "stateMutability": "view",
@@ -315,25 +216,6 @@ $(document).ready(() => {
                 }
             ],
             "stateMutability": "payable",
-            "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_idSubject",
-                    "type": "string"
-                }
-            ],
-            "name": "getBalanceCourse",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "nonpayable",
             "type": "function"
         },
         {
@@ -394,6 +276,25 @@ $(document).ready(() => {
                 }
             ],
             "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "string",
+                    "name": "_idSubject",
+                    "type": "string"
+                }
+            ],
+            "name": "mentorCancelCourse",
+            "outputs": [
+                {
+                    "internalType": "bool",
+                    "name": "",
+                    "type": "bool"
+                }
+            ],
+            "stateMutability": "payable",
             "type": "function"
         },
         {
@@ -510,29 +411,10 @@ $(document).ready(() => {
             ],
             "stateMutability": "payable",
             "type": "function"
-        },
-        {
-            "inputs": [
-                {
-                    "internalType": "string",
-                    "name": "_idSubject",
-                    "type": "string"
-                }
-            ],
-            "name": "withdrawWeb",
-            "outputs": [
-                {
-                    "internalType": "bool",
-                    "name": "",
-                    "type": "bool"
-                }
-            ],
-            "stateMutability": "payable",
-            "type": "function"
         }
     ];
 
-    const addressSC = "0x9AFe10b99eF5e0Bd348f0dE6F6896F82f61CC734";
+    const addressSC = "0x8DCbE94879a37A47F6426C2e91054ddf1784b082";
 
 
     const web3 = new Web3(window.ethereum);
@@ -636,10 +518,8 @@ $(document).ready(() => {
             currentAccount = data[0];
             console.log(currentAccount);
             sessionStorage.setItem('ssCurrentAccount', currentAccount)
-            document.getElementById("not-connect").style.display = "none";
-            document.getElementById("list-wallet").style.display = "block";
-            document.getElementById("creditcard-card__type").innerText = currentAccount.replace(currentAccount.substring(4, 38), "***");
-            document.getElementById("btnConnectMM").style.display = "none";
+            document.getElementById("successConnectMM").innerHTML = "Connect successfully with address " + currentAccount.replace(currentAccount.substring(4, 38), "***") + "!";
+            document.getElementById("btnConnectMM").disabled = true;
         }).catch((err) => {
             // document.getElementById("successConnectMM").innerHTML = err;
             console.log(err);
