@@ -24,7 +24,7 @@ var userAccount = new mongoose.Schema({
     },
     phone:{
         type: String,
-        required: false,
+        required: true,
         unique: true
     },
     address:{

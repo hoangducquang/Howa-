@@ -18,6 +18,41 @@ module.exports = (app) => {
         res.render("auth/signup")
     });
 
+    app.post("/auth/signup", (req, res) => {
+        if (
+          !req.body.name ||
+          !req.body.email ||
+          !req.body.password ||
+          !req.body.dob ||
+          !req.body.phone
+        ) {
+          res.json({ result: 0, err: "Not enough information!" + req.body.name });
+        }
+         else {
+          const hashPassword = CryptoJS.SHA256(req.body.password);
+          console.log("on");
+          var newUser = new userDB({
+            name: req.body.name,
+            dob: req.body.dob,
+            email: req.body.email,
+            phone: req.body.phone,
+            address: null,
+            update_at: Date.now(),
+            password: hashPassword,
+            image: "https://firebasestorage.googleapis.com/v0/b/blockchain-project-5d4d4.appspot.com/o/no-profile-picture-icon.png?alt=media&token=5edc75f1-b5a3-40e2-8a1b-71be9127fd67",
+          });
+        }
+        newUser.save((err) => {
+          //Cần hiển thị từng error riêng để người dùng biết được field nào đã tồn tại.
+          if (err) {
+            console.log(err);
+            res.json({ result: 0, err: "MongooseDB save error! " + err });
+          } else {
+            res.render("../views/auth/login.ejs", { User: newUser });
+          }
+        });
+      });
+
 
     app.post("/courses/create", (req, res) => {
         if(!req.body.name || !req.body.lectures_id || !req.body.end_regist || !req.body.end_date  || !req.body.price 

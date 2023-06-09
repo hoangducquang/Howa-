@@ -90,3 +90,10 @@ label {
   border: 5px solid #6be04e; 
   width: 25%
 }
+
+.img-profile{
+  width: 100%; 
+  float:left; 
+  margin: 5% 0; 
+  padding: 0 5% !important;
+}
