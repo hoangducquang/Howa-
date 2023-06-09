@@ -598,6 +598,12 @@ $(document).ready(() => {
                 users_id: idStudentCurrent,
             }, async (data) => {
                 if(data.result == 1){
+                    $('#tbList').append(`
+                        <tr>
+                            <td>` + returnEvent.returnValues.idStudent + `</td>
+                            <td>` + returnEvent.returnValues.wallet + `</td>
+                        </tr>
+                    `)
                     var spinner = document.getElementById('spinner').style.display = 'none';
                     console.log("Success")
                 }

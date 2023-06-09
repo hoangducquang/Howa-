@@ -42,7 +42,7 @@
       if(data.result == 1){
         btnBuyNow.style.display = "none";
         btnCancel.style.display = "none";
-        btnWithdraw.style.display = "none";
+        btnWithdraw.style.display = "block";
       } else if(data.result == -1){
         fetch(`/check-buycourse?courses_id=${courseId}&users_id=${userId}`)
         .then((response) => response.json())
@@ -194,7 +194,7 @@
             </div>
             <div>
               <h2>Info</h2>
-              <table id="tbList">
+              <table class="w3-table w3-striped w3-border" id="tbList">
                 <tr>
                   <td>ID Student</td>
                   <td>Address</td>
