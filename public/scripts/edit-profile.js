@@ -49,7 +49,7 @@ fetch("/api/account/edit-profile/" + ssIdUser)
     console.log(userCurrent);
     $("#main").append(`
       <div id="pitch">
-        <div id="img-profile" style="float:left; margin: 5% 0;">
+        <div id="img-profile">
           <div>
             <img src="${userCurrent.image}" class="img-center" salt="${userCurrent.name}">
             <br>

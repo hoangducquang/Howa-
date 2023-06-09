@@ -267,6 +267,8 @@ app.get("/auth/login.html", (req, res) => {
 
 
 app.post('/auth/login', async(req, res) => {
+  console.log(req.body.email);
+  console.log(req.body.password);
 	if(!req.body.email || !req.body.password) {
 		res.json({result: 0, err: "Not enough info" + req.body.email + ' ' + req.body.password})
 	}else{
@@ -293,38 +295,7 @@ app.get("/auth/signup.html", (req, res) => {
   res.render("auth/signup");
 });
 
-app.post("/auth/signup", (req, res) => {
-  if (
-    !req.body.name ||
-    !req.body.email ||
-    !req.body.password ||
-    !req.body.dob ||
-    !req.body.phone
-  ) {
-    res.json({ result: 0, err: "Not enough information!" + req.body.name });
-  } else {
-    const hashPassword = CryptoJS.SHA256(req.body.password);
-    console.log("on");
-    var newUser = new userDB({
-      name: req.body.name,
-      dob: req.body.dob,
-      email: req.body.email,
-      phone: req.body.phone,
-      address: null,
-      update_at: Date.now(),
-      password: hashPassword,
-    });
-  }
-  newUser.save((err) => {
-    //Cần hiển thị từng error riêng để người dùng biết được field nào đã tồn tại.
-    if (err) {
-      console.log(err);
-      res.json({ result: 0, err: "MongooseDB save error! " + err });
-    } else {
-      res.render("../views/auth/login.ejs", { User: newUser });
-    }
-  });
-});
+
 
 // Course Home
 app.get("/courses", (req, res) => {
@@ -378,16 +349,7 @@ const lectureDB = require("./models/lecture");
 const categoryDB = require("./models/category");
 const ordersDB = require("./models/orders");
 const CryptoJS = require("crypto-js");
-
-
-//get user profile
-// app.get('/account/profile/:id', async function (req, res) {
-// 	user = await userDB.findOne({
-// 		_id: req.params.id
-// 	})
-// 	console.log(user);
-// 	res.render("../views/account/profile", { user: user });
-// });
+const userOTPVerification = require("./models/userOTPVerification");
 
 //get user profile - edit
 app.get("/account/edit-profile/:id", async function (req, res) {
