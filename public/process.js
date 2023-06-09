@@ -598,6 +598,7 @@ $(document).ready(() => {
                 users_id: idStudentCurrent,
             }, async (data) => {
                 if(data.result == 1){
+                    var spinner = document.getElementById('spinner').style.display = 'none';
                     console.log("Success")
                 }
                 else{
@@ -613,6 +614,16 @@ $(document).ready(() => {
         if (err) {
             console.log(err);
         } else {
+            for (let i = 0; i < returnEvent.returnValues.listStudent.length; i++) {
+                if(returnEvent.returnValues.listStudent[i].idStudent != '') {
+                    $('#tbList').append(`
+                        <tr>
+                            <td>` + returnEvent.returnValues.listStudent[i].idStudent + `</td>
+                            <td>` + returnEvent.returnValues.listStudent[i].wallet + `</td>
+                        </tr>
+                    `)
+                }
+            }
             console.log(returnEvent.returnValues);
         }
     });
@@ -645,7 +656,6 @@ $(document).ready(() => {
             console.log(err);
         })
     })
-    
     
     $("#btn-create").click(() => {
         const currentAccount = sessionStorage.getItem('ssCurrentAccount');
@@ -704,7 +714,7 @@ $(document).ready(() => {
         const currentAccount = sessionStorage.getItem('ssCurrentAccount')
         var idStudentCurrent = sessionStorage.getItem('ssIdUser')
         var idSubjectCurrent = sessionStorage.getItem('ssIdCourse')
-
+        var spinner = document.getElementById('spinner').style.display = 'block';
         if (currentAccount == null) {
             alert("Please login metamask!");
         } else if(idStudentCurrent == null){
@@ -771,7 +781,7 @@ $(document).ready(() => {
             
                 if (data.result === 1) {
                     try {
-                        await contractMM.methods.withdrawStudent(ssIdCourse, 3).send({
+                        await contractMM.methods.withdrawStudent(ssIdCourse, 7).send({
                           from: currentAccount,
                         });
                         // Xử lý khi gọi thành công

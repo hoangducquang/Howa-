@@ -32,41 +32,57 @@
     sessionStorage.setItem('ssIdCourse', courseId)
     sessionStorage.setItem('ssPriceCourse', priceCurrent)
 
-    fetch(`/check-buycourse?courses_id=${courseId}&users_id=${userId}`)
-      .then((response) => response.json())
-      .then(data => {
-        if (data.result === 1) {
-          hasPurchased = 1; // Có thể huỷ khoá học và rút tiền
-        }else if(data.result === 2){
-          hasPurchased = 2  // Có thể huỷ khoá học và rút tiền lại những ngày không học
-        }else if(data.result === 3){
-          hasPurchased = 3  // Có thể rút tiền sau khoá học
-        }
-          // Lấy tham chiếu đến button
-          var btnBuyNow = document.getElementById('btnBuyNow');
-          var btnCancel = document.getElementById('btnCancelCourse');
-          var btnWithdraw = document.getElementById('btnWithdraw')
-
-          // Ẩn button nếu người dùng đã mua khóa học
-          if (hasPurchased === 1) {
-            btnBuyNow.style.display = "none";
-            btnCancel.style.display = "block";
-            btnWithdraw.style.display = "none";
-          } else if(hasPurchased === 0) {
-            btnCancel.style.display = "none";
-            btnBuyNow.style.display = "block";
-            btnWithdraw.style.display = "none";
-          }else if(hasPurchased === 3){
-            btnCancel.style.display = "none";
-            btnBuyNow.style.display = "none";
-            btnWithdraw.style.display = "block";
-          }else{
-            // Trường hợp không cho ruts
+    fetch(`/check-owner?courses_id=${courseId}&users_id=${userId}`)
+    .then((response) => response.json())
+    .then(data => {
+      var btnBuyNow = document.getElementById('btnBuyNow');
+      var btnCancel = document.getElementById('btnCancelCourse');
+      var btnWithdraw = document.getElementById('btnWithdraw')
+      // Is owner course
+      if(data.result == 1){
+        btnBuyNow.style.display = "none";
+        btnCancel.style.display = "none";
+        btnWithdraw.style.display = "none";
+      } else if(data.result == -1){
+        fetch(`/check-buycourse?courses_id=${courseId}&users_id=${userId}`)
+        .then((response) => response.json())
+        .then(data => {
+          if (data.result === 1) {
+            hasPurchased = 1; // Có thể huỷ khoá học và rút tiền
+          }else if(data.result === 2){
+            hasPurchased = 2  // Có thể huỷ khoá học và rút tiền lại những ngày không học
+          }else if(data.result === 3){
+            hasPurchased = 3  // Có thể rút tiền sau khoá học
           }
-      })
-      .catch(err => {
-        console.log(err)
-      })
+            // Lấy tham chiếu đến button
+            var btnBuyNow = document.getElementById('btnBuyNow');
+            var btnCancel = document.getElementById('btnCancelCourse');
+            var btnWithdraw = document.getElementById('btnWithdraw')
+
+            // Ẩn button nếu người dùng đã mua khóa học
+            if (hasPurchased === 1) {
+              btnBuyNow.style.display = "none";
+              btnCancel.style.display = "block";
+              btnWithdraw.style.display = "none";
+            } else if(hasPurchased === 0) {
+              btnCancel.style.display = "none";
+              btnBuyNow.style.display = "block";
+              btnWithdraw.style.display = "none";
+            }else if(hasPurchased === 3){
+              btnCancel.style.display = "none";
+              btnBuyNow.style.display = "none";
+              btnWithdraw.style.display = "block";
+            }else{
+              // Trường hợp không cho ruts
+            }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }
+    })
+
+    
   </script>
 </head>
 <%- include("../partials/header") %>
@@ -115,17 +131,26 @@
                 <span style="color: rgb(255, 0, 0);">&nbsp;-<%= Math.round((1-course.price/course.old_price)*100) %>
                     %</span>
               </div>
+              
               <div id="btnBuyNow" class="group-button" style="margin-bottom: 30px; display: none;">
-                <button class="btn btn-buy-now" type="button">Buy now</button>
+                <button class="btn btn-buy-now" type="button">Buy now
+                  <div id="spinner" class="spinner"></div>
+                </button>
               </div>
               <div id="btnCancelCourse" class="group-button" style="margin-bottom: 30px; display: none;">
-                <button class="btn btn-buy-now" style="background-color: purple;" type="button">Cancel Course</button>
+                <button class="btn btn-buy-now" style="background-color: purple;" type="button">Cancel Course
+                  <div id="spinner" class="spinner"></div>
+                </button>
               </div>
               <div id="btnWithdraw" class="group-button" style="margin-bottom: 30px; display: none;">
-                <button class="btn btn-buy-now" style="background-color: purple;" type="button">Withdraw</button>
+                <button class="btn btn-buy-now" style="background-color: purple;" type="button">Withdraw
+                  <div id="spinner" class="spinner"></div>
+                </button>
               </div>
               <div id="btnGet" class="group-button" style="margin-bottom: 30px; display: block;">
-                <button class="btn btn-buy-now" style="background-color: purple;" type="button">Get</button>
+                <button class="btn btn-buy-now" style="background-color: purple;" type="button">Get Info Student
+                  <div id="spinner" class="spinner"></div>
+                </button>
               </div>
               <p class="countdown-time" id="countdown" style="margin-top: 10px; color: red;"></p>
               <script>
@@ -166,6 +191,15 @@
               <p style="font-size: 20px; color: blueviolet; margin-top: 30px; margin-bottom: 15px;"><b>Description</b>
               </p>
               <%= course.description %>
+            </div>
+            <div>
+              <h2>Info</h2>
+              <table id="tbList">
+                <tr>
+                  <td>ID Student</td>
+                  <td>Address</td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>

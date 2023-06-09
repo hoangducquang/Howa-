@@ -369,6 +369,23 @@ app.get("/courses/detail/:id", async function (req, res) {
   res.render("../views/courses/coursedetail", { course: course });
 });
 
+app.get('/check-owner', (req, res) => {
+    const { courses_id, users_id } = req.query;
+
+    courseDB.findOne({ courses_id, users_id }, (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ result: 0, error: "Đã xảy ra lỗi" });
+      }
+
+      if(result) {
+        return res.json({ result: 1, error: "Is owner" });
+      }else {
+        return res.json({ result: -1, error: "Not owner" });
+      }
+    })
+})
+
 // Check canceled
 app.get('/check-canceled', (req, res) => {
   const { courses_id, users_id } = req.query;
