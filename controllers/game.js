@@ -76,6 +76,7 @@ module.exports = (app) => {
                 update_at: Date.now(),
                 image: req.body.image,
                 users_id: req.body.users_id,
+                withdraw: false,
             })
         }
         newCourse.save((err) => {

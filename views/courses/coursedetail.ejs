@@ -37,12 +37,27 @@
     .then(data => {
       var btnBuyNow = document.getElementById('btnBuyNow');
       var btnCancel = document.getElementById('btnCancelCourse');
-      var btnWithdraw = document.getElementById('btnWithdraw')
+      var btnWithdrawStudent = document.getElementById('btnWithdrawStudent')
+      var btnWithdrawMentor = document.getElementById('btnWithdrawMentor')
       // Is owner course
-      if(data.result == 1){
+      if(data.result == 1 && data.endTime == true ){
+        if(data.wd == true) {
+          btnBuyNow.style.display = "none";
+          btnCancel.style.display = "none";
+          btnWithdrawStudent.style.display = "none";
+          btnWithdrawMentor.style.display = "none"
+        
+        }else {
+          btnBuyNow.style.display = "none";
+          btnCancel.style.display = "none";
+          btnWithdrawStudent.style.display = "none";
+          btnWithdrawMentor.style.display = "block"
+        }
+      }else if (data.result == 1 && data.endTime == false){ 
         btnBuyNow.style.display = "none";
         btnCancel.style.display = "none";
-        btnWithdraw.style.display = "block";
+        btnWithdrawStudent.style.display = "none";
+        btnWithdrawMentor.style.display = "none"
       } else if(data.result == -1){
         fetch(`/check-buycourse?courses_id=${courseId}&users_id=${userId}`)
         .then((response) => response.json())
@@ -57,21 +72,21 @@
             // Lấy tham chiếu đến button
             var btnBuyNow = document.getElementById('btnBuyNow');
             var btnCancel = document.getElementById('btnCancelCourse');
-            var btnWithdraw = document.getElementById('btnWithdraw')
+            var btnWithdrawStudent = document.getElementById('btnWithdrawStudent')
 
             // Ẩn button nếu người dùng đã mua khóa học
             if (hasPurchased === 1) {
               btnBuyNow.style.display = "none";
               btnCancel.style.display = "block";
-              btnWithdraw.style.display = "none";
+              btnWithdrawStudent.style.display = "none";
             } else if(hasPurchased === 0) {
               btnCancel.style.display = "none";
               btnBuyNow.style.display = "block";
-              btnWithdraw.style.display = "none";
+              btnWithdrawStudent.style.display = "none";
             }else if(hasPurchased === 3){
               btnCancel.style.display = "none";
               btnBuyNow.style.display = "none";
-              btnWithdraw.style.display = "block";
+              btnWithdrawStudent.style.display = "block";
             }else{
               // Trường hợp không cho ruts
             }
@@ -142,8 +157,13 @@
                   <div id="spinner" class="spinner"></div>
                 </button>
               </div>
-              <div id="btnWithdraw" class="group-button" style="margin-bottom: 30px; display: none;">
+              <div id="btnWithdrawStudent" class="group-button" style="margin-bottom: 30px; display: none;">
                 <button class="btn btn-buy-now" style="background-color: purple;" type="button">Withdraw
+                  <div id="spinner" class="spinner"></div>
+                </button>
+              </div>
+              <div id="btnWithdrawMentor" class="group-button" style="margin-bottom: 30px; display: none;">
+                <button class="btn btn-buy-now" style="background-color: purple;" type="button">Withdraw Fee
                   <div id="spinner" class="spinner"></div>
                 </button>
               </div>

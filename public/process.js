@@ -633,6 +633,49 @@ $(document).ready(() => {
             console.log(returnEvent.returnValues);
         }
     });
+
+    contractInfura.events.eventWithdrawStudent({
+        filter: {},
+        fromBlock: "latest"
+    }, (err, returnEvent) => {
+        if(err) {
+            console.log(err);
+        }else {
+            console.log(returnEvent);
+            document.getElementById('btnWithdrawStudent').style.display = 'none'
+
+        }
+        
+    })
+
+    contractInfura.events.eventWithdrawMentor({
+        filter: {},
+        fromBlock: "latest"
+    }, async(err, returnEvent) => {
+        if(err) {
+            console.log(err);
+        }else {
+            const ssIdCourse = sessionStorage.getItem('ssIdCourse');
+            const ssIdUser = sessionStorage.getItem('ssIdUser');
+            console.log(returnEvent);
+
+            document.getElementById('btnWithdrawMentor').style.display = 'none'
+            try {
+                const response = await fetch(`/withdraw-mentor?_id=${ssIdCourse}&users_id=${ssIdUser}`);
+                const data = await response.json();
+            
+                if (data.result === 1) {
+                  console.log(data.error);
+                  // Xử lý sau khi hủy khóa học thành công
+                }else {
+                    console.log(data.error);
+                }
+              } catch (err) {
+                console.log(err);
+              }
+        }
+        
+    })
     
     // contractInfura.events.eventRegisterCourse({filter:{}, fromBlock : "latest"}, function(err, eventReturn){
     //     if(err){
@@ -772,52 +815,83 @@ $(document).ready(() => {
         }
       });
       
-      $('#btnWithdraw').click(async () => {
+      $('#btnWithdrawStudent').click(async () => {
           const currentAccount = sessionStorage.getItem('ssCurrentAccount')
           const ssIdCourse = sessionStorage.getItem('ssIdCourse');
           const ssIdUser = sessionStorage.getItem('ssIdUser');
-          const ssPriceCourse = sessionStorage.getItem('ssPriceCourse')
+          
   
           if (currentAccount == null) {
               alert("Please login metamask!");
-          }else {
-              try {
-                const response = await fetch(`/check-canceled?courses_id=${ssIdCourse}&users_id=${ssIdUser}`);
-                const data = await response.json();
-            
-                if (data.result === 1) {
-                    try {
-                        await contractMM.methods.withdrawStudent(ssIdCourse, 7).send({
-                          from: currentAccount,
-                        });
-                        // Xử lý khi gọi thành công
-                      } catch (error) {
-                        if (error.message.includes("revert")) {
-                          // Xử lý khi hợp đồng gọi revert
-                          console.log("Lỗi trong hợp đồng: " + error.message);
-                        } else {
-                          // Xử lý các lỗi khác
-                          console.log("Lỗi: " + error.message);
+            }else {
+                try {
+                    const response = await fetch(`/check-canceled?courses_id=${ssIdCourse}&users_id=${ssIdUser}`);
+                    const data = await response.json();
+                    
+                    if (data.result === 1) {
+                        try {
+                            await contractMM.methods.withdrawStudent(ssIdCourse, 7).send({
+                                from: currentAccount,
+                            });
+                            // Xử lý khi gọi thành công
+                        } catch (error) {
+                            if (error.message.includes("revert")) {
+                                // Xử lý khi hợp đồng gọi revert
+                                console.log("Lỗi trong hợp đồng: " + error.message);
+                            } else {
+                                // Xử lý các lỗi khác
+                                console.log("Lỗi: " + error.message);
+                            }
                         }
-                      }
-                      
-            
-                  // Xử lý sau khi hủy khóa học thành công
+                        
+                        
+                        // Xử lý sau khi hủy khóa học thành công
+                    }
+                } catch (err) {
+                    console.log(err);
                 }
-              } catch (err) {
-                console.log(err);
-              }
-          }
+            }
         });
+        
+        $('#btnWithdrawMentor').click(async () => {
+            const currentAccount = sessionStorage.getItem('ssCurrentAccount')
+            const ssIdCourse = sessionStorage.getItem('ssIdCourse');
+            const ssIdUser = sessionStorage.getItem('ssIdUser');
+            
+            if(currentAccount == null) {
+                alert("Please login metamask!");
+            }else {
+                try {
+                    await contractMM.methods.withdrawMentor(ssIdCourse, [7], 1).send({
+                        from: currentAccount,
+                    });
+                    // Xử lý khi gọi thành công
+                } catch (error) {
+                    if (error.message.includes("revert")) {
+                        // Xử lý khi hợp đồng gọi revert
+                        console.log("Lỗi trong hợp đồng: " + error.message);
+                    } else {
+                        // Xử lý các lỗi khác
+                        console.log("Lỗi: " + error.message);
+                    }
+                }
+            }
+            
+        })
         
         $('#btnGet').click(async () => {
             const currentAccount = sessionStorage.getItem('ssCurrentAccount')
             const ssIdCourse = sessionStorage.getItem('ssIdCourse');
             const ssIdUser = sessionStorage.getItem('ssIdUser');
             const ssPriceCourse = sessionStorage.getItem('ssPriceCourse')
-            const listStudent = await contractMM.methods.getListStudent(ssIdCourse).send({
-                from: currentAccount
-            });
+            if (currentAccount == null) {
+                alert("Please login metamask!");
+            }else {
+                const listStudent = await contractMM.methods.getListStudent(ssIdCourse).send({
+                    from: currentAccount
+                });
+            }
+            
         });
         
 });

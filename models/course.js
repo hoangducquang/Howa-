@@ -74,7 +74,11 @@ var courseList = new mongoose.Schema({
     users_id: {
         type: String,
         required: true
-    }
+    },
+    withdraw: {
+        type: Boolean,
+        default: false
+    },
 });
 
 const courseDB = mongoose.model('courses', courseList);

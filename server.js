@@ -372,18 +372,57 @@ app.get("/courses/detail/:id", async function (req, res) {
 app.get('/check-owner', (req, res) => {
     const { courses_id, users_id } = req.query;
 
-    courseDB.findOne({ courses_id, users_id }, (err, result) => {
+    courseDB.findOne({ courses_id, users_id }, async(err, result) => {
       if (err) {
         console.error(err);
         return res.status(500).json({ result: 0, error: "Đã xảy ra lỗi" });
       }
 
       if(result) {
-        return res.json({ result: 1, error: "Is owner" });
+        const course = await courseDB.findOne({
+          _id: courses_id,
+        });
+        const currentTime = Math.floor(Date.now() / 1000);
+        const end_dateTime = Math.floor(new Date(course.end_date) / 1000)
+        
+        if(currentTime > end_dateTime){
+          if(course.withdraw == true) {
+            return res.json({ result: 1, error: "Is owner", endTime: true, wd: true });
+          }else {
+            return res.json({result: 1, err: "Is owner", endTime: true })
+          }
+
+        }else{
+          return res.json({result: 1, err: "Is owner", endTime: false })
+        }
       }else {
         return res.json({ result: -1, error: "Not owner" });
       }
     })
+})
+
+app.get('/withdraw-mentor', async(req, res) => {
+    const { _id, users_id } = req.query;
+    const result = await courseDB.findOne({ _id, users_id })
+    if(result){
+      if(result.withdraw == false) {
+        result.withdraw = true
+        result.save()
+        .then(updatedCourse => {
+          console.log('Đã thay đổi trạng thái của khoá học');
+          console.log(updatedCourse);
+        })
+        .catch(error => {
+          console.error('Lỗi khi cập nhật trạng thái khoá học:', error);
+        })
+        return res.json({ result: 1, error: "Success" });
+      }else {
+        return res.json({ result: -1, error: "Not exist" });
+      }
+      
+    }else{
+      res.json({ result: 0, error: "Error not found" });
+    }
 })
 
 // Check canceled
@@ -433,7 +472,7 @@ app.get("/check-buycourse", (req, res) => {
       });
       const currentTime = Math.floor(Date.now() / 1000);
       const end_registTime = Math.floor(new Date(course.end_regist) / 1000)
-      const end_dateTime = Math.floor(new Date(course.end_regist) / 1000)
+      const end_dateTime = Math.floor(new Date(course.end_date) / 1000)
       console.log(currentTime);
       // Trường hợp người dùng có thể huỷ khoá học(thời gian hiện tại nhỏ hơn thời gian đăng kí)
       if(currentTime < end_registTime) {
