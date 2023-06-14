@@ -117,8 +117,12 @@
                               // Xử lý kết quả trả về từ API
                               const publicUrl = data.publicUrl;
                               fileInput.style.display = 'none';
-                              // Cập nhật tên hiển thị thành publicUrl
-                              document.getElementById('selected-picture').innerText = publicUrl;
+                                // Tách chuỗi publicUrl bằng dấu /
+                                const parts = publicUrl.split('/');
+                                // Lấy phần tử cuối cùng của mảng
+                                const lastPart = parts[parts.length - 1];
+                                // Cập nhật tên hiển thị thành lastPart
+                                document.getElementById('selected-picture').innerText = lastPart;
                             })
                             .catch(error => {
                               console.error('Error:', error);
