@@ -351,6 +351,37 @@ const ordersDB = require("./models/orders");
 const CryptoJS = require("crypto-js");
 const userOTPVerification = require("./models/userOTPVerification");
 
+// Add meeting in course
+app.put('/add-meeting', async(req, res) => {
+    const {courses_id, roomId} = req.query
+
+    courseDB.findOne({courses_id}, async(err, result) => {
+      if(err){
+        console.error(err);
+        return res.status(500).json({ result: 0, error: "Đã xảy ra lỗi" });
+      }
+      if(result) {
+        if(result.meeting == '') {
+          result.meeting = roomId
+          result.save()
+          .then(updatedCourse => {
+            console.log('Đã thêm roomID:');
+            console.log(updatedCourse);
+          })
+          .catch(error => {
+            console.error('Lỗi khi cập nhật trạng thái khoá học:', error);
+          })
+          return res.json({ result: 1, error: "Success"});
+        }else {
+          return res.json({ result: 0, error: "Have meeting", hasVal: true})
+        }
+        
+      }else {
+        return res.status(404).json({ result: -1, error: "Not found" });
+      }
+    })
+})
+
 //get user profile - edit
 app.get("/account/edit-profile/:id", async function (req, res) {
   user = await userDB.findOne({

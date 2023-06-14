@@ -5,16 +5,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Clone Zoom với Stringee hihi</title>
-
-    <!-- import the webpage's stylesheet -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
-    />
-
-    <!-- import the webpage's javascript file -->
+    
+    <title>Meeting</title>
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>
     <script src="https://cdn.stringee.com/sdk/web/2.2.1/stringee-web-sdk.min.js"></script>
 
@@ -23,7 +18,7 @@
   <body>
     <div class="container has-text-centered" id="app">
       <h1 class="title">
-        Ứng dụng Clone Zoom cực cool ngầu với
+        Room 
         <span class="header-highlight">Stringee API</span>
       </h1>
 
@@ -51,7 +46,25 @@
           Gửi link này cho bạn bè cùng join room nhé
           <a id="roomUrl" target="_blank"></a>.
         </p>
-        <p>Hoặc bạn cũng có thể copy <code id="roomIdCopy"></code> để share.</p>
+        <style>
+            #roomIdCopy {
+              background-color: #f1f1f1;
+              padding: 2px 4px;
+              border-radius: 4px;
+            }
+          
+            #copy {
+              display: inline-block;
+              background-color: green;
+              color: white;
+              padding: 5px 10px;
+              border-radius: 4px;
+              width: 70px;
+              font-size: small;
+            }
+            
+          </style>
+        <p style="display: inline; white-space: nowrap;">Click here <code id="roomIdCopy"></code><p id="copy" class="custom-panel" style="display: none" ></p> để share.</p>
       </div>
     </div>
 

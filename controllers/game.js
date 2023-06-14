@@ -77,6 +77,7 @@ module.exports = (app) => {
                 image: req.body.image,
                 users_id: req.body.users_id,
                 withdraw: false,
+                meeting: '',
             })
         }
         newCourse.save((err) => {

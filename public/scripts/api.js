@@ -1,7 +1,9 @@
+// const PROJECT_ID = "SK.0.nGI9q3q8Gps615vMVmcvjOIS1zS8gYEq";
+// const PROJECT_SECRET = "dExHNm1ZaFhvc0lEWkFpRlMxd3JnQ1pkWTJ4YUNPN1o=";
+// const BASE_URL = "https://api.stringee.com/v1/room2";
 
-
-const PROJECT_ID = "SK.0.nGI9q3q8Gps615vMVmcvjOIS1zS8gYEq";
-const PROJECT_SECRET = "dExHNm1ZaFhvc0lEWkFpRlMxd3JnQ1pkWTJ4YUNPN1o=";
+const PROJECT_ID = "SK.0.s3lrNmaogebI5dXUn5YgRAGFHUszVO";
+const PROJECT_SECRET = "MDFlVDVLM0JSeWRVNzZaUnlYekZOeVlDSWVWT3pTMQ==";
 const BASE_URL = "https://api.stringee.com/v1/room2";
 
 class API {

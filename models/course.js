@@ -79,6 +79,10 @@ var courseList = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    meeting: {
+        type: String,
+        required: false,
+    }
 });
 
 const courseDB = mongoose.model('courses', courseList);

@@ -9,6 +9,14 @@
   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/styles/course-detail.css">
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>
+  <script src="https://cdn.stringee.com/sdk/web/2.2.1/stringee-web-sdk.min.js"></script>
+  <script src="/scripts/api.js"></script>
+  <script src="/scripts/meeting.js"></script>
+
   <link rel="icon" href="/images/logo-hez.png" type="image/x-icon">
   <title>
     <%= course.name %> - Courses | HOWA - Course Register
@@ -172,6 +180,47 @@
                   <div id="spinner" class="spinner"></div>
                 </button>
               </div>
+              <!-- Tạo room -->
+              <div class="course-description" style="border-top: 1px solid #a8acc0;">
+                <p style="font-size: 20px; color: Navy; margin-top: 30px; margin-bottom: 15px;"><b>Meeting ROOM</b>
+                </p>
+                <div id="btnCreateRoom" class="group-button" style="margin-bottom: 30px; display: block;">
+                  <button class="btn btn-buy-now" style="background-color: wheat;" type="button" onclick="OnlyCreateRoom()">Create Room
+                    <div id="spinner" class="spinner"></div>
+                  </button>
+                </div>
+                <div id="info" style="display: none;">
+                  <p>Bạn đang ở trong room <strong id="roomId"></strong>.</p>
+                  <p>
+                    Gửi link này cho bạn bè cùng join room nhé
+                    <a id="roomUrl" target="_blank"></a>.
+                  </p>
+                  <style>
+                      #roomIdCopy {
+                        background-color: #f1f1f1;
+                        padding: 2px 4px;
+                        border-radius: 4px;
+                      }
+                    
+                      #copy {
+                        display: inline-block;
+                        background-color: green;
+                        color: white;
+                        padding: 5px 10px;
+                        border-radius: 4px;
+                        width: 70px;
+                        font-size: small;
+                      }
+                      
+                    </style>
+                  <p style="display: inline; white-space: nowrap;">Click here <code id="roomIdCopy"></code><p id="copy" class="custom-panel" style="display: none" ></p> để share.</p>
+                </div>
+                <!-- <div id="roomID"></div>
+                <br>
+                <div id="roomTOKEN"></div> -->
+                
+              </div>
+
               <p class="countdown-time" id="countdown" style="margin-top: 10px; color: red;"></p>
               <script>
                 var endTime = course.end_regist;
