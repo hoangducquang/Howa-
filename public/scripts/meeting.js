@@ -1,4 +1,4 @@
-const courseDB = require("./models/course");
+// const courseDB = require("./models/course");
 
 const videoContainer = document.querySelector("#videos");
 let userToken = "";
@@ -93,32 +93,33 @@ async function OnlyCreateRoom(){
     roomIdTemp = this.roomId
     this.roomToken = roomToken;
 
-    // var coursesId = sessionStorage.getItem('ssIdCourse')
+    var coursesId = sessionStorage.getItem('ssIdCourse')
 
     // Check room was create
-    // try {
-    //     const response = await fetch(`/add-meeting?courses_id=${coursesId}&roomId=${roomIdTemp}`, {
-    //       method: 'PUT'
-    //     });
-    //     const data = await response.json();
+    try {
+        const response = await fetch(`/add-meeting?courses_id=${coursesId}&roomId=${roomIdTemp}`, {
+          method: 'PUT'
+        });
+        const data = await response.json();
         
-    //     if (data.result === 1) {
-    //       console.log('Thêm roomId thành công');
+        if (data.result === 1) {
+          console.log('Thêm roomId thành công');
           
-    //       document.getElementById('btnCreateRoom').style.display = 'none'
-    //     } else if (data.result === 0 && data.hasVal) {
-    //       console.log('Khóa học đã có meeting');
-    //       // Thông báo rằng khóa học đã có meeting
-    //     } else if (data.result === -1) {
-    //       console.log('Khóa học không tồn tại');
-    //       // Thông báo rằng khóa học không tồn tại
-    //     } else {
-    //       console.log('Có lỗi xảy ra');
-    //       // Xử lý lỗi nếu cần thiết
-    //     }
-    // } catch (error) {
-    // console.error('Lỗi khi gọi API:', error);
-    // }
+          document.getElementById('btnCreateRoom').style.display = 'none'
+        } else if (data.result === 0 && data.hasVal) {
+          console.log('Khóa học đã có meeting');
+          
+          document.getElementById('btnCreateRoom').style.display = 'none'
+        } else if (data.result === -1) {
+          console.log('Khóa học không tồn tại');
+          // Thông báo rằng khóa học không tồn tại
+        } else {
+          console.log('Có lỗi xảy ra');
+          // Xử lý lỗi nếu cần thiết
+        }
+    } catch (error) {
+        console.error('Lỗi khi gọi API:', error);
+    }
 
     console.log({ roomIdTemp, roomToken });
     if (this.roomId) {
@@ -231,8 +232,8 @@ function addVideo(video) {
   videoContainer.appendChild(video);
 }
 
-function roomUrl() {
-    return `http://localhost:3000/courses/meeting?room=${this.roomId}`;
+function roomUrl(roomId) {
+    return `http://localhost:3000/courses/meeting?room=${roomId}`;
   }
 
 // Call the necessary functions

@@ -105,6 +105,60 @@
       }
     })
 
+    console.log(courseId)
+    // Check room was create
+    fetch(`/has-meeting?/${courseId}`)
+    .then(response => response.json())
+    .then(data => {
+      const infoDiv = document.getElementById("info");
+      const roomIdElement = document.getElementById("roomId");
+      const roomUrlElement = document.getElementById("roomUrl");
+      const roomIdCopyElement = document.getElementById("roomIdCopy");
+      const copyDiv = document.getElementById('copy')
+
+      if (data.result === 1) {
+        console.log('Not meeting yet');
+        
+        document.getElementById("info").style.display = "none";
+      } else if (data.result === 0 && data.hasVal) {
+        console.log('Have meeting');
+        document.getElementById('btnCreateRoom').style.display = 'none'
+
+        document.getElementById("info").style.display = "block";
+  
+        document.getElementById("roomId").textContent = data.hasVal;
+        document.getElementById("roomUrl").href = roomUrl(data.hasVal);
+        document.getElementById("roomUrl").textContent = roomUrl(data.hasVal);
+        document.getElementById("roomIdCopy").textContent = data.hasVal;
+    
+        document.getElementById("roomIdCopy").addEventListener('click', () => {
+            navigator.clipboard.writeText(data.hasVal)
+            .then(() => {
+              document.getElementById('copy').textContent = 'Copied'
+              document.getElementById('copy').style.display = 'inline-block'
+                
+                setTimeout(() => {
+                  document.getElementById('copy').style.display = 'none'
+                }, 5000);
+            console.log("Đã sao chép Room ID:", data.hasVal);
+            })
+            .catch((error) => {
+            console.error("Lỗi khi sao chép Room ID:", error);
+            });
+        })
+      } else if (data.result === -1) {
+        console.log('Not found');
+        // Không tìm thấy khóa học
+      } else {
+        console.log('Error:', data.error);
+        // Xử lý lỗi nếu có
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Xử lý lỗi nếu có
+    });
+
     
   </script>
 </head>

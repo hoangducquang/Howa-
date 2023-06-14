@@ -351,6 +351,30 @@ const ordersDB = require("./models/orders");
 const CryptoJS = require("crypto-js");
 const userOTPVerification = require("./models/userOTPVerification");
 
+// Check meeting
+app.get('/has-meeting', async (req, res) => {
+  const { courses_id } = req.query;
+
+  courseDB.findOne({ courses_id }, async (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ result: 0, error: "Đã xảy ra lỗi" });
+    }
+
+    if (result) {
+      console.log(result.meeting)
+      if (result.meeting === "") {
+
+        return res.json({ result: 1, error: "Not meeting yet" });
+      } else {
+        return res.json({ result: 0, error: "Have meeting", hasVal: result.meeting });
+      }
+    } else {
+      return res.status(404).json({ result: -1, error: "Not found" });
+    }
+  });
+});
+
 // Add meeting in course
 app.put('/add-meeting', async(req, res) => {
     const {courses_id, roomId} = req.query
