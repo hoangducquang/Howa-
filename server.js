@@ -295,7 +295,44 @@ app.get("/auth/signup.html", (req, res) => {
   res.render("auth/signup");
 });
 
-
+// Get API category
+app.get('/api/courses/index.html/:id', async(req, res) => {
+    const getID = req.params.id
+    var IdCurrent = 'programming'
+    
+    try{
+      switch(getID){
+        case 'programming':
+          IdCurrent = 'programming'
+          break
+        case 'languages':
+          IdCurrent = 'languages'
+          break 
+        case 'design':
+          IdCurrent = 'design'
+          break
+        case 'music':
+          IdCurrent = 'music'
+          break
+        case 'video-editting':
+          IdCurrent = 'videoediting'
+          break
+        case 'photography':
+          IdCurrent = 'photography'
+          break
+        case 'others':
+          break
+  
+      }
+      const filterCourse = await courseDB.find({
+        categories_id: IdCurrent
+      })
+      res.json({filterCourse})
+    }catch(error){
+      console.error("Lỗi:", error);
+      res.status(500).json({ error: "Lỗi server" });
+    }
+})
 
 // Course Home
 app.get("/courses", (req, res) => {
