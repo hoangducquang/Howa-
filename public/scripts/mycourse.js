@@ -26,7 +26,7 @@ window.onload = function() {
 function pagination(getCourseAll) {
   const pageElement = 3
   const totalPage = Math.ceil(getCourseAll.length / pageElement)
-  var currentPage = 1
+  let currentPage = 1
   var activeLink = null
   
   function displayInfo(num){
@@ -63,8 +63,12 @@ function pagination(getCourseAll) {
     }
   }
   function displayPagination() {
-    const paginationContainer = document.querySelectorAll('.pagination.pag-center a');
 
+    const paginationContainer = document.querySelectorAll('.pagination.pag-center a');
+    paginationContainer.innerHTML = '';
+
+    $('.pagination.pag-center a').empty();
+    $('.pagination.pag-center a').removeClass()
     // Previous
     const preLink = document.createElement('a')
     preLink.href = '#'
@@ -77,7 +81,7 @@ function pagination(getCourseAll) {
         // link.className = 'active'
         const pageLinks = document.querySelectorAll('.pagination.pag-center a');
         pageLinks[currentPage].classList.add('active')
-        // console.log(currentPage);
+        console.log(currentPage);
       }
     })
     
@@ -102,7 +106,7 @@ function pagination(getCourseAll) {
         displayInfo(i);
         link.className = 'active'
         // activeLink = link
-        // console.log(i);
+        console.log(i);
       });
       $('.pagination.pag-center').append(link);
     }
@@ -129,5 +133,4 @@ function pagination(getCourseAll) {
   displayInfo(1)
   displayPagination()
 }
-
 
