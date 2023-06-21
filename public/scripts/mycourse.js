@@ -42,24 +42,49 @@ function pagination(getCourseAll) {
     for(let i = startPage; i < endPage; i++)
     {
       const course = getCourseAll[i]
-      $("#tblistCourse").append(`
-        <div class="category-course-card">
-          <a href="/courses/detail/${course._id}" style="text-decoration: none;">
-            <div class="course-image">
-              <img src="${course.image}" alt="${course.name}" />
-              <div class="course-short-details">
-                <p class="cate-name">${course.categories_id}</p>
-                <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">${course.name}</h4>
-                <p class="w3-small">${course.lectures_id}</p>
-                <div class="price-course">
-                  <span class="new-price">${course.price.toLocaleString("en-US")} ETH</span>
+      const currentDate = new Date()
+      const courseEndDate = new Date(course.end_date)
+      if(currentDate > courseEndDate){
+        $("#tblistCourse").append(`
+          <div class="category-course-card">
+            <a href="/courses/detail/${course._id}" style="text-decoration: none; background-color: #cdd3d3">
+              <div class="course-image">
+                <img src="${course.image}" alt="${course.name}" />
+                <div class="course-short-details">
+                  <p class="cate-name">${course.categories_id}</p>
+                  <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">${course.name}</h4>
+                  <p class="w3-small">${course.lectures_id}</p>
+                  <div class="price-course">
+                    <span class="new-price">${course.price.toLocaleString("en-US")} ETH</span>
+                  </div>
+                  <p class="duration">${changeDate(course.start_date)} - ${changeDate(course.end_date)}</p>
                 </div>
-                <p class="duration">${changeDate(course.start_date)} - ${changeDate(course.end_date)}</p>
               </div>
-            </div>
-          </a>
-        </div>
-      `);
+            </a>
+          </div>
+        `);
+      }
+      else{
+        $("#tblistCourse").append(`
+          <div class="category-course-card">
+            <a href="/courses/detail/${course._id}" style="text-decoration: none;">
+              <div class="course-image">
+                <img src="${course.image}" alt="${course.name}" />
+                <div class="course-short-details">
+                  <p class="cate-name">${course.categories_id}</p>
+                  <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">${course.name}</h4>
+                  <p class="w3-small">${course.lectures_id}</p>
+                  <div class="price-course">
+                    <span class="new-price">${course.price.toLocaleString("en-US")} ETH</span>
+                  </div>
+                  <p class="duration">${changeDate(course.start_date)} - ${changeDate(course.end_date)}</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        `);
+
+      }
     }
   }
   function displayPagination() {
