@@ -30,6 +30,27 @@
           getCourseAll.sort(
             (a, b) => new Date(b.start_date) - new Date(a.start_date)
           );
+          // Click categories
+          const categoryLinks = document.querySelectorAll('.cat');
+
+          function categoryClick(event) {
+              event.preventDefault()
+
+              const categoriesId = this.getAttribute('href').substring(1)
+              fetch(`/api/courses/index.html/${categoriesId}`)
+              .then(response => response.json())
+              .then(data => {
+                $('.pagination.pag-center').empty();
+                pagination(data.filterCourse)
+              })
+              .catch(error => {
+                console.error("Lỗi:", error);
+              });
+          }
+
+          categoryLinks.forEach(link => {
+            link.addEventListener('click', categoryClick);
+          });
           pagination(getCourseAll)
 
           // Lấy thông tin trang 
