@@ -43,125 +43,125 @@
     sessionStorage.setItem('ssPriceCourse', priceCurrent)
 
     fetch(`/check-owner?courses_id=${courseId}&users_id=${userId}`)
-    .then((response) => response.json())
-    .then(data => {
-      var btnBuyNow = document.getElementById('btnBuyNow');
-      var btnCancel = document.getElementById('btnCancelCourse');
-      var btnWithdrawStudent = document.getElementById('btnWithdrawStudent')
-      var btnWithdrawMentor = document.getElementById('btnWithdrawMentor')
-      // Is owner course
-      if(data.result == 1 && data.endTime == true ){
-        if(data.wd == true) {
+      .then((response) => response.json())
+      .then(data => {
+        var btnBuyNow = document.getElementById('btnBuyNow');
+        var btnCancel = document.getElementById('btnCancelCourse');
+        var btnWithdrawStudent = document.getElementById('btnWithdrawStudent')
+        var btnWithdrawMentor = document.getElementById('btnWithdrawMentor')
+        // Is owner course
+        if (data.result == 1 && data.endTime == true) {
+          if (data.wd == true) {
+            btnBuyNow.style.display = "none";
+            btnCancel.style.display = "none";
+            btnWithdrawStudent.style.display = "none";
+            btnWithdrawMentor.style.display = "none"
+
+          } else {
+            btnBuyNow.style.display = "none";
+            btnCancel.style.display = "none";
+            btnWithdrawStudent.style.display = "none";
+            btnWithdrawMentor.style.display = "block"
+          }
+        } else if (data.result == 1 && data.endTime == false) {
           btnBuyNow.style.display = "none";
           btnCancel.style.display = "none";
           btnWithdrawStudent.style.display = "none";
           btnWithdrawMentor.style.display = "none"
-        
-        }else {
-          btnBuyNow.style.display = "none";
-          btnCancel.style.display = "none";
-          btnWithdrawStudent.style.display = "none";
-          btnWithdrawMentor.style.display = "block"
-        }
-      }else if (data.result == 1 && data.endTime == false){ 
-        btnBuyNow.style.display = "none";
-        btnCancel.style.display = "none";
-        btnWithdrawStudent.style.display = "none";
-        btnWithdrawMentor.style.display = "none"
-      } else if(data.result == -1){
-        fetch(`/check-buycourse?courses_id=${courseId}&users_id=${userId}`)
-        .then((response) => response.json())
-        .then(data => {
-          if (data.result === 1) {
-            hasPurchased = 1; // Có thể huỷ khoá học và rút tiền
-          }else if(data.result === 2){
-            hasPurchased = 2  // Có thể huỷ khoá học và rút tiền lại những ngày không học
-          }else if(data.result === 3){
-            hasPurchased = 3  // Có thể rút tiền sau khoá học
-          }
-            // Lấy tham chiếu đến button
-            var btnBuyNow = document.getElementById('btnBuyNow');
-            var btnCancel = document.getElementById('btnCancelCourse');
-            var btnWithdrawStudent = document.getElementById('btnWithdrawStudent')
+        } else if (data.result == -1) {
+          fetch(`/check-buycourse?courses_id=${courseId}&users_id=${userId}`)
+            .then((response) => response.json())
+            .then(data => {
+              if (data.result === 1) {
+                hasPurchased = 1; // Có thể huỷ khoá học và rút tiền
+              } else if (data.result === 2) {
+                hasPurchased = 2  // Có thể huỷ khoá học và rút tiền lại những ngày không học
+              } else if (data.result === 3) {
+                hasPurchased = 3  // Có thể rút tiền sau khoá học
+              }
+              // Lấy tham chiếu đến button
+              var btnBuyNow = document.getElementById('btnBuyNow');
+              var btnCancel = document.getElementById('btnCancelCourse');
+              var btnWithdrawStudent = document.getElementById('btnWithdrawStudent')
 
-            // Ẩn button nếu người dùng đã mua khóa học
-            if (hasPurchased === 1) {
-              btnBuyNow.style.display = "none";
-              btnCancel.style.display = "block";
-              btnWithdrawStudent.style.display = "none";
-            } else if(hasPurchased === 0) {
-              btnCancel.style.display = "none";
-              btnBuyNow.style.display = "block";
-              btnWithdrawStudent.style.display = "none";
-            }else if(hasPurchased === 3){
-              btnCancel.style.display = "none";
-              btnBuyNow.style.display = "none";
-              btnWithdrawStudent.style.display = "block";
-            }else{
-              // Trường hợp không cho ruts
-            }
-        })
-        .catch(err => {
-          console.log(err)
-        })
-      }
-    })
+              // Ẩn button nếu người dùng đã mua khóa học
+              if (hasPurchased === 1) {
+                btnBuyNow.style.display = "none";
+                btnCancel.style.display = "block";
+                btnWithdrawStudent.style.display = "none";
+              } else if (hasPurchased === 0) {
+                btnCancel.style.display = "none";
+                btnBuyNow.style.display = "block";
+                btnWithdrawStudent.style.display = "none";
+              } else if (hasPurchased === 3) {
+                btnCancel.style.display = "none";
+                btnBuyNow.style.display = "none";
+                btnWithdrawStudent.style.display = "block";
+              } else {
+                // Trường hợp không cho ruts
+              }
+            })
+            .catch(err => {
+              console.log(err)
+            })
+        }
+      })
 
     console.log(courseId)
     // Check room was create
     fetch(`/has-meeting?/${courseId}`)
-    .then(response => response.json())
-    .then(data => {
-      const infoDiv = document.getElementById("info");
-      const roomIdElement = document.getElementById("roomId");
-      const roomUrlElement = document.getElementById("roomUrl");
-      const roomIdCopyElement = document.getElementById("roomIdCopy");
-      const copyDiv = document.getElementById('copy')
+      .then(response => response.json())
+      .then(data => {
+        const infoDiv = document.getElementById("info");
+        const roomIdElement = document.getElementById("roomId");
+        const roomUrlElement = document.getElementById("roomUrl");
+        const roomIdCopyElement = document.getElementById("roomIdCopy");
+        const copyDiv = document.getElementById('copy')
 
-      if (data.result === 1) {
-        console.log('Not meeting yet');
-        
-        document.getElementById("info").style.display = "none";
-      } else if (data.result === 0 && data.hasVal) {
-        console.log('Have meeting');
-        document.getElementById('btnCreateRoom').style.display = 'none'
+        if (data.result === 1) {
+          console.log('Not meeting yet');
 
-        document.getElementById("info").style.display = "block";
-  
-        document.getElementById("roomId").textContent = data.hasVal;
-        document.getElementById("roomUrl").href = roomUrl(data.hasVal);
-        document.getElementById("roomUrl").textContent = roomUrl(data.hasVal);
-        document.getElementById("roomIdCopy").textContent = data.hasVal;
-    
-        document.getElementById("roomIdCopy").addEventListener('click', () => {
+          document.getElementById("info").style.display = "none";
+        } else if (data.result === 0 && data.hasVal) {
+          console.log('Have meeting');
+          document.getElementById('btnCreateRoom').style.display = 'none'
+
+          document.getElementById("info").style.display = "block";
+
+          document.getElementById("roomId").textContent = data.hasVal;
+          document.getElementById("roomUrl").href = roomUrl(data.hasVal);
+          document.getElementById("roomUrl").textContent = roomUrl(data.hasVal);
+          document.getElementById("roomIdCopy").textContent = data.hasVal;
+
+          document.getElementById("roomIdCopy").addEventListener('click', () => {
             navigator.clipboard.writeText(data.hasVal)
-            .then(() => {
-              document.getElementById('copy').textContent = 'Copied'
-              document.getElementById('copy').style.display = 'inline-block'
-                
+              .then(() => {
+                document.getElementById('copy').textContent = 'Copied'
+                document.getElementById('copy').style.display = 'inline-block'
+
                 setTimeout(() => {
                   document.getElementById('copy').style.display = 'none'
                 }, 5000);
-            console.log("Đã sao chép Room ID:", data.hasVal);
-            })
-            .catch((error) => {
-            console.error("Lỗi khi sao chép Room ID:", error);
-            });
-        })
-      } else if (data.result === -1) {
-        console.log('Not found');
-        // Không tìm thấy khóa học
-      } else {
-        console.log('Error:', data.error);
+                console.log("Đã sao chép Room ID:", data.hasVal);
+              })
+              .catch((error) => {
+                console.error("Lỗi khi sao chép Room ID:", error);
+              });
+          })
+        } else if (data.result === -1) {
+          console.log('Not found');
+          // Không tìm thấy khóa học
+        } else {
+          console.log('Error:', data.error);
+          // Xử lý lỗi nếu có
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
         // Xử lý lỗi nếu có
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      // Xử lý lỗi nếu có
-    });
+      });
 
-    
+
   </script>
 </head>
 <%- include("../partials/header") %>
@@ -173,7 +173,8 @@
         >
         <a href="/courses/index.html" style="color: black;">Courses</a>
         >
-        <a style="text-decoration: none;"><%= course.name %>
+        <a style="text-decoration: none;">
+          <%= course.name %>
         </a>
       </div>
       <div class="card" style="height: auto; display: block; margin: auto; margin-top: 30px; width: 1200px;">
@@ -191,11 +192,10 @@
                   <%= course.name %>
                 </b></h2>
               <p style="margin-bottom: 5px;">Category:&nbsp;
-                <a href="/courses/index.html#<%= course.categories_id %>" style="color: rgb(31, 128, 192)">
                   <%= course.categories_id.charAt(0).toUpperCase() + course.categories_id.slice(1) %>
-                </a>
               </p>
-              <p style="margin-bottom: 5px;">Lecturer:&nbsp;<%= course.lectures_id %></p>
+              <p style="margin-bottom: 5px;">Lecturer:&nbsp;<%= course.lectures_id %>
+              </p>
               <p style="margin-bottom: 5px">
                 Duration:&ensp;<%= course.start_date %> - <%= course.end_date %>
               </p>
@@ -209,11 +209,46 @@
                 <span style="color: rgb(255, 0, 0);">&nbsp;-<%= Math.round((1-course.price/course.old_price)*100) %>
                     %</span>
               </div>
-              
-              <div id="btnBuyNow" class="group-button" style="margin-bottom: 30px; display: none;">
-                <button class="btn btn-buy-now" type="button">Buy now
+              <div id="btnBuyNow" class="group-button" style="margin-bottom: 30px; ">
+                <button class="btn btn-buy-now" id="buttonBuy" type="button" style="display: none;">Buy now
                   <div id="spinner" class="spinner"></div>
                 </button>
+                <p class="countdown-time" id="countdown" style="margin-top: 10px; color: red;"></p>
+                <script>
+                  var endTime = new Date('<%= course.end_regist %>').getTime();
+                  console.log(endTime);
+                  //source: https://www.w3schools.com/howto/howto_js_countdown.asp
+                  // Set the date we're counting down to
+                  var countDownDate = new Date(endTime).getTime();
+                  console.log(countDownDate);
+                  // Update the count down every 1 second
+                  var x = setInterval(function () {
+
+                    // Get today's date and time
+                    var now = new Date().getTime();
+
+                    // Find the distance between now and the count down date
+                    var distance = countDownDate - now;
+                    if (distance < 0) {
+                      clearInterval(x);
+                      document.getElementById("countdown").innerHTML = "Registration period has ended!";
+                      document.getElementById("buttonBuy").style.display = "none";
+                      document.getElementById("buttonBuy").disabled = true;
+                    } else {
+                      // Time calculations for days, hours, minutes and seconds
+                      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                      document.getElementById("buttonBuy").style.display = "";
+                      // Output the result in an element with id="countdown"
+                      document.getElementById("countdown").innerHTML = "Registration will end in " + days + "d " + hours + "h "
+                        + minutes + "m " + seconds + "s!";
+
+                      // If the count down is over, write some text 
+                    }
+                  }, 1000);
+                </script>
               </div>
               <div id="btnCancelCourse" class="group-button" style="margin-bottom: 30px; display: none;">
                 <button class="btn btn-buy-now" style="background-color: purple;" type="button">Cancel Course
@@ -240,7 +275,8 @@
                 <p style="font-size: 20px; color: Navy; margin-top: 30px; margin-bottom: 15px;"><b>Meeting ROOM</b>
                 </p>
                 <div id="btnCreateRoom" class="group-button" style="margin-bottom: 30px; display: block;">
-                  <button class="btn btn-buy-now" style="background-color: wheat;" type="button" onclick="OnlyCreateRoom()">Create Room
+                  <button class="btn btn-buy-now" style="background-color: wheat;" type="button"
+                    onclick="OnlyCreateRoom()">Create Room
                     <div id="spinner" class="spinner"></div>
                   </button>
                 </div>
@@ -251,65 +287,29 @@
                     <a id="roomUrl" target="_blank"></a>.
                   </p>
                   <style>
-                      #roomIdCopy {
-                        background-color: #f1f1f1;
-                        padding: 2px 4px;
-                        border-radius: 4px;
-                      }
-                    
-                      #copy {
-                        display: inline-block;
-                        background-color: green;
-                        color: white;
-                        padding: 5px 10px;
-                        border-radius: 4px;
-                        width: 70px;
-                        font-size: small;
-                      }
-                      
-                    </style>
-                  <p style="display: inline; white-space: nowrap;">Click here <code id="roomIdCopy"></code><p id="copy" class="custom-panel" style="display: none" ></p> để share.</p>
+                    #roomIdCopy {
+                      background-color: #f1f1f1;
+                      padding: 2px 4px;
+                      border-radius: 4px;
+                    }
+
+                    #copy {
+                      display: inline-block;
+                      background-color: green;
+                      color: white;
+                      padding: 5px 10px;
+                      border-radius: 4px;
+                      width: 70px;
+                      font-size: small;
+                    }
+                  </style>
+                  <p style="display: inline; white-space: nowrap;">Click here <code id="roomIdCopy"></code>
+                  <p id="copy" class="custom-panel" style="display: none"></p> để share.</p>
                 </div>
                 <!-- <div id="roomID"></div>
                 <br>
                 <div id="roomTOKEN"></div> -->
-                
               </div>
-
-              <p class="countdown-time" id="countdown" style="margin-top: 10px; color: red;"></p>
-              <script>
-                var endTime = course.end_regist;
-                console.log(endTime);
-                //source: https://www.w3schools.com/howto/howto_js_countdown.asp
-                // Set the date we're counting down to
-                var countDownDate = new Date(endTime).getTime();
-                console.log(countDownDate);
-                // Update the count down every 1 second
-                var x = setInterval(function () {
-
-                  // Get today's date and time
-                  var now = new Date().getTime();
-
-                  // Find the distance between now and the count down date
-                  var distance = countDownDate - now;
-
-                  // Time calculations for days, hours, minutes and seconds
-                  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                  // Output the result in an element with id="countdown"
-                  document.getElementById("countdown").innerHTML = "Registration will end in " + days + "d " + hours + "h "
-                    + minutes + "m " + seconds + "s.";
-
-                  // If the count down is over, write some text 
-                  if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById("countdown").innerHTML = "Registration period has ended!";
-                  }
-                }, 1000);
-              </script>
             </div>
             <div class="course-description" style="border-top: 1px solid #a8acc0;">
               <p style="font-size: 20px; color: blueviolet; margin-top: 30px; margin-bottom: 15px;"><b>Description</b>

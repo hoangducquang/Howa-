@@ -1,139 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <link
-      rel="stylesheet"
-      href="https://www.w3schools.com/lib/w3-colors-flat.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="/styles/style.css" />
-    <link rel="stylesheet" href="/styles/course-category.css" />
-    <link rel="icon" href="/images/logo-hez.png" type="image/x-icon" />
-    <title>Course Categories | HOWA</title>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-    <script src="/scripts/mycourse.js"></script>
-    <script>
-      fetch(`/api/courses/index`)
-        .then((response) => response.json())
-        .then((data) => {
-          // Nhận kết quả từ server
-          const getCourseAll = data.coursesAll;
 
-          // Sắp xếp danh sách theo course.start_date giảm dần
-          getCourseAll.sort(
-            (a, b) => new Date(b.start_date) - new Date(a.start_date)
-          );
-          // Click categories
-          const categoryLinks = document.querySelectorAll('.cat');
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="stylesheet" href="/styles/course-category.css" />
+  <link rel="icon" href="/images/logo-hez.png" type="image/x-icon" />
+  <title>Course Categories | HOWA</title>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="/scripts/mycourse.js"></script>
+  <script>
+    fetch(`/api/courses/index`)
+      .then((response) => response.json())
+      .then((data) => {
+        // Nhận kết quả từ server
+        const getCourseAll = data.coursesAll;
 
-          function categoryClick(event) {
-              event.preventDefault()
+        // Sắp xếp danh sách theo course.start_date giảm dần
+        getCourseAll.sort(
+          (a, b) => new Date(b.start_date) - new Date(a.start_date)
+        );
+        // Click categories
+        const categoryLinks = document.querySelectorAll('.cat');
 
-              const categoriesId = this.getAttribute('href').substring(1)
-              fetch(`/api/courses/index.html/${categoriesId}`)
-              .then(response => response.json())
-              .then(data => {
-                $('.pagination.pag-center').empty();
-                pagination(data.filterCourse)
-              })
-              .catch(error => {
-                console.error("Lỗi:", error);
-              });
-          }
+        function categoryClick(event) {
+          event.preventDefault()
 
+          const categoriesId = this.getAttribute('href').substring(1)
+          fetch(`/api/courses/index.html/${categoriesId}`)
+            .then(response => response.json())
+            .then(data => {
+              $('.pagination.pag-center').empty();
+              pagination(data.filterCourse)
+            })
+            .catch(error => {
+              console.error("Lỗi:", error);
+            });
+          // Remove 'current' class from all category links
           categoryLinks.forEach(link => {
-            link.addEventListener('click', categoryClick);
+            link.classList.remove('current');
           });
-          pagination(getCourseAll)
 
-          // Lấy thông tin trang 
-          // const paginationLinks = document.querySelectorAll('.pagination.pag-center a');
-          // const pageSize = 3; // Kích thước trang (số khóa học hiển thị trên mỗi trang)
+          // Add 'current' class to the clicked category link
+          this.classList.add('current');
+        }
 
-          // const numberPage = Math.ceil(getCourseAll.length / pageSize);
-          // if (numberPage > 1) {
-          //   for (let i = 1; i <= numberPage; i++) {
-          //     console.log(i);
-          //     const pageLink = document.createElement('a');
-          //     if (i == 1){
-          //       pageLink.className = 'active'
-          //     }
-          //     pageLink.href = '#';
-          //     pageLink.textContent = i;
-          //     pageLink.addEventListener('click', function(event) {
-          //       event.preventDefault(); 
-
-          //       currentPage = i; // Lấy số trang từ liên kết
-
-          //       renderCourses(); // Gọi hàm để hiển thị khóa học cho trang hiện tại
-          //       $('.pagination.pag-center a').removeClass();
-          //       pageLink.className = 'active'
-
-          //       console.log(currentPage); // In ra số trang đã nhấp
-          //     });
-          //     $('.pagination.pag-center').append(pageLink);
-          //   }
-          // }
-
-          // $('.pagination.pag-center').append(`
-          //   <a href="#">&raquo;</a>
-          // `);
-
-          // let currentPage = 1; 
-
-          // // Hàm hiển thị khóa học cho trang hiện tại
-          // function renderCourses() {
-          //   const startIndex = (currentPage - 1) * pageSize;
-          //   const endIndex = Math.min(startIndex + pageSize, getCourseAll.length);
-            
-          //   // Xóa các khóa học hiện tại trong bảng
-          //   $("#tblistCourse").empty();
-            
-          //   // Hiển thị khóa học mới cho trang hiện tại
-          //   for (let i = startIndex; i < endIndex; i++) {
-          //     const course = getCourseAll[i];
-              
-          //     // Thay đổi
-
-          //     $("#tblistCourse").append(`
-          //       <div class="category-course-card">
-          //         <a href="/courses/detail/${course._id}" style="text-decoration: none;">
-          //           <div class="course-image">
-          //             <img src="${course.image}" alt="${course.name}" />
-          //             <div class="course-short-details">
-          //               <p class="cate-name">${course.categories_id}</p>
-          //               <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">${course.name}</h4>
-          //               <p class="w3-small">${course.lectures_id}</p>
-          //               <div class="price-course">
-          //                 <span class="new-price">${course.price.toLocaleString("en-US")} ETH</span>
-          //               </div>
-          //               <p class="duration">${changeDate(course.start_date)} - ${changeDate(course.end_date)}</p>
-          //             </div>
-          //           </div>
-          //         </a>
-          //       </div>
-          //     `);
-          //   }
-          // }
-
-          // // Gọi hàm để hiển thị dữ liệu cho trang đầu tiên khi trang được tải lần đầu
-          // renderCourses();
-
-        })
-        .catch((error) => {
-          // Xử lý lỗi nếu có
-          console.error("Lỗi:", error);
+        categoryLinks.forEach(link => {
+          link.addEventListener('click', categoryClick);
         });
-    </script>
-  </head>
-  <%- include("../partials/header") %>
+        pagination(getCourseAll)
+
+        // Lấy thông tin trang 
+        // const paginationLinks = document.querySelectorAll('.pagination.pag-center a');
+        // const pageSize = 3; // Kích thước trang (số khóa học hiển thị trên mỗi trang)
+
+        // const numberPage = Math.ceil(getCourseAll.length / pageSize);
+        // if (numberPage > 1) {
+        //   for (let i = 1; i <= numberPage; i++) {
+        //     console.log(i);
+        //     const pageLink = document.createElement('a');
+        //     if (i == 1){
+        //       pageLink.className = 'active'
+        //     }
+        //     pageLink.href = '#';
+        //     pageLink.textContent = i;
+        //     pageLink.addEventListener('click', function(event) {
+        //       event.preventDefault(); 
+
+        //       currentPage = i; // Lấy số trang từ liên kết
+
+        //       renderCourses(); // Gọi hàm để hiển thị khóa học cho trang hiện tại
+        //       $('.pagination.pag-center a').removeClass();
+        //       pageLink.className = 'active'
+
+        //       console.log(currentPage); // In ra số trang đã nhấp
+        //     });
+        //     $('.pagination.pag-center').append(pageLink);
+        //   }
+        // }
+
+        // $('.pagination.pag-center').append(`
+        //   <a href="#">&raquo;</a>
+        // `);
+
+        // let currentPage = 1; 
+
+        // // Hàm hiển thị khóa học cho trang hiện tại
+        // function renderCourses() {
+        //   const startIndex = (currentPage - 1) * pageSize;
+        //   const endIndex = Math.min(startIndex + pageSize, getCourseAll.length);
+
+        //   // Xóa các khóa học hiện tại trong bảng
+        //   $("#tblistCourse").empty();
+
+        //   // Hiển thị khóa học mới cho trang hiện tại
+        //   for (let i = startIndex; i < endIndex; i++) {
+        //     const course = getCourseAll[i];
+
+        //     // Thay đổi
+
+        //     $("#tblistCourse").append(`
+        //       <div class="category-course-card">
+        //         <a href="/courses/detail/${course._id}" style="text-decoration: none;">
+        //           <div class="course-image">
+        //             <img src="${course.image}" alt="${course.name}" />
+        //             <div class="course-short-details">
+        //               <p class="cate-name">${course.categories_id}</p>
+        //               <h4 style="text-overflow:ellipsis; overflow: hidden; font-weight: bold; line-height: normal;">${course.name}</h4>
+        //               <p class="w3-small">${course.lectures_id}</p>
+        //               <div class="price-course">
+        //                 <span class="new-price">${course.price.toLocaleString("en-US")} ETH</span>
+        //               </div>
+        //               <p class="duration">${changeDate(course.start_date)} - ${changeDate(course.end_date)}</p>
+        //             </div>
+        //           </div>
+        //         </a>
+        //       </div>
+        //     `);
+        //   }
+        // }
+
+        // // Gọi hàm để hiển thị dữ liệu cho trang đầu tiên khi trang được tải lần đầu
+        // renderCourses();
+
+      })
+      .catch((error) => {
+        // Xử lý lỗi nếu có
+        console.error("Lỗi:", error);
+      });
+  </script>
+</head>
+<%- include("../partials/header") %>
+
   <body>
     <div style="margin-top: 70px">
       <style>
@@ -166,9 +169,7 @@
       </style>
       <div class="add-course">
         <button class="button btn-add-course" type="button">
-          <a href="/courses/create.html" style="text-decoration: none"
-            >Create a course</a
-          >
+          <a href="/courses/create.html" style="text-decoration: none">Create a course</a>
         </button>
       </div>
       <div id="head-categories">
@@ -193,9 +194,10 @@
         </section>
       </div>
       <div class="pagination pag-center">
-        
+
       </div>
     </main>
     <%- include("../partials/footer") %>
   </body>
+
 </html>

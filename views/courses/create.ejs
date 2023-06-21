@@ -22,130 +22,135 @@
 </head>
 <%- include("../partials/header") %>
 
-<body>
-    <main class="category" style="min-height: max-content;">
-        <div class="course-form" style="margin-top: 70px;">
-            <div class="course-center">
-                <h1>Create a Course</h1>
-                <form method="post">
-                    <div class="text-field">
-                        <input id="create-course-name" type="text" name="course-name" required="">
-                        <span></span>
-                        <label>Course name</label>
-                    </div>
-                    <div class="text-field">
-                        <span></span>
-                        <label id="dropdown-container">Category</label>
-                        <!-- Cho nay can fix lai design -->
-                        <select id="create-category" name="category"
-                            style="padding: 10px 200px; background-color: #fff; width:100%; border: none;">
-                            <option value="foreignlanguage">Foreign Language</option>
-                            <option value="programming">Programming</option>
-                            <option value="design">Design</option>
-                            <option value="music">Music</option>
-                            <option value="videoediting">Video Editing</option>
-                            <option value="photography">Photography</option>
-                            <option value="others">Others</option> >
-                        </select>
-                    </div>
-                    <div class="text-field">
-                        <input id="create-lecturer" type="text" name="lecture" required="">
-                        <span></span>
-                        <label>Lecturer</label>
-                    </div>
-                    <div class="text-field">
-                        <input id="create-description" type="text" name="description" required="">
-                        <span></span>
-                        <label>Description</label>
-                    </div>
-                    <div class="text-field">
-                        <input id="create-tuition-fee" type="number" required="" name="fee">
-                        <span></span>
-                        <label>Tuition fee (ETH)</label>
-                    </div>
-                    <div class="text-field">
-                        <input id="create-max-student" type="number" required="" name="quantity" min="1">
-                        <span></span>
-                        <label>Max students</label>
-                    </div>
-                    <div class="text-field">
-                        <input id="create-days-of-course" type="number" required="" name="quantity" min="1">
-                        <span></span>
-                        <label>Days of course</label>
-                    </div>
-                    <div class="text-field date">
-                        <label>Course start time</label>
-                        <input id="create-time-start" type="datetime-local" required="" name="coursestartdate"
-                            id="coursestartdate" value="<?= date('Y-m-d') ?>" min="today" max="2030-12-31"
-                            style="padding-left: 200px;">
-                        <span></span>
-                    </div>
-                    <div class="text-field date">
-                        <label>Course end time</label>
-                        <input id="create-time-end" type="datetime-local" required="" name="courseenddate"
-                            value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
-                        <span></span>
-                    </div>
-                    <div class="text-field date">
-                        <label>Registration closing time</label>
-                        <input id="create-time-register" type="datetime-local" required="" name="registenddate"
-                            value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
-                        <span></span>
-                    </div>
-                    <div class="text-field-upload">
-                        <label>Select course's picture:</label>
-                        <input id="create-select-picture" value="" type="file" required name="image" accept="image/*" maxlength="2097152">
-                        <label id="selected-picture"></label>
-                      </div>
-                      <script>
-                        const fileInput = document.getElementById('create-select-picture');
-                        
-                        fileInput.addEventListener('change', function() {
-                          const file = fileInput.files[0];
-                          // Kiểm tra nếu có file được chọn
-                          if (file) {
-                            const formData = new FormData();
-                            formData.append('image', file);
-                      
-                            // Gửi form dữ liệu bằng Fetch API
-                            fetch('/upload', {
-                              method: 'POST',
-                              body: formData
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                              // Xử lý kết quả trả về từ API
-                              const publicUrl = data.publicUrl;
-                              fileInput.style.display = 'none';
-                                // Tách chuỗi publicUrl bằng dấu /
-                                const parts = publicUrl.split('/');
-                                // Lấy phần tử cuối cùng của mảng
-                                const lastPart = parts[parts.length - 1];
-                                // Cập nhật tên hiển thị thành lastPart
-                                document.getElementById('selected-picture').innerText = lastPart;
-                            })
-                            .catch(error => {
-                              console.error('Error:', error);
-                              // Xử lý lỗi (nếu có)
-                            });
-                          }else{
-                            // Xóa tên hiển thị
-                            fileInputLabel.innerText = "Select course's picture:";
-                          }
-                        });
-                      </script>
-                    <div class="text-field w3-center" style="border-bottom: none;">
-                        <button id="btn-create" type="button">Create</button>
-                        <div class="loader w3-center">
-                            <div class="loading w3-center"></div>
-                            <p style="margin-top: 10px; padding: auto;">Loading...</p>
+    <body>
+        <main class="category" style="min-height: max-content;">
+            <div class="course-form" style="margin-top: 70px;">
+                <div class="course-center">
+                    <h1>Create a Course</h1>
+                    <form method="post">
+                        <div class="text-field">
+                            <input id="create-course-name" type="text" name="course-name" required="">
+                            <span></span>
+                            <label>Course name</label>
                         </div>
-                    </div>
-                </form>          
+                        <div class="text-field">
+                            <span></span>
+                            <label id="dropdown-container">Category</label>
+                            <!-- Cho nay can fix lai design -->
+                            <select id="create-category" name="category"
+                                style="padding: 10px 200px; background-color: #fff; width:100%; border: none;">
+                                <option value="foreignlanguage">Foreign Language</option>
+                                <option value="programming">Programming</option>
+                                <option value="design">Design</option>
+                                <option value="music">Music</option>
+                                <option value="videoediting">Video Editing</option>
+                                <option value="photography">Photography</option>
+                                <option value="others">Others</option> >
+                            </select>
+                        </div>
+                        <div class="text-field">
+                            <input id="create-lecturer" type="text" name="lecture" required="">
+                            <span></span>
+                            <label>Lecturer</label>
+                        </div>
+                        <div class="text-field">
+                            <input id="create-description" type="text" name="description" required="">
+                            <span></span>
+                            <label>Description</label>
+                        </div>
+                        <div class="text-field">
+                            <input id="create-tuition-fee" type="number" required="" name="fee">
+                            <span></span>
+                            <label>Tuition fee (ETH)</label>
+                        </div>
+                        <div class="text-field">
+                            <input id="create-max-student" type="number" required="" name="quantity" min="1">
+                            <span></span>
+                            <label>Max students</label>
+                        </div>
+                        <div class="text-field">
+                            <input id="create-days-of-course" type="number" required="" name="quantity" min="1">
+                            <span></span>
+                            <label>Days of course</label>
+                        </div>
+                        <div class="text-field date">
+                            <label>Course start time</label>
+                            <input id="create-time-start" type="datetime-local" required="" name="coursestartdate"
+                                id="coursestartdate" value="<?= date('Y-m-d') ?>" min="today" max="2030-12-31"
+                                style="padding-left: 200px;">
+                            <span></span>
+                        </div>
+                        <div class="text-field date">
+                            <label>Course end time</label>
+                            <input id="create-time-end" type="datetime-local" required="" name="courseenddate"
+                                value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
+                            <span></span>
+                        </div>
+                        <div class="text-field date">
+                            <label>Registration closing time</label>
+                            <input id="create-time-register" type="datetime-local" required="" name="registenddate"
+                                value="<?= date('Y-m-d') ?>" max="2030-12-31" style="padding-left: 200px;">
+                            <span></span>
+                        </div>
+                        <div class="text-field-upload">
+                            <label>Select course's picture:</label>
+                            <input id="create-select-picture" value="" type="file" required name="image"
+                                accept="image/*" maxlength="2097152">
+                            <label id="selected-picture"></label>
+                            <i class="fa fa-check-circle" id="checkIcon" style="font-size:15px; color: green;"></i>
+                        </div>
+                        <script>
+                            const fileInput = document.getElementById('create-select-picture');
+                            document.getElementById('checkIcon').style.display = "none";
+                            fileInput.addEventListener('change', function () {
+                                
+                                const file = fileInput.files[0];
+                                // Kiểm tra nếu có file được chọn
+                                if (file) {
+                                    const formData = new FormData();
+                                    formData.append('image', file);
+
+                                    // Gửi form dữ liệu bằng Fetch API
+                                    fetch('/upload', {
+                                        method: 'POST',
+                                        body: formData
+                                    })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            // Xử lý kết quả trả về từ API
+                                            const publicUrl = data.publicUrl;
+                                            fileInput.style.display = 'none';
+                                            // Tách chuỗi publicUrl bằng dấu /
+                                            const parts = publicUrl.split('/');
+                                            // Lấy phần tử cuối cùng của mảng
+                                            const lastPart = parts[parts.length - 1];
+                                            // Cập nhật tên hiển thị thành lastPart
+                                            document.getElementById('selected-picture').innerText = lastPart;
+                                            document.getElementById('selected-picture').style.display = "margin-bottom: 2px";
+                                            document.getElementById('checkIcon').style.display = "";
+                                        })
+                                        .catch(error => {
+                                            console.error('Error:', error);
+                                            // Xử lý lỗi (nếu có)
+                                        });
+                                } else {
+                                    // Xóa tên hiển thị
+                                    fileInputLabel.innerText = "Select course's picture:";
+                                }
+                            });
+                        </script>
+                        <div class="text-field w3-center" style="border-bottom: none;">
+                            <button id="btn-create" type="button">Create</button>
+                            <div class="loader w3-center">
+                                <div class="loading w3-center"></div>
+                                <p style="margin-top: 10px; padding: auto;">Loading...</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </main>
-    <%- include("../partials/footer") %>
-</body>
+        </main>
+        <%- include("../partials/footer") %>
+    </body>
 
 </html>
