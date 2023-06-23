@@ -445,9 +445,11 @@ app.put('/add-meeting', async(req, res) => {
 })
 
 // get comment
-app.get("/api/comment", async(req, res) => {
+app.get("/api/comment/:id", async(req, res) => {
     try {
-      const commentAll = await commentDB.find({})
+      const commentAll = await commentDB.find({
+        courses_id: req.params.id,
+      })
       res.json({commentAll})
     } catch (error) {
       console.error(error)
