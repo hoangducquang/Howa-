@@ -1,3 +1,5 @@
+
+// Get comment db
 const courseIdComment = sessionStorage.getItem('ssIdCourse')
 console.log(courseIdComment);
 
@@ -34,7 +36,7 @@ function getComment(){
   });
 }
 
-getComment()
+// Show login
 var ssIdUser = sessionStorage.getItem('ssIdUser');
 console.log(ssIdUser);
 
