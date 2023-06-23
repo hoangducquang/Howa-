@@ -1,3 +1,4 @@
+
 var ssIdUser = sessionStorage.getItem('ssIdUser');
 console.log(ssIdUser);
 
@@ -23,3 +24,38 @@ function changeDate(orderDate){
 }
   
 console.log('homejs');
+
+function showComment(props) {
+  $('.Customer-feedback').append(`
+    <div class="feedback-card">
+      <div class="customer-feedback-header">
+        <div class="customer-profile">
+          <img src="https://photo-cms-tpo.epicdn.me/w890/Uploaded/2023/aohuooh/2014_07_08/annabelle_VGIK.jpg"
+            alt="Búp bê ma Annabelle" />
+        </div>
+        <div>
+          <p class="name">${props.name}</p>
+        </div>
+      </div>
+      <div>
+        <p class="w3-small">${props.comment}</p>
+      </div>
+    </div>
+  `)
+}
+
+function getComment(){
+  fetch('/api/comment')
+  .then(response => response.json())
+  .then(data => {
+    const allComment = data.commentAll
+    allComment.map(comment => {
+      showComment(comment)
+    })
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+}
+
+getComment()

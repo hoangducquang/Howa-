@@ -274,12 +274,12 @@
               <div class="course-description" style="border-top: 1px solid #a8acc0;">
                 <p style="font-size: 20px; color: Navy; margin-top: 30px; margin-bottom: 15px;"><b>Meeting ROOM</b>
                 </p>
-                <div id="btnCreateRoom" class="group-button" style="margin-bottom: 30px; display: block;">
+                <!-- <div id="btnCreateRoom" class="group-button" style="margin-bottom: 30px; display: block;">
                   <button class="btn btn-buy-now" style="background-color: wheat;" type="button"
                     onclick="OnlyCreateRoom()">Create Room
                     <div id="spinner" class="spinner"></div>
                   </button>
-                </div>
+                </div> -->
                 <div id="info" style="display: none;">
                   <p>Bạn đang ở trong room <strong id="roomId"></strong>.</p>
                   <p>
@@ -317,12 +317,9 @@
               <%= course.description %>
             </div>
             <div>
-              <h2>Info</h2>
-              <table class="w3-table w3-striped w3-border" id="tbList">
-                <tr>
-                  <td>ID Student</td>
-                  <td>Address</td>
-                </tr>
+              <h2 id="showInfo" style="display: none;">Information Student</h2>
+              <table class="w3-table w3-table-all" id="tbList">
+                
               </table>
             </div>
           </div>

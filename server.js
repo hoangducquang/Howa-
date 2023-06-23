@@ -382,6 +382,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const mongoose = require("mongoose");
 const userDB = require("./models/user");
 const courseDB = require("./models/course");
+const commentDB = require("./models/comment")
 const lectureDB = require("./models/lecture");
 const categoryDB = require("./models/category");
 const ordersDB = require("./models/orders");
@@ -442,6 +443,19 @@ app.put('/add-meeting', async(req, res) => {
       }
     })
 })
+
+// get comment
+app.get("/api/comment", async(req, res) => {
+    try {
+      const commentAll = await commentDB.find({})
+      res.json({commentAll})
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({error: error})
+    }
+
+  }
+)
 
 //get user profile - edit
 app.get("/account/edit-profile/:id", async function (req, res) {

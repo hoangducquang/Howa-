@@ -620,6 +620,15 @@ $(document).ready(() => {
         if (err) {
             console.log(err);
         } else {
+            const showInfo = document.getElementById('showInfo')
+            showInfo.style.display = 'block'
+            $('#tbList').append(`
+                <tr>
+                  <td>ID Student</td>
+                  <td>Address</td>
+                </tr>
+            
+            `)
             for (let i = 0; i < returnEvent.returnValues.listStudent.length; i++) {
                 if(returnEvent.returnValues.listStudent[i].idStudent != '') {
                     $('#tbList').append(`
