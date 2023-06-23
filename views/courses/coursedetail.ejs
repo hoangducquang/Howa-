@@ -9,16 +9,13 @@
   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/styles/course-detail.css">
-
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"/> -->
-
   <!-- <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>
   <script src="https://cdn.stringee.com/sdk/web/2.2.1/stringee-web-sdk.min.js"></script> -->
-
   <script src="/scripts/api.js"></script>
   <script src="/scripts/meeting.js"></script>
-
   <link rel="icon" href="/images/logo-hez.png" type="image/x-icon">
   <title>
     <%= course.name %> - Courses | HOWA - Course Register
@@ -28,6 +25,8 @@
   <script src="/scripts/coursedetail.js"></script>
   <script src="/scripts/profile.js"></script>
   <script src="/process.js"></script>
+  <script src="https://js.stripe.com/v3"></script>
+  <script src="https://srv.buysellads.com/ads/CWYDP2QE.json?callback=customJSONPCallback"></script>
   <script>
     const urlCurrent = window.location.href;
 
@@ -192,7 +191,7 @@
                   <%= course.name %>
                 </b></h2>
               <p style="margin-bottom: 5px;">Category:&nbsp;
-                  <%= course.categories_id.charAt(0).toUpperCase() + course.categories_id.slice(1) %>
+                <%= course.categories_id.charAt(0).toUpperCase() + course.categories_id.slice(1) %>
               </p>
               <p style="margin-bottom: 5px;">Lecturer:&nbsp;<%= course.lectures_id %>
               </p>
@@ -319,7 +318,7 @@
             <div>
               <h2 id="showInfo" style="display: none;">Information Student</h2>
               <table class="w3-table w3-table-all" id="tbList">
-                
+
               </table>
             </div>
           </div>
@@ -327,13 +326,108 @@
       </div>
     </section>
     <!-- Customer Feedback-->
-  <div class="w3-sand" style="margin-top: 40px; padding: 50px 0px;" id="testimony">
-    <div class="feedback">
-      <div class="w3-container ">
-        <h2 class="section-text-header" style="margin-top: 0px !important;">Customer FeedBack</h2>
+    <div class="w3-sand" style="margin-top: 40px; padding: 50px 0px;" id="testimony">
+      <div class="feedback">
+        <div class="w3-container">
+          <h2 class="section-text-header" style="margin-top: 0px !important;">Customer FeedBack</h2>
+          <!--Source code and css: https://www.w3schools.com/howto/howto_css_user_rating.asp-->
+          <div class="customer-rating w3-left-align">
+            <div class="col-4">
+              <span class="heading">User Rating</span>
+              <span class="fa fa-star checked" style="font-size:x-large;"></span>
+              <span class="fa fa-star checked" style="font-size:x-large;"></span>
+              <span class="fa fa-star checked" style="font-size:x-large;"></span>
+              <span class="fa fa-star checked" style="font-size:x-large;"></span>
+              <span class="fa fa-star" style="font-size:x-large;"></span>
+              <p>4.1 average based on 254 reviews.</p>
+            </div>
+          </div>
+        </div>
+        <hr style="border:3px solid #f1f1f1">
+        <div class="row">
+          <div class="side">
+            <div>5 stars</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-5"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>150</div>
+          </div>
+          <div class="side">
+            <div>4 stars</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-4"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>63</div>
+          </div>
+          <div class="side">
+            <div>3 stars</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-3"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>15</div>
+          </div>
+          <div class="side">
+            <div>2 stars</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-2"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>6</div>
+          </div>
+          <div class="side">
+            <div>1 star</div>
+          </div>
+          <div class="middle">
+            <div class="bar-container">
+              <div class="bar-1"></div>
+            </div>
+          </div>
+          <div class="side right">
+            <div>20</div>
+          </div>
+        </div>
+        <div class="group-button center" style="margin: 30px auto;">
+          <button class="btn btn-feedback" id="open-modal-btn">Send feedback</button>
+        </div>
+        <!-- Modal box -->
+        <div id="feedback-modal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2><b>Send feedback</b></h2>
+            <h5>Course: <%= course.name %> - <%= course.lectures_id %>
+            </h5>
+            <div class="rating">
+              <input type="number" name="rating" hidden>
+              <i class='bx bx-star star' style="--i: 0;"></i>
+              <i class='bx bx-star star' style="--i: 1;"></i>
+              <i class='bx bx-star star' style="--i: 2;"></i>
+              <i class='bx bx-star star' style="--i: 3;"></i>
+              <i class='bx bx-star star' style="--i: 4;"></i>
+            </div>
+            <textarea id="feedback-text" placeholder="What is your view?"></textarea>
+            <button class="btn btn-submit-feedback btn-center" id="submit-feedback-btn">Submit</button>
+            <button class="btn btn-cancel">Cancel</button>
+          </div>
+        </div>
       </div>
-      <div class="Customer-feedback w3-left-align" style="display: flex;flex-wrap: wrap;">
-        <!-- <div class="feedback-card">
+    </div>
+    <div class="Customer-feedback w3-left-align" style="display: flex;flex-wrap: wrap;">
+      <!-- <div class="feedback-card">
           <div class="customer-feedback-header">
             <div class="customer-profile">
               <img src="https://photo-cms-tpo.epicdn.me/w890/Uploaded/2023/aohuooh/2014_07_08/annabelle_VGIK.jpg"
@@ -395,9 +489,9 @@
             <p class="w3-small">"My đã nhận ra 550:2 không phải là 225 sau khi học một khoá làm toán ở Howa!"</p>
           </div>
         </div> -->
-      </div>
     </div>
-  </div>
+    </div>
+    </div>
     <%- include("../partials/footer") %>
   </body>
 
