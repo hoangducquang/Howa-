@@ -54,6 +54,7 @@ allStar.forEach((item, idx)=> {
 
 
 const courseIdComment = sessionStorage.getItem("ssIdCourse");
+
 console.log(courseIdComment);
 console.log('test js');
 

@@ -40,6 +40,7 @@
     var hasPurchased = 0
     sessionStorage.setItem('ssIdCourse', courseId)
     sessionStorage.setItem('ssPriceCourse', priceCurrent)
+    getComment()
 
     fetch(`/check-owner?courses_id=${courseId}&users_id=${userId}`)
       .then((response) => response.json())
@@ -315,10 +316,10 @@
               </p>
               <%= course.description %>
             </div>
-            <div>
+            <div id="showInformation">
               <h2 id="showInfo" style="display: none;">Information Student</h2>
-              <table class="w3-table w3-table-all" id="tbList">
 
+              <table class="w3-table w3-table-all" id="tbList" style="font-size: 10px; padding-right: 5px; padding-left: 5px;">
               </table>
             </div>
           </div>
